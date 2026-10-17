@@ -14,6 +14,8 @@ cd dna-cinema-pe
 npm ci
 Copy-Item .env.example .env
 docker compose up -d
+npx prisma migrate deploy
+npm run seed  # Ou npx prisma db seed
 ```
 
 No macOS ou Linux, use `cp .env.example .env` no lugar de `Copy-Item`.
