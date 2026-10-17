@@ -10,19 +10,19 @@ Cada arquivo corresponde diretamente a uma tabela do modelo relacional definido 
 
 Na primeira extração realizada a partir do board FigJam (*TOPICOS PARA PESQUISAR*), diversos campos estavam ausentes (`null` ou `-1`) porque os post-its originais continham apenas anotações parciais ou imagens estáticas sem texto extraível.
 
-Na revisão e expansão atual da base, todas as lacunas foram preenchidas com dados históricos verificados (Cinemateca Brasileira, ANCINE/FSA, Fundarpe/Funcultura e catálogos oficiais de festivais), além da inclusão de novas obras fundamentais de Pernambuco e do Nordeste.
+Na revisão e expansão atual da base, todas as lacunas foram preenchidas com dados históricos verificados (Cinemateca Pernambucana, Cinemateca Brasileira, ANCINE/FSA, Fundarpe/Funcultura e catálogos oficiais de festivais), além da inclusão de 13 novas obras fundamentais **exclusivamente do Cinema Pernambucano**.
 
 ### Comparativo Quantitativo e Qualitativo
 
 | Arquivo | Tabela | Carga Inicial | Carga Atual | Evolução | Principais Mudanças |
 | :--- | :--- | :---: | :---: | :---: | :--- |
-| [`filmes.json`](./filmes.json) | `filme` | 21 | **38** | **+17** (+81%) | Preenchimento de 100% dos campos `genero`, `cidadeFilmagem`, `classificacaoIndicativa`, `posterUrl` e `posterAlt` + adição de 17 clássicos de PE e do Nordeste. |
-| [`pessoas.json`](./pessoas.json) | `pessoa` | 15 | **60** | **+45** (+300%) | Preenchimento de `idade`, `genero` e `flagEhNordestino` (antes 100% nulos/`-1`) + inclusão de diretoras mulheres, elenco, roteiristas, produtores e fotógrafos. |
+| [`filmes.json`](./filmes.json) | `filme` | 21 | **34** | **+13** (+62%) | Preenchimento de 100% dos campos `genero`, `cidadeFilmagem`, `classificacaoIndicativa`, `posterUrl` e `posterAlt` + adição de 13 obras do cinema pernambucano. |
+| [`pessoas.json`](./pessoas.json) | `pessoa` | 15 | **64** | **+49** (+327%) | Preenchimento de `idade`, `genero` e `flagEhNordestino` (antes 100% nulos/`-1`) + inclusão de diretoras mulheres, elenco, roteiristas, produtores e fotógrafos. |
 | [`premiacoes.json`](./premiacoes.json) | `premiacao` | 48 | **50** | **+2** (+4%) | Preenchimento das 31 descrições que estavam `null` + inclusão do *Festival de San Sebastián* e do *Festival de Guadalajara*. |
 | [`editais.json`](./editais.json) | `edital` | 0 | **12** | **+12** (Novo) | Criação de 12 editais estaduais (Funcultura PE) e federais (FSA/ANCINE, Petrobras Cultural, Lei do Audiovisual e Prêmio Resgate MinC). |
-| [`filme_pessoa.json`](./filme_pessoa.json) | `filme_pessoa` | 26 | **174** | **+148** (+569%) | Expansão de vínculos: antes restrito apenas a `DIRECAO`; agora contempla `DIRECAO`, `ELENCO`, `ROTEIRO`, `PRODUCAO` e `FOTOGRAFIA`. |
-| [`filme_premiacao.json`](./filme_premiacao.json) | `filme_premiacao` | 112 | **208** | **+96** (+86%) | Substituição de todos os `edicaoAno: -1` pelos anos reais, correção de categorias nulas, inclusão de prêmios omitidos e atualização da temporada 2025/2026. |
-| [`filme_edital.json`](./filme_edital.json) | `filme_edital` | 0 | **43** | **+43** (Novo) | Mapeamento de 43 aportes financeiros públicos vinculados aos filmes do acervo, respeitando o teto orçamentário de cada edital. |
+| [`filme_pessoa.json`](./filme_pessoa.json) | `filme_pessoa` | 26 | **152** | **+126** (+485%) | Expansão de vínculos: antes restrito apenas a `DIRECAO`; agora contempla `DIRECAO`, `ELENCO`, `ROTEIRO`, `PRODUCAO` e `FOTOGRAFIA`. |
+| [`filme_premiacao.json`](./filme_premiacao.json) | `filme_premiacao` | 112 | **191** | **+79** (+71%) | Substituição de todos os `edicaoAno: -1` pelos anos reais, correção de categorias nulas, inclusão de prêmios omitidos e atualização da temporada 2025/2026. |
+| [`filme_edital.json`](./filme_edital.json) | `filme_edital` | 0 | **46** | **+46** (Novo) | Mapeamento de 46 aportes financeiros públicos vinculados aos filmes pernambucanos do acervo, respeitando o teto orçamentário de cada edital. |
 
 ---
 
@@ -30,11 +30,11 @@ Na revisão e expansão atual da base, todas as lacunas foram preenchidas com da
 
 1. **Filmes sem gênero, cidade de filmagem, classificação ou pôster (`filmes.json`):**
    - **Antes:** 8 dos 21 filmes estavam com `genero: null`; 18 dos 21 estavam com `cidadeFilmagem: null`; e todos os 21 estavam com `classificacaoIndicativa: null`, `posterUrl: null` e `posterAlt: null`.
-   - **Depois:** Todos os filmes originais tiveram seu gênero catalogado (ex.: *Baile Perfumado* como `Drama / Histórico`, *O Som ao Redor* como `Drama / Suspense`, *O Agente Secreto* como `Thriller político / Drama`), sua principal cidade de filmagem identificada (Recife, Camaragibe, Arcoverde, Petrolina, Toritama, Sertânia, Patos-PB), classificação indicativa oficial (`L`, `12`, `14`, `16`, `18`) e texto alternativo descritivo (`posterAlt`).
+   - **Depois:** Todos os filmes originais tiveram seu gênero catalogado (ex.: *Baile Perfumado* como `Drama / Histórico`, *O Som ao Redor* como `Drama / Suspense`, *O Agente Secreto* como `Thriller político / Drama`), sua principal cidade de filmagem identificada em Pernambuco (Recife, Camaragibe, Arcoverde, Petrolina, Toritama, Sertânia), classificação indicativa oficial (`L`, `12`, `14`, `16`, `18`) e texto alternativo descritivo (`posterAlt`).
 
 2. **Pessoas sem dados demográficos e ausência de elenco (`pessoas.json` e `filme_pessoa.json`):**
    - **Antes:** Todos os 15 registros tinham `idade: -1`, `genero: null` e `flagEhNordestino: null`, e só havia diretores homens listados.
-   - **Depois:** Os dados biográficos de todos os profissionais foram preenchidos com base em suas biografias públicas e locais de nascimento documentados (diferenciando naturais do Nordeste, como *Kleber Mendonça Filho*, *Cláudio Assis*, *Karim Aïnouz*, *Irandhir Santos*, *Wagner Moura* e *Marcélia Cartaxo*, de profissionais nascidos em outras regiões que atuaram no cinema nordestino, como *Alberto Cavalcanti*, *Sonia Braga*, *Maeve Jinkings* e *Matheus Nachtergaele*).
+   - **Depois:** Os dados biográficos de todos os profissionais foram preenchidos com base em suas biografias públicas e locais de nascimento documentados (diferenciando naturais do Nordeste, como *Kleber Mendonça Filho*, *Cláudio Assis*, *Gabriel Mascaro*, *Renata Pinheiro*, *Irandhir Santos*, *Hermila Guedes* e *Jesuíta Barbosa*, de profissionais nascidos em outras regiões que atuaram no cinema pernambucano, como *Alberto Cavalcanti*, *Sonia Braga*, *Maeve Jinkings* e *Matheus Nachtergaele*).
 
 3. **Filmes históricos sem prêmios registrados e anos `-1` (`filme_premiacao.json`):**
    - **Antes:** Obras consagradas como *Baile Perfumado* (1996), *O Rap do Pequeno Príncipe Contra as Almas Sebosas* (2000), *Amarelo Manga* (2002), *O Som ao Redor* (2012) e *Era Uma Vez Eu, Verônica* (2012) não possuíam nenhum prêmio vinculado no JSON, e quase todas as demais linhas traziam `edicaoAno: -1`.
@@ -42,29 +42,25 @@ Na revisão e expansão atual da base, todas as lacunas foram preenchidas com da
 
 ---
 
-## 3. Novos Filmes Adicionados ao Acervo (+17 Obras)
+## 3. Novos Filmes do Cinema Pernambucano Adicionados ao Acervo (+13 Obras)
 
-Para tornar o banco mais robusto e representativo da produção pernambucana e nordestina (do Cinema Novo à produção contemporânea), foram incorporados 17 filmes:
+Para tornar o banco mais robusto e representativo de todas as mesorregiões de Pernambuco (Metropolitana, Zona da Mata, Agreste e Sertão), foram incorporados 13 filmes pernambucanos:
 
-| Chave | Título | Ano | Direção | Cidade / UF de Filmagem | Destaque Histórico |
+| Chave | Título | Ano | Direção | Município de Filmagem (PE) | Destaque no Cinema Pernambucano |
 | :--- | :--- | :---: | :--- | :--- | :--- |
-| `o-pagador-de-promessas-1962` | *O Pagador de Promessas* | 1962 | Anselmo Duarte | Salvador (BA) | Único filme brasileiro vencedor da Palma de Ouro em Cannes e indicado ao Oscar. |
-| `vidas-secas-1963` | *Vidas Secas* | 1963 | Nelson Pereira dos Santos | Palmeira dos Índios (AL) | Marco inaugural do Cinema Novo no sertão alagoano, premiado em Cannes. |
-| `deus-e-o-diabo-na-terra-do-sol-1964` | *Deus e o Diabo na Terra do Sol* | 1964 | Glauber Rocha | Monte Santo (BA) | Obra-prima do Cinema Novo baiano, indicado à Palma de Ouro em Cannes (1964). |
-| `o-dragao-da-maldade-1969` | *O Dragão da Maldade contra o Santo Guerreiro* | 1969 | Glauber Rocha | Milagres (BA) | Rendeu a Glauber Rocha o prêmio de Melhor Diretor no Festival de Cannes (1969). |
-| `o-auto-da-compadecida-2000` | *O Auto da Compadecida* | 2000 | Guel Arraes | Cabaceiras (PB) | Adaptação da obra de Ariano Suassuna dirigida pelo pernambucano Guel Arraes. |
-| `lisbela-e-o-prisioneiro-2003` | *Lisbela e o Prisioneiro* | 2003 | Guel Arraes | Igarassu (PE) | Fenômeno de público rodado em Pernambuco, vencedor de 2 Grandes Otelo. |
-| `o-ceu-de-suely-2006` | *O Céu de Suely* | 2006 | Karim Aïnouz | Iguatu (CE) | Grande vencedor do Festival do Rio e de Havana, estrelado pela pernambucana Hermila Guedes. |
-| `deserto-feliz-2007` | *Deserto Feliz* | 2007 | Paulo Caldas | Recife (PE) | Premiado em Gramado e Guadalajara, selecionado para o Festival de Berlim. |
-| `amor-plastico-e-barulho-2013` | *Amor, Plástico e Barulho* | 2013 | Renata Pinheiro | Recife (PE) | Retrato da cena brega recifense dirigido por Renata Pinheiro, premiado em Brasília. |
-| `a-historia-da-eternidade-2014` | *A História da Eternidade* | 2014 | Camilo Cavalcante | Floresta (PE) | Rodado no Sertão do São Francisco, consagrado no Festival de Paulínia e em Rotterdam. |
-| `azougue-nazare-2018` | *Azougue Nazaré* | 2018 | Tiago Melo | Nazaré da Mata (PE) | Destaque do Maracatu Rural da Zona da Mata Norte, premiado em Rotterdam e no Rio. |
-| `pacarrete-2019` | *Pacarrete* | 2019 | Allan Deberton | Russas (CE) | Vencedor de 8 Kikitos no Festival de Gramado, incluindo Melhor Filme e Melhor Atriz. |
-| `piedade-2019` | *Piedade* | 2019 | Cláudio Assis | Jaboatão dos Guararapes (PE) | Premiado no Festival de Brasília, abordando impactos socioambientais no litoral sul de PE. |
-| `carro-rei-2021` | *Carro Rei* | 2021 | Renata Pinheiro | Caruaru (PE) | Ficção científica agrestina vencedora de Melhor Filme no Festival de Gramado (2021). |
-| `paloma-2022` | *Paloma* | 2022 | Marcelo Gomes | Ilha de Itamaracá (PE) | Vencedor de Melhor Filme e Melhor Atriz (Kika Sena) no Festival do Rio (2022). |
-| `sem-coracao-2023` | *Sem Coração* | 2023 | Nara Normande e Tião | Maceió (AL) | Coprodução alagoana-pernambucana selecionada para a Mostra Horizontes do Festival de Veneza. |
-| `motel-destino-2024` | *Motel Destino* | 2024 | Karim Aïnouz | Beberibe (CE) | Thriller neonatal nordestino selecionado para a competição principal da Palma de Ouro em Cannes (2024). |
+| `lisbela-e-o-prisioneiro-2003` | *Lisbela e o Prisioneiro* | 2003 | Guel Arraes | Igarassu | Baseado na obra do pernambucano Osman Lins e dirigido pelo recifense Guel Arraes; vencedor de 2 Grandes Otelo. |
+| `deserto-feliz-2007` | *Deserto Feliz* | 2007 | Paulo Caldas | Recife | Produzido em Pernambuco, vencedor de 5 Kikitos em Gramado, premiado em Guadalajara e exibido em Berlim. |
+| `amor-plastico-e-barulho-2013` | *Amor, Plástico e Barulho* | 2013 | Renata Pinheiro | Recife | Retrato da cena brega recifense dirigido pela cineasta pernambucana Renata Pinheiro; 3 prêmios no Festival de Brasília. |
+| `a-historia-da-eternidade-2014` | *A História da Eternidade* | 2014 | Camilo Cavalcante | Floresta | Rodado no Sertão de Pernambuco, consagrado no Festival de Paulínia, Grande Prêmio do Cinema Brasileiro e Rotterdam. |
+| `ventos-de-agosto-2014` | *Ventos de Agosto* | 2014 | Gabriel Mascaro | Tamandaré | Filmado no litoral sul de Pernambuco, premiado nos festivais de Locarno, Gramado e Brasília. |
+| `a-luneta-do-tempo-2014` | *A Luneta do Tempo* | 2014 | Alceu Valença | Paudalho | Dirigido pelo pernambucano Alceu Valença na Zona da Mata de PE; vencedor de 2 Kikitos no Festival de Gramado. |
+| `big-jato-2015` | *Big Jato* | 2015 | Cláudio Assis | Pesqueira | Rodado no Agreste pernambucano; grande vencedor do Festival de Brasília (Melhor Filme, Ator e Roteiro). |
+| `azougue-nazare-2018` | *Azougue Nazaré* | 2018 | Tiago Melo | Nazaré da Mata | Protagonizado pelo Maracatu de Baque Solto da Zona da Mata Norte; vencedor em Rotterdam (Bright Future) e no Festival do Rio. |
+| `divino-amor-2019` | *Divino Amor* | 2019 | Gabriel Mascaro | Recife | Ficção científica distópica ambientada e filmada no Recife; selecionada para Sundance, Berlim e premiada em Guadalajara. |
+| `piedade-2019` | *Piedade* | 2019 | Cláudio Assis | Jaboatão dos Guararapes | Aborda os impactos socioambientais no litoral sul pernambucano; vencedor de 3 prêmios no Festival de Brasília. |
+| `carro-rei-2021` | *Carro Rei* | 2021 | Renata Pinheiro | Caruaru | Ficção científica agrestina vencedora de 4 Kikitos no Festival de Gramado (incluindo Melhor Filme) e selecionada em Rotterdam. |
+| `paloma-2022` | *Paloma* | 2022 | Marcelo Gomes | Ilha de Itamaracá | Produzido pela Carnaval Filmes (Recife); vencedor de Melhor Filme e Melhor Atriz (Kika Sena) no Festival do Rio. |
+| `propriedade-2022` | *Propriedade* | 2022 | Daniel Bandeira | São José da Coroa Grande | Thriller social pernambucano selecionado para o Festival de Berlim e premiado no Festival do Rio. |
 
 ---
 
@@ -72,12 +68,12 @@ Para tornar o banco mais robusto e representativo da produção pernambucana e n
 
 Com a reformulação dos dados, todas as histórias de usuário do sistema contam agora com massa de dados completa para consultas, filtros e visualizações gráficas:
 
-- **US01 (Acervo, Linha do Tempo e Acessibilidade):** 38 filmes de 1923 a 2025 com sinopse, gênero, classificação indicativa, `posterUrl` e texto alternativo descritivo (`posterAlt`).
-- **US02 (Fomento Público e Editais):** 12 editais estaduais (**Funcultura Audiovisual PE**) e federais (**FSA/ANCINE**, **Petrobras Cultural**, **Lei do Audiovisual**, **Prêmio Resgate**) somando 43 aportes em filmes.
-- **US03 (Participação de Atores e Profissionais Nordestinos):** 60 pessoas cadastradas com `flagEhNordestino` verificado e 174 vínculos em `filme_pessoa.json` cobrindo elenco e equipe criativa.
-- **US04 (Participação Feminina na Direção e no Elenco):** Presença de mulheres cineastas (*Renata Pinheiro*, *Nara Normande*), produtoras (*Emilie Lesclaux*) e amplo elenco feminino (*Hermila Guedes*, *Maeve Jinkings*, *Marcélia Cartaxo*, *Sonia Braga*, *Fernanda Montenegro*, *Dira Paes*, *Kika Sena*, *Nash Laila*, *Bárbara Colen*, *Nataly Rocha*), com `genero` 100% preenchido.
-- **US05 (Premiações e Reconhecimento Nacional/Internacional):** 50 premiações categorizadas por nível de importância (`1` = principal, `2` = relevante, `3` = demais) e 207 registros em `filme_premiacao.json` diferenciando `VENCEDOR` e `INDICADO`.
-- **US06 (Distribuição Geográfica e Locações):** Locações mapeadas na Capital (`Recife`), Região Metropolitana (`Camaragibe`, `Jaboatão dos Guararapes`, `Igarassu`, `Ilha de Itamaracá`), Zona da Mata (`Nazaré da Mata`), Agreste (`Caruaru`, `Toritama`), Sertão (`Arcoverde`, `Petrolina`, `Floresta`, `Sertânia`) e demais estados do Nordeste (`BA`, `CE`, `PB`, `AL`).
+- **US01 (Acervo, Linha do Tempo e Acessibilidade):** 34 filmes do cinema pernambucano (de 1923 a 2025) com sinopse, gênero, classificação indicativa, `posterUrl` e texto alternativo descritivo (`posterAlt`).
+- **US02 (Fomento Público e Editais):** 12 editais estaduais (**Funcultura Audiovisual PE**) e federais (**FSA/ANCINE**, **Petrobras Cultural**, **Lei do Audiovisual**, **Prêmio Resgate**) somando 46 aportes em filmes pernambucanos.
+- **US03 (Participação de Atores e Profissionais Nordestinos):** 64 pessoas cadastradas com `flagEhNordestino` verificado e 152 vínculos em `filme_pessoa.json` cobrindo elenco e equipe criativa.
+- **US04 (Participação Feminina na Direção e no Elenco):** Presença de mulheres cineastas (*Renata Pinheiro*, *Nara Normande*), produtoras (*Emilie Lesclaux*) e amplo elenco feminino (*Hermila Guedes*, *Maeve Jinkings*, *Marcélia Cartaxo*, *Sonia Braga*, *Fernanda Montenegro*, *Dira Paes*, *Kika Sena*, *Nash Laila*, *Bárbara Colen*, *Dandara de Morais*, *Malu Galli*), com `genero` 100% preenchido.
+- **US05 (Premiações e Reconhecimento Nacional/Internacional):** 50 premiações categorizadas por nível de importância (`1` = principal, `2` = relevante, `3` = demais) e 191 registros em `filme_premiacao.json` diferenciando `VENCEDOR` e `INDICADO`.
+- **US06 (Distribuição Geográfica e Locações em Pernambuco):** Locações mapeadas em todas as regiões de Pernambuco: Capital (`Recife`), Região Metropolitana (`Camaragibe`, `Jaboatão dos Guararapes`, `Igarassu`, `Ilha de Itamaracá`), Zona da Mata (`Nazaré da Mata`, `Paudalho`, `São José da Coroa Grande`), Agreste (`Caruaru`, `Toritama`, `Pesqueira`) e Sertão (`Arcoverde`, `Petrolina`, `Floresta`, `Sertânia`).
 
 ---
 

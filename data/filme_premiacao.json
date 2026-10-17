@@ -6,20 +6,6 @@
   { "filme": "o-canto-do-mar-1953", "premiacao": "Prêmio da Associação Brasileira de Cronistas Cinematográficos", "edicaoAno": 1954, "categoriaPremiacao": "Melhor Filme", "resultado": "VENCEDOR" },
   { "filme": "o-canto-do-mar-1953", "premiacao": "Festival de Cannes", "edicaoAno": 1954, "categoriaPremiacao": "Palma de Ouro", "resultado": "INDICADO" },
 
-  { "filme": "o-pagador-de-promessas-1962", "premiacao": "Festival de Cannes", "edicaoAno": 1962, "categoriaPremiacao": "Palma de Ouro", "resultado": "VENCEDOR" },
-  { "filme": "o-pagador-de-promessas-1962", "premiacao": "Oscar", "edicaoAno": 1963, "categoriaPremiacao": "Melhor Filme Internacional", "resultado": "INDICADO" },
-  { "filme": "o-pagador-de-promessas-1962", "premiacao": "Prêmio Governador do Estado", "edicaoAno": 1962, "categoriaPremiacao": "Melhor Filme", "resultado": "VENCEDOR" },
-
-  { "filme": "vidas-secas-1963", "premiacao": "Festival de Cannes", "edicaoAno": 1964, "categoriaPremiacao": "Prêmio OCIC", "resultado": "VENCEDOR" },
-  { "filme": "vidas-secas-1963", "premiacao": "Festival de Cannes", "edicaoAno": 1964, "categoriaPremiacao": "Palma de Ouro", "resultado": "INDICADO" },
-  { "filme": "vidas-secas-1963", "premiacao": "BAFTA", "edicaoAno": 1965, "categoriaPremiacao": "Melhor Filme de Qualquer Origem", "resultado": "INDICADO" },
-
-  { "filme": "deus-e-o-diabo-na-terra-do-sol-1964", "premiacao": "Festival de Cannes", "edicaoAno": 1964, "categoriaPremiacao": "Palma de Ouro", "resultado": "INDICADO" },
-  { "filme": "deus-e-o-diabo-na-terra-do-sol-1964", "premiacao": "Prêmio Governador do Estado", "edicaoAno": 1964, "categoriaPremiacao": "Melhor Fotografia", "resultado": "VENCEDOR" },
-
-  { "filme": "o-dragao-da-maldade-1969", "premiacao": "Festival de Cannes", "edicaoAno": 1969, "categoriaPremiacao": "Melhor Diretor", "resultado": "VENCEDOR" },
-  { "filme": "o-dragao-da-maldade-1969", "premiacao": "Festival de Cannes", "edicaoAno": 1969, "categoriaPremiacao": "Palma de Ouro", "resultado": "INDICADO" },
-
   { "filme": "valente-e-o-galo-1974", "premiacao": "III Jornada Brasileira de Curta-Metragem", "edicaoAno": 1974, "categoriaPremiacao": "Melhor Super-8", "resultado": "VENCEDOR" },
 
   { "filme": "baile-perfumado-1996", "premiacao": "Festival de Brasília", "edicaoAno": 1996, "categoriaPremiacao": "Melhor Filme", "resultado": "VENCEDOR" },
@@ -27,11 +13,6 @@
   { "filme": "baile-perfumado-1996", "premiacao": "Festival de Brasília", "edicaoAno": 1996, "categoriaPremiacao": "Melhor Cenografia", "resultado": "VENCEDOR" },
   { "filme": "baile-perfumado-1996", "premiacao": "Prêmio APCA", "edicaoAno": 1998, "categoriaPremiacao": "Melhor Fotografia", "resultado": "VENCEDOR" },
   { "filme": "baile-perfumado-1996", "premiacao": "Prêmio Guarani", "edicaoAno": 1998, "categoriaPremiacao": "Melhor Trilha Sonora", "resultado": "VENCEDOR" },
-
-  { "filme": "o-auto-da-compadecida-2000", "premiacao": "Grande Prêmio do Cinema Brasileiro", "edicaoAno": 2001, "categoriaPremiacao": "Melhor Diretor", "resultado": "VENCEDOR" },
-  { "filme": "o-auto-da-compadecida-2000", "premiacao": "Grande Prêmio do Cinema Brasileiro", "edicaoAno": 2001, "categoriaPremiacao": "Melhor Ator", "resultado": "VENCEDOR" },
-  { "filme": "o-auto-da-compadecida-2000", "premiacao": "Grande Prêmio do Cinema Brasileiro", "edicaoAno": 2001, "categoriaPremiacao": "Melhor Roteiro", "resultado": "VENCEDOR" },
-  { "filme": "o-auto-da-compadecida-2000", "premiacao": "Festival de Cinema Brasileiro de Miami", "edicaoAno": 2001, "categoriaPremiacao": "Melhor Filme — Voto do Público", "resultado": "VENCEDOR" },
 
   { "filme": "o-rap-do-pequeno-principe-2000", "premiacao": "Festival do Rio", "edicaoAno": 2000, "categoriaPremiacao": "Prêmio Especial do Júri", "resultado": "VENCEDOR" },
   { "filme": "o-rap-do-pequeno-principe-2000", "premiacao": "Festival de Havana", "edicaoAno": 2000, "categoriaPremiacao": "Melhor Documentário", "resultado": "VENCEDOR" },
@@ -66,12 +47,6 @@
   { "filme": "cinema-aspirinas-e-urubus-2005", "premiacao": "Grande Prêmio do Cinema Brasileiro", "edicaoAno": 2007, "categoriaPremiacao": "Melhor Filme", "resultado": "VENCEDOR" },
   { "filme": "cinema-aspirinas-e-urubus-2005", "premiacao": "Festival de Cannes", "edicaoAno": 2005, "categoriaPremiacao": "Mostra Un Certain Regard", "resultado": "INDICADO" },
   { "filme": "cinema-aspirinas-e-urubus-2005", "premiacao": "Oscar", "edicaoAno": 2007, "categoriaPremiacao": "Indicação brasileira a Melhor Filme Internacional", "resultado": "INDICADO" },
-
-  { "filme": "o-ceu-de-suely-2006", "premiacao": "Festival do Rio", "edicaoAno": 2006, "categoriaPremiacao": "Melhor Filme", "resultado": "VENCEDOR" },
-  { "filme": "o-ceu-de-suely-2006", "premiacao": "Festival do Rio", "edicaoAno": 2006, "categoriaPremiacao": "Melhor Direção", "resultado": "VENCEDOR" },
-  { "filme": "o-ceu-de-suely-2006", "premiacao": "Festival do Rio", "edicaoAno": 2006, "categoriaPremiacao": "Melhor Atriz", "resultado": "VENCEDOR" },
-  { "filme": "o-ceu-de-suely-2006", "premiacao": "Festival de Havana", "edicaoAno": 2006, "categoriaPremiacao": "Grande Coral — 1º Prêmio", "resultado": "VENCEDOR" },
-  { "filme": "o-ceu-de-suely-2006", "premiacao": "Festival de Veneza", "edicaoAno": 2006, "categoriaPremiacao": "Seleção oficial (Mostra Horizontes)", "resultado": "INDICADO" },
 
   { "filme": "deserto-feliz-2007", "premiacao": "Festival de Gramado", "edicaoAno": 2007, "categoriaPremiacao": "Melhor Diretor", "resultado": "VENCEDOR" },
   { "filme": "deserto-feliz-2007", "premiacao": "Festival de Gramado", "edicaoAno": 2007, "categoriaPremiacao": "Melhor Fotografia", "resultado": "VENCEDOR" },
@@ -154,6 +129,12 @@
   { "filme": "a-historia-da-eternidade-2014", "premiacao": "Grande Prêmio do Cinema Brasileiro", "edicaoAno": 2016, "categoriaPremiacao": "Melhor Trilha Sonora Original", "resultado": "VENCEDOR" },
   { "filme": "a-historia-da-eternidade-2014", "premiacao": "Festival Internacional de Cinema de Rotterdam", "edicaoAno": 2014, "categoriaPremiacao": "Tiger Award", "resultado": "INDICADO" },
 
+  { "filme": "ventos-de-agosto-2014", "premiacao": "Festival de Gramado", "edicaoAno": 2014, "categoriaPremiacao": "Melhor Fotografia", "resultado": "VENCEDOR" },
+  { "filme": "ventos-de-agosto-2014", "premiacao": "Festival de Brasília", "edicaoAno": 2014, "categoriaPremiacao": "Melhor Fotografia", "resultado": "VENCEDOR" },
+
+  { "filme": "a-luneta-do-tempo-2014", "premiacao": "Festival de Gramado", "edicaoAno": 2014, "categoriaPremiacao": "Melhor Trilha Musical", "resultado": "VENCEDOR" },
+  { "filme": "a-luneta-do-tempo-2014", "premiacao": "Festival de Gramado", "edicaoAno": 2014, "categoriaPremiacao": "Melhor Direção de Arte", "resultado": "VENCEDOR" },
+
   { "filme": "boi-neon-2015", "premiacao": "Festival Internacional de Cinema de Toronto (TIFF)", "edicaoAno": 2015, "categoriaPremiacao": "Prêmio Especial do Júri (Mostra Platform)", "resultado": "VENCEDOR" },
   { "filme": "boi-neon-2015", "premiacao": "Festival de Berlim", "edicaoAno": 2016, "categoriaPremiacao": "Menção Honrosa (Mostra Forum)", "resultado": "VENCEDOR" },
   { "filme": "boi-neon-2015", "premiacao": "Festival de Veneza", "edicaoAno": 2015, "categoriaPremiacao": "Prêmio Especial do Júri (Mostra Horizontes)", "resultado": "VENCEDOR" },
@@ -162,6 +143,10 @@
   { "filme": "boi-neon-2015", "premiacao": "Festival do Rio", "edicaoAno": 2015, "categoriaPremiacao": "Melhor Fotografia", "resultado": "VENCEDOR" },
   { "filme": "boi-neon-2015", "premiacao": "Grande Prêmio do Cinema Brasileiro", "edicaoAno": 2017, "categoriaPremiacao": "Melhor Roteiro Original", "resultado": "VENCEDOR" },
   { "filme": "boi-neon-2015", "premiacao": "Festival de Veneza", "edicaoAno": 2015, "categoriaPremiacao": "Melhor Filme (Mostra Horizontes)", "resultado": "INDICADO" },
+
+  { "filme": "big-jato-2015", "premiacao": "Festival de Brasília", "edicaoAno": 2015, "categoriaPremiacao": "Melhor Filme", "resultado": "VENCEDOR" },
+  { "filme": "big-jato-2015", "premiacao": "Festival de Brasília", "edicaoAno": 2015, "categoriaPremiacao": "Melhor Ator", "resultado": "VENCEDOR" },
+  { "filme": "big-jato-2015", "premiacao": "Festival de Brasília", "edicaoAno": 2015, "categoriaPremiacao": "Melhor Roteiro", "resultado": "VENCEDOR" },
 
   { "filme": "aquarius-2016", "premiacao": "Grande Prêmio do Cinema Brasileiro", "edicaoAno": 2017, "categoriaPremiacao": "Melhor Filme", "resultado": "VENCEDOR" },
   { "filme": "aquarius-2016", "premiacao": "Grande Prêmio do Cinema Brasileiro", "edicaoAno": 2017, "categoriaPremiacao": "Melhor Direção", "resultado": "VENCEDOR" },
@@ -193,11 +178,8 @@
   { "filme": "bacurau-2019", "premiacao": "New York Film Festival (NYFF)", "edicaoAno": 2019, "categoriaPremiacao": "Seleção oficial", "resultado": "INDICADO" },
   { "filme": "bacurau-2019", "premiacao": "Festival de Sitges", "edicaoAno": 2019, "categoriaPremiacao": "Seleção oficial", "resultado": "INDICADO" },
 
-  { "filme": "pacarrete-2019", "premiacao": "Festival de Gramado", "edicaoAno": 2019, "categoriaPremiacao": "Melhor Filme (Kikito)", "resultado": "VENCEDOR" },
-  { "filme": "pacarrete-2019", "premiacao": "Festival de Gramado", "edicaoAno": 2019, "categoriaPremiacao": "Melhor Diretor", "resultado": "VENCEDOR" },
-  { "filme": "pacarrete-2019", "premiacao": "Festival de Gramado", "edicaoAno": 2019, "categoriaPremiacao": "Melhor Atriz", "resultado": "VENCEDOR" },
-  { "filme": "pacarrete-2019", "premiacao": "Festival de Gramado", "edicaoAno": 2019, "categoriaPremiacao": "Melhor Roteiro", "resultado": "VENCEDOR" },
-  { "filme": "pacarrete-2019", "premiacao": "Grande Prêmio do Cinema Brasileiro", "edicaoAno": 2021, "categoriaPremiacao": "Melhor Atriz", "resultado": "VENCEDOR" },
+  { "filme": "divino-amor-2019", "premiacao": "Festival de Berlim", "edicaoAno": 2019, "categoriaPremiacao": "Seleção oficial (Mostra Panorama)", "resultado": "INDICADO" },
+  { "filme": "divino-amor-2019", "premiacao": "Festival Internacional de Cinema de Guadalajara", "edicaoAno": 2019, "categoriaPremiacao": "Melhor Roteiro", "resultado": "VENCEDOR" },
 
   { "filme": "piedade-2019", "premiacao": "Festival de Brasília", "edicaoAno": 2019, "categoriaPremiacao": "Prêmio Especial do Júri", "resultado": "VENCEDOR" },
   { "filme": "piedade-2019", "premiacao": "Festival de Brasília", "edicaoAno": 2019, "categoriaPremiacao": "Melhor Ator Coadjuvante", "resultado": "VENCEDOR" },
@@ -212,6 +194,9 @@
   { "filme": "paloma-2022", "premiacao": "Festival do Rio", "edicaoAno": 2022, "categoriaPremiacao": "Melhor Atriz", "resultado": "VENCEDOR" },
   { "filme": "paloma-2022", "premiacao": "Festival de Munique", "edicaoAno": 2022, "categoriaPremiacao": "Seleção oficial", "resultado": "INDICADO" },
 
+  { "filme": "propriedade-2022", "premiacao": "Festival do Rio", "edicaoAno": 2022, "categoriaPremiacao": "Melhor Montagem", "resultado": "VENCEDOR" },
+  { "filme": "propriedade-2022", "premiacao": "Festival de Berlim", "edicaoAno": 2023, "categoriaPremiacao": "Seleção oficial (Mostra Panorama)", "resultado": "INDICADO" },
+
   { "filme": "retratos-fantasmas-2023", "premiacao": "Prêmio APCA", "edicaoAno": 2024, "categoriaPremiacao": "Melhor Filme", "resultado": "VENCEDOR" },
   { "filme": "retratos-fantasmas-2023", "premiacao": "Festival Sesc Melhores Filmes", "edicaoAno": 2024, "categoriaPremiacao": "Melhor Filme (voto do público)", "resultado": "VENCEDOR" },
   { "filme": "retratos-fantasmas-2023", "premiacao": "Festival Sesc Melhores Filmes", "edicaoAno": 2024, "categoriaPremiacao": "Melhor Documentário (crítica e público)", "resultado": "VENCEDOR" },
@@ -220,12 +205,6 @@
   { "filme": "retratos-fantasmas-2023", "premiacao": "Oscar", "edicaoAno": 2024, "categoriaPremiacao": "Indicação brasileira a Melhor Filme Internacional (não entrou na lista de pré-indicados)", "resultado": "INDICADO" },
   { "filme": "retratos-fantasmas-2023", "premiacao": "Prêmio Grande Otelo", "edicaoAno": 2024, "categoriaPremiacao": "Melhor Direção", "resultado": "INDICADO" },
   { "filme": "retratos-fantasmas-2023", "premiacao": "Prêmio Grande Otelo", "edicaoAno": 2024, "categoriaPremiacao": "Melhor Documentário", "resultado": "INDICADO" },
-
-  { "filme": "sem-coracao-2023", "premiacao": "Festival do Rio", "edicaoAno": 2023, "categoriaPremiacao": "Melhor Fotografia", "resultado": "VENCEDOR" },
-  { "filme": "sem-coracao-2023", "premiacao": "Festival de Veneza", "edicaoAno": 2023, "categoriaPremiacao": "Seleção oficial (Mostra Horizontes)", "resultado": "INDICADO" },
-
-  { "filme": "motel-destino-2024", "premiacao": "Festival de Cannes", "edicaoAno": 2024, "categoriaPremiacao": "Palma de Ouro", "resultado": "INDICADO" },
-  { "filme": "motel-destino-2024", "premiacao": "Queer Palm", "edicaoAno": 2024, "categoriaPremiacao": "Melhor Longa-Metragem", "resultado": "INDICADO" },
 
   { "filme": "o-agente-secreto-2025", "premiacao": "Festival de Cannes", "edicaoAno": 2025, "categoriaPremiacao": "Melhor Direção", "resultado": "VENCEDOR" },
   { "filme": "o-agente-secreto-2025", "premiacao": "Festival de Cannes", "edicaoAno": 2025, "categoriaPremiacao": "Melhor Ator", "resultado": "VENCEDOR" },

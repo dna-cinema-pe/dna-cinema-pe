@@ -16,24 +16,6 @@
   { "filme": "o-canto-do-mar-1953", "pessoa": "Alberto Cavalcanti", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
   { "filme": "o-canto-do-mar-1953", "pessoa": "Alberto Cavalcanti", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
 
-  { "filme": "o-pagador-de-promessas-1962", "pessoa": "Anselmo Duarte", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
-  { "filme": "o-pagador-de-promessas-1962", "pessoa": "Anselmo Duarte", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
-  { "filme": "o-pagador-de-promessas-1962", "pessoa": "Leonardo Villar", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
-  { "filme": "o-pagador-de-promessas-1962", "pessoa": "Othon Bastos", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
-
-  { "filme": "vidas-secas-1963", "pessoa": "Nelson Pereira dos Santos", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
-  { "filme": "vidas-secas-1963", "pessoa": "Nelson Pereira dos Santos", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
-  { "filme": "vidas-secas-1963", "pessoa": "Átila Iório", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
-
-  { "filme": "deus-e-o-diabo-na-terra-do-sol-1964", "pessoa": "Glauber Rocha", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
-  { "filme": "deus-e-o-diabo-na-terra-do-sol-1964", "pessoa": "Glauber Rocha", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
-  { "filme": "deus-e-o-diabo-na-terra-do-sol-1964", "pessoa": "Othon Bastos", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
-  { "filme": "deus-e-o-diabo-na-terra-do-sol-1964", "pessoa": "Yoná Magalhães", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
-
-  { "filme": "o-dragao-da-maldade-1969", "pessoa": "Glauber Rocha", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
-  { "filme": "o-dragao-da-maldade-1969", "pessoa": "Glauber Rocha", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
-  { "filme": "o-dragao-da-maldade-1969", "pessoa": "Othon Bastos", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
-
   { "filme": "valente-e-o-galo-1974", "pessoa": "Fernando Spencer", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
   { "filme": "valente-e-o-galo-1974", "pessoa": "Fernando Spencer", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
 
@@ -45,14 +27,6 @@
   { "filme": "baile-perfumado-1996", "pessoa": "Luiz Carlos Vasconcelos", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
   { "filme": "baile-perfumado-1996", "pessoa": "Aramis Trindade", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
   { "filme": "baile-perfumado-1996", "pessoa": "Chico Díaz", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
-
-  { "filme": "o-auto-da-compadecida-2000", "pessoa": "Guel Arraes", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
-  { "filme": "o-auto-da-compadecida-2000", "pessoa": "Guel Arraes", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
-  { "filme": "o-auto-da-compadecida-2000", "pessoa": "Matheus Nachtergaele", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
-  { "filme": "o-auto-da-compadecida-2000", "pessoa": "Selton Mello", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
-  { "filme": "o-auto-da-compadecida-2000", "pessoa": "Fernanda Montenegro", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
-  { "filme": "o-auto-da-compadecida-2000", "pessoa": "Virginia Cavendish", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
-  { "filme": "o-auto-da-compadecida-2000", "pessoa": "Aramis Trindade", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
 
   { "filme": "o-rap-do-pequeno-principe-2000", "pessoa": "Paulo Caldas", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
   { "filme": "o-rap-do-pequeno-principe-2000", "pessoa": "Marcelo Luna", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
@@ -84,11 +58,6 @@
   { "filme": "cinema-aspirinas-e-urubus-2005", "pessoa": "João Vieira Jr.", "funcaoPessoa": "PRODUCAO", "flagEhCineasta": false },
   { "filme": "cinema-aspirinas-e-urubus-2005", "pessoa": "Hermila Guedes", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
   { "filme": "cinema-aspirinas-e-urubus-2005", "pessoa": "Irandhir Santos", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
-
-  { "filme": "o-ceu-de-suely-2006", "pessoa": "Karim Aïnouz", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
-  { "filme": "o-ceu-de-suely-2006", "pessoa": "Karim Aïnouz", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
-  { "filme": "o-ceu-de-suely-2006", "pessoa": "Hermila Guedes", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
-  { "filme": "o-ceu-de-suely-2006", "pessoa": "Zé Maria", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
 
   { "filme": "deserto-feliz-2007", "pessoa": "Paulo Caldas", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
   { "filme": "deserto-feliz-2007", "pessoa": "Paulo Caldas", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
@@ -142,10 +111,24 @@
   { "filme": "a-historia-da-eternidade-2014", "pessoa": "Marcélia Cartaxo", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
   { "filme": "a-historia-da-eternidade-2014", "pessoa": "Zé Maria", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
 
+  { "filme": "ventos-de-agosto-2014", "pessoa": "Gabriel Mascaro", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
+  { "filme": "ventos-de-agosto-2014", "pessoa": "Gabriel Mascaro", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
+  { "filme": "ventos-de-agosto-2014", "pessoa": "Dandara de Morais", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
+  { "filme": "ventos-de-agosto-2014", "pessoa": "Gabriel Mascaro", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
+
+  { "filme": "a-luneta-do-tempo-2014", "pessoa": "Alceu Valença", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
+  { "filme": "a-luneta-do-tempo-2014", "pessoa": "Alceu Valença", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
+  { "filme": "a-luneta-do-tempo-2014", "pessoa": "Irandhir Santos", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
+  { "filme": "a-luneta-do-tempo-2014", "pessoa": "Hermila Guedes", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
+
   { "filme": "boi-neon-2015", "pessoa": "Gabriel Mascaro", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
   { "filme": "boi-neon-2015", "pessoa": "Gabriel Mascaro", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
   { "filme": "boi-neon-2015", "pessoa": "Juliano Cazarré", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
   { "filme": "boi-neon-2015", "pessoa": "Maeve Jinkings", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
+
+  { "filme": "big-jato-2015", "pessoa": "Cláudio Assis", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
+  { "filme": "big-jato-2015", "pessoa": "Hilton Lacerda", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
+  { "filme": "big-jato-2015", "pessoa": "Matheus Nachtergaele", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
 
   { "filme": "aquarius-2016", "pessoa": "Kleber Mendonça Filho", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
   { "filme": "aquarius-2016", "pessoa": "Kleber Mendonça Filho", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
@@ -169,10 +152,9 @@
   { "filme": "bacurau-2019", "pessoa": "Silvero Pereira", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
   { "filme": "bacurau-2019", "pessoa": "Bárbara Colen", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
 
-  { "filme": "pacarrete-2019", "pessoa": "Allan Deberton", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
-  { "filme": "pacarrete-2019", "pessoa": "Allan Deberton", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
-  { "filme": "pacarrete-2019", "pessoa": "Marcélia Cartaxo", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
-  { "filme": "pacarrete-2019", "pessoa": "Zé Maria", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
+  { "filme": "divino-amor-2019", "pessoa": "Gabriel Mascaro", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
+  { "filme": "divino-amor-2019", "pessoa": "Gabriel Mascaro", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
+  { "filme": "divino-amor-2019", "pessoa": "Dira Paes", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
 
   { "filme": "piedade-2019", "pessoa": "Cláudio Assis", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
   { "filme": "piedade-2019", "pessoa": "Hilton Lacerda", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
@@ -189,22 +171,14 @@
   { "filme": "paloma-2022", "pessoa": "João Vieira Jr.", "funcaoPessoa": "PRODUCAO", "flagEhCineasta": false },
   { "filme": "paloma-2022", "pessoa": "Kika Sena", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
 
+  { "filme": "propriedade-2022", "pessoa": "Daniel Bandeira", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
+  { "filme": "propriedade-2022", "pessoa": "Daniel Bandeira", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
+  { "filme": "propriedade-2022", "pessoa": "Malu Galli", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
+  { "filme": "propriedade-2022", "pessoa": "Zé Maria", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
+
   { "filme": "retratos-fantasmas-2023", "pessoa": "Kleber Mendonça Filho", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
   { "filme": "retratos-fantasmas-2023", "pessoa": "Kleber Mendonça Filho", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
   { "filme": "retratos-fantasmas-2023", "pessoa": "Emilie Lesclaux", "funcaoPessoa": "PRODUCAO", "flagEhCineasta": false },
-
-  { "filme": "sem-coracao-2023", "pessoa": "Nara Normande", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
-  { "filme": "sem-coracao-2023", "pessoa": "Tião", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
-  { "filme": "sem-coracao-2023", "pessoa": "Nara Normande", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
-  { "filme": "sem-coracao-2023", "pessoa": "Tião", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
-  { "filme": "sem-coracao-2023", "pessoa": "Emilie Lesclaux", "funcaoPessoa": "PRODUCAO", "flagEhCineasta": false },
-  { "filme": "sem-coracao-2023", "pessoa": "Maeve Jinkings", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
-
-  { "filme": "motel-destino-2024", "pessoa": "Karim Aïnouz", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
-  { "filme": "motel-destino-2024", "pessoa": "Karim Aïnouz", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
-  { "filme": "motel-destino-2024", "pessoa": "Iago Xavier", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
-  { "filme": "motel-destino-2024", "pessoa": "Nataly Rocha", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
-  { "filme": "motel-destino-2024", "pessoa": "Fábio Assunção", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
 
   { "filme": "o-agente-secreto-2025", "pessoa": "Kleber Mendonça Filho", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
   { "filme": "o-agente-secreto-2025", "pessoa": "Kleber Mendonça Filho", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },

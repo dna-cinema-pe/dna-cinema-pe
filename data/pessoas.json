@@ -24,6 +24,8 @@
   { "nome": "Allan Deberton", "idade": 41, "genero": "MASCULINO", "flagEhNordestino": true },
   { "nome": "Anselmo Duarte", "idade": 89, "genero": "MASCULINO", "flagEhNordestino": false },
   { "nome": "Nelson Pereira dos Santos", "idade": 89, "genero": "MASCULINO", "flagEhNordestino": false },
+  { "nome": "Alceu Valença", "idade": 80, "genero": "MASCULINO", "flagEhNordestino": true },
+  { "nome": "Daniel Bandeira", "idade": 46, "genero": "MASCULINO", "flagEhNordestino": true },
   { "nome": "Irandhir Santos", "idade": 48, "genero": "MASCULINO", "flagEhNordestino": true },
   { "nome": "Maeve Jinkings", "idade": 50, "genero": "FEMININO", "flagEhNordestino": false },
   { "nome": "Hermila Guedes", "idade": 46, "genero": "FEMININO", "flagEhNordestino": true },
@@ -58,5 +60,7 @@
   { "nome": "João Vieira Jr.", "idade": 58, "genero": "MASCULINO", "flagEhNordestino": true },
   { "nome": "Walter Carvalho", "idade": 79, "genero": "MASCULINO", "flagEhNordestino": true },
   { "nome": "Pedro Sotero", "idade": 45, "genero": "MASCULINO", "flagEhNordestino": true },
-  { "nome": "Almudena", "idade": 60, "genero": "FEMININO", "flagEhNordestino": true }
+  { "nome": "Almudena", "idade": 60, "genero": "FEMININO", "flagEhNordestino": true },
+  { "nome": "Dandara de Morais", "idade": 37, "genero": "FEMININO", "flagEhNordestino": true },
+  { "nome": "Malu Galli", "idade": 54, "genero": "FEMININO", "flagEhNordestino": false }
 ]

@@ -44,50 +44,6 @@
     "classificacaoIndicativa": "12"
   },
   {
-    "chave": "o-pagador-de-promessas-1962",
-    "titulo": "O Pagador de Promessas",
-    "ano": 1962,
-    "genero": "Drama",
-    "sinopse": "Zé do Burro, um pequeno lavrador baiano, faz uma promessa em um terreiro de candomblé para salvar seu asno de estimação e carrega uma pesada cruz de madeira até a Igreja de Santa Bárbara, em Salvador, onde enfrenta a intolerância religiosa do padre local.",
-    "cidadeFilmagem": "Salvador (BA)",
-    "posterUrl": "/posters/o-pagador-de-promessas-1962.jpg",
-    "posterAlt": "Pôster de O Pagador de Promessas com Leonardo Villar carregando uma grande cruz de madeira nas escadarias de Salvador.",
-    "classificacaoIndicativa": "12"
-  },
-  {
-    "chave": "vidas-secas-1963",
-    "titulo": "Vidas Secas",
-    "ano": 1963,
-    "genero": "Drama",
-    "sinopse": "Baseado no romance de Graciliano Ramos, o filme acompanha a família de retirantes formada por Fabiano, Sinhá Vitória, seus dois filhos e a cadela Baleia, que atravessam a aridez do sertão nordestino em busca de sobrevivência e dignidade diante da seca e da exploração latifundiária.",
-    "cidadeFilmagem": "Palmeira dos Índios (AL)",
-    "posterUrl": "/posters/vidas-secas-1963.jpg",
-    "posterAlt": "Cartaz de Vidas Secas mostrando a família de Fabiano caminhando sob o sol escaldante da caatinga alagoana.",
-    "classificacaoIndicativa": "12"
-  },
-  {
-    "chave": "deus-e-o-diabo-na-terra-do-sol-1964",
-    "titulo": "Deus e o Diabo na Terra do Sol",
-    "ano": 1964,
-    "genero": "Drama / Faroeste",
-    "sinopse": "No sertão baiano, o vaqueiro Manuel se rebela contra a exploração de um coronel e foge com a esposa Rosa, juntando-se primeiro aos seguidores messiânicos do beato Sebastião e, posteriormente, ao bando do cangaceiro Corisco, enquanto são perseguidos pelo matador Antônio das Mortes.",
-    "cidadeFilmagem": "Monte Santo (BA)",
-    "posterUrl": "/posters/deus-e-o-diabo-na-terra-do-sol-1964.jpg",
-    "posterAlt": "Pôster icônico de Deus e o Diabo na Terra do Sol com arte gráfica de Rogério Duarte representando o sol e o cangaço.",
-    "classificacaoIndicativa": "14"
-  },
-  {
-    "chave": "o-dragao-da-maldade-1969",
-    "titulo": "O Dragão da Maldade contra o Santo Guerreiro",
-    "ano": 1969,
-    "genero": "Drama / Faroeste",
-    "sinopse": "Quase trinta anos após matar Corisco, o jagunço Antônio das Mortes é contratado por um coronel cego de uma pequena cidade do sertão para eliminar Coirana, um novo líder cangaceiro, mas acaba passando por uma profunda transformação política e espiritual.",
-    "cidadeFilmagem": "Milagres (BA)",
-    "posterUrl": "/posters/o-dragao-da-maldade-1969.jpg",
-    "posterAlt": "Cartaz colorido de O Dragão da Maldade contra o Santo Guerreiro com Antônio das Mortes em trajes do sertão.",
-    "classificacaoIndicativa": "14"
-  },
-  {
     "chave": "valente-e-o-galo-1974",
     "titulo": "Valente é o Galo",
     "ano": 1974,
@@ -108,17 +64,6 @@
     "posterUrl": "/posters/baile-perfumado-1996.jpg",
     "posterAlt": "Pôster de Baile Perfumado com o mascate Benjamin Abrahão segurando uma câmera cinematográfica ao lado de Lampião e Maria Bonita.",
     "classificacaoIndicativa": "16"
-  },
-  {
-    "chave": "o-auto-da-compadecida-2000",
-    "titulo": "O Auto da Compadecida",
-    "ano": 2000,
-    "genero": "Comédia / Aventura",
-    "sinopse": "Adaptado da obra de Ariano Suassuna, o filme narra as aventuras de João Grilo e Chicó, dois sertanejos pobres e astutos que usam a inteligência para sobreviver às injustiças sociais, à cobiça do clero e à violência do cangaço no interior nordestino, até enfrentarem o julgamento divino.",
-    "cidadeFilmagem": "Cabaceiras (PB)",
-    "posterUrl": "/posters/o-auto-da-compadecida-2000.jpg",
-    "posterAlt": "Pôster de O Auto da Compadecida com Matheus Nachtergaele e Selton Mello caracterizados como João Grilo e Chicó no sertão.",
-    "classificacaoIndicativa": "12"
   },
   {
     "chave": "o-rap-do-pequeno-principe-2000",
@@ -147,10 +92,10 @@
     "titulo": "Lisbela e o Prisioneiro",
     "ano": 2003,
     "genero": "Comédia romântica",
-    "sinopse": "A jovem sonhadora Lisbela, apaixonada pelos filmes de Hollywood e prestes a se casar, conhece Leléu, um aventureiro e artista mambembe que acaba preso na delegacia da cidade. O romance proibido entre os dois desencadeia uma série de perseguições e reviravoltas cômicas em Pernambuco.",
+    "sinopse": "A jovem sonhadora Lisbela, apaixonada pelos filmes de Hollywood e prestes a se casar, conhece Leléu, um aventureiro e artista mambembe que acaba preso na delegacia da cidade. O romance proibido entre os dois, adaptado da obra do pernambucano Osman Lins, desencadeia perseguições e reviravoltas cômicas em Pernambuco.",
     "cidadeFilmagem": "Igarassu",
     "posterUrl": "/posters/lisbela-e-o-prisioneiro-2003.jpg",
-    "posterAlt": "Pôster de Lisbela e o Prisioneiro com Débora Falabella e Selton Mello em clima de cinema clássico e romance nordestino.",
+    "posterAlt": "Pôster de Lisbela e o Prisioneiro com Débora Falabella e Selton Mello em clima de cinema clássico e romance pernambucano.",
     "classificacaoIndicativa": "12"
   },
   {
@@ -170,21 +115,10 @@
     "ano": 2005,
     "genero": "Drama / Road Movie",
     "sinopse": "Em 1942, um alemão que atravessa o sertão vendendo aspirinas conhece Ranulpho, um sertanejo simples que deseja escapar da seca e ir para o Sul do país. Juntos, eles viajam pelos povoados até formarem uma inesperada amizade.",
-    "cidadeFilmagem": "Patos (PB)",
+    "cidadeFilmagem": "Sertânia",
     "posterUrl": "/posters/cinema-aspirinas-e-urubus-2005.jpg",
     "posterAlt": "Pôster de Cinema, Aspirinas e Urubus mostrando Johann e Ranulpho ao lado do caminhão de aspirinas na caatinga em 1942.",
     "classificacaoIndicativa": "12"
-  },
-  {
-    "chave": "o-ceu-de-suely-2006",
-    "titulo": "O Céu de Suely",
-    "ano": 2006,
-    "genero": "Drama",
-    "sinopse": "Hermila, uma jovem de 21 anos, retorna de São Paulo para sua pequena cidade natal de Iguatu, no interior do Ceará, com o filho pequeno nos braços. Abandonada pelo companheiro, ela decide rifar o próprio corpo sob o nome de Suely para juntar dinheiro e recomeçar a vida longe dali.",
-    "cidadeFilmagem": "Iguatu (CE)",
-    "posterUrl": "/posters/o-ceu-de-suely-2006.jpg",
-    "posterAlt": "Pôster de O Céu de Suely com Hermila Guedes iluminada pelas luzes noturnas de uma estrada no interior cearense.",
-    "classificacaoIndicativa": "16"
   },
   {
     "chave": "deserto-feliz-2007",
@@ -216,7 +150,7 @@
     "sinopse": "José Renato, um geólogo enviado em uma expedição de trabalho pelo sertão para avaliar o percurso da transposição das águas do Rio São Francisco, cruza estradas ermas e pequenas cidades. Durante o trajeto, a solidão e a dor de um término recente transformam o relatório técnico em um diário lírico e existencial, onde reflexões sobre abandono e a aridez da paisagem se misturam.",
     "cidadeFilmagem": "Petrolina",
     "posterUrl": "/posters/viajo-porque-preciso-2009.jpg",
-    "posterAlt": "Pôster de Viajo Porque Preciso, Volto Porque Te Amo com colagens fotográficas e paisagens das estradas do sertão nordestino.",
+    "posterAlt": "Pôster de Viajo Porque Preciso, Volto Porque Te Amo com colagens fotográficas e paisagens das estradas do sertão pernambucano.",
     "classificacaoIndicativa": "14"
   },
   {
@@ -286,6 +220,28 @@
     "classificacaoIndicativa": "16"
   },
   {
+    "chave": "ventos-de-agosto-2014",
+    "titulo": "Ventos de Agosto",
+    "ano": 2014,
+    "genero": "Drama",
+    "sinopse": "Em uma pequena vila costeira no litoral sul de Pernambuco, a rotina da jovem Shirley, que trabalha em uma fazenda de cocos, e de seu namorado Jeison, mergulhador de pesca submarina, é transformada pela chegada de um pesquisador de sons de ventos e tempestades marítimas.",
+    "cidadeFilmagem": "Tamandaré",
+    "posterUrl": "/posters/ventos-de-agosto-2014.jpg",
+    "posterAlt": "Pôster de Ventos de Agosto com Dandara de Morais entre os coqueirais e o mar agitado do litoral pernambucano.",
+    "classificacaoIndicativa": "16"
+  },
+  {
+    "chave": "a-luneta-do-tempo-2014",
+    "titulo": "A Luneta do Tempo",
+    "ano": 2014,
+    "genero": "Drama / Musical",
+    "sinopse": "Escrito e dirigido pelo músico pernambucano Alceu Valença, o filme retrata a rivalidade histórica entre o bando de Lampião e a volante liderada por Severo no sertão de Pernambuco, entrelaçada à paixão de seus descendentes em um circo mambembe.",
+    "cidadeFilmagem": "Paudalho",
+    "posterUrl": "/posters/a-luneta-do-tempo-2014.jpg",
+    "posterAlt": "Pôster poético de A Luneta do Tempo com Irandhir Santos caracterizado como Lampião sob a estética circense e de cordel.",
+    "classificacaoIndicativa": "14"
+  },
+  {
     "chave": "boi-neon-2015",
     "titulo": "Boi Neon",
     "ano": 2015,
@@ -294,6 +250,17 @@
     "cidadeFilmagem": "Toritama",
     "posterUrl": "/posters/boi-neon-2015.jpg",
     "posterAlt": "Pôster de Boi Neon com Juliano Cazarré e elenco em cima do caminhão de vaquejada sob luzes noturnas neon no Agreste.",
+    "classificacaoIndicativa": "16"
+  },
+  {
+    "chave": "big-jato-2015",
+    "titulo": "Big Jato",
+    "ano": 2015,
+    "genero": "Drama / Comédia",
+    "sinopse": "Baseado no livro autobiográfico do escritor pernambucano Xico Sá, o filme acompanha o cotidiano de um adolescente no interior de Pernambuco que viaja com o pai no caminhão limpa-fossas Big Jato enquanto desperta para a poesia, a política e o primeiro amor sob a influência do tio artista.",
+    "cidadeFilmagem": "Pesqueira",
+    "posterUrl": "/posters/big-jato-2015.jpg",
+    "posterAlt": "Pôster de Big Jato com Matheus Nachtergaele em frente ao caminhão pipa nas estradas do Agreste pernambucano.",
     "classificacaoIndicativa": "16"
   },
   {
@@ -330,15 +297,15 @@
     "classificacaoIndicativa": "16"
   },
   {
-    "chave": "pacarrete-2019",
-    "titulo": "Pacarrete",
+    "chave": "divino-amor-2019",
+    "titulo": "Divino Amor",
     "ano": 2019,
-    "genero": "Drama",
-    "sinopse": "Pacarrete é uma professora de dança aposentada e excêntrica que vive em Russas, no interior do Ceará, e sonha em estrelar um espetáculo de balé clássico para a população local durante a grande festa de aniversário de 200 anos da cidade.",
-    "cidadeFilmagem": "Russas (CE)",
-    "posterUrl": "/posters/pacarrete-2019.jpg",
-    "posterAlt": "Pôster de Pacarrete com Marcélia Cartaxo vestida com tutu de bailarina clássico caminhando pelas ruas de Russas no Ceará.",
-    "classificacaoIndicativa": "12"
+    "genero": "Drama / Ficção Científica",
+    "sinopse": "Em um Brasil distópico do ano de 2027, no Recife, Joana é uma devota escrivã de cartório que utiliza sua posição para tentar reconciliar casais em processo de divórcio e participa do grupo religioso Divino Amor enquanto aguarda um sinal divino para engravidar.",
+    "cidadeFilmagem": "Recife",
+    "posterUrl": "/posters/divino-amor-2019.jpg",
+    "posterAlt": "Pôster em luzes néon rosa e azul de Divino Amor com Dira Paes e Julio Machado em clima futurista no Recife.",
+    "classificacaoIndicativa": "18"
   },
   {
     "chave": "piedade-2019",
@@ -367,10 +334,21 @@
     "titulo": "Paloma",
     "ano": 2022,
     "genero": "Drama / Romance",
-    "sinopse": "Paloma, uma mulher trans trabalhadora rural no cultivo de mamão no sertão nordestino, economiza todas as suas forças e recursos para realizar seu maior sonho: casar-se de véu e grinalda na igreja tradicional com seu namorado Zé, enfrentando o preconceito e a recusa do padre local.",
+    "sinopse": "Paloma, uma mulher trans trabalhadora rural no cultivo de mamão no interior pernambucano, economiza todas as suas forças e recursos para realizar seu maior sonho: casar-se de véu e grinalda na igreja tradicional com seu namorado Zé, enfrentando o preconceito e a recusa do padre local.",
     "cidadeFilmagem": "Ilha de Itamaracá",
     "posterUrl": "/posters/paloma-2022.jpg",
-    "posterAlt": "Pôster de Paloma com a atriz Kika Sena sorrindo sob um guarda-sol colorido na paisagem rural nordestina.",
+    "posterAlt": "Pôster de Paloma com a atriz Kika Sena sorrindo sob um guarda-sol colorido na paisagem rural pernambucana.",
+    "classificacaoIndicativa": "16"
+  },
+  {
+    "chave": "propriedade-2022",
+    "titulo": "Propriedade",
+    "ano": 2022,
+    "genero": "Suspense / Drama",
+    "sinopse": "Para se recuperar de um trauma urbano no Recife, a estilista Teresa refugia-se na fazenda histórica de sua família no interior de Pernambuco. Quando os trabalhadores rurais se revoltam após o anúncio do fechamento da propriedade, ela se tranca dentro de seu carro blindado, dando início a um tenso confronto de classes.",
+    "cidadeFilmagem": "São José da Coroa Grande",
+    "posterUrl": "/posters/propriedade-2022.jpg",
+    "posterAlt": "Pôster de Propriedade com Malu Galli no interior de um carro blindado cercado pelos trabalhadores rurais em Pernambuco.",
     "classificacaoIndicativa": "16"
   },
   {
@@ -383,28 +361,6 @@
     "posterUrl": "/posters/retratos-fantasmas-2023.jpg",
     "posterAlt": "Pôster de Retratos Fantasmas destacando a fachada iluminada do histórico Cinema São Luiz às margens do Rio Capibaribe no Recife.",
     "classificacaoIndicativa": "12"
-  },
-  {
-    "chave": "sem-coracao-2023",
-    "titulo": "Sem Coração",
-    "ano": 2023,
-    "genero": "Drama",
-    "sinopse": "No verão de 1996, no litoral de Alagoas, Tamara aproveita suas últimas semanas na vila pesqueira onde cresceu antes de se mudar para estudar em Brasília. Durante as férias, ela sente uma forte atração por uma adolescente misteriosa apelidada de 'Sem Coração' por causa de uma cicatriz no peito.",
-    "cidadeFilmagem": "Maceió (AL)",
-    "posterUrl": "/posters/sem-coracao-2023.jpg",
-    "posterAlt": "Pôster de Sem Coração com duas jovens adolescentes à beira do mar azul do litoral nordestino nos anos 1990.",
-    "classificacaoIndicativa": "14"
-  },
-  {
-    "chave": "motel-destino-2024",
-    "titulo": "Motel Destino",
-    "ano": 2024,
-    "genero": "Suspense / Drama erótico",
-    "sinopse": "À beira de uma rodovia no litoral do Ceará, o Motel Destino é palco de jogos perigosos de desejo, poder e liberdade. A chegada de Heraldo, um jovem em fuga de uma gangue local, transforma a relação tensa entre Dayana e seu marido abusivo Elias, proprietário do estabelecimento.",
-    "cidadeFilmagem": "Beberibe (CE)",
-    "posterUrl": "/posters/motel-destino-2024.jpg",
-    "posterAlt": "Pôster em cores saturadas de Motel Destino com Iago Xavier e Nataly Rocha sob as luzes de néon do motel no litoral cearense.",
-    "classificacaoIndicativa": "18"
   },
   {
     "chave": "o-agente-secreto-2025",
