@@ -1,4 +1,4 @@
-﻿# Estrutura do projeto
+# Estrutura do projeto
 
 ```text
 dna-cinema-pe/
@@ -50,8 +50,7 @@ dna-cinema-pe/
 ├── README.md                        # Pré-requisitos e comandos para rodar localmente
 ├── tsconfig.json                    # Configuração do TypeScript
 ├── CONTRIBUTING.md                  # Placeholder para orientações de contribuição
-├── LICENSE                          # Licença do projeto
-└── Untitled.html                    # Exportação da planilha original de requisitos
+└── LICENSE                          # Licença do projeto
 ```
 
 O PostgreSQL roda localmente pelo Docker Compose. O Next.js concentra as páginas e futuras rotas de API. O acesso à base, os modelos Prisma, as migrations, os dados de seed e os componentes específicos do projeto serão definidos nas próximas etapas.
