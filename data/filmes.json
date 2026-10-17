@@ -5,10 +5,10 @@
     "ano": 1923,
     "genero": "Drama",
     "sinopse": "Considerado o primeiro filme de enredo produzido em Pernambuco, Retribuição surgiu no início do chamado Ciclo do Recife, quando realizadores locais começaram a produzir seus próprios filmes na cidade.",
-    "cidadeFilmagem": null,
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "cidadeFilmagem": "Recife",
+    "posterUrl": "/posters/retribuicao-1923.jpg",
+    "posterAlt": "Cartaz histórico em preto e branco de Retribuição (1923), marco inaugural do Ciclo do Recife.",
+    "classificacaoIndicativa": "L"
   },
   {
     "chave": "aitare-da-praia-1925",
@@ -16,21 +16,21 @@
     "ano": 1925,
     "genero": "Drama romântico",
     "sinopse": "A história acompanha Aitaré, um jovem pescador, que se apaixona por Cora. Depois de salvar um coronel rico e sua filha durante uma viagem de jangada, Aitaré enfrenta conflitos amorosos e sociais relacionados à sua origem e à família de Cora. A Cinemateca Brasileira registra o filme como drama romântico e confirma sua produção pela Aurora-Film.",
-    "cidadeFilmagem": null,
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "cidadeFilmagem": "Recife",
+    "posterUrl": "/posters/aitare-da-praia-1925.jpg",
+    "posterAlt": "Fotograma clássico em preto e branco de Aitaré da Praia mostrando um jangadeiro no litoral pernambucano.",
+    "classificacaoIndicativa": "L"
   },
   {
     "chave": "a-filha-do-advogado-1926",
     "titulo": "A Filha do Advogado",
     "ano": 1926,
-    "genero": null,
+    "genero": "Drama",
     "sinopse": "A história acompanha Heloísa, filha de um advogado que vive com a mãe em uma fazenda e posteriormente se muda para a capital. A partir daí, conflitos familiares e interesses pessoais movimentam a narrativa.",
     "cidadeFilmagem": "Recife",
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "posterUrl": "/posters/a-filha-do-advogado-1926.jpg",
+    "posterAlt": "Pôster histórico do filme mudo pernambucano A Filha do Advogado (1926), dirigido por Jota Soares.",
+    "classificacaoIndicativa": "12"
   },
   {
     "chave": "o-canto-do-mar-1953",
@@ -38,32 +38,87 @@
     "ano": 1953,
     "genero": "Drama",
     "sinopse": "Ambientado no litoral nordestino, o filme acompanha uma família marcada pela pobreza e pelas dificuldades enfrentadas por pessoas que deixam o sertão em busca de melhores condições de vida. Os filhos desejam partir, enquanto a mãe tenta manter a família unida.",
-    "cidadeFilmagem": null,
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "cidadeFilmagem": "Recife",
+    "posterUrl": "/posters/o-canto-do-mar-1953.jpg",
+    "posterAlt": "Pôster de O Canto do Mar (1953) com pescadores e retirantes à beira-mar no litoral de Pernambuco.",
+    "classificacaoIndicativa": "12"
+  },
+  {
+    "chave": "o-pagador-de-promessas-1962",
+    "titulo": "O Pagador de Promessas",
+    "ano": 1962,
+    "genero": "Drama",
+    "sinopse": "Zé do Burro, um pequeno lavrador baiano, faz uma promessa em um terreiro de candomblé para salvar seu asno de estimação e carrega uma pesada cruz de madeira até a Igreja de Santa Bárbara, em Salvador, onde enfrenta a intolerância religiosa do padre local.",
+    "cidadeFilmagem": "Salvador (BA)",
+    "posterUrl": "/posters/o-pagador-de-promessas-1962.jpg",
+    "posterAlt": "Pôster de O Pagador de Promessas com Leonardo Villar carregando uma grande cruz de madeira nas escadarias de Salvador.",
+    "classificacaoIndicativa": "12"
+  },
+  {
+    "chave": "vidas-secas-1963",
+    "titulo": "Vidas Secas",
+    "ano": 1963,
+    "genero": "Drama",
+    "sinopse": "Baseado no romance de Graciliano Ramos, o filme acompanha a família de retirantes formada por Fabiano, Sinhá Vitória, seus dois filhos e a cadela Baleia, que atravessam a aridez do sertão nordestino em busca de sobrevivência e dignidade diante da seca e da exploração latifundiária.",
+    "cidadeFilmagem": "Palmeira dos Índios (AL)",
+    "posterUrl": "/posters/vidas-secas-1963.jpg",
+    "posterAlt": "Cartaz de Vidas Secas mostrando a família de Fabiano caminhando sob o sol escaldante da caatinga alagoana.",
+    "classificacaoIndicativa": "12"
+  },
+  {
+    "chave": "deus-e-o-diabo-na-terra-do-sol-1964",
+    "titulo": "Deus e o Diabo na Terra do Sol",
+    "ano": 1964,
+    "genero": "Drama / Faroeste",
+    "sinopse": "No sertão baiano, o vaqueiro Manuel se rebela contra a exploração de um coronel e foge com a esposa Rosa, juntando-se primeiro aos seguidores messiânicos do beato Sebastião e, posteriormente, ao bando do cangaceiro Corisco, enquanto são perseguidos pelo matador Antônio das Mortes.",
+    "cidadeFilmagem": "Monte Santo (BA)",
+    "posterUrl": "/posters/deus-e-o-diabo-na-terra-do-sol-1964.jpg",
+    "posterAlt": "Pôster icônico de Deus e o Diabo na Terra do Sol com arte gráfica de Rogério Duarte representando o sol e o cangaço.",
+    "classificacaoIndicativa": "14"
+  },
+  {
+    "chave": "o-dragao-da-maldade-1969",
+    "titulo": "O Dragão da Maldade contra o Santo Guerreiro",
+    "ano": 1969,
+    "genero": "Drama / Faroeste",
+    "sinopse": "Quase trinta anos após matar Corisco, o jagunço Antônio das Mortes é contratado por um coronel cego de uma pequena cidade do sertão para eliminar Coirana, um novo líder cangaceiro, mas acaba passando por uma profunda transformação política e espiritual.",
+    "cidadeFilmagem": "Milagres (BA)",
+    "posterUrl": "/posters/o-dragao-da-maldade-1969.jpg",
+    "posterAlt": "Cartaz colorido de O Dragão da Maldade contra o Santo Guerreiro com Antônio das Mortes em trajes do sertão.",
+    "classificacaoIndicativa": "14"
   },
   {
     "chave": "valente-e-o-galo-1974",
     "titulo": "Valente é o Galo",
     "ano": 1974,
-    "genero": null,
+    "genero": "Documentário",
     "sinopse": "O documentário apresenta um olhar crítico e antropológico sobre o universo e as origens das brigas de galo no Brasil. A obra aborda de forma direta a forte presença da violência, o circuito de apostas e a cultura popular que envolve as rinhas, questionando essa prática.",
-    "cidadeFilmagem": null,
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "cidadeFilmagem": "Recife",
+    "posterUrl": "/posters/valente-e-o-galo-1974.jpg",
+    "posterAlt": "Cartaz do documentário em Super-8 Valente é o Galo (1974), de Fernando Spencer, retratando uma rinha tradicional.",
+    "classificacaoIndicativa": "12"
   },
   {
     "chave": "baile-perfumado-1996",
     "titulo": "Baile Perfumado",
     "ano": 1996,
-    "genero": null,
+    "genero": "Drama / Histórico",
     "sinopse": "A obra conta a história de Benjamin Abrahão, fotógrafo e cinegrafista que registrou imagens de Lampião e seu bando. Mas a abordagem não procura simplesmente reproduzir a imagem tradicional do cangaço. O filme mistura a história do sertão com uma linguagem contemporânea e uma trilha sonora fortemente ligada ao Manguebeat.",
-    "cidadeFilmagem": null,
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "cidadeFilmagem": "Recife",
+    "posterUrl": "/posters/baile-perfumado-1996.jpg",
+    "posterAlt": "Pôster de Baile Perfumado com o mascate Benjamin Abrahão segurando uma câmera cinematográfica ao lado de Lampião e Maria Bonita.",
+    "classificacaoIndicativa": "16"
+  },
+  {
+    "chave": "o-auto-da-compadecida-2000",
+    "titulo": "O Auto da Compadecida",
+    "ano": 2000,
+    "genero": "Comédia / Aventura",
+    "sinopse": "Adaptado da obra de Ariano Suassuna, o filme narra as aventuras de João Grilo e Chicó, dois sertanejos pobres e astutos que usam a inteligência para sobreviver às injustiças sociais, à cobiça do clero e à violência do cangaço no interior nordestino, até enfrentarem o julgamento divino.",
+    "cidadeFilmagem": "Cabaceiras (PB)",
+    "posterUrl": "/posters/o-auto-da-compadecida-2000.jpg",
+    "posterAlt": "Pôster de O Auto da Compadecida com Matheus Nachtergaele e Selton Mello caracterizados como João Grilo e Chicó no sertão.",
+    "classificacaoIndicativa": "12"
   },
   {
     "chave": "o-rap-do-pequeno-principe-2000",
@@ -71,21 +126,32 @@
     "ano": 2000,
     "genero": "Documentário",
     "sinopse": "O documentário acompanha dois jovens de Camaragibe: Garnizé, músico, integrante da banda Faces do Subúrbio e liderança comunitária; e Helinho, conhecido como \"Pequeno Príncipe\", apresentado no filme como justiceiro. Os dois representam caminhos completamente diferentes diante da mesma realidade social: de um lado, a música e a ação comunitária; do outro, a violência.",
-    "cidadeFilmagem": null,
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "cidadeFilmagem": "Camaragibe",
+    "posterUrl": "/posters/o-rap-do-pequeno-principe-2000.jpg",
+    "posterAlt": "Pôster de O Rap do Pequeno Príncipe Contra as Almas Sebosas dividindo os rostos de Helinho e do músico Garnizé em Camaragibe.",
+    "classificacaoIndicativa": "14"
   },
   {
     "chave": "amarelo-manga-2002",
     "titulo": "Amarelo Manga",
     "ano": 2002,
-    "genero": null,
+    "genero": "Drama",
     "sinopse": "A narrativa acompanha diferentes personagens ligados ao centro do Recife e às suas relações de desejo, violência, religião, sexualidade e sobrevivência. A própria produtora descreve Recife como cenário de uma sucessão de histórias envolvendo moradores do centro da cidade.",
-    "cidadeFilmagem": null,
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "cidadeFilmagem": "Recife",
+    "posterUrl": "/posters/amarelo-manga-2002.jpg",
+    "posterAlt": "Pôster vibrante em tons de amarelo de Amarelo Manga retratando os personagens do centro do Recife e do Hotel Texas.",
+    "classificacaoIndicativa": "18"
+  },
+  {
+    "chave": "lisbela-e-o-prisioneiro-2003",
+    "titulo": "Lisbela e o Prisioneiro",
+    "ano": 2003,
+    "genero": "Comédia romântica",
+    "sinopse": "A jovem sonhadora Lisbela, apaixonada pelos filmes de Hollywood e prestes a se casar, conhece Leléu, um aventureiro e artista mambembe que acaba preso na delegacia da cidade. O romance proibido entre os dois desencadeia uma série de perseguições e reviravoltas cômicas em Pernambuco.",
+    "cidadeFilmagem": "Igarassu",
+    "posterUrl": "/posters/lisbela-e-o-prisioneiro-2003.jpg",
+    "posterAlt": "Pôster de Lisbela e o Prisioneiro com Débora Falabella e Selton Mello em clima de cinema clássico e romance nordestino.",
+    "classificacaoIndicativa": "12"
   },
   {
     "chave": "arido-movie-2005",
@@ -93,21 +159,43 @@
     "ano": 2005,
     "genero": "Drama",
     "sinopse": "Jonas, um famoso apresentador de televisão que vive em São Paulo, retorna à sua cidade natal no Nordeste após a morte do pai. Lá, encontra familiares que não conhecia e é pressionado a se envolver na vingança pela morte do pai.",
-    "cidadeFilmagem": null,
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "cidadeFilmagem": "Arcoverde",
+    "posterUrl": "/posters/arido-movie-2005.jpg",
+    "posterAlt": "Pôster de Árido Movie com Guilherme Weber em uma estrada seca do sertão pernambucano sob céu alaranjado.",
+    "classificacaoIndicativa": "16"
   },
   {
     "chave": "cinema-aspirinas-e-urubus-2005",
     "titulo": "Cinema, Aspirinas e Urubus",
     "ano": 2005,
-    "genero": null,
+    "genero": "Drama / Road Movie",
     "sinopse": "Em 1942, um alemão que atravessa o sertão vendendo aspirinas conhece Ranulpho, um sertanejo simples que deseja escapar da seca e ir para o Sul do país. Juntos, eles viajam pelos povoados até formarem uma inesperada amizade.",
-    "cidadeFilmagem": null,
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "cidadeFilmagem": "Patos (PB)",
+    "posterUrl": "/posters/cinema-aspirinas-e-urubus-2005.jpg",
+    "posterAlt": "Pôster de Cinema, Aspirinas e Urubus mostrando Johann e Ranulpho ao lado do caminhão de aspirinas na caatinga em 1942.",
+    "classificacaoIndicativa": "12"
+  },
+  {
+    "chave": "o-ceu-de-suely-2006",
+    "titulo": "O Céu de Suely",
+    "ano": 2006,
+    "genero": "Drama",
+    "sinopse": "Hermila, uma jovem de 21 anos, retorna de São Paulo para sua pequena cidade natal de Iguatu, no interior do Ceará, com o filho pequeno nos braços. Abandonada pelo companheiro, ela decide rifar o próprio corpo sob o nome de Suely para juntar dinheiro e recomeçar a vida longe dali.",
+    "cidadeFilmagem": "Iguatu (CE)",
+    "posterUrl": "/posters/o-ceu-de-suely-2006.jpg",
+    "posterAlt": "Pôster de O Céu de Suely com Hermila Guedes iluminada pelas luzes noturnas de uma estrada no interior cearense.",
+    "classificacaoIndicativa": "16"
+  },
+  {
+    "chave": "deserto-feliz-2007",
+    "titulo": "Deserto Feliz",
+    "ano": 2007,
+    "genero": "Drama",
+    "sinopse": "Jéssica, uma adolescente de 16 anos que vive no pequeno povoado de Deserto Feliz, no sertão pernambucano, foge da violência doméstica do padrasto e parte para o Recife, onde mergulha na dura realidade do turismo sexual e acaba viajando para a Alemanha.",
+    "cidadeFilmagem": "Recife",
+    "posterUrl": "/posters/deserto-feliz-2007.jpg",
+    "posterAlt": "Pôster de Deserto Feliz com a atriz Nash Laila olhando para o horizonte entre a aridez do sertão e a vida urbana.",
+    "classificacaoIndicativa": "18"
   },
   {
     "chave": "recife-frio-2009",
@@ -115,10 +203,10 @@
     "ano": 2009,
     "genero": "Ficção / falso documentário",
     "sinopse": "Uma mudança climática inexplicável faz o Recife, cidade conhecida pelo clima tropical, tornar-se uma cidade fria. Uma equipe de televisão estrangeira acompanha os efeitos dessa transformação sobre a população e sobre a própria cidade.",
-    "cidadeFilmagem": null,
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "cidadeFilmagem": "Recife",
+    "posterUrl": "/posters/recife-frio-2009.jpg",
+    "posterAlt": "Pôster de Recife Frio com a orla de Boa Viagem sob céu cinzento e moradores agasalhados com roupas de inverno.",
+    "classificacaoIndicativa": "12"
   },
   {
     "chave": "viajo-porque-preciso-2009",
@@ -126,10 +214,10 @@
     "ano": 2009,
     "genero": "Drama / Romance / Docuficção / Road Movie",
     "sinopse": "José Renato, um geólogo enviado em uma expedição de trabalho pelo sertão para avaliar o percurso da transposição das águas do Rio São Francisco, cruza estradas ermas e pequenas cidades. Durante o trajeto, a solidão e a dor de um término recente transformam o relatório técnico em um diário lírico e existencial, onde reflexões sobre abandono e a aridez da paisagem se misturam.",
-    "cidadeFilmagem": null,
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "cidadeFilmagem": "Petrolina",
+    "posterUrl": "/posters/viajo-porque-preciso-2009.jpg",
+    "posterAlt": "Pôster de Viajo Porque Preciso, Volto Porque Te Amo com colagens fotográficas e paisagens das estradas do sertão nordestino.",
+    "classificacaoIndicativa": "14"
   },
   {
     "chave": "febre-do-rato-2011",
@@ -137,32 +225,32 @@
     "ano": 2011,
     "genero": "Drama",
     "sinopse": "O filme acompanha Zizo, um poeta anarquista que publica um jornal independente e circula pela periferia do Recife. Sua relação com Eneida e com as pessoas ao seu redor serve como ponto de partida para abordar liberdade, desejo, arte e comportamento social.",
-    "cidadeFilmagem": null,
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "cidadeFilmagem": "Recife",
+    "posterUrl": "/posters/febre-do-rato-2011.jpg",
+    "posterAlt": "Pôster em preto e branco com detalhes em amarelo de Febre do Rato mostrando Irandhir Santos como o poeta Zizo no Recife.",
+    "classificacaoIndicativa": "18"
   },
   {
     "chave": "o-som-ao-redor-2012",
     "titulo": "O Som ao Redor",
     "ano": 2012,
-    "genero": null,
+    "genero": "Drama / Suspense",
     "sinopse": "O Som ao Redor acompanha moradores de uma área de classe média do Recife e a chegada de uma empresa miliciana de segurança privada ao bairro, que traz uma falsa sensação de paz aos moradores. A presença dos guardas, no entanto, acaba despertando paranoias, tensões sociais e revela as antigas heranças dos senhores de engenho disfarçadas na arquitetura urbana e nas relações de trabalho modernas. O filme transforma a vida cotidiana em uma observação sobre medo, segurança, propriedade e relações de classe.",
-    "cidadeFilmagem": null,
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "cidadeFilmagem": "Recife",
+    "posterUrl": "/posters/o-som-ao-redor-2012.jpg",
+    "posterAlt": "Pôster de O Som ao Redor com vista dos edifícios residenciais do bairro de Setúbal, no Recife, cercados por grades.",
+    "classificacaoIndicativa": "16"
   },
   {
     "chave": "era-uma-vez-eu-veronica-2012",
     "titulo": "Era Uma Vez Eu, Verônica",
     "ano": 2012,
-    "genero": null,
+    "genero": "Drama",
     "sinopse": "Verônica tem 24 anos, acabou de se formar em Medicina e começa sua vida profissional em um hospital público. Ao mesmo tempo, enfrenta mudanças em sua relação com o pai, com o trabalho e consigo mesma.",
-    "cidadeFilmagem": null,
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "cidadeFilmagem": "Recife",
+    "posterUrl": "/posters/era-uma-vez-eu-veronica-2012.jpg",
+    "posterAlt": "Pôster de Era Uma Vez Eu, Verônica com Hermila Guedes em primeiro plano sob a luz solar do Recife.",
+    "classificacaoIndicativa": "16"
   },
   {
     "chave": "tatuagem-2013",
@@ -170,10 +258,32 @@
     "ano": 2013,
     "genero": "Drama",
     "sinopse": "Ambientado no Brasil de 1978, durante a Ditadura Militar, o filme acompanha a trupe teatral Chão de Estrelas, que realiza espetáculos em um cabaré entre cidades do Nordeste. A chegada de um jovem soldado ao grupo estabelece uma relação que confronta as normas morais e políticas daquele período.",
-    "cidadeFilmagem": null,
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "cidadeFilmagem": "Recife",
+    "posterUrl": "/posters/tatuagem-2013.jpg",
+    "posterAlt": "Pôster de Tatuagem com Irandhir Santos e Jesuíta Barbosa abraçados sob luzes de palco do cabaré Chão de Estrelas.",
+    "classificacaoIndicativa": "18"
+  },
+  {
+    "chave": "amor-plastico-e-barulho-2013",
+    "titulo": "Amor, Plástico e Barulho",
+    "ano": 2013,
+    "genero": "Drama / Musical",
+    "sinopse": "Shelly, uma jovem dançarina que sonha em se tornar cantora de música brega no Recife, divide o palco com Jaqueline, uma vocalista veterana que luta para manter o sucesso em meio à efemeridade da indústria musical periférica pernambucana.",
+    "cidadeFilmagem": "Recife",
+    "posterUrl": "/posters/amor-plastico-e-barulho-2013.jpg",
+    "posterAlt": "Pôster colorido em tons neon de Amor, Plástico e Barulho com Maeve Jinkings e Nash Laila caracterizadas como cantoras de brega.",
+    "classificacaoIndicativa": "16"
+  },
+  {
+    "chave": "a-historia-da-eternidade-2014",
+    "titulo": "A História da Eternidade",
+    "ano": 2014,
+    "genero": "Drama",
+    "sinopse": "Em um pequeno vilarejo isolado no sertão de Pernambuco, as histórias de três mulheres de diferentes gerações — uma adolescente, uma mulher madura e uma viúva idosa — cruzam-se em torno do amor, do desejo reprimido e dos afetos que desafiam a aridez do ambiente.",
+    "cidadeFilmagem": "Floresta",
+    "posterUrl": "/posters/a-historia-da-eternidade-2014.jpg",
+    "posterAlt": "Pôster de A História da Eternidade com Irandhir Santos realizando uma performance artística no chão rachado do sertão.",
+    "classificacaoIndicativa": "16"
   },
   {
     "chave": "boi-neon-2015",
@@ -181,10 +291,10 @@
     "ano": 2015,
     "genero": "Drama",
     "sinopse": "O filme acompanha Iremar, um vaqueiro que trabalha nos bastidores das vaquejadas no Nordeste, mas que nutre o sonho de se tornar estilista e criar roupas de corte e costura no polo confeccionador da região.",
-    "cidadeFilmagem": null,
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "cidadeFilmagem": "Toritama",
+    "posterUrl": "/posters/boi-neon-2015.jpg",
+    "posterAlt": "Pôster de Boi Neon com Juliano Cazarré e elenco em cima do caminhão de vaquejada sob luzes noturnas neon no Agreste.",
+    "classificacaoIndicativa": "16"
   },
   {
     "chave": "aquarius-2016",
@@ -192,10 +302,21 @@
     "ano": 2016,
     "genero": "Drama / suspense",
     "sinopse": "Clara, uma jornalista e crítica musical aposentada, é a última moradora de um antigo edifício à beira-mar no Recife. Uma construtora tenta convencê-la a vender o apartamento para substituir o prédio por um novo empreendimento.",
-    "cidadeFilmagem": null,
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "cidadeFilmagem": "Recife",
+    "posterUrl": "/posters/aquarius-2016.jpg",
+    "posterAlt": "Pôster de Aquarius com Sonia Braga como Clara em seu apartamento repleto de discos de vinil na Praia de Boa Viagem.",
+    "classificacaoIndicativa": "16"
+  },
+  {
+    "chave": "azougue-nazare-2018",
+    "titulo": "Azougue Nazaré",
+    "ano": 2018,
+    "genero": "Drama / Fantasia",
+    "sinopse": "Na cidade de Nazaré da Mata, na Zona da Mata Norte de Pernambuco, cercada por canaviais, a preparação para o Carnaval opõe os brincantes do tradicional Maracatu de Baque Solto a um pastor evangélico ex-mestre de maracatu, enquanto forças místicas ganham vida nos caboclos de lança.",
+    "cidadeFilmagem": "Nazaré da Mata",
+    "posterUrl": "/posters/azougue-nazare-2018.jpg",
+    "posterAlt": "Pôster de Azougue Nazaré destacando um caboclo de lança do Maracatu Rural com gola bordada e cravo na boca em meio ao canavial.",
+    "classificacaoIndicativa": "14"
   },
   {
     "chave": "bacurau-2019",
@@ -203,10 +324,54 @@
     "ano": 2019,
     "genero": "Ficção Científica / Thriller / Faroeste",
     "sinopse": "Pouco após a morte de Dona Carmelita, a matriarca do povoado fictício de Bacurau, no sertão pernambucano, os moradores percebem fenômenos estranhos: a comunidade sumiu dos mapas digitais, o sinal de celular desaparece e drones em formato de disco voador surgem nos céus. O povoado descobre que está sendo caçado por um grupo de estrangeiros armados e precisa se unir para resistir e defender sua terra.",
-    "cidadeFilmagem": null,
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "cidadeFilmagem": "Sertânia",
+    "posterUrl": "/posters/bacurau-2019.jpg",
+    "posterAlt": "Pôster de Bacurau ilustrando os moradores do povoado sertanejo reunidos sob um drone em formato de disco voador no céu vermelho.",
+    "classificacaoIndicativa": "16"
+  },
+  {
+    "chave": "pacarrete-2019",
+    "titulo": "Pacarrete",
+    "ano": 2019,
+    "genero": "Drama",
+    "sinopse": "Pacarrete é uma professora de dança aposentada e excêntrica que vive em Russas, no interior do Ceará, e sonha em estrelar um espetáculo de balé clássico para a população local durante a grande festa de aniversário de 200 anos da cidade.",
+    "cidadeFilmagem": "Russas (CE)",
+    "posterUrl": "/posters/pacarrete-2019.jpg",
+    "posterAlt": "Pôster de Pacarrete com Marcélia Cartaxo vestida com tutu de bailarina clássico caminhando pelas ruas de Russas no Ceará.",
+    "classificacaoIndicativa": "12"
+  },
+  {
+    "chave": "piedade-2019",
+    "titulo": "Piedade",
+    "ano": 2019,
+    "genero": "Drama",
+    "sinopse": "A rotina dos moradores da cidade fictícia de Piedade, no litoral sul de Pernambuco, é abalada pela expansão predatória de um grande complexo portuário e petrolífero que provoca ataques de tubarão nas praias e tenta expulsar a viúva Carminha de seu tradicional bar à beira-mar.",
+    "cidadeFilmagem": "Jaboatão dos Guararapes",
+    "posterUrl": "/posters/piedade-2019.jpg",
+    "posterAlt": "Pôster de Piedade com Fernanda Montenegro, Irandhir Santos, Matheus Nachtergaele e Cauã Reymond diante do mar pernambucano.",
+    "classificacaoIndicativa": "18"
+  },
+  {
+    "chave": "carro-rei-2021",
+    "titulo": "Carro Rei",
+    "ano": 2021,
+    "genero": "Ficção Científica / Drama",
+    "sinopse": "Uno, um jovem estudante de engenharia agroecológica de Caruaru que nasceu com o dom incomum de conversar com automóveis, transforma o antigo táxi da família no Carro Rei, uma máquina falante e sedutora que passa a liderar uma revolta mecânica e autoritária na cidade.",
+    "cidadeFilmagem": "Caruaru",
+    "posterUrl": "/posters/carro-rei-2021.jpg",
+    "posterAlt": "Pôster futurista de Carro Rei mostrando o automóvel iluminado por faróis vermelhos e os personagens de Caruaru ao redor.",
+    "classificacaoIndicativa": "16"
+  },
+  {
+    "chave": "paloma-2022",
+    "titulo": "Paloma",
+    "ano": 2022,
+    "genero": "Drama / Romance",
+    "sinopse": "Paloma, uma mulher trans trabalhadora rural no cultivo de mamão no sertão nordestino, economiza todas as suas forças e recursos para realizar seu maior sonho: casar-se de véu e grinalda na igreja tradicional com seu namorado Zé, enfrentando o preconceito e a recusa do padre local.",
+    "cidadeFilmagem": "Ilha de Itamaracá",
+    "posterUrl": "/posters/paloma-2022.jpg",
+    "posterAlt": "Pôster de Paloma com a atriz Kika Sena sorrindo sob um guarda-sol colorido na paisagem rural nordestina.",
+    "classificacaoIndicativa": "16"
   },
   {
     "chave": "retratos-fantasmas-2023",
@@ -215,19 +380,41 @@
     "genero": "Documentário",
     "sinopse": "O documentário trata do hábito de ir ao cinema no centro do Recife ao longo do século XX, quando as salas de exibição eram espaços de convivência que faziam parte da rotina e dos costumes da população. Usando em parte gravações do seu próprio arquivo pessoal, o diretor revisita sua cidade natal a partir dos cinemas que frequentava, lugares hoje fechados que marcaram a transformação da sociedade brasileira.",
     "cidadeFilmagem": "Recife",
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "posterUrl": "/posters/retratos-fantasmas-2023.jpg",
+    "posterAlt": "Pôster de Retratos Fantasmas destacando a fachada iluminada do histórico Cinema São Luiz às margens do Rio Capibaribe no Recife.",
+    "classificacaoIndicativa": "12"
+  },
+  {
+    "chave": "sem-coracao-2023",
+    "titulo": "Sem Coração",
+    "ano": 2023,
+    "genero": "Drama",
+    "sinopse": "No verão de 1996, no litoral de Alagoas, Tamara aproveita suas últimas semanas na vila pesqueira onde cresceu antes de se mudar para estudar em Brasília. Durante as férias, ela sente uma forte atração por uma adolescente misteriosa apelidada de 'Sem Coração' por causa de uma cicatriz no peito.",
+    "cidadeFilmagem": "Maceió (AL)",
+    "posterUrl": "/posters/sem-coracao-2023.jpg",
+    "posterAlt": "Pôster de Sem Coração com duas jovens adolescentes à beira do mar azul do litoral nordestino nos anos 1990.",
+    "classificacaoIndicativa": "14"
+  },
+  {
+    "chave": "motel-destino-2024",
+    "titulo": "Motel Destino",
+    "ano": 2024,
+    "genero": "Suspense / Drama erótico",
+    "sinopse": "À beira de uma rodovia no litoral do Ceará, o Motel Destino é palco de jogos perigosos de desejo, poder e liberdade. A chegada de Heraldo, um jovem em fuga de uma gangue local, transforma a relação tensa entre Dayana e seu marido abusivo Elias, proprietário do estabelecimento.",
+    "cidadeFilmagem": "Beberibe (CE)",
+    "posterUrl": "/posters/motel-destino-2024.jpg",
+    "posterAlt": "Pôster em cores saturadas de Motel Destino com Iago Xavier e Nataly Rocha sob as luzes de néon do motel no litoral cearense.",
+    "classificacaoIndicativa": "18"
   },
   {
     "chave": "o-agente-secreto-2025",
     "titulo": "O Agente Secreto",
     "ano": 2025,
-    "genero": null,
+    "genero": "Thriller político / Drama",
     "sinopse": "A história acompanha Marcelo, um professor universitário que retorna ao Recife tentando escapar de um passado violento. Ao chegar à cidade, percebe que está cercado por vigilância, segredos e mecanismos de repressão. A trama utiliza o thriller e outros gêneros cinematográficos para trabalhar questões relacionadas à memória política e à repressão durante a ditadura.",
     "cidadeFilmagem": "Recife",
-    "posterUrl": null,
-    "posterAlt": null,
-    "classificacaoIndicativa": null
+    "posterUrl": "/posters/o-agente-secreto-2025.jpg",
+    "posterAlt": "Pôster de O Agente Secreto com Wagner Moura caracterizado como o professor Marcelo no Recife de 1977.",
+    "classificacaoIndicativa": "16"
   }
 ]

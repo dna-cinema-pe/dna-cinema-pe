@@ -1,1 +1,56 @@
-[]
+[
+  { "filme": "baile-perfumado-1996", "edital": "premio-resgate-minc-1994", "valorInvestidoFilmeBrl": "850000.00" },
+
+  { "filme": "o-auto-da-compadecida-2000", "edital": "lei-do-audiovisual-ancine-1999", "valorInvestidoFilmeBrl": "3500000.00" },
+  { "filme": "o-rap-do-pequeno-principe-2000", "edital": "lei-do-audiovisual-ancine-1999", "valorInvestidoFilmeBrl": "420000.00" },
+  { "filme": "amarelo-manga-2002", "edital": "lei-do-audiovisual-ancine-1999", "valorInvestidoFilmeBrl": "1100000.00" },
+  { "filme": "lisbela-e-o-prisioneiro-2003", "edital": "lei-do-audiovisual-ancine-1999", "valorInvestidoFilmeBrl": "4200000.00" },
+
+  { "filme": "arido-movie-2005", "edital": "petrobras-cultural-2003", "valorInvestidoFilmeBrl": "1800000.00" },
+  { "filme": "cinema-aspirinas-e-urubus-2005", "edital": "petrobras-cultural-2003", "valorInvestidoFilmeBrl": "1400000.00" },
+  { "filme": "o-ceu-de-suely-2006", "edital": "petrobras-cultural-2003", "valorInvestidoFilmeBrl": "1250000.00" },
+  { "filme": "deserto-feliz-2007", "edital": "petrobras-cultural-2003", "valorInvestidoFilmeBrl": "1600000.00" },
+
+  { "filme": "recife-frio-2009", "edital": "funcultura-pe-2007", "valorInvestidoFilmeBrl": "120000.00" },
+  { "filme": "viajo-porque-preciso-2009", "edital": "funcultura-pe-2007", "valorInvestidoFilmeBrl": "750000.00" },
+
+  { "filme": "febre-do-rato-2011", "edital": "funcultura-pe-2010", "valorInvestidoFilmeBrl": "980000.00" },
+  { "filme": "o-som-ao-redor-2012", "edital": "funcultura-pe-2010", "valorInvestidoFilmeBrl": "950000.00" },
+  { "filme": "era-uma-vez-eu-veronica-2012", "edital": "funcultura-pe-2010", "valorInvestidoFilmeBrl": "890000.00" },
+  { "filme": "tatuagem-2013", "edital": "funcultura-pe-2010", "valorInvestidoFilmeBrl": "1100000.00" },
+  { "filme": "amor-plastico-e-barulho-2013", "edital": "funcultura-pe-2010", "valorInvestidoFilmeBrl": "820000.00" },
+
+  { "filme": "o-som-ao-redor-2012", "edital": "fsa-ancine-prodecine-2012", "valorInvestidoFilmeBrl": "850000.00" },
+  { "filme": "tatuagem-2013", "edital": "fsa-ancine-prodecine-2012", "valorInvestidoFilmeBrl": "1200000.00" },
+  { "filme": "amor-plastico-e-barulho-2013", "edital": "fsa-ancine-prodecine-2012", "valorInvestidoFilmeBrl": "950000.00" },
+  { "filme": "a-historia-da-eternidade-2014", "edital": "fsa-ancine-prodecine-2012", "valorInvestidoFilmeBrl": "1150000.00" },
+
+  { "filme": "a-historia-da-eternidade-2014", "edital": "funcultura-pe-2013", "valorInvestidoFilmeBrl": "900000.00" },
+  { "filme": "boi-neon-2015", "edital": "funcultura-pe-2013", "valorInvestidoFilmeBrl": "1250000.00" },
+  { "filme": "aquarius-2016", "edital": "funcultura-pe-2013", "valorInvestidoFilmeBrl": "1600000.00" },
+  { "filme": "azougue-nazare-2018", "edital": "funcultura-pe-2013", "valorInvestidoFilmeBrl": "1100000.00" },
+
+  { "filme": "boi-neon-2015", "edital": "fsa-ancine-prodecine-2015", "valorInvestidoFilmeBrl": "1450000.00" },
+  { "filme": "aquarius-2016", "edital": "fsa-ancine-prodecine-2015", "valorInvestidoFilmeBrl": "2900000.00" },
+  { "filme": "azougue-nazare-2018", "edital": "fsa-ancine-prodecine-2015", "valorInvestidoFilmeBrl": "950000.00" },
+
+  { "filme": "bacurau-2019", "edital": "funcultura-pe-2017", "valorInvestidoFilmeBrl": "1850000.00" },
+  { "filme": "piedade-2019", "edital": "funcultura-pe-2017", "valorInvestidoFilmeBrl": "1500000.00" },
+  { "filme": "carro-rei-2021", "edital": "funcultura-pe-2017", "valorInvestidoFilmeBrl": "1400000.00" },
+
+  { "filme": "bacurau-2019", "edital": "fsa-ancine-prodecine-2018", "valorInvestidoFilmeBrl": "3900000.00" },
+  { "filme": "pacarrete-2019", "edital": "fsa-ancine-prodecine-2018", "valorInvestidoFilmeBrl": "1650000.00" },
+  { "filme": "piedade-2019", "edital": "fsa-ancine-prodecine-2018", "valorInvestidoFilmeBrl": "2100000.00" },
+  { "filme": "carro-rei-2021", "edital": "fsa-ancine-prodecine-2018", "valorInvestidoFilmeBrl": "1500000.00" },
+
+  { "filme": "paloma-2022", "edital": "funcultura-pe-2021", "valorInvestidoFilmeBrl": "1350000.00" },
+  { "filme": "retratos-fantasmas-2023", "edital": "funcultura-pe-2021", "valorInvestidoFilmeBrl": "1200000.00" },
+  { "filme": "sem-coracao-2023", "edital": "funcultura-pe-2021", "valorInvestidoFilmeBrl": "1400000.00" },
+  { "filme": "o-agente-secreto-2025", "edital": "funcultura-pe-2021", "valorInvestidoFilmeBrl": "2500000.00" },
+
+  { "filme": "paloma-2022", "edital": "fsa-ancine-retomada-2023", "valorInvestidoFilmeBrl": "1500000.00" },
+  { "filme": "retratos-fantasmas-2023", "edital": "fsa-ancine-retomada-2023", "valorInvestidoFilmeBrl": "2300000.00" },
+  { "filme": "sem-coracao-2023", "edital": "fsa-ancine-retomada-2023", "valorInvestidoFilmeBrl": "1900000.00" },
+  { "filme": "motel-destino-2024", "edital": "fsa-ancine-retomada-2023", "valorInvestidoFilmeBrl": "3200000.00" },
+  { "filme": "o-agente-secreto-2025", "edital": "fsa-ancine-retomada-2023", "valorInvestidoFilmeBrl": "7500000.00" }
+]
