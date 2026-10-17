@@ -1,1 +1,74 @@
-[]
+[
+  {
+    "chave": "premio-resgate-minc-1994",
+    "titulo": "Prêmio Resgate do Cinema Brasileiro — MinC",
+    "ano": 1994,
+    "valorTotalBrl": "4500000.00"
+  },
+  {
+    "chave": "lei-do-audiovisual-ancine-1999",
+    "titulo": "Lei do Audiovisual — Captação Federal (MinC / ANCINE)",
+    "ano": 1999,
+    "valorTotalBrl": "12000000.00"
+  },
+  {
+    "chave": "petrobras-cultural-2003",
+    "titulo": "Programa Petrobras Cultural — Cinema de Longa-Metragem",
+    "ano": 2003,
+    "valorTotalBrl": "15000000.00"
+  },
+  {
+    "chave": "funcultura-pe-2007",
+    "titulo": "1º Edital Funcultura Audiovisual — Fundarpe / Secult-PE",
+    "ano": 2007,
+    "valorTotalBrl": "5500000.00"
+  },
+  {
+    "chave": "funcultura-pe-2010",
+    "titulo": "4º Edital Funcultura Audiovisual — Fundarpe / Secult-PE",
+    "ano": 2010,
+    "valorTotalBrl": "8500000.00"
+  },
+  {
+    "chave": "fsa-ancine-prodecine-2012",
+    "titulo": "Fundo Setorial do Audiovisual (FSA / ANCINE) — PRODECINE",
+    "ano": 2012,
+    "valorTotalBrl": "22000000.00"
+  },
+  {
+    "chave": "funcultura-pe-2013",
+    "titulo": "7º Edital Funcultura Audiovisual — Arranjos Regionais PE",
+    "ano": 2013,
+    "valorTotalBrl": "14000000.00"
+  },
+  {
+    "chave": "fsa-ancine-prodecine-2015",
+    "titulo": "Fundo Setorial do Audiovisual (FSA / ANCINE) — Produção e Coprodução",
+    "ano": 2015,
+    "valorTotalBrl": "30000000.00"
+  },
+  {
+    "chave": "funcultura-pe-2017",
+    "titulo": "11º Edital Funcultura Audiovisual — Fundarpe / Secult-PE",
+    "ano": 2017,
+    "valorTotalBrl": "16500000.00"
+  },
+  {
+    "chave": "fsa-ancine-prodecine-2018",
+    "titulo": "Fundo Setorial do Audiovisual (FSA / ANCINE) — Chamada Pública Cinema",
+    "ano": 2018,
+    "valorTotalBrl": "35000000.00"
+  },
+  {
+    "chave": "funcultura-pe-2021",
+    "titulo": "15º Edital Funcultura Audiovisual — Fundarpe / Secult-PE",
+    "ano": 2021,
+    "valorTotalBrl": "18000000.00"
+  },
+  {
+    "chave": "fsa-ancine-retomada-2023",
+    "titulo": "Fundo Setorial do Audiovisual (FSA / ANCINE) — Produção Independente",
+    "ano": 2023,
+    "valorTotalBrl": "45000000.00"
+  }
+]
