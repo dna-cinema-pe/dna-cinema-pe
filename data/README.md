@@ -21,7 +21,7 @@ Na revisão e expansão atual da base, todas as lacunas foram preenchidas com da
 | [`premiacoes.json`](./premiacoes.json) | `premiacao` | 48 | **50** | **+2** (+4%) | Preenchimento das 31 descrições que estavam `null` + inclusão do *Festival de San Sebastián* e do *Festival de Guadalajara*. |
 | [`editais.json`](./editais.json) | `edital` | 0 | **12** | **+12** (Novo) | Criação de 12 editais estaduais (Funcultura PE) e federais (FSA/ANCINE, Petrobras Cultural, Lei do Audiovisual e Prêmio Resgate MinC). |
 | [`filme_pessoa.json`](./filme_pessoa.json) | `filme_pessoa` | 26 | **174** | **+148** (+569%) | Expansão de vínculos: antes restrito apenas a `DIRECAO`; agora contempla `DIRECAO`, `ELENCO`, `ROTEIRO`, `PRODUCAO` e `FOTOGRAFIA`. |
-| [`filme_premiacao.json`](./filme_premiacao.json) | `filme_premiacao` | 112 | **207** | **+95** (+85%) | Substituição de todos os `edicaoAno: -1` pelos anos reais, correção de categorias nulas, inclusão de prêmios omitidos e atualização da temporada 2025/2026. |
+| [`filme_premiacao.json`](./filme_premiacao.json) | `filme_premiacao` | 112 | **208** | **+96** (+86%) | Substituição de todos os `edicaoAno: -1` pelos anos reais, correção de categorias nulas, inclusão de prêmios omitidos e atualização da temporada 2025/2026. |
 | [`filme_edital.json`](./filme_edital.json) | `filme_edital` | 0 | **43** | **+43** (Novo) | Mapeamento de 43 aportes financeiros públicos vinculados aos filmes do acervo, respeitando o teto orçamentário de cada edital. |
 
 ---
