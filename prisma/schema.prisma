@@ -1,8 +1,116 @@
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
+  // Emite imports com extensão explícita (./enums.ts). Sem isso o client gerado usa
+  // imports sem extensão, que só um bundler resolve — e o seed roda em Node puro.
+  moduleFormat        = "esm"
+  importFileExtension = "ts"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+/// Convenção de dados (ver docs e issues US01–US06):
+/// campos numéricos sem informação recebem -1; texto e booleanos sem
+/// informação ficam NULL. O front exibe "Informação não disponível".
+
+model Filme {
+  idFilme                 Int     @id @default(autoincrement()) @map("id_filme")
+  titulo                  String  @db.VarChar(255)
+  ano                     Int     @db.SmallInt
+  genero                  String? @db.VarChar(100)
+  posterUrl               String? @map("poster_url") @db.VarChar(500)
+  posterAlt               String? @map("poster_alt") @db.VarChar(255)
+  sinopse                 String? @db.Text
+  classificacaoIndicativa String? @map("classificacao_indicativa") @db.VarChar(3)
+  cidadeFilmagem          String? @map("cidade_filmagem") @db.VarChar(100)
+
+  premiacoes FilmePremiacao[]
+  editais    FilmeEdital[]
+  pessoas    FilmePessoa[]
+
+  @@map("filme")
+}
+
+model Premiacao {
+  idPremiacao               Int     @id @default(autoincrement()) @map("id_premiacao")
+  nomePremiacao             String  @unique @map("nome_premiacao") @db.VarChar(150)
+  descricaoPremiacao        String? @map("descricao_premiacao") @db.Text
+  /// 1 = principal, 2 = relevante, 3 = demais (destaque na US05)
+  nivelImportanciaPremiacao Int     @map("nivel_importancia_premiacao") @db.SmallInt
+  flagNacional              Boolean @map("flag_nacional")
+
+  filmes FilmePremiacao[]
+
+  @@map("premiacao")
+}
+
+model Edital {
+  idEdital      Int     @id @default(autoincrement()) @map("id_edital")
+  titulo        String  @db.VarChar(255)
+  ano           Int     @db.SmallInt
+  valorTotalBrl Decimal @map("valor_total_brl") @db.Decimal(15, 2)
+
+  filmes FilmeEdital[]
+
+  @@map("edital")
+}
+
+model Pessoa {
+  idPessoa Int     @id @default(autoincrement()) @map("id_pessoa")
+  nome     String  @db.VarChar(255)
+  idade    Int     @default(-1) @db.SmallInt
+  /// FEMININO, MASCULINO ou OUTRO; NULL quando não informado
+  genero   String? @db.VarChar(20)
+  /// NULL quando não informado — o dado nunca é inferido (US03)
+  flagEhNordestino Boolean? @map("flag_eh_nordestino")
+
+  filmes FilmePessoa[]
+
+  @@map("pessoa")
+}
+
+model FilmePremiacao {
+  idFilmePremiacao   Int     @id @default(autoincrement()) @map("id_filme_premiacao")
+  idFilme            Int     @map("id_filme")
+  idPremiacao        Int     @map("id_premiacao")
+  edicaoAno          Int     @map("edicao_ano") @db.SmallInt
+  categoriaPremiacao String? @map("categoria_premiacao") @db.VarChar(150)
+  /// VENCEDOR ou INDICADO — diferencia prêmio ganho de indicação (US05)
+  resultado          String  @db.VarChar(10)
+
+  filme     Filme     @relation(fields: [idFilme], references: [idFilme], onDelete: Cascade)
+  premiacao Premiacao @relation(fields: [idPremiacao], references: [idPremiacao], onDelete: Cascade)
+
+  @@unique([idFilme, idPremiacao, edicaoAno, categoriaPremiacao])
+  @@map("filme_premiacao")
+}
+
+model FilmeEdital {
+  idFilme                Int     @map("id_filme")
+  idEdital               Int     @map("id_edital")
+  valorInvestidoFilmeBrl Decimal @map("valor_investido_filme_brl") @db.Decimal(15, 2)
+
+  filme  Filme  @relation(fields: [idFilme], references: [idFilme], onDelete: Cascade)
+  edital Edital @relation(fields: [idEdital], references: [idEdital], onDelete: Cascade)
+
+  @@id([idFilme, idEdital])
+  @@map("filme_edital")
+}
+
+model FilmePessoa {
+  idFilmePessoa Int     @id @default(autoincrement()) @map("id_filme_pessoa")
+  idFilme       Int     @map("id_filme")
+  idPessoa      Int     @map("id_pessoa")
+  /// ELENCO, DIRECAO, ROTEIRO, PRODUCAO, FOTOGRAFIA, MONTAGEM etc.
+  funcaoPessoa  String  @map("funcao_pessoa") @db.VarChar(50)
+  /// true para funções de cineasta; false para elenco e equipe técnica (US04)
+  flagEhCineasta Boolean @map("flag_eh_cineasta")
+
+  filme  Filme  @relation(fields: [idFilme], references: [idFilme], onDelete: Cascade)
+  pessoa Pessoa @relation(fields: [idPessoa], references: [idPessoa], onDelete: Cascade)
+
+  @@unique([idFilme, idPessoa, funcaoPessoa])
+  @@map("filme_pessoa")
 }
