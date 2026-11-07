@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { listarFilmes } from "@/server/filmes.ts";
+import { NAO_DISPONIVEL } from "@/lib/utils.ts";
 
 export default async function FilmesPage() {
   const filmes = await listarFilmes();
@@ -116,7 +117,7 @@ export default async function FilmesPage() {
                       {filme.genero ? (
                         <span>{filme.genero}</span>
                       ) : (
-                        <span className="text-zinc-600 italic">Não informado</span>
+                        <span className="text-zinc-600 italic">{NAO_DISPONIVEL}</span>
                       )}
                     </td>
 
@@ -128,7 +129,7 @@ export default async function FilmesPage() {
                           {filme.cidadeFilmagem}
                         </span>
                       ) : (
-                        <span className="text-zinc-600 italic">Não informada</span>
+                        <span className="text-zinc-600 italic">{NAO_DISPONIVEL}</span>
                       )}
                     </td>
 

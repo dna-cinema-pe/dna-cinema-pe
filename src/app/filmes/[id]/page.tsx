@@ -8,8 +8,7 @@ import {
   listarCineastasFemininas,
   listarPremiacoes,
 } from "@/server/filmes.ts";
-
-const NAO_DISPONIVEL = "Informação não disponível";
+import { NAO_DISPONIVEL } from "@/lib/utils.ts";
 
 // Convenção do schema: -1 em campo numérico significa "sem informação".
 const formatarAno = (ano: number) => (ano > 0 ? ano : NAO_DISPONIVEL);
@@ -105,15 +104,15 @@ async function EstatisticasElencoSection({ id }: { id: number }) {
       <h2>US03: Estatísticas do Elenco</h2>
       <p>
         <strong>Total do elenco:</strong>{" "}
-        {dados.temDadosElenco ? dados.totalElenco : "Dado não disponível / Não informado"}
+        {dados.temDadosElenco ? dados.totalElenco : NAO_DISPONIVEL}
       </p>
       <p>
         <strong>Atrizes:</strong>{" "}
-        {dados.temDadosElenco ? dados.atrizes : "Dado não disponível / Não informado"}
+        {dados.temDadosElenco ? dados.atrizes : NAO_DISPONIVEL}
       </p>
       <p>
         <strong>Nordestinos no elenco:</strong>{" "}
-        {dados.temDadosElenco ? dados.nordestinos : "Dado não disponível / Não informado"}
+        {dados.temDadosElenco ? dados.nordestinos : NAO_DISPONIVEL}
       </p>
       {dados.elenco.length > 0 && (
         <table border={1} cellPadding={6} style={{ borderCollapse: "collapse", width: "100%", marginTop: "0.5rem" }}>
@@ -130,8 +129,8 @@ async function EstatisticasElencoSection({ id }: { id: number }) {
               <tr key={m.idPessoa}>
                 <td>{m.nome}</td>
                 <td>{m.funcao}</td>
-                <td>{m.genero ?? "[null]"}</td>
-                <td>{m.flagEhNordestino === null ? "[null]" : m.flagEhNordestino ? "Sim" : "Não"}</td>
+                <td>{m.genero ?? NAO_DISPONIVEL}</td>
+                <td>{m.flagEhNordestino === null ? NAO_DISPONIVEL : m.flagEhNordestino ? "Sim" : "Não"}</td>
               </tr>
             ))}
           </tbody>
@@ -207,7 +206,7 @@ async function PremiacoesSection({ id }: { id: number }) {
                   <tr key={p.idFilmePremiacao}>
                     <td>{p.nomePremiacao}</td>
                     <td>{formatarAno(p.edicaoAno)}</td>
-                    <td>{p.categoriaPremiacao ?? "[null]"}</td>
+                    <td>{p.categoriaPremiacao ?? NAO_DISPONIVEL}</td>
                     <td><strong>{p.resultado}</strong></td>
                     <td>
                       Nível {p.nivelImportancia} {p.flagNacional ? "(Nacional)" : "(Internacional)"}
@@ -233,7 +232,7 @@ async function PremiacoesSection({ id }: { id: number }) {
                 <tr key={p.idFilmePremiacao}>
                   <td>{p.nomePremiacao}</td>
                   <td>{formatarAno(p.edicaoAno)}</td>
-                  <td>{p.categoriaPremiacao ?? "[null]"}</td>
+                  <td>{p.categoriaPremiacao ?? NAO_DISPONIVEL}</td>
                   <td>{p.resultado}</td>
                 </tr>
               ))}
