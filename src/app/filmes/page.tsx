@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { listarFilmes } from "@/server/filmes.ts";
 
+const NAO_DISPONIVEL = "Informação não disponível";
+
 export default async function FilmesPage() {
   const filmes = await listarFilmes();
 
@@ -46,7 +48,7 @@ export default async function FilmesPage() {
                       style={{ width: "45px", height: "auto" }}
                     />
                   ) : (
-                    <span>[null]</span>
+                    <span>{NAO_DISPONIVEL}</span>
                   )}
                 </td>
                 <td>
@@ -55,8 +57,8 @@ export default async function FilmesPage() {
                   </Link>
                 </td>
                 <td>{filme.ano}</td>
-                <td>{filme.genero ?? "[null]"}</td>
-                <td>{filme.cidadeFilmagem ?? "[null]"}</td>
+                <td>{filme.genero ?? NAO_DISPONIVEL}</td>
+                <td>{filme.cidadeFilmagem ?? NAO_DISPONIVEL}</td>
                 <td>
                   <Link href={`/filmes/${filme.idFilme}`}>Ver detalhes</Link> |{" "}
                   <a
