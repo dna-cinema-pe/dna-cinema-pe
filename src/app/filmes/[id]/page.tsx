@@ -9,6 +9,14 @@ import {
   listarPremiacoes,
 } from "@/server/filmes.ts";
 
+const NAO_DISPONIVEL = "Informação não disponível";
+
+// Convenção do schema: -1 em campo numérico significa "sem informação".
+const formatarAno = (ano: number) => (ano > 0 ? ano : NAO_DISPONIVEL);
+
+const formatarBrl =(valor: string | number) =>
+  new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(Number(valor));
+
 interface Props {
   params: Promise<{ id: string }>;
 }
@@ -25,12 +33,25 @@ async function FichaFilmeSection({ id }: { id: number }) {
           <tr><th style={{ width: "200px" }}>ID</th><td>{filme.idFilme}</td></tr>
           <tr><th>Título</th><td><strong>{filme.titulo}</strong></td></tr>
           <tr><th>Ano</th><td>{filme.ano}</td></tr>
-          <tr><th>Gênero</th><td>{filme.genero ?? "[null]"}</td></tr>
-          <tr><th>Sinopse</th><td>{filme.sinopse ?? "[null]"}</td></tr>
-          <tr><th>Classificação Indicativa</th><td>{filme.classificacaoIndicativa ?? "[null]"}</td></tr>
-          <tr><th>Cidade de Filmagem</th><td>{filme.cidadeFilmagem ?? "[null]"}</td></tr>
-          <tr><th>Pôster URL</th><td>{filme.posterUrl ?? "[null]"}</td></tr>
-          <tr><th>Pôster Alt</th><td>{filme.posterAlt ?? "[null]"}</td></tr>
+          <tr><th>Gênero</th><td>{filme.genero ?? NAO_DISPONIVEL}</td></tr>
+          <tr><th>Sinopse</th><td>{filme.sinopse ?? NAO_DISPONIVEL}</td></tr>
+          <tr><th>Classificação Indicativa</th><td>{filme.classificacaoIndicativa ?? NAO_DISPONIVEL}</td></tr>
+          <tr><th>Cidade de Filmagem</th><td>{filme.cidadeFilmagem ?? NAO_DISPONIVEL}</td></tr>
+          <tr>
+            <th>Pôster</th>
+            <td>
+              {filme.posterUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={filme.posterUrl}
+                  alt={filme.posterAlt ?? `Pôster do filme ${filme.titulo}`}
+                  style={{ width: "200px", height: "auto" }}
+                />
+              ) : (
+                NAO_DISPONIVEL
+              )}
+            </td>
+          </tr>
         </tbody>
       </table>
     </section>
@@ -49,8 +70,7 @@ async function IncentivoPublicoSection({ id }: { id: number }) {
           : "Não há registro de incentivo financeiro público"}
       </p>
       <p>
-        <strong>Total investido:</strong> R${" "}
-        {dados.totalInvestido.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+        <strong>Total investido:</strong> {formatarBrl(dados.totalInvestido)}
       </p>
       {dados.itens.length > 0 && (
         <table border={1} cellPadding={6} style={{ borderCollapse: "collapse", width: "100%" }}>
@@ -58,8 +78,8 @@ async function IncentivoPublicoSection({ id }: { id: number }) {
             <tr style={{ background: "#f9f9f9" }}>
               <th>Edital</th>
               <th>Ano</th>
-              <th>Total do Edital (R$)</th>
-              <th>Investido no Filme (R$)</th>
+              <th>Total do Edital</th>
+              <th>Investido no Filme</th>
             </tr>
           </thead>
           <tbody>
@@ -67,8 +87,8 @@ async function IncentivoPublicoSection({ id }: { id: number }) {
               <tr key={item.idEdital}>
                 <td>{item.tituloEdital}</td>
                 <td>{item.anoEdital}</td>
-                <td>{item.valorTotalEditalBrl}</td>
-                <td>{item.valorInvestidoFilmeBrl}</td>
+                <td>{formatarBrl(item.valorTotalEditalBrl)}</td>
+                <td>{formatarBrl(item.valorInvestidoFilmeBrl)}</td>
               </tr>
             ))}
           </tbody>
@@ -186,7 +206,7 @@ async function PremiacoesSection({ id }: { id: number }) {
                 {dados.principais.map((p) => (
                   <tr key={p.idFilmePremiacao}>
                     <td>{p.nomePremiacao}</td>
-                    <td>{p.edicaoAno === -1 ? "-1 (Não informado)" : p.edicaoAno}</td>
+                    <td>{formatarAno(p.edicaoAno)}</td>
                     <td>{p.categoriaPremiacao ?? "[null]"}</td>
                     <td><strong>{p.resultado}</strong></td>
                     <td>
@@ -212,7 +232,7 @@ async function PremiacoesSection({ id }: { id: number }) {
               {dados.todas.map((p) => (
                 <tr key={p.idFilmePremiacao}>
                   <td>{p.nomePremiacao}</td>
-                  <td>{p.edicaoAno === -1 ? "-1" : p.edicaoAno}</td>
+                  <td>{formatarAno(p.edicaoAno)}</td>
                   <td>{p.categoriaPremiacao ?? "[null]"}</td>
                   <td>{p.resultado}</td>
                 </tr>
