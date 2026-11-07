@@ -60,7 +60,18 @@ Um PR só entra quando **todos** os itens abaixo estiverem cumpridos:
 - [ ] Não há conflito com a branch de destino, e a branch foi atualizada com ela antes do merge.
 - [ ] O PR não inclui `.env`, arquivos gerados ou código sem relação com a tarefa.
 
-> **Importante:** esses critérios hoje valem por acordo do time. A proteção de branch nas settings do GitHub, que bloquearia o merge automaticamente, exige plano pago ou repositório público (resposta da API do GitHub) e está acompanhada em [#24](https://github.com/dna-cinema-pe/dna-cinema-pe/issues/24). Até lá, ninguém deve fazer push direto em `main` ou `develop` nem mesclar com o `CI` vermelho.
+> **O que o GitHub impõe e o que é acordo do time**
+>
+> `main` e `develop` têm proteção de branch ativa (issues [#2](https://github.com/dna-cinema-pe/dna-cinema-pe/issues/2) e [#24](https://github.com/dna-cinema-pe/dna-cinema-pe/issues/24)). Ela vale também para administradores.
+>
+> **Imposto automaticamente:**
+> - Push direto, force push e exclusão das duas branches são bloqueados; tudo entra por PR.
+> - O check `checks` precisa estar verde para o merge ser liberado.
+> - Na `develop`, a branch do PR precisa estar atualizada com ela. Na `main` isso não é exigido: o merge commit das releases deixa a `main` sempre à frente da `develop`.
+>
+> **Vale só por acordo (o GitHub não bloqueia):**
+> - A aprovação de ao menos 1 pessoa. Não há revisão obrigatória nas settings, porque o autor do PR não pode aprovar o próprio PR.
+> - O modelo de PR preenchido e a ausência de código fora do escopo da tarefa.
 
 ## Release
 
