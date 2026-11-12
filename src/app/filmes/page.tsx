@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { listarFilmes } from "@/server/filmes.ts";
+import { NAO_DISPONIVEL } from "@/lib/utils.ts";
 
 export default async function FilmesPage() {
   const filmes = await listarFilmes();
@@ -20,7 +21,7 @@ export default async function FilmesPage() {
               Catálogo de Filmes
             </h1>
             <p className="text-sm text-zinc-400 mt-1">
-              Acervo histórico do cinema pernambucano (US06)
+              Acervo histórico do cinema pernambucano
             </p>
           </div>
           <div className="flex items-center gap-3">
@@ -31,9 +32,10 @@ export default async function FilmesPage() {
               href="/api/filmes"
               target="_blank"
               rel="noreferrer"
+              aria-label="Dados em JSON de todo o catálogo (abre em nova aba)"
               className="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 transition-colors"
             >
-              Exportar JSON
+              Dados em JSON
             </a>
           </div>
         </div>
@@ -41,11 +43,19 @@ export default async function FilmesPage() {
         {/* Tabela de Filmes */}
         {filmes.length === 0 ? (
           <div className="bg-zinc-950 border border-zinc-800 rounded-lg p-12 text-center text-zinc-500">
-            Nenhum filme cadastrado no banco de dados.
+            Nenhum filme cadastrado no acervo.
           </div>
         ) : (
-          <div className="overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-950/70 shadow-2xl">
+          <div
+            role="region"
+            aria-label="Lista de filmes do acervo"
+            tabIndex={0}
+            className="overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-950/70 shadow-2xl"
+          >
             <table className="w-full text-left border-collapse text-sm">
+              <caption className="sr-only">
+                Filmes do acervo, em ordem alfabética, com ano, gênero e cidade de filmagem
+              </caption>
               <thead>
                 <tr className="bg-zinc-900/90 border-b border-zinc-800 text-zinc-300 text-xs uppercase tracking-wider font-semibold">
                   <th scope="col" className="py-3.5 px-4 w-28 text-center">
@@ -61,7 +71,7 @@ export default async function FilmesPage() {
                     Gênero
                   </th>
                   <th scope="col" className="py-3.5 px-4 w-40">
-                    Cidade Filmagem
+                    Cidade de filmagem
                   </th>
                   <th scope="col" className="py-3.5 px-4 w-32 text-center">
                     Ações
@@ -116,7 +126,7 @@ export default async function FilmesPage() {
                       {filme.genero ? (
                         <span>{filme.genero}</span>
                       ) : (
-                        <span className="text-zinc-600 italic">Não informado</span>
+                        <span className="text-zinc-600 italic">{NAO_DISPONIVEL}</span>
                       )}
                     </td>
 
@@ -128,7 +138,7 @@ export default async function FilmesPage() {
                           {filme.cidadeFilmagem}
                         </span>
                       ) : (
-                        <span className="text-zinc-600 italic">Não informada</span>
+                        <span className="text-zinc-600 italic">{NAO_DISPONIVEL}</span>
                       )}
                     </td>
 
@@ -137,6 +147,7 @@ export default async function FilmesPage() {
                       <div className="flex items-center justify-center gap-2">
                         <Link
                           href={`/filmes/${filme.idFilme}`}
+                          aria-label={`Ver detalhes de ${filme.titulo}`}
                           className="px-2.5 py-1.5 rounded bg-zinc-800 hover:bg-amber-500 hover:text-black font-medium text-xs text-zinc-200 transition-colors shadow-sm"
                         >
                           Detalhes
@@ -147,6 +158,7 @@ export default async function FilmesPage() {
                           rel="noreferrer"
                           className="px-2 py-1.5 rounded bg-zinc-900 hover:bg-zinc-800 font-mono text-xs text-zinc-400 hover:text-zinc-200 transition-colors border border-zinc-800"
                           title="Ver resposta JSON da API"
+                          aria-label={`Ver dados de ${filme.titulo} em JSON (abre em nova aba)`}
                         >
                           JSON
                         </a>

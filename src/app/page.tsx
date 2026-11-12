@@ -1,28 +1,36 @@
-import Link from "next/link";
+import { Suspense } from "react";
+import { DesignPoster } from "@/components/poster/DesignPoster.tsx";
+import { PosterViewport } from "@/components/poster/PosterViewport.tsx";
+import { obterRecorteGenero } from "@/server/panorama.ts";
+
+/**
+ * Home: o frame do Figma Make, sem animações.
+ * Só o gráfico de gênero vem do banco; os de origem e classe social são placeholders
+ * fixos porque o schema não tem esses dados (ver docs/analise-design-vs-banco.md).
+ */
+async function PosterComDados() {
+  // Banco fora do ar não derruba a Home: o gráfico cai para o placeholder.
+  const genero = await obterRecorteGenero().catch(() => null);
+
+  return (
+    <PosterViewport>
+      <DesignPoster genero={genero} />
+    </PosterViewport>
+  );
+}
 
 export default function HomePage() {
   return (
-    <main style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-      <h1>DNA Cinema PE</h1>
-      <p>
-        Plataforma para consulta e preservação da história do cinema pernambucano.
-      </p>
-
-      <div style={{ marginTop: "1.5rem" }}>
-        <h2>Navegação</h2>
-        <ul>
-          <li>
-            <Link href="/filmes">
-              <strong>/filmes</strong> - Lista de filmes (US06)
-            </Link>
-          </li>
-          <li>
-            <a href="/api/filmes" target="_blank" rel="noreferrer">
-              <code>/api/filmes</code> - Endpoint JSON da listagem
-            </a>
-          </li>
-        </ul>
-      </div>
+    <main className="flex-1 bg-fundo">
+      <Suspense
+        fallback={
+          <PosterViewport>
+            <DesignPoster />
+          </PosterViewport>
+        }
+      >
+        <PosterComDados />
+      </Suspense>
     </main>
   );
 }
