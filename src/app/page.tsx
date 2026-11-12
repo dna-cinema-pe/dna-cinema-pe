@@ -1,33 +1,36 @@
-import { Moldura } from "@/components/landing/Moldura.tsx";
-import { Anos2000 } from "@/components/landing/secoes/Anos2000.tsx";
-import { CicloDoRecife } from "@/components/landing/secoes/CicloDoRecife.tsx";
-import { Conclusao } from "@/components/landing/secoes/Conclusao.tsx";
-import { Contexto } from "@/components/landing/secoes/Contexto.tsx";
-import { Financiamento } from "@/components/landing/secoes/Financiamento.tsx";
-import { Hero } from "@/components/landing/secoes/Hero.tsx";
-import { ReconhecimentoInternacional } from "@/components/landing/secoes/ReconhecimentoInternacional.tsx";
-import { RecorteGeneroRacaOrigem } from "@/components/landing/secoes/RecorteGeneroRacaOrigem.tsx";
-import { RetomadaManguebeat } from "@/components/landing/secoes/RetomadaManguebeat.tsx";
-import { Rodape } from "@/components/landing/secoes/Rodape.tsx";
-import { Super8 } from "@/components/landing/secoes/Super8.tsx";
+import { Suspense } from "react";
+import { DesignPoster } from "@/components/poster/DesignPoster.tsx";
+import { PosterViewport } from "@/components/poster/PosterViewport.tsx";
+import { obterRecorteGenero } from "@/server/panorama.ts";
 
-// Sem dados, cada seção mostra seus placeholders.
+/**
+ * Home: o frame do Figma Make, sem animações.
+ * Só o gráfico de gênero vem do banco; os de origem e classe social são placeholders
+ * fixos porque o schema não tem esses dados (ver docs/analise-design-vs-banco.md).
+ */
+async function PosterComDados() {
+  // Banco fora do ar não derruba a Home: o gráfico cai para o placeholder.
+  const genero = await obterRecorteGenero().catch(() => null);
+
+  return (
+    <PosterViewport>
+      <DesignPoster genero={genero} />
+    </PosterViewport>
+  );
+}
+
 export default function HomePage() {
   return (
-    <main className="flex-1 bg-fundo font-corpo text-papel">
-      <Moldura>
-        <Hero />
-        <Contexto />
-        <CicloDoRecife />
-        <Super8 />
-        <RetomadaManguebeat />
-        <Anos2000 />
-        <Financiamento />
-        <ReconhecimentoInternacional />
-        <RecorteGeneroRacaOrigem />
-        <Conclusao />
-      </Moldura>
-      <Rodape />
+    <main className="flex-1 bg-fundo">
+      <Suspense
+        fallback={
+          <PosterViewport>
+            <DesignPoster />
+          </PosterViewport>
+        }
+      >
+        <PosterComDados />
+      </Suspense>
     </main>
   );
 }
