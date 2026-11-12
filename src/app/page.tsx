@@ -1,53 +1,33 @@
-import Link from "next/link";
+import { Moldura } from "@/components/landing/Moldura.tsx";
+import { Anos2000 } from "@/components/landing/secoes/Anos2000.tsx";
+import { CicloDoRecife } from "@/components/landing/secoes/CicloDoRecife.tsx";
+import { Conclusao } from "@/components/landing/secoes/Conclusao.tsx";
+import { Contexto } from "@/components/landing/secoes/Contexto.tsx";
+import { Financiamento } from "@/components/landing/secoes/Financiamento.tsx";
+import { Hero } from "@/components/landing/secoes/Hero.tsx";
+import { ReconhecimentoInternacional } from "@/components/landing/secoes/ReconhecimentoInternacional.tsx";
+import { RecorteGeneroRacaOrigem } from "@/components/landing/secoes/RecorteGeneroRacaOrigem.tsx";
+import { RetomadaManguebeat } from "@/components/landing/secoes/RetomadaManguebeat.tsx";
+import { Rodape } from "@/components/landing/secoes/Rodape.tsx";
+import { Super8 } from "@/components/landing/secoes/Super8.tsx";
 
+// Sem dados, cada seção mostra seus placeholders.
 export default function HomePage() {
   return (
-    <main style={{ padding: "2rem" }}>
-      <header>
-        <h1>DNA Cinema PE</h1>
-        <p>
-          Uma investigação sobre a história, os recursos e as pessoas por trás do
-          cinema feito em Pernambuco.
-        </p>
-        <p style={{ marginTop: "1rem" }}>
-          <Link href="/filmes">
-            <strong>Explorar o catálogo de filmes</strong>
-          </Link>
-        </p>
-      </header>
-
-      <section aria-labelledby="o-que-voce-encontra" style={{ marginTop: "2rem" }}>
-        <h2 id="o-que-voce-encontra">O que você encontra em cada filme</h2>
-        <ul>
-          <li>
-            <strong>Ficha da obra:</strong> sinopse, classificação indicativa, ano,
-            cidade de filmagem e pôster.
-          </li>
-          <li>
-            <strong>Recursos públicos:</strong> o valor investido e o edital que
-            apoiou a produção.
-          </li>
-          <li>
-            <strong>Pessoas:</strong> elenco, atrizes, participação de pessoas
-            nordestinas e cineastas mulheres.
-          </li>
-          <li>
-            <strong>Reconhecimento:</strong> premiações ganhas e indicações, com os
-            principais prêmios em destaque.
-          </li>
-        </ul>
-      </section>
-
-      <section aria-labelledby="para-desenvolvedores" style={{ marginTop: "2rem" }}>
-        <h2 id="para-desenvolvedores">Para desenvolvedores</h2>
-        <p>
-          Os mesmos dados do catálogo estão disponíveis em JSON:{" "}
-          <a href="/api/filmes" target="_blank" rel="noreferrer">
-            <code>/api/filmes</code>
-          </a>
-          .
-        </p>
-      </section>
+    <main className="flex-1 bg-fundo font-corpo text-papel">
+      <Moldura>
+        <Hero />
+        <Contexto />
+        <CicloDoRecife />
+        <Super8 />
+        <RetomadaManguebeat />
+        <Anos2000 />
+        <Financiamento />
+        <ReconhecimentoInternacional />
+        <RecorteGeneroRacaOrigem />
+        <Conclusao />
+      </Moldura>
+      <Rodape />
     </main>
   );
 }

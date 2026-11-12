@@ -10,6 +10,18 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-titulo: var(--font-alfa);
+  --font-corpo: var(--font-poppins);
+}
+
+@theme {
+  --color-fundo: #0b0909;
+  --color-ouro: #e3a54f;
+  --color-ferrugem: #ac3215;
+  --color-ferrugem-claro: #b83e24;
+  --color-vermelho: #e2200f;
+  --color-laranja: #ff9f3f;
+  --color-papel: #ceccc8;
 }
 
 @media (prefers-color-scheme: dark) {
