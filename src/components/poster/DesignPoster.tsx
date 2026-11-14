@@ -218,21 +218,21 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         </div>
       </div>
       <div
-        className="absolute inset-[12.99%_76.56%_86.46%_4.27%]"
+        className="cloud-float cloud-float--slow absolute inset-[12.99%_76.56%_86.46%_4.27%]"
         data-node-id="283:117"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada3} />
       </div>
       <div
-        className="absolute inset-[12.99%_76.56%_86.46%_4.27%]"
+        className="cloud-float cloud-float--slow absolute inset-[12.99%_76.56%_86.46%_4.27%]"
         data-node-id="288:144"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada3} />
       </div>
       <div
-        className="absolute inset-[13.76%_4.86%_85.73%_71.46%]"
+        className="cloud-float cloud-float--reverse absolute inset-[13.76%_4.86%_85.73%_71.46%]"
         data-node-id="288:147"
         data-name="Camada_1"
       >
@@ -253,14 +253,14 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         </div>
       </div>
       <div
-        className="pointer-events-none absolute z-10 left-[-94px] top-[130px] h-[314px] w-[778px]"
+        className="red-cloud-loop pointer-events-none absolute z-10 left-[-94px] top-[130px] h-[314px] w-[778px]"
         data-node-id="299:327"
         data-name="Vector"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector6} />
       </div>
       <div
-        className="pointer-events-none absolute z-10 left-[1443px] top-[828px] h-[99px] w-[312px]"
+        className="gold-cloud-loop pointer-events-none absolute z-10 left-[1443px] top-[828px] h-[99px] w-[312px]"
         data-node-id="299:508"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup45} />
@@ -296,7 +296,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           data-node-id="46:7"
           data-name="Vector"
         >
-          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
+          <img alt="" className="sun-spin absolute block inset-0 max-w-none size-full" src={imgVector} />
         </div>
         <div
           className="absolute flex h-[285.578px] items-center justify-center left-[calc(40%+128.98px)] top-[70.34px] w-[990.76px]"
@@ -317,7 +317,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
             data-name="nuvem 1"
           >
             <div
-              className="absolute inset-[35.01%_148.87%_53.36%_-84.87%]"
+              className="cloud-float absolute inset-[35.01%_148.87%_53.36%_-84.87%]"
               data-node-id="299:269"
               data-name="Vector"
             >
@@ -328,7 +328,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
               />
             </div>
             <div
-              className="absolute inset-[24.44%_177.24%_65.37%_-119.21%]"
+              className="cloud-float cloud-float--slow absolute inset-[24.44%_177.24%_65.37%_-119.21%]"
               data-node-id="299:270"
               data-name="Vector"
             >
@@ -339,7 +339,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
               />
             </div>
             <div
-              className="absolute inset-[24.85%_144.19%_68.39%_-74.38%]"
+              className="cloud-float cloud-float--reverse absolute inset-[24.85%_144.19%_68.39%_-74.38%]"
               data-node-id="299:271"
               data-name="Vector"
             >
@@ -350,7 +350,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
               />
             </div>
             <div
-              className="absolute inset-[39.88%_195.34%_52.84%_-117.3%]"
+              className="cloud-float cloud-float--gentle absolute inset-[39.88%_195.34%_52.84%_-117.3%]"
               data-node-id="299:272"
               data-name="Vector"
             >
@@ -470,7 +470,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
               <div className="relative size-full" data-name="Camada_1">
                 <img
                   alt=""
-                  className="absolute block inset-0 max-w-none size-full"
+                  className="wind-sway absolute block inset-0 max-w-none size-full"
                   src={imgCamada6}
                 />
               </div>
@@ -484,7 +484,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         >
           <img
             alt=""
-            className="absolute block inset-0 max-w-none size-full"
+            className="bird-flap absolute block inset-0 max-w-none size-full"
             src={imgCamada7}
           />
         </div>
@@ -1428,7 +1428,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         de contar seu lado, E não deixava que o pouco investimento tornasse o cinema pernambucano
         limitado.
       </p>
-      <div className="absolute h-[781.76px] left-[90px] top-[calc(32%+230.37px)] w-[576.791px]">
+      <div className="hanging-postcard absolute h-[781.76px] left-[90px] top-[calc(32%+230.37px)] w-[576.791px]">
         <div
           className="absolute inset-0 flex items-center justify-center"
           data-node-id="156:60"
@@ -1464,7 +1464,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           </div>
         </div>
       </div>
-      <div className="absolute bg-[#d9d9d9] h-[747.369px] left-[calc(20%+313px)] top-[calc(33%+232.04px)] w-[526.736px]">
+      <div className="hanging-postcard absolute bg-[#d9d9d9] h-[747.369px] left-[calc(20%+313px)] top-[calc(33%+232.04px)] w-[526.736px]">
         <div
           className="absolute h-[393px] left-[38px] top-[44px] w-[449px]"
           data-node-id="156:54"
@@ -1486,7 +1486,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           olhar para uma produção pernambucana que voltava a se destacar
         </p>
       </div>
-      <div className="absolute h-[807.888px] left-[calc(60%+79px)] top-[calc(34%+184.87px)] w-[616.874px]">
+      <div className="hanging-postcard absolute h-[807.888px] left-[calc(60%+79px)] top-[calc(34%+184.87px)] w-[616.874px]">
         <div
           className="absolute inset-0 flex items-center justify-center"
           data-node-id="196:9"
@@ -1548,7 +1548,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         CONCLUSÃO
       </p>
       <div
-        className="absolute z-10 flex h-[313.969px] items-center justify-center left-[162px] top-[calc(43%+194.87px)] w-[267.621px]"
+        className="hanging-postcard absolute z-10 flex h-[313.969px] items-center justify-center left-[162px] top-[calc(43%+194.87px)] w-[267.621px]"
         data-node-id="163:142"
       >
         <div className="flex-none rotate-[1.28deg]">
@@ -1562,7 +1562,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         </div>
       </div>
       <div
-        className="absolute flex h-[520.207px] items-center justify-center left-[calc(20%+371px)] top-[calc(47%-8.64px)] w-[464.88px]"
+        className="hanging-postcard absolute flex h-[520.207px] items-center justify-center left-[calc(20%+371px)] top-[calc(47%-8.64px)] w-[464.88px]"
         data-node-id="163:176"
       >
         <div className="flex-none rotate-[11.02deg]">
@@ -1576,7 +1576,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         </div>
       </div>
       <div
-        className="absolute flex h-[467.094px] items-center justify-center left-[calc(60%+162px)] top-[calc(47%+39.36px)] w-[399.371px]"
+        className="hanging-postcard absolute flex h-[467.094px] items-center justify-center left-[calc(60%+162px)] top-[calc(47%+39.36px)] w-[399.371px]"
         data-node-id="163:182"
       >
         <div className="flex-none rotate-[-1.83deg]">
@@ -1590,7 +1590,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         </div>
       </div>
       <div
-        className="absolute flex h-[521.214px] items-center justify-center left-[236px] top-[calc(46%+144.48px)] w-[466.172px]"
+        className="hanging-postcard absolute flex h-[521.214px] items-center justify-center left-[236px] top-[calc(46%+144.48px)] w-[466.172px]"
         data-node-id="163:179"
       >
         <div className="flex-none rotate-[11.22deg]">
@@ -1656,7 +1656,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         </div>
       </div>
       <div
-        className="absolute flex h-[376.553px] items-center justify-center left-[calc(20%+107px)] top-[calc(43%+112.84px)] w-[330.067px]"
+        className="hanging-postcard absolute flex h-[376.553px] items-center justify-center left-[calc(20%+107px)] top-[calc(43%+112.84px)] w-[330.067px]"
         data-node-id="163:161"
       >
         <div className="flex-none rotate-[-6.71deg]">
@@ -1670,7 +1670,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         </div>
       </div>
       <div
-        className="absolute flex h-[368.416px] items-center justify-center left-[calc(40%+73px)] top-[calc(43%+85.84px)] w-[315px]"
+        className="hanging-postcard absolute flex h-[368.416px] items-center justify-center left-[calc(40%+73px)] top-[calc(43%+85.84px)] w-[315px]"
         data-node-id="163:162"
       >
         <div className="flex-none rotate-[-1.83deg]">
@@ -1695,7 +1695,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         </div>
       </div>
       <div
-        className="absolute flex h-[368.416px] items-center justify-center left-[calc(60%+333px)] top-[calc(43%+43.84px)] w-[315px]"
+        className="hanging-postcard absolute flex h-[368.416px] items-center justify-center left-[calc(60%+333px)] top-[calc(43%+43.84px)] w-[315px]"
         data-node-id="163:169"
       >
         <div className="flex-none rotate-[-1.83deg]">
@@ -2038,10 +2038,10 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         data-node-id="196:29"
       />
       <div
-        className="absolute z-10 flex h-[380.488px] items-center justify-center left-[calc(60%+3px)] top-[calc(43%+44.84px)] w-[329.539px]"
+        className="falling-poster absolute z-10 flex h-[380.488px] items-center justify-center left-[calc(60%+3px)] top-[calc(43%+44.84px)] w-[329.539px]"
         data-node-id="163:174"
       >
-        <div className="poster-body">
+        <div className="falling-poster__body">
           <div className="flex-none rotate-[-4.27deg]">
             <div className="h-[358.877px] relative w-[303.665px]">
               <img
@@ -2529,7 +2529,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada15} />
       </div>
       <div
-        className="absolute h-[621px] left-[calc(20%+120px)] top-[calc(9%+138.92px)] w-[920px]"
+        className="hanging-postcard absolute h-[621px] left-[calc(20%+120px)] top-[calc(9%+138.92px)] w-[920px]"
         data-node-id="292:176"
         data-name="ChatGPT Image 25 de set. de 2026, 14_58_30 1"
       >
