@@ -273,3 +273,24 @@ body {
 .hotspot:active {
   transform: scale(0.97);
 }
+
+/*
+ * Reduzir movimento (US-3.3). `data-animacoes="desligadas"` no <html> vem do sistema
+ * (prefers-reduced-motion) ou do interruptor, que prevalece e fica no localStorage.
+ * Pausa todas as animações e transições; pôster e avião ficam direto no estado final.
+ */
+html[data-animacoes="desligadas"] *,
+html[data-animacoes="desligadas"] *::before,
+html[data-animacoes="desligadas"] *::after {
+  animation: none !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+html[data-animacoes="desligadas"] .falling-poster__body {
+  transform: translate3d(0, 720px, 0) rotate(13deg);
+}
+
+html[data-animacoes="desligadas"] .plane-flight {
+  offset-distance: 100%;
+}
