@@ -6,7 +6,7 @@ import { derrubarPoster, iniciarVoo, obterAviao, obterPoster, SELETOR_LOOPS } fr
 /**
  * Liga os gatilhos das animações do poster, que é renderizado no servidor:
  * - o avião voa uma vez quando 30% dele aparece na tela;
- * - o pôster cai ao receber o ponteiro e fica caído;
+ * - o pôster cai ao receber o ponteiro (ou Enter/Espaço no foco) e fica caído;
  * - os loops (nuvens, sol, pássaro, bandeirinhas) pausam quando saem da tela.
  * Não renderiza nada.
  */
@@ -31,8 +31,17 @@ export function AnimacoesDoPoster() {
 
     const poster = obterPoster();
     if (poster) {
+      const aoTeclar = (evento: KeyboardEvent) => {
+        if (evento.key !== "Enter" && evento.key !== " ") return;
+        evento.preventDefault();
+        derrubarPoster();
+      };
       poster.addEventListener("pointerenter", derrubarPoster);
-      limpezas.push(() => poster.removeEventListener("pointerenter", derrubarPoster));
+      poster.addEventListener("keydown", aoTeclar);
+      limpezas.push(() => {
+        poster.removeEventListener("pointerenter", derrubarPoster);
+        poster.removeEventListener("keydown", aoTeclar);
+      });
     }
 
     // Os loops se movem horizontalmente (a nuvem vermelha anda 2400 px), então observar o próprio

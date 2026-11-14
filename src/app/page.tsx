@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { AnimacoesDoPoster } from "@/components/poster/AnimacoesDoPoster.tsx";
+import { ControlesDeMovimento } from "@/components/poster/ControlesDeMovimento.tsx";
 import { DesignPoster } from "@/components/poster/DesignPoster.tsx";
 import { PosterViewport } from "@/components/poster/PosterViewport.tsx";
 import { obterRecorteGenero, obterRecorteOrigem } from "@/server/panorama.ts";
@@ -34,6 +35,7 @@ export default function HomePage() {
   return (
     <main className="flex-1 bg-fundo">
       <OnboardingProvider>
+        <ControlesDeMovimento />
         <Suspense
           fallback={
             <PosterViewport>

@@ -2038,7 +2038,10 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         data-node-id="196:29"
       />
       <div
-        className="falling-poster absolute z-10 flex h-[380.488px] items-center justify-center left-[calc(60%+3px)] top-[calc(43%+44.84px)] w-[329.539px]"
+        className="falling-poster hotspot absolute z-10 flex h-[380.488px] items-center justify-center left-[calc(60%+3px)] top-[calc(43%+44.84px)] w-[329.539px]"
+        role="button"
+        tabIndex={0}
+        aria-label="Derrubar o pôster"
         data-node-id="163:174"
       >
         <div className="falling-poster__body">

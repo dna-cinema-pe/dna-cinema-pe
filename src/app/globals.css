@@ -255,3 +255,21 @@ body {
 .loop-pausado {
   animation-play-state: paused;
 }
+
+/*
+ * Hotspots (US-3.2): cursor de mão, foco visível com contorno dourado de 2 px e resposta
+ * imediata (< 100 ms) ao pressionar.
+ */
+.hotspot {
+  cursor: pointer;
+  transition: transform 80ms ease-out;
+}
+
+.hotspot:focus-visible {
+  outline: 2px solid var(--color-ouro);
+  outline-offset: 2px;
+}
+
+.hotspot:active {
+  transform: scale(0.97);
+}
