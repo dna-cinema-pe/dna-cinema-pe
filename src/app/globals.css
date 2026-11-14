@@ -36,9 +36,261 @@ body {
   color: var(--foreground);
 }
 
-/* Avião da Home: parado no início do trajeto e já rotacionado, sem animação. */
+/*
+ * Animações do protótipo (Figma Make), copiadas sem bibliotecas: mesmos keyframes, tempos e
+ * valores de movimento. Só transform, opacity e offset-distance, para manter 60 fps.
+ */
+@keyframes cloud-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  35% {
+    transform: translate3d(var(--cloud-drift-x, 72px), -48px, 0);
+  }
+
+  70% {
+    transform: translate3d(var(--cloud-return-x, -32px), 24px, 0);
+  }
+}
+
+@keyframes red-cloud-loop {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  70% {
+    transform: translate3d(2400px, 0, 0);
+  }
+
+  70.01% {
+    transform: translate3d(-1000px, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes sun-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gold-cloud-loop {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  31% {
+    transform: translate3d(800px, 0, 0);
+  }
+
+  31.01% {
+    transform: translate3d(-1800px, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes bird-flap {
+  0%,
+  100% {
+    transform: translate3d(-10px, 0, 0) rotate(-0.3deg) scaleY(1);
+  }
+
+  45% {
+    transform: translate3d(12px, -2.4px, 0) rotate(0.6deg) scaleY(0.982);
+  }
+
+  70% {
+    transform: translate3d(5px, -0.9px, 0) rotate(0deg) scaleY(1.006);
+  }
+}
+
+@keyframes wind-sway {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-0.8deg) skewX(-0.4deg);
+  }
+
+  45% {
+    transform: translate3d(2px, 4px, 0) rotate(1.1deg) skewX(0.6deg);
+  }
+
+  72% {
+    transform: translate3d(-1px, 2px, 0) rotate(0.3deg) skewX(0.2deg);
+  }
+}
+
+@keyframes postcard-swing {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  22% {
+    transform: rotate(2deg);
+  }
+
+  48% {
+    transform: rotate(-1.5deg);
+  }
+
+  72% {
+    transform: rotate(0.8deg);
+  }
+}
+
+@keyframes poster-fall {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  18% {
+    transform: translate3d(0, 10px, 0) rotate(2deg);
+  }
+
+  100% {
+    transform: translate3d(0, 720px, 0) rotate(13deg);
+  }
+}
+
+@keyframes plane-flight {
+  from {
+    offset-distance: 0%;
+  }
+
+  to {
+    offset-distance: 100%;
+  }
+}
+
+.cloud-float {
+  --cloud-drift-x: 72px;
+  --cloud-return-x: -32px;
+  animation: cloud-float 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.cloud-float--slow {
+  --cloud-drift-x: 96px;
+  --cloud-return-x: -44px;
+  animation-duration: 8s;
+}
+
+.cloud-float--reverse {
+  --cloud-drift-x: -80px;
+  --cloud-return-x: 36px;
+  animation-delay: -2.5s;
+  animation-duration: 7s;
+}
+
+.cloud-float--gentle {
+  --cloud-drift-x: 56px;
+  --cloud-return-x: -24px;
+  animation-delay: -4s;
+  animation-duration: 9s;
+}
+
+.red-cloud-loop {
+  animation: red-cloud-loop 34.3s linear infinite;
+  will-change: transform;
+}
+
+.gold-cloud-loop {
+  animation: gold-cloud-loop 26.3s linear infinite;
+  will-change: transform;
+}
+
+.sun-spin {
+  animation: sun-spin 28s linear infinite;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.bird-flap {
+  animation: bird-flap 1.6s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.wind-sway {
+  animation: wind-sway 5.5s ease-in-out infinite;
+  transform-origin: 50% 0%;
+  will-change: transform;
+}
+
+.hanging-postcard {
+  transform-origin: 50% 0%;
+}
+
+.hanging-postcard:hover {
+  animation: postcard-swing 2.2s ease-in-out infinite;
+  will-change: transform;
+}
+
+.falling-poster--fallen .falling-poster__body {
+  animation: poster-fall 1.35s cubic-bezier(0.55, 0.05, 0.8, 0.2) forwards;
+  transform-origin: 50% 0%;
+  will-change: transform;
+}
+
 .plane-flight {
   offset-path: path("M 0 0 C -360 -20 -850 55 -1200 170");
   offset-distance: 0%;
   offset-rotate: auto 180deg;
+}
+
+.plane-flight--active {
+  animation: plane-flight 9s cubic-bezier(0.22, 0.6, 0.35, 1) forwards;
+  will-change: offset-distance;
+}
+
+/* Loops que saem da tela são pausados por AnimacoesDoPoster (IntersectionObserver). */
+.loop-pausado {
+  animation-play-state: paused;
+}
+
+/*
+ * Hotspots (US-3.2): cursor de mão, foco visível com contorno dourado de 2 px e resposta
+ * imediata (< 100 ms) ao pressionar.
+ */
+.hotspot {
+  cursor: pointer;
+  transition: transform 80ms ease-out;
+}
+
+.hotspot:focus-visible {
+  outline: 2px solid var(--color-ouro);
+  outline-offset: 2px;
+}
+
+.hotspot:active {
+  transform: scale(0.97);
+}
+
+/*
+ * Reduzir movimento (US-3.3). `data-animacoes="desligadas"` no <html> vem do sistema
+ * (prefers-reduced-motion) ou do interruptor, que prevalece e fica no localStorage.
+ * Pausa todas as animações e transições; pôster e avião ficam direto no estado final.
+ */
+html[data-animacoes="desligadas"] *,
+html[data-animacoes="desligadas"] *::before,
+html[data-animacoes="desligadas"] *::after {
+  animation: none !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+html[data-animacoes="desligadas"] .falling-poster__body {
+  transform: translate3d(0, 720px, 0) rotate(13deg);
+}
+
+html[data-animacoes="desligadas"] .plane-flight {
+  offset-distance: 100%;
 }

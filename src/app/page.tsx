@@ -1,4 +1,6 @@
 import { Suspense } from "react";
+import { AnimacoesDoPoster } from "@/components/poster/AnimacoesDoPoster.tsx";
+import { ControlesDeMovimento } from "@/components/poster/ControlesDeMovimento.tsx";
 import { DesignPoster } from "@/components/poster/DesignPoster.tsx";
 import { PosterViewport } from "@/components/poster/PosterViewport.tsx";
 import { obterRecorteGenero, obterRecorteOrigem } from "@/server/panorama.ts";
@@ -9,7 +11,7 @@ import { Navigator } from "@/components/onboarding/Navigator.tsx";
 import { CompletionSummary } from "@/components/onboarding/CompletionSummary.tsx";
 
 /**
- * Home: o frame do Figma Make, sem animações.
+ * Home: o frame do Figma Make, com as animações do protótipo (ver globals.css).
  * Gênero e origem (pernambucanos x outros, dentro do próprio acervo) vêm do banco;
  * classe social continua placeholder fixo porque o schema não tem esse dado
  * (ver analise-design-vs-banco.md).
@@ -24,6 +26,7 @@ async function PosterComDados() {
   return (
     <PosterViewport>
       <DesignPoster genero={genero} origem={origem} />
+      <AnimacoesDoPoster />
     </PosterViewport>
   );
 }
@@ -32,6 +35,7 @@ export default function HomePage() {
   return (
     <main className="flex-1 bg-fundo">
       <OnboardingProvider>
+        <ControlesDeMovimento />
         <Suspense
           fallback={
             <PosterViewport>

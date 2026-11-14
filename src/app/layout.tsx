@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Alfa_Slab_One, Geist, Geist_Mono, Poppins } from "next/font/google";
+import { SCRIPT_ANIMACOES } from "@/components/landing/movimento.ts";
 import "./globals.css";
 
 const alfaSlabOne = Alfa_Slab_One({
@@ -34,9 +35,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="pt-BR"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${alfaSlabOne.variable} ${poppins.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <script dangerouslySetInnerHTML={{ __html: SCRIPT_ANIMACOES }} />
+        {children}
+      </body>
     </html>
   );
 }
