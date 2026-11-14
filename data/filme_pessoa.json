@@ -27,6 +27,7 @@
   { "filme": "baile-perfumado-1996", "pessoa": "Luiz Carlos Vasconcelos", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
   { "filme": "baile-perfumado-1996", "pessoa": "Aramis Trindade", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
   { "filme": "baile-perfumado-1996", "pessoa": "Chico Díaz", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
+  { "filme": "baile-perfumado-1996", "pessoa": "Vânia Fernandes Debs", "funcaoPessoa": "MONTAGEM", "flagEhCineasta": false },
 
   { "filme": "o-rap-do-pequeno-principe-2000", "pessoa": "Paulo Caldas", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
   { "filme": "o-rap-do-pequeno-principe-2000", "pessoa": "Marcelo Luna", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
@@ -138,6 +139,7 @@
   { "filme": "aquarius-2016", "pessoa": "Maeve Jinkings", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
   { "filme": "aquarius-2016", "pessoa": "Irandhir Santos", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
   { "filme": "aquarius-2016", "pessoa": "Bárbara Colen", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
+  { "filme": "aquarius-2016", "pessoa": "Eduardo Serrano", "funcaoPessoa": "MONTAGEM", "flagEhCineasta": false },
 
   { "filme": "azougue-nazare-2018", "pessoa": "Tiago Melo", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
   { "filme": "azougue-nazare-2018", "pessoa": "Tiago Melo", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
@@ -151,6 +153,7 @@
   { "filme": "bacurau-2019", "pessoa": "Sonia Braga", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
   { "filme": "bacurau-2019", "pessoa": "Silvero Pereira", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
   { "filme": "bacurau-2019", "pessoa": "Bárbara Colen", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
+  { "filme": "bacurau-2019", "pessoa": "Eduardo Serrano", "funcaoPessoa": "MONTAGEM", "flagEhCineasta": false },
 
   { "filme": "divino-amor-2019", "pessoa": "Gabriel Mascaro", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
   { "filme": "divino-amor-2019", "pessoa": "Gabriel Mascaro", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
@@ -183,5 +186,22 @@
   { "filme": "o-agente-secreto-2025", "pessoa": "Kleber Mendonça Filho", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
   { "filme": "o-agente-secreto-2025", "pessoa": "Kleber Mendonça Filho", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
   { "filme": "o-agente-secreto-2025", "pessoa": "Emilie Lesclaux", "funcaoPessoa": "PRODUCAO", "flagEhCineasta": false },
-  { "filme": "o-agente-secreto-2025", "pessoa": "Wagner Moura", "funcaoPessoa": "ELENCO", "flagEhCineasta": false }
+  { "filme": "o-agente-secreto-2025", "pessoa": "Wagner Moura", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
+  { "filme": "o-agente-secreto-2025", "pessoa": "Eduardo Serrano", "funcaoPessoa": "MONTAGEM", "flagEhCineasta": false },
+  { "filme": "o-agente-secreto-2025", "pessoa": "Matheus Farias", "funcaoPessoa": "MONTAGEM", "flagEhCineasta": false },
+  { "filme": "o-agente-secreto-2025", "pessoa": "Tjin Hazen", "funcaoPessoa": "SOM", "flagEhCineasta": false },
+
+  { "filme": "o-ultimo-azul-2024", "pessoa": "Gabriel Mascaro", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
+  { "filme": "o-ultimo-azul-2024", "pessoa": "Gabriel Mascaro", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
+  { "filme": "o-ultimo-azul-2024", "pessoa": "Tibério Azul", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
+  { "filme": "o-ultimo-azul-2024", "pessoa": "Rodrigo Santoro", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
+  { "filme": "o-ultimo-azul-2024", "pessoa": "Denise Weinberg", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
+  { "filme": "o-ultimo-azul-2024", "pessoa": "Clarissa Pinheiro", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
+  { "filme": "o-ultimo-azul-2024", "pessoa": "Miriam Socarras", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
+  { "filme": "o-ultimo-azul-2024", "pessoa": "Adanilo", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
+
+  { "filme": "manas-2024", "pessoa": "Marianna Brennand", "funcaoPessoa": "DIRECAO", "flagEhCineasta": true },
+  { "filme": "manas-2024", "pessoa": "Marianna Brennand", "funcaoPessoa": "ROTEIRO", "flagEhCineasta": false },
+  { "filme": "manas-2024", "pessoa": "Dira Paes", "funcaoPessoa": "ELENCO", "flagEhCineasta": false },
+  { "filme": "manas-2024", "pessoa": "Jamilli Correa", "funcaoPessoa": "ELENCO", "flagEhCineasta": false }
 ]
