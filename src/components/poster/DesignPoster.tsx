@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import type { RecorteGenero } from "@/server/panorama.ts";
+import type { RecorteGenero, RecorteOrigem } from "@/server/panorama.ts";
+import { Hotspot } from "@/components/onboarding/Hotspot.tsx";
 
 const assetPathPrefix = "/poster";
 const imgImage2 = `${assetPathPrefix}/6cfd1.png`;
@@ -151,13 +152,15 @@ const imgCamada27 = `${assetPathPrefix}/7188f.svg`;
 interface DesignPosterProps {
   /** Vem de `obterRecorteGenero()`. Sem dado, o gráfico de gênero vira placeholder. */
   genero?: RecorteGenero | null;
+  /** Vem de `obterRecorteOrigem()`. Sem dado, o gráfico de origem vira placeholder. */
+  origem?: RecorteOrigem | null;
 }
 
 const BARRA_MAX = 382;
 const BARRA_BORDA_DIREITA = 402;
 const CINZA_PLACEHOLDER = "#d9d9d9";
 
-export function DesignPoster({ genero = null }: DesignPosterProps) {
+export function DesignPoster({ genero = null, origem = null }: DesignPosterProps) {
   const maior = genero ? Math.max(genero.mulheres, genero.homens, 1) : 0;
   const larguraMulheres = genero ? Math.round((BARRA_MAX * genero.mulheres) / maior) : 253;
   const larguraHomens = genero ? Math.round((BARRA_MAX * genero.homens) / maior) : BARRA_MAX;
@@ -165,12 +168,35 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
   const corHomens = genero ? "#e3a54f" : CINZA_PLACEHOLDER;
   const textoMulheres = genero ? `${genero.mulheres}%` : "--%";
   const textoHomens = genero ? `${genero.homens}%` : "--%";
+
+  const maiorOrigem = origem ? Math.max(origem.pernambucanos, origem.outros, 1) : 0;
+  const larguraPernambucanos = origem
+    ? Math.round((BARRA_MAX * origem.pernambucanos) / maiorOrigem)
+    : 253;
+  const larguraOutros = origem ? Math.round((BARRA_MAX * origem.outros) / maiorOrigem) : BARRA_MAX;
+  const corPernambucanos = origem ? "red" : CINZA_PLACEHOLDER;
+  const corOutros = origem ? "#e3a54f" : CINZA_PLACEHOLDER;
+  const textoPernambucanos = origem ? `${origem.pernambucanos}%` : "--%";
+  const textoOutros = origem ? `${origem.outros}%` : "--%";
   return (
     <div
       className="bg-[#0b0909] relative h-[25712px] w-[1920px] overflow-hidden"
       data-node-id="46:2"
       data-name="Frame 2 teste"
     >
+      {/* Âncoras de capítulo (US-1.4): posição casada com o título de cada seção, sem alterar o layout do Figma. */}
+      <span id="cap-hero" aria-hidden="true" className="absolute left-0 top-0 h-px w-px" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(7% + 60.16px)" }} id="cap-contexto" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(15% + 77.2px)" }} id="cap-ciclo-do-recife" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(24% + 24.12px)" }} id="cap-super-8" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(29% + 70.52px)" }} id="cap-retomada-e-manguebeat" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(38% + 133.44px)" }} id="cap-anos-2000" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(41% + 71.08px)" }} id="cap-consolidacao" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(50% + 199px)" }} id="cap-financiamento" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(60% + 237.8px)" }} id="cap-reconhecimento-internacional" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(71% + 74.48px)" }} id="cap-recorte-genero-raca-origem" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(82% + 151.16px)" }} id="cap-conclusao" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(89% + 240.32px)" }} id="cap-rodape" />
       <div
         className="absolute flex h-[450.879px] items-center justify-center left-[calc(40%+301px)] top-[calc(17%-2.04px)] w-[445.039px]"
         data-node-id="288:172"
@@ -1321,7 +1347,7 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(70%-265px)] not-italic text-[24px] text-white top-[calc(16%+41.08px)] w-[453px]"
         data-node-id="46:307"
       >
-        De 1923 a 1931, treze longas foram realizados. O chamado Ciclo do Recife deixou jovens
+        De 1923 a 1931, o Recife já realizava seus próprios longas. O chamado Ciclo do Recife deixou jovens
         impressionados com um cinema que nascia e com projetos próprios e variados.
       </p>
       <p
@@ -1789,9 +1815,9 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(40%+368px)] not-italic text-[24px] text-white top-[calc(63%+114.44px)] w-[477px]"
         data-node-id="163:238"
       >
-        Sem cansar, Pernambuco representou o Brasil três vezes nos sonhos do Oscar. O Último Azul e
-        Manas, levaram dois pernambucanos a tentar. Mas com O Agente Secreto Recife conhecido no
-        mundo todo ia ficar.
+        Sem cansar, Pernambuco chegou aos sonhos do Oscar. Manas disputou de perto a vaga do Brasil,
+        O Último Azul brilhou em Berlim por outra estrada. Mas foi com O Agente Secreto que Recife ficou
+        conhecido no mundo todo.
       </p>
       <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(57%+98.16px)] w-[477px]"
@@ -1804,8 +1830,8 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(56%+87.28px)] w-[477px]"
         data-node-id="163:203"
       >
-        Um valor anunciado não é o mesmo que o pago. Um edital publicado não significa tudo
-        realizado. Para entender o investimento, cada dado deve ser verificado
+        Um edital publicado não garante o mesmo alcance em cada edição. Cada um tem suas regras,
+        seus critérios e seu teto. Para entender o investimento, cada dado deve ser verificado
       </p>
       <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(55%+38.4px)] w-[477px]"
@@ -1819,8 +1845,8 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(54%+25.52px)] w-[477px]"
         data-node-id="163:207"
       >
-        Criado em 2003, ganhou um marco importante: o audiovisual passou a ter edital próprio
-        adiante. Desde 2007, essa modalidade integra essa trajetória.
+        Criado em 2002, ganhou um marco importante: o audiovisual passou a ter edital próprio
+        adiante dentro do Funcultura.
       </p>
       <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(53%+12.64px)] w-[477px]"
@@ -2065,6 +2091,15 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
         <p className="leading-[normal] mb-0">*3 lugar</p>
         <p className="leading-[normal]">indicados qlqr coisa</p>
       </div>
+      <Hotspot
+        id="hotspot-genero"
+        style={{ top: "calc(73% + 16px)", left: "calc(60% - 10px)", width: 460, height: 240 }}
+        tooltip={
+          genero
+            ? `Dado real do acervo cadastrado: ${genero.mulheres}% mulheres e ${genero.homens}% homens entre as pessoas com gênero informado.`
+            : "Sem pessoas com gênero informado no acervo ainda — por isso o gráfico aparece em cinza."
+        }
+      />
       <div
         className="absolute contents left-[calc(40%+301px)] top-[calc(73%+16.24px)]"
         data-node-id="223:160"
@@ -2108,23 +2143,34 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
           data-node-id="196:42"
         >{textoHomens}</p>
       </div>
+      <Hotspot
+        id="hotspot-origem"
+        style={{ top: "calc(76% + 28px)", left: "calc(60% - 10px)", width: 460, height: 260 }}
+        tooltip={
+          origem
+            ? `${origem.pernambucanos}% das pessoas cadastradas no acervo nasceram em Pernambuco. Não é uma comparação com o cinema nacional — é só dentro do nosso próprio banco.`
+            : "Sem naturalidade confirmada por fonte pública ainda — por isso o gráfico aparece em cinza."
+        }
+      />
       <div
         className="absolute contents left-[calc(40%+301px)] top-[calc(76%+28.88px)]"
         data-node-id="223:159"
       >
         <div
-          className="absolute bg-[#d9d9d9] h-[41px] left-[calc(60%+149px)] top-[calc(76%+37.88px)] w-[253px]"
+          className="absolute h-[41px] top-[calc(76%+37.88px)]"
+          style={{ left: `calc(60% + ${BARRA_BORDA_DIREITA - larguraPernambucanos}px)`, width: larguraPernambucanos, backgroundColor: corPernambucanos }}
           data-node-id="196:43"
         />
         <div
-          className="absolute bg-[#d9d9d9] h-[41px] left-[calc(60%+20px)] top-[calc(76%+98.88px)] w-[382px]"
+          className="absolute h-[41px] top-[calc(76%+98.88px)]"
+          style={{ left: `calc(60% + ${BARRA_BORDA_DIREITA - larguraOutros}px)`, width: larguraOutros, backgroundColor: corOutros }}
           data-node-id="196:44"
         />
         <p
           className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(40%+369px)] not-italic text-[20px] text-white top-[calc(76%+189.88px)] whitespace-nowrap"
           data-node-id="196:45"
         >
-          Pernambucanos no cinema nacional
+          Pernambucanos no cinema pernambucano
         </p>
         <p
           className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(60%+293px)] not-italic text-[20px] text-white top-[calc(76%+233.88px)] whitespace-nowrap"
@@ -2133,21 +2179,23 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
           Outros
         </p>
         <div
-          className="absolute bg-[#d9d9d9] left-[calc(60%+379px)] size-[23px] top-[calc(76%+192.88px)]"
+          className="absolute size-[23px] top-[calc(76%+192.88px)]"
+          style={{ left: "calc(60% + 379px)", backgroundColor: corPernambucanos }}
           data-node-id="196:47"
         />
         <div
-          className="absolute bg-[#d9d9d9] left-[calc(60%+379px)] size-[23px] top-[calc(76%+240.88px)]"
+          className="absolute size-[23px] top-[calc(76%+240.88px)]"
+          style={{ left: "calc(60% + 379px)", backgroundColor: corOutros }}
           data-node-id="196:48"
         />
         <p
           className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(60%+55px)] not-italic text-[40px] text-white top-[calc(76%+28.88px)] whitespace-nowrap"
           data-node-id="196:49"
-        >--%</p>
+        >{textoPernambucanos}</p>
         <p
           className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(40%+301px)] not-italic text-[40px] text-white top-[calc(76%+94.88px)] whitespace-nowrap"
           data-node-id="196:50"
-        >--%</p>
+        >{textoOutros}</p>
       </div>
       <p
         className="[word-break:break-word] absolute font-corpo font-semibold font-semibold leading-[normal] left-[calc(60%+78px)] text-[24px] text-white top-[calc(66%+119.08px)] w-[423px]"
