@@ -65,6 +65,13 @@ model Pessoa {
   genero   String? @db.VarChar(20)
   /// NULL quando não informado — o dado nunca é inferido (US03)
   flagEhNordestino Boolean? @map("flag_eh_nordestino")
+  /// true só para quem nasceu em Pernambuco; nordestino não é sinônimo de pernambucano (US03)
+  flagEhPernambucano Boolean? @default(false) @map("flag_eh_pernambucano")
+  /// UF (2 letras) de nascimento; "EX" para nascidos fora do Brasil; NULL quando não há fonte pública confiável (US03)
+  naturalidade     String? @db.VarChar(2)
+  /// Cor/raça AUTODECLARADA pela própria pessoa (nunca inferida por aparência); NULL
+  /// quando não há autodeclaração pública — esperado ficar vazio na maioria (US03)
+  corRaca          String? @map("cor_raca") @db.VarChar(20)
 
   filmes FilmePessoa[]
 
@@ -103,7 +110,7 @@ model FilmePessoa {
   idFilmePessoa Int     @id @default(autoincrement()) @map("id_filme_pessoa")
   idFilme       Int     @map("id_filme")
   idPessoa      Int     @map("id_pessoa")
-  /// ELENCO, DIRECAO, ROTEIRO, PRODUCAO, FOTOGRAFIA, MONTAGEM etc.
+  /// ELENCO, DIRECAO, ROTEIRO, PRODUCAO, FOTOGRAFIA, MONTAGEM, SOM etc.
   funcaoPessoa  String  @map("funcao_pessoa") @db.VarChar(50)
   /// true para funções de cineasta; false para elenco e equipe técnica (US04)
   flagEhCineasta Boolean @map("flag_eh_cineasta")

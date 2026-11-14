@@ -6,6 +6,18 @@
  * - RETOMADA.polaroids[0] repete o texto do Super-8.
  * - RETOMADA.polaroids[2] cita "Science" e "Nação" (Chico Science & Nação Zumbi?).
  * - RECONHECIMENTO tem "Já" e "Um futuro" com maiúscula no meio da frase, e "ia ficar".
+ *
+ * CORRIGIDO após apuração (ver analise-design-vs-banco.md e data/README.md §6),
+ * já aplicado também em DesignPoster.tsx:
+ * - CICLO_DO_RECIFE: "treze longas" não tem fonte cruzada confiável (fontes vão de
+ *   13 a ~50, sem lista de títulos verificável); o texto não afirma mais um número.
+ * - FINANCIAMENTO: Funcultura foi criado em 2002 (Lei 12.310/2002), não 2003 — o
+ *   decreto de 2003 só regulamentou a lei. A data de 2007 para o edital de
+ *   audiovisual não tem fonte confirmada e foi removida.
+ * - RECONHECIMENTO: nem O Último Azul nem Manas foram submissão oficial do Brasil
+ *   ao Oscar. Manas disputou a vaga e perdeu para O Agente Secreto (único dos três
+ *   que de fato representou o Brasil no Oscar); O Último Azul ganhou o Urso de
+ *   Prata em Berlim, prêmio diferente. "representou o Brasil três vezes" era falso.
  */
 
 export const HERO = {
@@ -31,7 +43,7 @@ export const CICLO_DO_RECIFE = {
   titulo: "Ciclo do Recife",
   paragrafos: [
     "Na década de vinte, o Recife também filmava. Entre histórias e imagens, uma produção se formava, e o cinema feito por aqui novos caminhos ensaiava.",
-    "De 1923 a 1931, treze longas foram realizados. O chamado Ciclo do Recife deixou jovens impressionados com um cinema que nascia e com projetos próprios e variados.",
+    "De 1923 a 1931, o Recife já realizava seus próprios longas. O chamado Ciclo do Recife deixou jovens impressionados com um cinema que nascia e com projetos próprios e variados.",
   ],
 } as const;
 
@@ -75,9 +87,9 @@ export const FINANCIAMENTO = {
   paragrafos: [
     "Um filme nasce de uma ideia, mas precisa de contribuição. Tem roteiro, equipe e equipamento, tem trabalho e preparação. Para chegar até as telas, também precisa de condição.",
     "Em Pernambuco, há caminhos para incentivar a criação. O Funcultura é um mecanismo de fomento à produção, com editais que destinam recursos para a cultura da nação.",
-    "Criado em 2003, ganhou um marco importante: o audiovisual passou a ter edital próprio adiante. Desde 2007, essa modalidade integra essa trajetória.",
+    "Criado em 2002, ganhou um marco importante: o audiovisual passou a ter edital próprio adiante dentro do Funcultura.",
     "Mas, quanto se investe em filmes? Como os recursos vão mudar? Quem consegue financiamento? Quem pode se inscrever e acessar? São perguntas necessárias para entender quem consegue filmar.",
-    "Um valor anunciado não é o mesmo que o pago. Um edital publicado não significa tudo realizado. Para entender o investimento, cada dado deve ser verificado",
+    "Um edital publicado não garante o mesmo alcance em cada edição. Cada um tem suas regras, seus critérios e seu teto. Para entender o investimento, cada dado deve ser verificado",
     "O dinheiro não conta tudo quando aparece em um total. Também importa saber como se distribui o capital, quais projetos são contemplados e quem consegue chegar ao edital.",
     "Os dados podem mostrar concentrações e diferenças, mas precisam de contexto para sustentar conclusões. Investigar quem recebe recursos também exige olhar as condições.",
   ],
@@ -89,7 +101,7 @@ export const RECONHECIMENTO = {
     "Um filme ganha um prêmio, outro chega a um festival. A notícia cruza fronteiras, o reconhecimento cresce afinal. Mas o que cada conquista nos revela sobre nosso audiovisual?",
     "Em 2025, um Urso de Prata veio de Berlim para contar: O Último Azul, de Gabriel Mascaro, foi de Recife até lá para ganhar. Mais um prêmio de reconhecimento internacional para a produção brasileira levar.",
     "Baile Perfumado marcou uma etapa dessa trajetória. Depois, outros filmes chegaram a circuitos de outra escala. Cada conquista tem seu contexto, cada prêmio tem sua história.",
-    "Sem cansar, Pernambuco representou o Brasil três vezes nos sonhos do Oscar. O Último Azul e Manas, levaram dois pernambucanos a tentar. Mas com O Agente Secreto Recife conhecido no mundo todo ia ficar.",
+    "Sem cansar, Pernambuco chegou aos sonhos do Oscar. Manas disputou de perto a vaga do Brasil, O Último Azul brilhou em Berlim por outra estrada. Mas foi com O Agente Secreto que Recife ficou conhecido no mundo todo.",
     "O Som ao Redor chegou a circuitos internacionais. Bacurau ganhou destaque em festivais mundiais. São marcos de uma trajetória que atravessou fronteiras culturais",
     "Presente em Cannes, Toronto, Berlim e muitos mais, Pernambucano foi reconhecido e ganhou tudo que era capaz, Já com 4 indicações ao Oscar, Um futuro de destaque é nossa aposta",
   ],
