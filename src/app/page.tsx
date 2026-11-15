@@ -3,6 +3,7 @@ import { AnimacoesDoPoster } from "@/components/poster/AnimacoesDoPoster.tsx";
 import { ControlesDeMovimento } from "@/components/poster/ControlesDeMovimento.tsx";
 import { DesignPoster } from "@/components/poster/DesignPoster.tsx";
 import { PosterViewport } from "@/components/poster/PosterViewport.tsx";
+import { TrilhaDaLinhaDoTempo } from "@/components/poster/TrilhaDaLinhaDoTempo.tsx";
 import { obterRecorteGenero, obterRecorteOrigem } from "@/server/panorama.ts";
 import { OnboardingProvider } from "@/components/onboarding/OnboardingProvider.tsx";
 import { WelcomeTour, BotaoReabrirTour } from "@/components/onboarding/WelcomeTour.tsx";
@@ -47,6 +48,7 @@ export default function HomePage() {
         </Suspense>
         <ScrollHint />
         <Navigator />
+        <TrilhaDaLinhaDoTempo />
         <CompletionSummary />
         <WelcomeTour />
         <BotaoReabrirTour />

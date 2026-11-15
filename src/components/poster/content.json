@@ -17,5 +17,41 @@
       "Mas o que existe por trás de um cinema que ganhou projeção? Como se formou essa trajetória, quem construiu essa produção e o que os dados nos revelam sobre as suas condições?",
       "Para descobrir esse caminho, vamos voltar no tempo. Antes de olhar para os prêmios, vamos conhecer o nascimento de uma produção que atravessou diferentes épocas e movimentos."
     ]
+  },
+  "cicloDoRecife": {
+    "titulo": "CICLO DO RECIFE",
+    "paragrafos": [
+      "Na década de vinte, o Recife também filmava. Entre histórias e imagens, uma produção se formava, e o cinema feito por aqui novos caminhos ensaiava.",
+      "De 1923 a 1931, o Recife já realizava seus próprios longas. O chamado Ciclo do Recife deixou jovens impressionados com um cinema que nascia e com projetos próprios e variados."
+    ]
+  },
+  "super8": {
+    "titulo": "SUPER-8",
+    "paragrafos": [
+      "Mas fazer cinema exige recursos, equipamento e condição. Mas nem sempre quem tem histórias consegue trazê-las à exibição. Décadas depois, outras gerações buscaram formas de experimentação.",
+      "Com equipamentos mais acessíveis, novos caminhos puderam explorar, fazendo do próprio processo uma maneira de inventar. Com câmeras Super-8, novos filmes puderam criar.",
+      "Entre recursos escassos e um caminho pouco explorado, uma geração experimentava outro modo de contar seu lado, E não deixava que o pouco investimento tornasse o cinema pernambucano limitado."
+    ]
+  },
+  "anos2000": {
+    "titulo": "ANOS 2000",
+    "paragrafos": [
+      "Com a virada do século, novos filmes ganharam espaço. A produção se diversificava, ampliando o próprio traço. Não havia um só caminho, nem um único compasso.",
+      "Entre os filmes dessa trajetória, Amarelo Manga se destacou. Em 2002, o longa de Cláudio Assis novos olhares apresentou. A produção pernambucana outras vozes incorporou."
+    ]
+  },
+  "consolidacao": {
+    "titulo": "CONSOLIDAÇÃO",
+    "paragrafos": [
+      "Chegando aos anos recentes, mais filmes cruzaram fronteiras. Recife ganhou espaço em histórias e maneiras de transformar o próprio lugar em imagens para outras galeras.",
+      "O Som ao Redor, Aquarius, Bacurau e Retratos Fantasmas ajudam a contar essa história, com diferentes pegadas. Marcelo Gomes, Kleber Mendonça Filho trouxeram de Pernambuco novas olhadas."
+    ]
+  },
+  "retomadaManguebeat": {
+    "titulo": [
+      "RETOMADA",
+      "E",
+      "MANGUEBEAT"
+    ]
   }
 }

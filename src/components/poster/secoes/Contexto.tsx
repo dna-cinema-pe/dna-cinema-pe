@@ -1,5 +1,5 @@
 import conteudo from "../content.json";
-import { RevelarTexto } from "../RevelarTexto.tsx";
+import { Paragrafos, type LayoutParagrafo } from "./Paragrafos.tsx";
 
 const { titulo, paragrafos } = conteudo.contexto;
 
@@ -7,12 +7,12 @@ const { titulo, paragrafos } = conteudo.contexto;
  * Posição de cada parágrafo no frame do Figma, na mesma ordem de `paragrafos`.
  * São duas linhas de duas colunas; o atraso escalona a revelação dentro de cada linha.
  */
-const LAYOUT = [
+const LAYOUT: readonly LayoutParagrafo[] = [
   { nodeId: "46:273", className: "left-[calc(20%+4px)] top-[calc(8%+35.04px)] w-[470px]", atraso: 0 },
   { nodeId: "46:275", className: "left-[calc(40%+266px)] top-[calc(8%+35.04px)] w-[498px]", atraso: 150 },
   { nodeId: "46:276", className: "left-[calc(20%+4px)] top-[calc(12%+60.56px)] w-[500px]", atraso: 0 },
   { nodeId: "132:713", className: "left-[calc(40%+252px)] top-[calc(12%+60.56px)] w-[512px]", atraso: 150 },
-] as const;
+];
 
 /**
  * Contexto (US-2.2): título e os quatro parágrafos do protótipo.
@@ -31,17 +31,7 @@ export function Contexto() {
       >
         {titulo}
       </h2>
-      {paragrafos.map((texto, i) => (
-        <p
-          key={LAYOUT[i].nodeId}
-          className={`revelar-texto [word-break:break-word] absolute font-corpo font-medium leading-[normal] not-italic text-[24px] text-white ${LAYOUT[i].className}`}
-          style={{ transitionDelay: `${LAYOUT[i].atraso}ms` }}
-          data-node-id={LAYOUT[i].nodeId}
-        >
-          {texto}
-        </p>
-      ))}
-      <RevelarTexto />
+      <Paragrafos textos={paragrafos} layout={LAYOUT} />
     </section>
   );
 }
