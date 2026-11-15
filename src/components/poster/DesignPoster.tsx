@@ -2,6 +2,7 @@
 import type { RecorteGenero, RecorteOrigem } from "@/server/panorama.ts";
 import { Hotspot } from "@/components/onboarding/Hotspot.tsx";
 import { Abertura } from "./secoes/Abertura.tsx";
+import { Contexto } from "./secoes/Contexto.tsx";
 
 const assetPathPrefix = "/poster";
 const imgImage2 = `${assetPathPrefix}/6cfd1.png`;
@@ -227,34 +228,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         </div>
       </div>
       <Abertura />
-      <p
-        className="-translate-x-full [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+979px)] not-italic text-[128px] text-right text-white top-[calc(7%+60.16px)] whitespace-nowrap"
-        data-node-id="46:272"
-      >
-        CONTEXTO
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(8%+35.04px)] w-[470px]"
-        data-node-id="46:273"
-      >
-        Hoje, o cinema pernambucano ganha espaço pelo mundo afora. Mas, antes dos grandes festivais,
-        já havia gente por aqui fazendo cinema acontecer, muito antes da fama de agora.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(40%+266px)] not-italic text-[24px] text-white top-[calc(8%+35.04px)] w-[498px]"
-        data-node-id="46:275"
-      >{`Cada filme guarda uma história, cada época, uma transformação. Há quem escreva, filme e edite, quem financia a produção, quem abra caminhos para outros e quem mantenha viva a criação. `}</p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(12%+60.56px)] w-[500px]"
-        data-node-id="46:276"
-      >
-        Mas o que existe por trás de um cinema que ganhou projeção? Como se formou essa trajetória,
-        quem construiu essa produção e o que os dados nos revelam sobre as suas condições?
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(40%+252px)] not-italic text-[24px] text-white top-[calc(12%+60.56px)] w-[512px]"
-        data-node-id="132:713"
-      >{`Para descobrir esse caminho, vamos voltar no tempo. Antes de olhar para os prêmios, vamos conhecer o nascimento de uma produção que atravessou diferentes épocas e movimentos. `}</p>
+      <Contexto />
       <div
         className="absolute aspect-[85/81] left-[85.73%] right-[9.84%] top-[calc(2%+130.76px)]"
         data-node-id="46:277"

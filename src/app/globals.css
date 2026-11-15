@@ -251,6 +251,21 @@ body {
   will-change: offset-distance;
 }
 
+/*
+ * Revelação de texto (500 ms): o texto sobe 24 px e aparece quando RevelarTexto adiciona
+ * `--visivel`. Só esconde com animações ligadas, para o texto nunca sumir sem JavaScript.
+ */
+.revelar-texto {
+  transition:
+    opacity 500ms ease-out,
+    transform 500ms ease-out;
+}
+
+html[data-animacoes="ligadas"] .revelar-texto:not(.revelar-texto--visivel) {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+}
+
 /* Loops que saem da tela são pausados por AnimacoesDoPoster (IntersectionObserver). */
 .loop-pausado {
   animation-play-state: paused;

@@ -2,8 +2,20 @@
   "abertura": {
     "titulo": {
       "prefixo": "DNA DO",
-      "linhas": ["CINEMA", "PERNAMBUCANO"]
+      "linhas": [
+        "CINEMA",
+        "PERNAMBUCANO"
+      ]
     },
     "subtitulo": "Uma investigação sobre a história, os recursos e as pessoas por trás do cinema feito em Pernambuco."
+  },
+  "contexto": {
+    "titulo": "CONTEXTO",
+    "paragrafos": [
+      "Hoje, o cinema pernambucano ganha espaço pelo mundo afora. Mas, antes dos grandes festivais, já havia gente por aqui fazendo cinema acontecer, muito antes da fama de agora.",
+      "Cada filme guarda uma história, cada época, uma transformação. Há quem escreva, filme e edite, quem financia a produção, quem abra caminhos para outros e quem mantenha viva a criação.",
+      "Mas o que existe por trás de um cinema que ganhou projeção? Como se formou essa trajetória, quem construiu essa produção e o que os dados nos revelam sobre as suas condições?",
+      "Para descobrir esse caminho, vamos voltar no tempo. Antes de olhar para os prêmios, vamos conhecer o nascimento de uma produção que atravessou diferentes épocas e movimentos."
+    ]
   }
 }
