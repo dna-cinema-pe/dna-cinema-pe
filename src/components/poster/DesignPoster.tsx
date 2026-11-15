@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import type { RecorteGenero, RecorteOrigem } from "@/server/panorama.ts";
+import type { PremiosInternacionais, RecorteGenero, RecorteOrigem } from "@/server/panorama.ts";
 import { Hotspot } from "@/components/onboarding/Hotspot.tsx";
 import { Abertura } from "./secoes/Abertura.tsx";
 import { Contexto } from "./secoes/Contexto.tsx";
@@ -8,6 +8,7 @@ import { Super8 } from "./secoes/Super8.tsx";
 import { RetomadaManguebeat } from "./secoes/RetomadaManguebeat.tsx";
 import { Anos2000 } from "./secoes/Anos2000.tsx";
 import { Consolidacao } from "./secoes/Consolidacao.tsx";
+import { ReconhecimentoInternacional } from "./secoes/ReconhecimentoInternacional.tsx";
 
 const assetPathPrefix = "/poster";
 const imgImage2 = `${assetPathPrefix}/6cfd1.png`;
@@ -134,13 +135,15 @@ interface DesignPosterProps {
   genero?: RecorteGenero | null;
   /** Vem de `obterRecorteOrigem()`. Sem dado, o gráfico de origem vira placeholder. */
   origem?: RecorteOrigem | null;
+  /** Vem de `obterPremiosInternacionais()`. Sem dado, os pinos da rota avisam que não carregou. */
+  premios?: PremiosInternacionais | null;
 }
 
 const BARRA_MAX = 382;
 const BARRA_BORDA_DIREITA = 402;
 const CINZA_PLACEHOLDER = "#d9d9d9";
 
-export function DesignPoster({ genero = null, origem = null }: DesignPosterProps) {
+export function DesignPoster({ genero = null, origem = null, premios = null }: DesignPosterProps) {
   const maior = genero ? Math.max(genero.mulheres, genero.homens, 1) : 0;
   const larguraMulheres = genero ? Math.round((BARRA_MAX * genero.mulheres) / maior) : 253;
   const larguraHomens = genero ? Math.round((BARRA_MAX * genero.homens) / maior) : BARRA_MAX;
@@ -1256,13 +1259,6 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           <img alt="" className="block max-w-none size-full" src={imgVector56} />
         </div>
       </div>
-      <div
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[0] left-[calc(20%+598px)] not-italic text-[100px] text-center text-white top-[calc(60%+237.8px)] whitespace-nowrap"
-        data-node-id="163:185"
-      >
-        <p className="leading-[normal] mb-0 whitespace-pre">{`RECONHECIMENTO `}</p>
-        <p className="leading-[normal] whitespace-pre">INTERNACIONAL</p>
-      </div>
       <Consolidacao />
       <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(58%+146.04px)] w-[477px]"
@@ -1270,28 +1266,6 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
       >
         Os dados podem mostrar concentrações e diferenças, mas precisam de contexto para sustentar
         conclusões. Investigar quem recebe recursos também exige olhar as condições.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(62%+69.56px)] w-[477px]"
-        data-node-id="163:233"
-      >
-        Um filme ganha um prêmio, outro chega a um festival. A notícia cruza fronteiras, o
-        reconhecimento cresce afinal. Mas o que cada conquista nos revela sobre nosso audiovisual?
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(40%+368px)] not-italic text-[24px] text-white top-[calc(62%+69.56px)] w-[477px]"
-        data-node-id="163:235"
-      >
-        Em 2025, um Urso de Prata veio de Berlim para contar: O Último Azul, de Gabriel Mascaro, foi
-        de Recife até lá para ganhar. Mais um prêmio de reconhecimento internacional para a produção
-        brasileira levar.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(64%+165.32px)] w-[477px]"
-        data-node-id="163:240"
-      >
-        O Som ao Redor chegou a circuitos internacionais. Bacurau ganhou destaque em festivais
-        mundiais. São marcos de uma trajetória que atravessou fronteiras culturais
       </p>
       <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+348px)] not-italic text-[24px] text-white top-[calc(83%+221.04px)] w-[477px]"
@@ -1321,28 +1295,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         Há cultura, há financiamento, há quem produza e quem crie. Há caminhos que se abrem e
         barreiras que persistem. A história se faz por muitos, mesmo quando poucos aparecem.
       </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(40%+368px)] not-italic text-[24px] text-white top-[calc(64%+165.32px)] w-[477px]"
-        data-node-id="163:241"
-      >
-        Presente em Cannes, Toronto, Berlim e muitos mais, Pernambucano foi reconhecido e ganhou
-        tudo que era capaz, Já com 4 indicações ao Oscar, Um futuro de destaque é nossa aposta
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(63%+114.44px)] w-[477px]"
-        data-node-id="163:237"
-      >
-        Baile Perfumado marcou uma etapa dessa trajetória. Depois, outros filmes chegaram a
-        circuitos de outra escala. Cada conquista tem seu contexto, cada prêmio tem sua história.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(40%+368px)] not-italic text-[24px] text-white top-[calc(63%+114.44px)] w-[477px]"
-        data-node-id="163:238"
-      >
-        Sem cansar, Pernambuco chegou aos sonhos do Oscar. Manas disputou de perto a vaga do Brasil,
-        O Último Azul brilhou em Berlim por outra estrada. Mas foi com O Agente Secreto que Recife ficou
-        conhecido no mundo todo.
-      </p>
+      <ReconhecimentoInternacional premios={premios} />
       <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(57%+98.16px)] w-[477px]"
         data-node-id="163:201"
