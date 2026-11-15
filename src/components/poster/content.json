@@ -67,5 +67,25 @@
       "O Som ao Redor chegou a circuitos internacionais. Bacurau ganhou destaque em festivais mundiais. São marcos de uma trajetória que atravessou fronteiras culturais",
       "Presente em Cannes, Toronto, Berlim e muitos mais, Pernambucano foi reconhecido e ganhou tudo que era capaz, Já com 4 indicações ao Oscar, Um futuro de destaque é nossa aposta"
     ]
+  },
+  "podio": {
+    "dica": "Passe o mouse (ou toque) em um degrau para ver os filmes →",
+    "degraus": [
+      {
+        "posicao": 1,
+        "rotulo": "Vencedores relevantes",
+        "filmes": []
+      },
+      {
+        "posicao": 2,
+        "rotulo": "Indicados relevantes e vencedores",
+        "filmes": []
+      },
+      {
+        "posicao": 3,
+        "rotulo": "Outros indicados",
+        "filmes": []
+      }
+    ]
   }
 }
