@@ -87,5 +87,52 @@
         "filmes": []
       }
     ]
+  },
+  "conclusao": {
+    "titulo": "CONCLUSÃO",
+    "paragrafos": [
+      "Dos primeiros filmes do Recife aos que ganharam projeção, há décadas de experiências, trabalho e transformação. O cinema pernambucano não se explica por uma só razão.",
+      "Há cultura, há financiamento, há quem produza e quem crie. Há caminhos que se abrem e barreiras que persistem. A história se faz por muitos, mesmo quando poucos aparecem.",
+      "Os prêmios mostram conquistas, os recursos, condições. Os dados sobre profissionais podem revelar desigualdades. Cada fonte tem seus limites, cada número, suas verdades",
+      "O cinema pernambucano tem muitas histórias para contar. Mas, para além das telas, Há muito a investigar. Conhecer o que o sustenta também é parte do olhar."
+    ],
+    "voltarAoInicio": "Voltar ao início",
+    "compartilhar": "Compartilhar",
+    "linkCopiado": "Link copiado!"
+  },
+  "creditos": {
+    "titulo": "Créditos de produção",
+    "grupos": [
+      {
+        "titulo": "Design",
+        "nomes": [
+          "Annalyce Gonçalves",
+          "Dandara Vitória",
+          "Júlia",
+          "Pedro Henrique"
+        ]
+      },
+      {
+        "titulo": "Programação",
+        "nomes": [
+          "Asael",
+          "Bruna Veiga",
+          "Heitor",
+          "Guilherme",
+          "Ohashi",
+          "Jl",
+          "Klarissa",
+          "João Vitor",
+          "João Moraes"
+        ]
+      },
+      {
+        "titulo": "Jornalismo",
+        "nomes": [
+          "Jl",
+          "Vitória Lira"
+        ]
+      }
+    ]
   }
 }

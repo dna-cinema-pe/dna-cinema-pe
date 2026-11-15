@@ -2,7 +2,9 @@
 import type { PremiosInternacionais, RecorteGenero, RecorteOrigem } from "@/server/panorama.ts";
 import { Hotspot } from "@/components/onboarding/Hotspot.tsx";
 import { Abertura } from "./secoes/Abertura.tsx";
+import { Conclusao } from "./secoes/Conclusao.tsx";
 import { Contexto } from "./secoes/Contexto.tsx";
+import { Creditos } from "./secoes/Creditos.tsx";
 import { CicloDoRecife } from "./secoes/CicloDoRecife.tsx";
 import { Super8 } from "./secoes/Super8.tsx";
 import { RetomadaManguebeat } from "./secoes/RetomadaManguebeat.tsx";
@@ -1074,12 +1076,6 @@ export function DesignPoster({ genero = null, origem = null, premios = null }: D
         <p className="leading-[normal] mb-0">RECORTE DE GÊNERO,</p>
         <p className="leading-[normal]">RAÇA E ORIGEM</p>
       </div>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-1/2 not-italic text-[170px] text-center text-white top-[calc(82%+151.16px)] whitespace-nowrap"
-        data-node-id="163:297"
-      >
-        CONCLUSÃO
-      </p>
       <div
         className="hanging-postcard absolute z-10 flex h-[313.969px] items-center justify-center left-[162px] top-[calc(43%+194.87px)] w-[267.621px]"
         data-node-id="163:142"
@@ -1268,34 +1264,7 @@ export function DesignPoster({ genero = null, origem = null, premios = null }: D
         Os dados podem mostrar concentrações e diferenças, mas precisam de contexto para sustentar
         conclusões. Investigar quem recebe recursos também exige olhar as condições.
       </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+348px)] not-italic text-[24px] text-white top-[calc(83%+221.04px)] w-[477px]"
-        data-node-id="163:298"
-      >
-        Dos primeiros filmes do Recife aos que ganharam projeção, há décadas de experiências,
-        trabalho e transformação. O cinema pernambucano não se explica por uma só razão.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+348px)] not-italic text-[24px] text-white top-[calc(88%+135.44px)] w-[477px]"
-        data-node-id="163:301"
-      >
-        O cinema pernambucano tem muitas histórias para contar. Mas, para além das telas, Há muito a
-        investigar. Conhecer o que o sustenta também é parte do olhar.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+348px)] not-italic text-[24px] text-white top-[calc(87%+5.56px)] w-[477px]"
-        data-node-id="163:300"
-      >
-        Os prêmios mostram conquistas, os recursos, condições. Os dados sobre profissionais podem
-        revelar desigualdades. Cada fonte tem seus limites, cada número, suas verdades
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+348px)] not-italic text-[24px] text-white top-[calc(85%+117.8px)] w-[477px]"
-        data-node-id="163:299"
-      >
-        Há cultura, há financiamento, há quem produza e quem crie. Há caminhos que se abrem e
-        barreiras que persistem. A história se faz por muitos, mesmo quando poucos aparecem.
-      </p>
+      <Conclusao />
       <ReconhecimentoInternacional premios={premios} />
       <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(57%+98.16px)] w-[477px]"
@@ -1822,49 +1791,7 @@ export function DesignPoster({ genero = null, origem = null, premios = null }: D
           </div>
         </div>
       </div>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-black leading-[normal] left-[calc(50%-207px)] not-italic text-[36px] text-white top-[calc(89%+240.32px)] whitespace-nowrap"
-        data-node-id="262:101"
-      >
-        Créditos de produção:
-      </p>
-      <div
-        className="-translate-x-1/2 [word-break:break-word] absolute font-corpo font-semibold leading-[0] left-1/2 not-italic text-[24px] text-center text-white top-[calc(90%+130.2px)] whitespace-nowrap"
-        data-node-id="262:102"
-      >
-        <p className="font-corpo font-extrabold leading-[normal] mb-0 whitespace-pre">{`Design: `}</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0 whitespace-pre">
-          Annalyce Gonçalves
-        </p>
-        <p className="font-corpo font-medium leading-[normal] mb-0 whitespace-pre">
-          Dandara Vitória
-        </p>
-        <p className="font-corpo font-medium leading-[normal] mb-0 whitespace-pre">Júlia</p>
-        <p className="font-corpo font-medium leading-[normal] whitespace-pre">Pedro Henrique</p>
-      </div>
-      <div
-        className="-translate-x-1/2 [word-break:break-word] absolute font-corpo font-semibold leading-[0] left-1/2 not-italic text-[24px] text-center text-white top-[calc(91%+98.08px)] whitespace-nowrap"
-        data-node-id="262:103"
-      >
-        <p className="font-corpo font-extrabold leading-[normal] mb-0">Programação:</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Asael</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Bruna Veiga</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Heitor</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Guilherme</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Ohashi</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Jl</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Klarissa</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">João Vitor</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">João Moraes</p>
-      </div>
-      <div
-        className="-translate-x-1/2 [word-break:break-word] absolute font-corpo font-extrabold leading-[0] left-1/2 not-italic text-[24px] text-center text-white top-[calc(92%+245.96px)] whitespace-nowrap"
-        data-node-id="262:104"
-      >
-        <p className="leading-[normal] mb-0">Jornalismo:</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Jl</p>
-        <p className="font-corpo font-medium leading-[normal]">Vitória Lira</p>
-      </div>
+      <Creditos />
       <div
         className="absolute flex inset-[93.36%_97.7%_0.44%_1.46%] items-center justify-center"
         data-node-id="262:107"
