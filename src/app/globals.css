@@ -73,6 +73,17 @@ body {
   }
 }
 
+@keyframes cross-sway {
+  0%,
+  100% {
+    transform: rotate(-12deg);
+  }
+
+  50% {
+    transform: rotate(12deg);
+  }
+}
+
 @keyframes sun-spin {
   to {
     transform: rotate(360deg);
@@ -207,10 +218,14 @@ body {
   will-change: transform;
 }
 
-.sun-spin {
-  animation: sun-spin 28s linear infinite;
+.cross-sway {
+  animation: cross-sway 3s ease-in-out infinite;
   transform-origin: center;
   will-change: transform;
+}
+
+.sun-spin {
+  animation: sun-spin 28s linear infinite;
 }
 
 .bird-flap {
@@ -226,12 +241,20 @@ body {
 }
 
 .hanging-postcard {
+  cursor: pointer;
   transform-origin: 50% 0%;
 }
 
-.hanging-postcard:hover {
+/* Hover no desktop; no toque, PostalPendurado liga `--balancando` no primeiro toque. */
+.hanging-postcard:hover,
+.hanging-postcard--balancando {
   animation: postcard-swing 2.2s ease-in-out infinite;
   will-change: transform;
+}
+
+.hanging-postcard:focus-visible {
+  outline: 4px solid var(--color-ouro);
+  outline-offset: 4px;
 }
 
 .falling-poster--fallen .falling-poster__body {

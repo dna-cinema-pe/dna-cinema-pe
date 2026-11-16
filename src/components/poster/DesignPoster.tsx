@@ -2,6 +2,7 @@
 import type { RecorteGenero, RecorteOrigem } from "@/server/panorama.ts";
 import { Hotspot } from "@/components/onboarding/Hotspot.tsx";
 import { Abertura } from "./secoes/Abertura.tsx";
+import { PostalPendurado } from "./PostalPendurado.tsx";
 
 const assetPathPrefix = "/poster";
 const imgImage2 = `${assetPathPrefix}/6cfd1.png`;
@@ -69,6 +70,9 @@ const imgGroup9 = `${assetPathPrefix}/6e384.svg`;
 const imgGroup32 = `${assetPathPrefix}/88159.svg`;
 const imgVector53 = `${assetPathPrefix}/a19ac.svg`;
 const imgArcoCiclo = `${assetPathPrefix}/90d88.svg`;
+const imgCicloRecife1 = `${assetPathPrefix}/ciclo-recife-1.png`;
+const imgCicloRecife2 = `${assetPathPrefix}/ciclo-recife-2.png`;
+const imgCicloRecife3 = `${assetPathPrefix}/ciclo-recife-3.png`;
 const imgEllipse2 = `${assetPathPrefix}/ea310.svg`;
 const imgGroup14 = `${assetPathPrefix}/5f164.svg`;
 const imgGroup15 = `${assetPathPrefix}/b0c58.svg`;
@@ -841,17 +845,11 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           data-node-id="46:302"
         >
           <div className="flex-none rotate-[9.49deg]">
-            <div className="bg-[#d9d9d9] h-[350px] relative w-[571.677px]" />
-          </div>
-        </div>
-        <div
-          className="absolute flex h-[68.361px] items-center justify-center left-[239.76px] top-[195.82px] w-[259.741px]"
-          data-node-id="46:303"
-        >
-          <div className="flex-none rotate-[9.49deg]">
-            <p className="[word-break:break-word] font-corpo font-semibold h-[26px] leading-[normal] not-italic relative text-[24px] text-black w-[259px]">
-              imagem filmes
-            </p>
+            <img
+              alt="Ponte sobre o rio Capibaribe no Recife, em cena dos anos 1920"
+              className="h-[350px] object-cover relative w-[571.677px]"
+              src={imgCicloRecife1}
+            />
           </div>
         </div>
       </div>
@@ -863,17 +861,11 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           data-node-id="51:78"
         >
           <div className="flex-none rotate-[14.59deg]">
-            <div className="bg-[#eee] h-[350px] relative w-[569.769px]" />
-          </div>
-        </div>
-        <div
-          className="absolute flex h-[70.619px] items-center justify-center left-[241.8px] top-[199.8px] w-[188.47px]"
-          data-node-id="51:79"
-        >
-          <div className="flex-none rotate-[10.99deg]">
-            <p className="[word-break:break-word] font-corpo font-semibold leading-[normal] not-italic relative text-[24px] text-black whitespace-nowrap">
-              imagem filmes
-            </p>
+            <img
+              alt="Público em frente a um cinema do Recife com cartazes de filmes"
+              className="h-[350px] object-cover relative w-[569.769px]"
+              src={imgCicloRecife2}
+            />
           </div>
         </div>
       </div>
@@ -885,17 +877,11 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           data-node-id="51:81"
         >
           <div className="flex-none rotate-[25.46deg]">
-            <div className="bg-[#c4c4c4] h-[350px] relative w-[542.991px]" />
-          </div>
-        </div>
-        <div
-          className="absolute flex h-[96.688px] items-center justify-center left-[252px] top-[240px] w-[191.947px]"
-          data-node-id="51:82"
-        >
-          <div className="flex-none rotate-[21.69deg]">
-            <p className="[word-break:break-word] font-corpo font-semibold h-[26px] leading-[normal] not-italic relative text-[24px] text-black w-[196.233px]">
-              imagem filmes
-            </p>
+            <img
+              alt="Ator em cena de filme do Ciclo do Recife"
+              className="h-[350px] object-cover relative w-[542.991px]"
+              src={imgCicloRecife3}
+            />
           </div>
         </div>
       </div>
@@ -1076,7 +1062,11 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         de contar seu lado, E não deixava que o pouco investimento tornasse o cinema pernambucano
         limitado.
       </p>
-      <div className="hanging-postcard absolute h-[781.76px] left-[90px] top-[calc(32%+230.37px)] w-[576.791px]">
+      <PostalPendurado
+        id="valente-e-o-galo"
+        comDica
+        className="absolute h-[781.76px] left-[90px] top-[calc(32%+230.37px)] w-[576.791px]"
+      >
         <div
           className="absolute inset-0 flex items-center justify-center"
           data-node-id="156:60"
@@ -1111,8 +1101,11 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
             </p>
           </div>
         </div>
-      </div>
-      <div className="hanging-postcard absolute bg-[#d9d9d9] h-[747.369px] left-[calc(20%+313px)] top-[calc(33%+232.04px)] w-[526.736px]">
+      </PostalPendurado>
+      <PostalPendurado
+        id="baile-perfumado"
+        className="absolute bg-[#d9d9d9] h-[747.369px] left-[calc(20%+313px)] top-[calc(33%+232.04px)] w-[526.736px]"
+      >
         <div
           className="absolute h-[393px] left-[38px] top-[44px] w-[449px]"
           data-node-id="156:54"
@@ -1133,8 +1126,11 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           Na trajetória do cinema, um marco veio se firmar: Baile Perfumado, de 1996, fez o público
           olhar para uma produção pernambucana que voltava a se destacar
         </p>
-      </div>
-      <div className="hanging-postcard absolute h-[807.888px] left-[calc(60%+79px)] top-[calc(34%+184.87px)] w-[616.874px]">
+      </PostalPendurado>
+      <PostalPendurado
+        id="o-rap-do-pequeno-principe"
+        className="absolute h-[807.888px] left-[calc(60%+79px)] top-[calc(34%+184.87px)] w-[616.874px]"
+      >
         <div
           className="absolute inset-0 flex items-center justify-center"
           data-node-id="196:9"
@@ -1169,7 +1165,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
             </p>
           </div>
         </div>
-      </div>
+      </PostalPendurado>
       <p
         className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+576px)] not-italic text-[120px] text-center text-white top-[calc(38%+133.44px)] whitespace-nowrap"
         data-node-id="163:120"
@@ -1195,8 +1191,10 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
       >
         CONCLUSÃO
       </p>
-      <div
-        className="hanging-postcard absolute z-10 flex h-[313.969px] items-center justify-center left-[162px] top-[calc(43%+194.87px)] w-[267.621px]"
+      <PostalPendurado
+        id="amarelo-manga"
+        comDica
+        className="absolute z-10 flex h-[313.969px] items-center justify-center left-[162px] top-[calc(43%+194.87px)] w-[267.621px]"
         data-node-id="163:142"
       >
         <div className="flex-none rotate-[1.28deg]">
@@ -1208,9 +1206,10 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
             />
           </div>
         </div>
-      </div>
-      <div
-        className="hanging-postcard absolute flex h-[520.207px] items-center justify-center left-[calc(20%+371px)] top-[calc(47%-8.64px)] w-[464.88px]"
+      </PostalPendurado>
+      <PostalPendurado
+        id="cinema-aspirinas-e-urubus"
+        className="absolute flex h-[520.207px] items-center justify-center left-[calc(20%+371px)] top-[calc(47%-8.64px)] w-[464.88px]"
         data-node-id="163:176"
       >
         <div className="flex-none rotate-[11.02deg]">
@@ -1222,9 +1221,10 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
             />
           </div>
         </div>
-      </div>
-      <div
-        className="hanging-postcard absolute flex h-[467.094px] items-center justify-center left-[calc(60%+162px)] top-[calc(47%+39.36px)] w-[399.371px]"
+      </PostalPendurado>
+      <PostalPendurado
+        id="o-agente-secreto"
+        className="absolute flex h-[467.094px] items-center justify-center left-[calc(60%+162px)] top-[calc(47%+39.36px)] w-[399.371px]"
         data-node-id="163:182"
       >
         <div className="flex-none rotate-[-1.83deg]">
@@ -1236,9 +1236,10 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
             />
           </div>
         </div>
-      </div>
-      <div
-        className="hanging-postcard absolute flex h-[521.214px] items-center justify-center left-[236px] top-[calc(46%+144.48px)] w-[466.172px]"
+      </PostalPendurado>
+      <PostalPendurado
+        id="febre-do-rato"
+        className="absolute flex h-[521.214px] items-center justify-center left-[236px] top-[calc(46%+144.48px)] w-[466.172px]"
         data-node-id="163:179"
       >
         <div className="flex-none rotate-[11.22deg]">
@@ -1250,7 +1251,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
             />
           </div>
         </div>
-      </div>
+      </PostalPendurado>
       <div
         className="absolute flex inset-[35.55%_95.33%_52.05%_1.35%] items-center justify-center"
         data-node-id="162:66"
@@ -1303,8 +1304,9 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           <img alt="" className="block max-w-none size-full" src={imgVector55} />
         </div>
       </div>
-      <div
-        className="hanging-postcard absolute flex h-[376.553px] items-center justify-center left-[calc(20%+107px)] top-[calc(43%+112.84px)] w-[330.067px]"
+      <PostalPendurado
+        id="o-som-ao-redor"
+        className="absolute flex h-[376.553px] items-center justify-center left-[calc(20%+107px)] top-[calc(43%+112.84px)] w-[330.067px]"
         data-node-id="163:161"
       >
         <div className="flex-none rotate-[-6.71deg]">
@@ -1316,9 +1318,10 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
             />
           </div>
         </div>
-      </div>
-      <div
-        className="hanging-postcard absolute flex h-[368.416px] items-center justify-center left-[calc(40%+73px)] top-[calc(43%+85.84px)] w-[315px]"
+      </PostalPendurado>
+      <PostalPendurado
+        id="aquarius"
+        className="absolute flex h-[368.416px] items-center justify-center left-[calc(40%+73px)] top-[calc(43%+85.84px)] w-[315px]"
         data-node-id="163:162"
       >
         <div className="flex-none rotate-[-1.83deg]">
@@ -1330,7 +1333,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
             />
           </div>
         </div>
-      </div>
+      </PostalPendurado>
       <div
         className="absolute flex inset-[42.93%_46.95%_56.55%_50.89%] items-center justify-center"
         data-node-id="297:253"
@@ -1342,8 +1345,9 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           </div>
         </div>
       </div>
-      <div
-        className="hanging-postcard absolute flex h-[368.416px] items-center justify-center left-[calc(60%+333px)] top-[calc(43%+43.84px)] w-[315px]"
+      <PostalPendurado
+        id="retratos-fantasmas"
+        className="absolute flex h-[368.416px] items-center justify-center left-[calc(60%+333px)] top-[calc(43%+43.84px)] w-[315px]"
         data-node-id="163:169"
       >
         <div className="flex-none rotate-[-1.83deg]">
@@ -1355,7 +1359,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
             />
           </div>
         </div>
-      </div>
+      </PostalPendurado>
       <div
         className="absolute flex inset-[42.85%_13.91%_56.64%_84.15%] items-center justify-center"
         data-node-id="297:258"
@@ -2179,8 +2183,10 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada15} />
       </div>
-      <div
-        className="hanging-postcard absolute h-[621px] left-[calc(20%+120px)] top-[calc(9%+138.92px)] w-[920px]"
+      <PostalPendurado
+        id="recife-frio"
+        comDica
+        className="absolute h-[621px] left-[calc(20%+120px)] top-[calc(9%+138.92px)] w-[920px]"
         data-node-id="292:176"
         data-name="ChatGPT Image 25 de set. de 2026, 14_58_30 1"
       >
@@ -2189,7 +2195,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
           src={imgChatGptImage25DeSetDe20261458301}
         />
-      </div>
+      </PostalPendurado>
       <div
         className="absolute h-[282px] left-[89px] top-[calc(20%+216.6px)] w-[1741px]"
         data-node-id="294:204"

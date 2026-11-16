@@ -6,7 +6,7 @@ const CLASSE_AVIAO_ATIVO = "plane-flight--active";
 
 /** Elementos com animação em loop; pausam fora da tela. */
 export const SELETOR_LOOPS =
-  ".cloud-float, .red-cloud-loop, .gold-cloud-loop, .sun-spin, .bird-flap, .wind-sway";
+  ".cloud-float, .red-cloud-loop, .gold-cloud-loop, .sun-spin, .cross-sway, .bird-flap, .wind-sway";
 
 export function obterPoster(): HTMLElement | null {
   return document.querySelector<HTMLElement>(`.${CLASSE_POSTER}`);
