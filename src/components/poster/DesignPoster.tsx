@@ -3,6 +3,11 @@ import type { RecorteGenero, RecorteOrigem } from "@/server/panorama.ts";
 import { Hotspot } from "@/components/onboarding/Hotspot.tsx";
 import { Abertura } from "./secoes/Abertura.tsx";
 import { Contexto } from "./secoes/Contexto.tsx";
+import { CicloDoRecife } from "./secoes/CicloDoRecife.tsx";
+import { Super8 } from "./secoes/Super8.tsx";
+import { RetomadaManguebeat } from "./secoes/RetomadaManguebeat.tsx";
+import { Anos2000 } from "./secoes/Anos2000.tsx";
+import { Consolidacao } from "./secoes/Consolidacao.tsx";
 
 const assetPathPrefix = "/poster";
 const imgImage2 = `${assetPathPrefix}/6cfd1.png`;
@@ -920,12 +925,6 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           src={imgImage15}
         />
       </div>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-1/2 not-italic text-[120px] text-center text-white top-[calc(24%+24.12px)] whitespace-nowrap"
-        data-node-id="149:9"
-      >
-        SUPER-8
-      </p>
       <div
         className="absolute h-[334.844px] left-[77px] top-[calc(21%+73.48px)] w-[1767.946px]"
         data-node-id="61:18"
@@ -940,44 +939,8 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
       >
         Celso Marconi, Jomard Muniz de Brito e Aristides Guimarães, realizadores do Ciclo Super 8
       </p>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+574px)] not-italic text-[90px] text-center text-white top-[calc(29%+70.52px)] whitespace-nowrap"
-        data-node-id="67:25"
-      >
-        RETOMADA
-      </p>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(40%+190px)] not-italic text-[80px] text-center text-white top-[calc(29%+201.52px)] whitespace-nowrap"
-        data-node-id="67:26"
-      >
-        E
-      </p>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+573.5px)] not-italic text-[120px] text-center text-white top-[calc(30%+64.4px)] whitespace-nowrap"
-        data-node-id="67:29"
-      >
-        MANGUEBEAT
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(30%-184px)] not-italic text-[24px] text-white top-[calc(16%+41.08px)] w-[501px]"
-        data-node-id="46:301"
-      >
-        Na década de vinte, o Recife também filmava. Entre histórias e imagens, uma produção se
-        formava, e o cinema feito por aqui novos caminhos ensaiava.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(70%-265px)] not-italic text-[24px] text-white top-[calc(16%+41.08px)] w-[453px]"
-        data-node-id="46:307"
-      >
-        De 1923 a 1931, o Recife já realizava seus próprios longas. O chamado Ciclo do Recife deixou jovens
-        impressionados com um cinema que nascia e com projetos próprios e variados.
-      </p>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-1/2 not-italic text-[120px] text-center text-white top-[calc(15%+77.2px)] w-[1158px]"
-        data-node-id="129:3"
-      >
-        CICLO DO RECIFE
-      </p>
+      <RetomadaManguebeat />
+      <CicloDoRecife />
       <div
         className="absolute h-[373.177px] left-[calc(20%+204px)] top-[calc(13%+184.61px)] w-[743.277px]"
         data-node-id="288:159"
@@ -992,64 +955,13 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse2} />
       </div>
       <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[160px] not-italic text-[24px] text-white top-[calc(27%+36.76px)] w-[477px]"
-        data-node-id="149:12"
-      >
-        Mas fazer cinema exige recursos, equipamento e condição. Mas nem sempre quem tem histórias
-        consegue trazê-las à exibição. Décadas depois, outras gerações buscaram formas de
-        experimentação.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium h-[211px] leading-[normal] left-[calc(20%+25px)] not-italic text-[24px] text-white top-[calc(39%+219.32px)] w-[477px]"
-        data-node-id="163:123"
-      >
-        Com a virada do século, novos filmes ganharam espaço. A produção se diversificava, ampliando
-        o próprio traço. Não havia um só caminho, nem um único compasso.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium h-[246px] leading-[normal] left-[calc(40%+240px)] not-italic text-[24px] text-white top-[calc(39%+219.32px)] w-[477px]"
-        data-node-id="163:125"
-      >
-        Entre os filmes dessa trajetória, Amarelo Manga se destacou. Em 2002, o longa de Cláudio
-        Assis novos olhares apresentou. A produção pernambucana outras vozes incorporou.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium h-[340px] leading-[normal] left-[calc(20%+25px)] not-italic text-[24px] text-white top-[calc(41%+228.08px)] w-[477px]"
-        data-node-id="163:149"
-      >
-        Chegando aos anos recentes, mais filmes cruzaram fronteiras. Recife ganhou espaço em
-        histórias e maneiras de transformar o próprio lugar em imagens para outras galeras.
-      </p>
-      <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(52%+0.76px)] w-[477px]"
         data-node-id="163:197"
       >
         Um filme nasce de uma ideia, mas precisa de contribuição. Tem roteiro, equipe e equipamento,
         tem trabalho e preparação. Para chegar até as telas, também precisa de condição.
       </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium h-[246px] leading-[normal] left-[calc(40%+240px)] not-italic text-[24px] text-white top-[calc(41%+228.08px)] w-[477px]"
-        data-node-id="163:150"
-      >
-        O Som ao Redor, Aquarius, Bacurau e Retratos Fantasmas ajudam a contar essa história, com
-        diferentes pegadas. Marcelo Gomes, Kleber Mendonça Filho trouxeram de Pernambuco novas
-        olhadas.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(50%-239px)] not-italic text-[24px] text-white top-[calc(27%+36.76px)] w-[477px]"
-        data-node-id="149:13"
-      >
-        Com equipamentos mais acessíveis, novos caminhos puderam explorar, fazendo do próprio
-        processo uma maneira de inventar. Com câmeras Super-8, novos filmes puderam criar.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(60%+130px)] not-italic text-[24px] text-white top-[calc(27%+36.76px)] w-[455px]"
-        data-node-id="149:17"
-      >
-        Entre recursos escassos e um caminho pouco explorado, uma geração experimentava outro modo
-        de contar seu lado, E não deixava que o pouco investimento tornasse o cinema pernambucano
-        limitado.
-      </p>
+      <Super8 />
       <div className="hanging-postcard absolute h-[781.76px] left-[90px] top-[calc(32%+230.37px)] w-[576.791px]">
         <div
           className="absolute inset-0 flex items-center justify-center"
@@ -1144,12 +1056,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           </div>
         </div>
       </div>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+576px)] not-italic text-[120px] text-center text-white top-[calc(38%+133.44px)] whitespace-nowrap"
-        data-node-id="163:120"
-      >
-        ANOS 2000
-      </p>
+      <Anos2000 />
       <p
         className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+586.5px)] not-italic text-[115px] text-center text-white top-[calc(50%+199px)] whitespace-nowrap"
         data-node-id="163:188"
@@ -1356,12 +1263,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         <p className="leading-[normal] mb-0 whitespace-pre">{`RECONHECIMENTO `}</p>
         <p className="leading-[normal] whitespace-pre">INTERNACIONAL</p>
       </div>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+547px)] not-italic text-[64px] text-center text-white top-[calc(41%+71.08px)] whitespace-nowrap"
-        data-node-id="180:3"
-      >
-        CONSOLIDAÇÃO
-      </p>
+      <Consolidacao />
       <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(58%+146.04px)] w-[477px]"
         data-node-id="163:199"
