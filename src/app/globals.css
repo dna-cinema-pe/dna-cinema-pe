@@ -84,6 +84,12 @@ body {
   }
 }
 
+@keyframes sun-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes gold-cloud-loop {
   0% {
     transform: translate3d(0, 0, 0);
@@ -216,6 +222,10 @@ body {
   animation: cross-sway 3s ease-in-out infinite;
   transform-origin: center;
   will-change: transform;
+}
+
+.sun-spin {
+  animation: sun-spin 28s linear infinite;
 }
 
 .bird-flap {
