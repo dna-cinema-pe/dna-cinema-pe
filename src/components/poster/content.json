@@ -53,5 +53,86 @@
       "E",
       "MANGUEBEAT"
     ]
+  },
+  "reconhecimentoInternacional": {
+    "titulo": [
+      "RECONHECIMENTO",
+      "INTERNACIONAL"
+    ],
+    "paragrafos": [
+      "Um filme ganha um prêmio, outro chega a um festival. A notícia cruza fronteiras, o reconhecimento cresce afinal. Mas o que cada conquista nos revela sobre nosso audiovisual?",
+      "Em 2025, um Urso de Prata veio de Berlim para contar: O Último Azul, de Gabriel Mascaro, foi de Recife até lá para ganhar. Mais um prêmio de reconhecimento internacional para a produção brasileira levar.",
+      "Baile Perfumado marcou uma etapa dessa trajetória. Depois, outros filmes chegaram a circuitos de outra escala. Cada conquista tem seu contexto, cada prêmio tem sua história.",
+      "Sem cansar, Pernambuco chegou aos sonhos do Oscar. Manas disputou de perto a vaga do Brasil, O Último Azul brilhou em Berlim por outra estrada. Mas foi com O Agente Secreto que Recife ficou conhecido no mundo todo.",
+      "O Som ao Redor chegou a circuitos internacionais. Bacurau ganhou destaque em festivais mundiais. São marcos de uma trajetória que atravessou fronteiras culturais",
+      "Presente em Cannes, Toronto, Berlim e muitos mais, Pernambucano foi reconhecido e ganhou tudo que era capaz, Já com 4 indicações ao Oscar, Um futuro de destaque é nossa aposta"
+    ]
+  },
+  "podio": {
+    "dica": "Passe o mouse (ou toque) em um degrau para ver os filmes →",
+    "degraus": [
+      {
+        "posicao": 1,
+        "rotulo": "Vencedores relevantes",
+        "filmes": []
+      },
+      {
+        "posicao": 2,
+        "rotulo": "Indicados relevantes e vencedores",
+        "filmes": []
+      },
+      {
+        "posicao": 3,
+        "rotulo": "Outros indicados",
+        "filmes": []
+      }
+    ]
+  },
+  "conclusao": {
+    "titulo": "CONCLUSÃO",
+    "paragrafos": [
+      "Dos primeiros filmes do Recife aos que ganharam projeção, há décadas de experiências, trabalho e transformação. O cinema pernambucano não se explica por uma só razão.",
+      "Há cultura, há financiamento, há quem produza e quem crie. Há caminhos que se abrem e barreiras que persistem. A história se faz por muitos, mesmo quando poucos aparecem.",
+      "Os prêmios mostram conquistas, os recursos, condições. Os dados sobre profissionais podem revelar desigualdades. Cada fonte tem seus limites, cada número, suas verdades",
+      "O cinema pernambucano tem muitas histórias para contar. Mas, para além das telas, Há muito a investigar. Conhecer o que o sustenta também é parte do olhar."
+    ],
+    "voltarAoInicio": "Voltar ao início",
+    "compartilhar": "Compartilhar",
+    "linkCopiado": "Link copiado!"
+  },
+  "creditos": {
+    "titulo": "Créditos de produção",
+    "grupos": [
+      {
+        "titulo": "Design",
+        "nomes": [
+          "Annalyce Gonçalves",
+          "Dandara Vitória",
+          "Júlia",
+          "Pedro Henrique"
+        ]
+      },
+      {
+        "titulo": "Programação",
+        "nomes": [
+          "Asael",
+          "Bruna Veiga",
+          "Heitor",
+          "Guilherme",
+          "Ohashi",
+          "Jl",
+          "Klarissa",
+          "João Vitor",
+          "João Moraes"
+        ]
+      },
+      {
+        "titulo": "Jornalismo",
+        "nomes": [
+          "Jl",
+          "Vitória Lira"
+        ]
+      }
+    ]
   }
 }
