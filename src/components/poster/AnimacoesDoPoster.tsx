@@ -7,7 +7,7 @@ import { derrubarPoster, iniciarVoo, obterAviao, obterPoster, SELETOR_LOOPS } fr
  * Liga os gatilhos das animações do poster, que é renderizado no servidor:
  * - o avião voa uma vez quando 30% dele aparece na tela;
  * - o pôster cai ao receber o ponteiro (ou Enter/Espaço no foco) e fica caído;
- * - os loops (nuvens, sol, pássaro, bandeirinhas) pausam quando saem da tela.
+ * - os loops (nuvens, cruz, pássaro, bandeirinhas) pausam quando saem da tela.
  * Não renderiza nada.
  */
 export function AnimacoesDoPoster() {
@@ -65,7 +65,7 @@ export function AnimacoesDoPoster() {
       marcador.style.pointerEvents = "none";
       marcador.className = loop.className
         .split(/\s+/)
-        .filter((classe) => !/^(cloud-float|red-cloud-loop|gold-cloud-loop|sun-spin|bird-flap|wind-sway)/.test(classe))
+        .filter((classe) => !/^(cloud-float|red-cloud-loop|gold-cloud-loop|cross-sway|bird-flap|wind-sway)/.test(classe))
         .filter((classe) => classe !== "block")
         .join(" ");
       loop.parentElement?.insertBefore(marcador, loop);

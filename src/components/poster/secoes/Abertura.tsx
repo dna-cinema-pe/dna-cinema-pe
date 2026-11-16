@@ -103,7 +103,7 @@ export function Abertura() {
           data-node-id="46:7"
           data-name="cruz"
         >
-          <img alt="" className="sun-spin absolute block inset-0 max-w-none size-full" src={imgVector} />
+          <img alt="" className="cross-sway absolute block inset-0 max-w-none size-full" src={imgVector} />
         </div>
         <div
           className="absolute z-20 h-[1135.39px] left-[23px] overflow-clip top-[40px] w-[1873.95px]"
