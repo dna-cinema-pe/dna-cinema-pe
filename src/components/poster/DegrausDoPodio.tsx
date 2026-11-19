@@ -4,6 +4,7 @@
 import { useEffect, useId, useState } from "react";
 
 export interface FilmeDoPodio {
+  id: number;
   titulo: string;
   /** Caminho em /public; sem ele, o cartão mostra o cinza de placeholder do Figma. */
   poster?: string;
@@ -25,6 +26,7 @@ const AREAS = [
 
 /** Cartões cinza mostrados enquanto o jornalismo não define os filmes do degrau. */
 const QUANTIDADE_PLACEHOLDER = 4;
+const ITENS_POR_PAGINA = 7;
 
 /**
  * Interação do pódio (US-2.8). Passar o mouse, focar ou tocar um degrau mostra, logo abaixo do
@@ -33,16 +35,8 @@ const QUANTIDADE_PLACEHOLDER = 4;
  */
 export function DegrausDoPodio({ degraus }: { degraus: DegrauDoPodio[] }) {
   const [ativo, setAtivo] = useState<number | null>(null);
+  const [pagina, setPagina] = useState(0);
   const fileiraId = useId();
-
-  useEffect(() => {
-    if (ativo === null) return;
-    const aoTeclar = (evento: KeyboardEvent) => {
-      if (evento.key === "Escape") setAtivo(null);
-    };
-    window.addEventListener("keydown", aoTeclar);
-    return () => window.removeEventListener("keydown", aoTeclar);
-  }, [ativo]);
 
   const degrauAtivo = ativo === null ? null : degraus[ativo];
   const cartoes: Array<FilmeDoPodio | null> = degrauAtivo
@@ -50,6 +44,31 @@ export function DegrausDoPodio({ degraus }: { degraus: DegrauDoPodio[] }) {
       ? degrauAtivo.filmes
       : Array.from({ length: QUANTIDADE_PLACEHOLDER }, () => null)
     : [];
+  const totalPaginas = Math.max(1, Math.ceil(cartoes.length / ITENS_POR_PAGINA));
+  const cartoesVisiveis = cartoes.slice(
+    pagina * ITENS_POR_PAGINA,
+    (pagina + 1) * ITENS_POR_PAGINA,
+  );
+
+  useEffect(() => {
+    if (ativo === null) return;
+    const aoTeclar = (evento: KeyboardEvent) => {
+      if (evento.key === "Escape") setAtivo(null);
+      if (evento.key === "ArrowLeft") {
+        setPagina((atual) => Math.max(0, atual - 1));
+      }
+      if (evento.key === "ArrowRight") {
+        setPagina((atual) => Math.min(totalPaginas - 1, atual + 1));
+      }
+    };
+    window.addEventListener("keydown", aoTeclar);
+    return () => window.removeEventListener("keydown", aoTeclar);
+  }, [ativo, totalPaginas]);
+
+  const ativarDegrau = (indice: number) => {
+    if (ativo !== indice) setPagina(0);
+    setAtivo(indice);
+  };
 
   return (
     <>
@@ -61,10 +80,10 @@ export function DegrausDoPodio({ degraus }: { degraus: DegrauDoPodio[] }) {
           aria-expanded={ativo === i}
           aria-controls={ativo === i ? fileiraId : undefined}
           onPointerEnter={(evento) => {
-            if (evento.pointerType === "mouse") setAtivo(i);
+            if (evento.pointerType === "mouse") ativarDegrau(i);
           }}
-          onFocus={() => setAtivo(i)}
-          onClick={() => setAtivo(i)}
+          onFocus={() => ativarDegrau(i)}
+          onClick={() => ativarDegrau(i)}
           className="hotspot absolute z-20 rounded-lg bg-transparent outline-offset-8 hover:bg-white/5 aria-expanded:bg-white/5"
           style={AREAS[i]}
         />
@@ -76,28 +95,56 @@ export function DegrausDoPodio({ degraus }: { degraus: DegrauDoPodio[] }) {
           id={fileiraId}
           role="region"
           aria-label={`Filmes do ${degrauAtivo.posicao}º lugar`}
-          className="absolute left-[160px] top-[17990px] z-30 flex w-[1600px] justify-center gap-10"
+          className="absolute left-[160px] top-[17990px] z-30 w-[1600px] overflow-hidden"
         >
-          {cartoes.map((filme, i) => (
-            <figure
-              key={filme?.titulo ?? i}
-              className="podio-item flex w-[180px] flex-col items-center gap-3"
-              style={{ animationDelay: `${i * 80}ms` }}
-            >
-              {filme?.poster ? (
-                <img
-                  src={filme.poster}
-                  alt={filme.alt ?? `Pôster de ${filme.titulo}`}
-                  className="h-[240px] w-[180px] object-cover shadow-lg"
-                />
-              ) : (
-                <div aria-hidden="true" className="h-[240px] w-[180px] bg-[#8c8888] shadow-lg" />
-              )}
-              <figcaption className="text-center font-corpo text-[22px] font-semibold leading-tight text-white">
-                {filme?.titulo ?? "Filme a definir"}
-              </figcaption>
-            </figure>
-          ))}
+          <div className="mx-[70px] flex w-[1460px] justify-center gap-8 pb-5">
+            {cartoesVisiveis.map((filme, i) => (
+              <figure
+                key={filme?.id ?? i}
+                className="podio-item flex w-[180px] shrink-0 flex-col items-center gap-3"
+                style={{ animationDelay: `${i * 80}ms` }}
+              >
+                {filme?.poster ? (
+                  <img
+                    src={filme.poster}
+                    alt={filme.alt ?? `Pôster de ${filme.titulo}`}
+                    className="h-[240px] w-[180px] object-cover shadow-lg"
+                  />
+                ) : (
+                  <div aria-hidden="true" className="h-[240px] w-[180px] bg-[#8c8888] shadow-lg" />
+                )}
+                <figcaption className="text-center font-corpo text-[22px] font-semibold leading-tight text-white">
+                  {filme?.titulo ?? "Filme a definir"}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+
+          {totalPaginas > 1 && (
+            <>
+              <button
+                type="button"
+                aria-label="Página anterior de filmes"
+                disabled={pagina === 0}
+                onClick={() => setPagina((atual) => Math.max(0, atual - 1))}
+                className="absolute left-1 top-[92px] flex size-14 items-center justify-center rounded-full border-2 border-ouro bg-fundo/90 font-corpo text-4xl text-ouro shadow-lg disabled:cursor-not-allowed disabled:opacity-30"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                aria-label="Próxima página de filmes"
+                disabled={pagina === totalPaginas - 1}
+                onClick={() => setPagina((atual) => Math.min(totalPaginas - 1, atual + 1))}
+                className="absolute right-1 top-[92px] flex size-14 items-center justify-center rounded-full border-2 border-ouro bg-fundo/90 font-corpo text-4xl text-ouro shadow-lg disabled:cursor-not-allowed disabled:opacity-30"
+              >
+                ›
+              </button>
+              <span className="sr-only" aria-live="polite">
+                Página {pagina + 1} de {totalPaginas}
+              </span>
+            </>
+          )}
         </div>
       )}
     </>
