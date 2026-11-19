@@ -1,5 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import type { PremiosInternacionais, RecorteGenero, RecorteOrigem } from "@/server/panorama.ts";
+import type {
+  PodioPremios,
+  PremiosInternacionais,
+  RecorteGenero,
+  RecorteRaca,
+} from "@/server/panorama.ts";
 import { Hotspot } from "@/components/onboarding/Hotspot.tsx";
 import { Abertura } from "./secoes/Abertura.tsx";
 import { Conclusao } from "./secoes/Conclusao.tsx";
@@ -140,17 +145,24 @@ const imgCamada27 = `${assetPathPrefix}/7188f.svg`;
 interface DesignPosterProps {
   /** Vem de `obterRecorteGenero()`. Sem dado, o gráfico de gênero vira placeholder. */
   genero?: RecorteGenero | null;
-  /** Vem de `obterRecorteOrigem()`. Sem dado, o gráfico de origem vira placeholder. */
-  origem?: RecorteOrigem | null;
+  /** Vem de `obterRecorteRaca()`. Sem dado, o gráfico de raça vira placeholder. */
+  raca?: RecorteRaca | null;
   /** Vem de `obterPremiosInternacionais()`. Sem dado, os pinos da rota avisam que não carregou. */
   premios?: PremiosInternacionais | null;
+  /** Vem de `obterPodioPremios()`. Sem dado, os degraus mostram placeholders. */
+  podio?: PodioPremios | null;
 }
 
 const BARRA_MAX = 382;
 const BARRA_BORDA_DIREITA = 402;
 const CINZA_PLACEHOLDER = "#d9d9d9";
 
-export function DesignPoster({ genero = null, origem = null, premios = null }: DesignPosterProps) {
+export function DesignPoster({
+  genero = null,
+  raca = null,
+  premios = null,
+  podio = null,
+}: DesignPosterProps) {
   const maior = genero ? Math.max(genero.mulheres, genero.homens, 1) : 0;
   const larguraMulheres = genero ? Math.round((BARRA_MAX * genero.mulheres) / maior) : 253;
   const larguraHomens = genero ? Math.round((BARRA_MAX * genero.homens) / maior) : BARRA_MAX;
@@ -159,15 +171,9 @@ export function DesignPoster({ genero = null, origem = null, premios = null }: D
   const textoMulheres = genero ? `${genero.mulheres}%` : "--%";
   const textoHomens = genero ? `${genero.homens}%` : "--%";
 
-  const maiorOrigem = origem ? Math.max(origem.pernambucanos, origem.outros, 1) : 0;
-  const larguraPernambucanos = origem
-    ? Math.round((BARRA_MAX * origem.pernambucanos) / maiorOrigem)
-    : 253;
-  const larguraOutros = origem ? Math.round((BARRA_MAX * origem.outros) / maiorOrigem) : BARRA_MAX;
-  const corPernambucanos = origem ? "red" : CINZA_PLACEHOLDER;
-  const corOutros = origem ? "#e3a54f" : CINZA_PLACEHOLDER;
-  const textoPernambucanos = origem ? `${origem.pernambucanos}%` : "--%";
-  const textoOutros = origem ? `${origem.outros}%` : "--%";
+  const maiorPercentualRaca = raca
+    ? Math.max(...raca.itens.map((item) => item.percentual), 1)
+    : 1;
   return (
     <div
       className="bg-[#0b0909] relative h-[25712px] w-[1920px] overflow-hidden"
@@ -184,7 +190,7 @@ export function DesignPoster({ genero = null, origem = null, premios = null }: D
       <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(41% + 71.08px)" }} id="cap-consolidacao" />
       <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(50% + 199px)" }} id="cap-financiamento" />
       <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(60% + 237.8px)" }} id="cap-reconhecimento-internacional" />
-      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(71% + 74.48px)" }} id="cap-recorte-genero-raca-origem" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(71% + 74.48px)" }} id="cap-recorte-genero-raca" />
       <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(82% + 151.16px)" }} id="cap-conclusao" />
       <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(89% + 240.32px)" }} id="cap-rodape" />
       <div
@@ -1069,8 +1075,8 @@ export function DesignPoster({ genero = null, origem = null, premios = null }: D
         className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[0] left-[982px] not-italic text-[120px] text-center text-white top-[calc(71%+74.48px)] whitespace-nowrap"
         data-node-id="163:271"
       >
-        <p className="leading-[normal] mb-0">RECORTE DE GÊNERO,</p>
-        <p className="leading-[normal]">RAÇA E ORIGEM</p>
+        <p className="leading-[normal] mb-0">RECORTE DE GÊNERO</p>
+        <p className="leading-[normal]">E RAÇA</p>
       </div>
       <PostalPendurado
         id="amarelo-manga"
@@ -1400,20 +1406,6 @@ export function DesignPoster({ genero = null, origem = null, premios = null }: D
         inventar. Uma lacuna na pesquisa também precisa se registrar.
       </p>
       <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(79%+101.52px)] w-[477px]"
-        data-node-id="163:279"
-      >
-        Um filme pode ser filmado em Pernambuco, em qualquer lugar. Mas o local das filmagens não
-        basta para explicar a origem de quem trabalha nem o vínculo com esse lugar
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(80%+106.4px)] w-[477px]"
-        data-node-id="163:280"
-      >
-        Há quem nasça nesta terra, há quem venha aqui trabalhar. Há quem construa sua carreira e
-        decida aqui ficar. São trajetórias diferentes que precisamos separar.
-      </p>
-      <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(75%+82px)] w-[477px]"
         data-node-id="163:276"
       >
@@ -1458,7 +1450,7 @@ export function DesignPoster({ genero = null, origem = null, premios = null }: D
           </div>
         </div>
       </div>
-      <Podio />
+      <Podio colocacoes={podio} />
       <Hotspot
         id="hotspot-genero"
         style={{ top: "calc(73% + 16px)", left: "calc(60% - 10px)", width: 460, height: 240 }}
@@ -1512,117 +1504,45 @@ export function DesignPoster({ genero = null, origem = null, premios = null }: D
         >{textoHomens}</p>
       </div>
       <Hotspot
-        id="hotspot-origem"
+        id="hotspot-raca"
         style={{ top: "calc(76% + 28px)", left: "calc(60% - 10px)", width: 460, height: 260 }}
         tooltip={
-          origem
-            ? `${origem.pernambucanos}% das pessoas cadastradas no acervo nasceram em Pernambuco. Não é uma comparação com o cinema nacional — é só dentro do nosso próprio banco.`
-            : "Sem naturalidade confirmada por fonte pública ainda — por isso o gráfico aparece em cinza."
+          raca
+            ? `Recorte baseado em ${raca.totalInformado} autodeclarações de cor/raça. ${raca.totalSemInformacao} pessoas sem autodeclaração registrada não entram no percentual.`
+            : "Sem autodeclarações de cor/raça registradas no acervo."
         }
       />
-      <div
-        className="absolute contents left-[calc(40%+301px)] top-[calc(76%+28.88px)]"
-        data-node-id="223:159"
-      >
-        <div
-          className="absolute h-[41px] top-[calc(76%+37.88px)]"
-          style={{ left: `calc(60% + ${BARRA_BORDA_DIREITA - larguraPernambucanos}px)`, width: larguraPernambucanos, backgroundColor: corPernambucanos }}
-          data-node-id="196:43"
-        />
-        <div
-          className="absolute h-[41px] top-[calc(76%+98.88px)]"
-          style={{ left: `calc(60% + ${BARRA_BORDA_DIREITA - larguraOutros}px)`, width: larguraOutros, backgroundColor: corOutros }}
-          data-node-id="196:44"
-        />
-        <p
-          className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(40%+369px)] not-italic text-[20px] text-white top-[calc(76%+189.88px)] whitespace-nowrap"
-          data-node-id="196:45"
-        >
-          Pernambucanos no cinema pernambucano
-        </p>
-        <p
-          className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(60%+293px)] not-italic text-[20px] text-white top-[calc(76%+233.88px)] whitespace-nowrap"
-          data-node-id="196:59"
-        >
-          Outros
-        </p>
-        <div
-          className="absolute size-[23px] top-[calc(76%+192.88px)]"
-          style={{ left: "calc(60% + 379px)", backgroundColor: corPernambucanos }}
-          data-node-id="196:47"
-        />
-        <div
-          className="absolute size-[23px] top-[calc(76%+240.88px)]"
-          style={{ left: "calc(60% + 379px)", backgroundColor: corOutros }}
-          data-node-id="196:48"
-        />
-        <p
-          className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(60%+55px)] not-italic text-[40px] text-white top-[calc(76%+28.88px)] whitespace-nowrap"
-          data-node-id="196:49"
-        >{textoPernambucanos}</p>
-        <p
-          className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(40%+301px)] not-italic text-[40px] text-white top-[calc(76%+94.88px)] whitespace-nowrap"
-          data-node-id="196:50"
-        >{textoOutros}</p>
-      </div>
-      <div
-        className="absolute contents left-[calc(40%+309px)] top-[calc(79%+37.52px)]"
-        data-node-id="200:16"
-      >
-        <div
-          className="absolute bg-[#d9d9d9] h-[41px] left-[calc(60%+256px)] top-[calc(79%+119.52px)] w-[152px]"
-          data-node-id="196:51"
-        />
-        <div
-          className="absolute bg-[#d9d9d9] h-[41px] left-[calc(60%+182px)] top-[calc(79%+40.52px)] w-[228px]"
-          data-node-id="196:68"
-        />
-        <div
-          className="absolute bg-[#d9d9d9] h-[41px] left-[calc(60%+28px)] top-[calc(79%+179.52px)] w-[380px]"
-          data-node-id="196:52"
-        />
-        <p
-          className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(40%+345px)] not-italic text-[20px] text-white top-[calc(80%+13.4px)] whitespace-nowrap"
-          data-node-id="196:53"
-        >
-          Classe baixa no cinema pernambucano
-        </p>
-        <p
-          className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(40%+336px)] not-italic text-[20px] text-white top-[calc(80%+102.4px)] whitespace-nowrap"
-          data-node-id="200:2"
-        >
-          Classe media no cinema pernambucano
-        </p>
-        <p
-          className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(40%+362px)] not-italic text-[20px] text-white top-[calc(80%+58.4px)] whitespace-nowrap"
-          data-node-id="196:54"
-        >
-          Classe alta no cinema pernambucano
-        </p>
-        <div
-          className="absolute bg-[#d9d9d9] left-[calc(80%+3px)] size-[23px] top-[calc(80%+16.4px)]"
-          data-node-id="196:55"
-        />
-        <div
-          className="absolute bg-[#d9d9d9] left-[calc(80%+3px)] size-[23px] top-[calc(80%+108.4px)]"
-          data-node-id="200:3"
-        />
-        <div
-          className="absolute bg-[#d9d9d9] left-[calc(80%+3px)] size-[23px] top-[calc(80%+66.4px)]"
-          data-node-id="196:56"
-        />
-        <p
-          className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(60%+156px)] not-italic text-[40px] text-white top-[calc(79%+110.52px)] whitespace-nowrap"
-          data-node-id="196:57"
-        >--%</p>
-        <p
-          className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(60%+73px)] not-italic text-[40px] text-white top-[calc(79%+37.52px)] whitespace-nowrap"
-          data-node-id="196:69"
-        >--%</p>
-        <p
-          className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(40%+309px)] not-italic text-[40px] text-white top-[calc(79%+176.52px)] whitespace-nowrap"
-          data-node-id="196:58"
-        >--%</p>
+      <div className="absolute left-[calc(60%-10px)] top-[calc(76%+28.88px)] w-[460px] space-y-6">
+        {(raca?.itens ?? [{ categoria: "Raça/cor sem dados", percentual: 0 }]).map(
+          (item, indice) => {
+            const cor = ["red", "#e3a54f", "#8c8888", "#f2e8d5", "#a34a32"][indice % 5];
+            const largura = raca
+              ? Math.round((BARRA_MAX * item.percentual) / maiorPercentualRaca)
+              : BARRA_MAX;
+
+            return (
+              <div key={item.categoria}>
+                <div className="flex items-center gap-5">
+                  <span className="w-[82px] font-corpo text-[40px] font-semibold text-white">
+                    {raca ? `${item.percentual}%` : "--%"}
+                  </span>
+                  <div className="flex h-[41px] flex-1 justify-end">
+                    <div
+                      className="h-full"
+                      style={{
+                        width: largura,
+                        backgroundColor: raca ? cor : CINZA_PLACEHOLDER,
+                      }}
+                    />
+                  </div>
+                </div>
+                <p className="mt-2 text-right font-corpo text-[20px] font-semibold text-white">
+                  {item.categoria}
+                </p>
+              </div>
+            );
+          },
+        )}
       </div>
       <div
         className="plane-flight absolute z-10 flex inset-[59.91%_15.97%_39.56%_68.75%] items-center justify-center"

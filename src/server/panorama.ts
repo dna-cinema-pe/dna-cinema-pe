@@ -27,25 +27,122 @@ export async function obterRecorteGenero(): Promise<RecorteGenero | null> {
   return { mulheres: percentualMulheres, homens: 100 - percentualMulheres };
 }
 
-export interface RecorteOrigem {
-  /** Percentuais inteiros que somam 100. */
-  pernambucanos: number;
-  outros: number;
+export interface ItemRecorteRaca {
+  categoria: string;
+  percentual: number;
+}
+
+export interface RecorteRaca {
+  totalInformado: number;
+  totalSemInformacao: number;
+  itens: ItemRecorteRaca[];
 }
 
 /**
- * Landing: proporção de pessoas nascidas em Pernambuco entre as pessoas cadastradas
- * no acervo (não é uma comparação com o cinema nacional — ver convenção de dados
- * ausentes no schema e analise-design-vs-banco.md, item 4).
- * `flagEhPernambucano` NULL não entra na conta; sem nenhum registro, devolve `null`.
+ * Landing: distribuição de cor/raça entre as pessoas com autodeclaração registrada.
+ * Registros sem autodeclaração não entram no percentual e são informados separadamente.
  */
-export async function obterRecorteOrigem(): Promise<RecorteOrigem | null> {
-  const total = await prisma.pessoa.count({ where: { flagEhPernambucano: { not: null } } });
-  if (total === 0) return null;
+export async function obterRecorteRaca(): Promise<RecorteRaca | null> {
+  const [grupos, totalPessoas] = await Promise.all([
+    prisma.pessoa.groupBy({
+      by: ["corRaca"],
+      where: { corRaca: { not: null } },
+      _count: { _all: true },
+    }),
+    prisma.pessoa.count(),
+  ]);
 
-  const pernambucanos = await prisma.pessoa.count({ where: { flagEhPernambucano: true } });
-  const percentualPernambucanos = Math.round((pernambucanos / total) * 100);
-  return { pernambucanos: percentualPernambucanos, outros: 100 - percentualPernambucanos };
+  const informados = grupos
+    .filter((grupo): grupo is typeof grupo & { corRaca: string } => grupo.corRaca !== null)
+    .sort(
+      (a, b) =>
+        b._count._all - a._count._all || a.corRaca.localeCompare(b.corRaca, "pt-BR"),
+    );
+  const totalInformado = informados.reduce((total, grupo) => total + grupo._count._all, 0);
+  if (totalInformado === 0) return null;
+
+  return {
+    totalInformado,
+    totalSemInformacao: totalPessoas - totalInformado,
+    itens: informados.map((grupo) => ({
+      categoria: grupo.corRaca,
+      percentual: Math.round((grupo._count._all / totalInformado) * 100),
+    })),
+  };
+}
+
+export interface FilmeDoPodio {
+  id: number;
+  titulo: string;
+  poster?: string;
+  alt?: string;
+}
+
+export interface ColocacaoPodio {
+  posicao: 1 | 2 | 3;
+  filmes: FilmeDoPodio[];
+}
+
+export type PodioPremios = ColocacaoPodio[];
+
+export async function obterPodioPremios(): Promise<PodioPremios> {
+  const registros = await prisma.filmePremiacao.findMany({
+    where: { resultado: { in: ["VENCEDOR", "INDICADO"] } },
+    select: {
+      resultado: true,
+      filme: {
+        select: {
+          idFilme: true,
+          titulo: true,
+          posterUrl: true,
+          posterAlt: true,
+        },
+      },
+      premiacao: { select: { nivelImportanciaPremiacao: true } },
+    },
+  });
+
+  const melhorPosicaoPorFilme = new Map<number, { posicao: 1 | 2 | 3; filme: FilmeDoPodio }>();
+
+  for (const registro of registros) {
+    const nivel = registro.premiacao.nivelImportanciaPremiacao;
+    const posicao: 1 | 2 | 3 =
+      registro.resultado === "VENCEDOR" && nivel === 1
+        ? 1
+        : (registro.resultado === "INDICADO" && nivel === 1) ||
+            (registro.resultado === "VENCEDOR" && nivel === 2)
+          ? 2
+          : 3;
+
+    const existente = melhorPosicaoPorFilme.get(registro.filme.idFilme);
+    if (existente && existente.posicao <= posicao) continue;
+
+    melhorPosicaoPorFilme.set(registro.filme.idFilme, {
+      posicao,
+      filme: {
+        id: registro.filme.idFilme,
+        titulo: registro.filme.titulo,
+        poster: registro.filme.posterUrl ?? undefined,
+        alt: registro.filme.posterAlt ?? undefined,
+      },
+    });
+  }
+
+  const colocacoes: PodioPremios = [
+    { posicao: 1, filmes: [] },
+    { posicao: 2, filmes: [] },
+    { posicao: 3, filmes: [] },
+  ];
+
+  for (const { posicao, filme } of melhorPosicaoPorFilme.values()) {
+    colocacoes[posicao - 1].filmes.push(filme);
+  }
+
+  for (const colocacao of colocacoes) {
+    colocacao.filmes.sort((a, b) => a.titulo.localeCompare(b.titulo, "pt-BR"));
+  }
+
+  return colocacoes;
 }
 
 /** Festivais com pino na rota do avião (US-2.7), pelo `nomePremiacao` do banco. */
