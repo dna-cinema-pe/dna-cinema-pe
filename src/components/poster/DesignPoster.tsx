@@ -829,7 +829,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute h-[439.493px] left-[151.87px] top-[calc(17%+93.37px)] w-[621.574px]"
+        className="postal-ciclo absolute h-[439.493px] left-[151.87px] top-[calc(17%+93.37px)] w-[621.574px]"
       >
         <div
           className="absolute inset-0 flex items-center justify-center"
@@ -845,7 +845,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute h-[482.247px] left-[calc(20%+265.2px)] top-[calc(17%+236.18px)] w-[639.564px]"
+        className="postal-ciclo absolute h-[482.247px] left-[calc(20%+265.2px)] top-[calc(17%+236.18px)] w-[639.564px]"
       >
         <div
           className="absolute inset-0 flex items-center justify-center"
@@ -861,7 +861,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute h-[549.416px] left-[calc(60%+7px)] top-[calc(18%+152.84px)] w-[640.713px]"
+        className="postal-ciclo absolute h-[549.416px] left-[calc(60%+7px)] top-[calc(18%+152.84px)] w-[640.713px]"
       >
         <div
           className="absolute inset-0 flex items-center justify-center"
@@ -877,7 +877,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute h-[603px] left-[82px] top-[calc(17%+36.96px)] w-[1810px]"
+        className="pointer-events-none absolute h-[603px] left-[82px] top-[calc(17%+36.96px)] w-[1810px]"
         data-node-id="129:2"
       >
         <div className="absolute inset-[-0.47%_0_-0.63%_-0.15%]">
@@ -899,7 +899,7 @@ export function DesignPoster({
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup9} />
       </div>
       <div
-        className="absolute flex inset-[18.57%_13.67%_80.72%_78.91%] items-center justify-center"
+        className="pointer-events-none absolute flex inset-[18.57%_13.67%_80.72%_78.91%] items-center justify-center"
         data-node-id="222:155"
         style={{ containerType: "size" }}
       >
@@ -940,17 +940,29 @@ export function DesignPoster({
       <RetomadaManguebeat />
       <CicloDoRecife />
       <div
-        className="absolute h-[373.177px] left-[calc(20%+204px)] top-[calc(13%+184.61px)] w-[743.277px]"
+        className="arco-frevo absolute h-[373.177px] left-[calc(20%+204px)] top-[calc(13%+184.61px)] w-[743.277px]"
         data-node-id="288:159"
         data-name="ARCO CICLO"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgArcoCiclo} />
       </div>
       <div
-        className="-translate-x-1/2 absolute h-[916px] left-1/2 top-[calc(22%+138.36px)] w-[940px]"
+        className="-translate-x-1/2 absolute z-30 h-[916px] left-1/2 top-[calc(22%+138.36px)] w-[940px]"
         data-node-id="149:10"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse2} />
+        <img
+          alt=""
+          className="super8-holofote absolute block inset-0 max-w-none size-full"
+          src={imgEllipse2}
+        />
+      </div>
+      {/* Cortinas do Super-8: cobrem o palco (mesma caixa da "image 15") até abrirem. */}
+      <div
+        aria-hidden="true"
+        className="super8-cortinas pointer-events-none absolute z-20 h-[959px] left-[122px] overflow-hidden top-[calc(22%+94.36px)] w-[1678px]"
+      >
+        <div className="super8-cortina super8-cortina--esquerda" />
+        <div className="super8-cortina super8-cortina--direita" />
       </div>
       <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(52%+0.76px)] w-[477px]"
@@ -1176,7 +1188,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute h-[687.459px] left-[73px] top-[calc(32%+82.66px)] w-[1779px]"
+        className="pointer-events-none absolute h-[687.459px] left-[73px] top-[calc(32%+82.66px)] w-[1779px]"
         data-node-id="163:152"
       >
         <div className="absolute inset-[-0.44%_-0.17%]">
@@ -1184,7 +1196,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute h-[217.018px] left-[85.29px] top-[calc(43%-7.76px)] w-[1764.837px]"
+        className="pointer-events-none absolute h-[217.018px] left-[85.29px] top-[calc(43%-7.76px)] w-[1764.837px]"
         data-node-id="163:156"
       >
         <div className="absolute inset-[-1.84%_-0.23%]">
@@ -1259,7 +1271,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute h-[265.599px] left-[85.29px] top-[calc(46%+28.59px)] w-[1775.598px]"
+        className="pointer-events-none absolute h-[265.599px] left-[85.29px] top-[calc(46%+28.59px)] w-[1775.598px]"
         data-node-id="163:160"
       >
         <div className="absolute inset-[-1.51%_-0.23%]">
@@ -1439,6 +1451,13 @@ export function DesignPoster({
           </div>
         </div>
       </div>
+      {/* Área de pouso: centrado sobre onde o pôster cai (top + --queda-poster), acima dele. */}
+      <button
+        type="button"
+        className="falling-poster__repor hotspot absolute z-20 -translate-x-1/2 rounded-full border-2 border-ouro bg-fundo/90 px-6 py-3 font-corpo text-[28px] font-semibold text-ouro whitespace-nowrap hover:bg-ouro hover:text-fundo left-[calc(60%+167.77px)] top-[calc(43%+44.84px+var(--queda-poster)-96px)]"
+      >
+        ↺ Pendurar de novo
+      </button>
       <div
         className="absolute flex inset-[42.81%_28.85%_56.67%_67.66%] items-center justify-center"
         data-node-id="297:263"
@@ -1630,7 +1649,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute flex inset-[33.33%_46.65%_65.61%_46.69%] items-center justify-center"
+        className="pointer-events-none absolute flex inset-[33.33%_46.65%_65.61%_46.69%] items-center justify-center"
         data-node-id="221:125"
         style={{ containerType: "size" }}
       >
@@ -1654,11 +1673,11 @@ export function DesignPoster({
       <div className="absolute inset-[21.83%_83.79%_77.23%_10.42%]" data-node-id="222:138">
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup28} />
       </div>
-      <div className="absolute inset-[17.06%_82.66%_82.29%_13.39%]" data-node-id="222:149">
+      <div className="pointer-events-none absolute inset-[17.06%_82.66%_82.29%_13.39%]" data-node-id="222:149">
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup30} />
       </div>
       <div
-        className="absolute flex inset-[17.81%_41.35%_81.52%_49.95%] items-center justify-center"
+        className="pointer-events-none absolute flex inset-[17.81%_41.35%_81.52%_49.95%] items-center justify-center"
         data-node-id="222:152"
         style={{ containerType: "size" }}
       >
@@ -1756,7 +1775,7 @@ export function DesignPoster({
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada13} />
       </div>
       <div
-        className="absolute h-[82.15px] left-[calc(40%+158px)] top-[calc(17%+26.96px)] w-[68.66px]"
+        className="pointer-events-none absolute h-[82.15px] left-[calc(40%+158px)] top-[calc(17%+26.96px)] w-[68.66px]"
         data-node-id="288:166"
         data-name="Camada_1"
       >
@@ -1834,7 +1853,7 @@ export function DesignPoster({
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup37} />
       </div>
       <div
-        className="absolute flex inset-[42.87%_64.11%_55.74%_14.48%] items-center justify-center"
+        className="pointer-events-none absolute flex inset-[42.87%_64.11%_55.74%_14.48%] items-center justify-center"
         data-node-id="297:243"
         style={{ containerType: "size" }}
       >
@@ -1954,7 +1973,7 @@ export function DesignPoster({
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada14} />
       </div>
       <div
-        className="absolute h-[55.61px] left-[calc(80%+98px)] top-[calc(43%+218.84px)] w-[45.22px]"
+        className="pointer-events-none absolute h-[55.61px] left-[calc(80%+98px)] top-[calc(43%+218.84px)] w-[45.22px]"
         data-node-id="304:672"
         data-name="Camada_1"
       >
