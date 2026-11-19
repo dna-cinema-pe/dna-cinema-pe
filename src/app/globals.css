@@ -264,6 +264,22 @@ body {
   transform-origin: 50% 0%;
 }
 
+/*
+ * Arco de guarda-chuva de frevo (Ciclo do Recife): máscara em leque centrada na base, de onde
+ * saem os gomos. `--abertura-arco` (0° a 95°, vindo da rolagem) é a metade do leque visível,
+ * para cada lado a partir do topo: 0° esconde tudo, 95° mostra o arco inteiro.
+ */
+.arco-frevo {
+  --abertura-arco: 0deg;
+  --mascara-arco: conic-gradient(
+    from calc(-1 * var(--abertura-arco)) at 50% 100%,
+    #000 calc(2 * var(--abertura-arco)),
+    transparent 0
+  );
+  -webkit-mask-image: var(--mascara-arco);
+  mask-image: var(--mascara-arco);
+}
+
 /* Hover no desktop; no toque, PostalPendurado liga `--balancando` no primeiro toque. */
 .hanging-postcard:hover,
 .hanging-postcard--balancando {
@@ -443,6 +459,12 @@ html[data-animacoes="desligadas"] .falling-poster__body {
 /* Sem animações o pôster já fica caído e não há o que repor. */
 html[data-animacoes="desligadas"] .falling-poster__repor {
   display: none;
+}
+
+/* Sem animações o arco de frevo aparece inteiro, sem depender da rolagem. */
+html[data-animacoes="desligadas"] .arco-frevo {
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 /* Sem animações as cortinas já ficam abertas, o título visível e o holofote, parado no centro. */

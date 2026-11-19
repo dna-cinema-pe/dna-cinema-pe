@@ -991,7 +991,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         CICLO DO RECIFE
       </p>
       <div
-        className="absolute h-[373.177px] left-[calc(20%+204px)] top-[calc(13%+184.61px)] w-[743.277px]"
+        className="arco-frevo absolute h-[373.177px] left-[calc(20%+204px)] top-[calc(13%+184.61px)] w-[743.277px]"
         data-node-id="288:159"
         data-name="ARCO CICLO"
       >

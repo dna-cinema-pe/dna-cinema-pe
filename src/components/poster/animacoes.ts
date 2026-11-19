@@ -12,6 +12,7 @@ const CLASSE_HOLOFOTE_PARADO = "super8-holofote--parado";
 
 /** Quanto tempo o holofote varre as cortinas fechadas antes de elas abrirem. */
 export const VARREDURA_ANTES_DE_ABRIR_MS = 3000;
+const CLASSE_ARCO = "arco-frevo";
 const CLASSE_AVIAO = "plane-flight";
 const CLASSE_AVIAO_ATIVO = "plane-flight--active";
 
@@ -25,6 +26,23 @@ export function obterPoster(): HTMLElement | null {
 
 export function obterBotaoReporPoster(): HTMLButtonElement | null {
   return document.querySelector<HTMLButtonElement>(`.${CLASSE_BOTAO_REPOR}`);
+}
+
+export function obterArco(): HTMLElement | null {
+  return document.querySelector<HTMLElement>(`.${CLASSE_ARCO}`);
+}
+
+/**
+ * Abre o arco de guarda-chuva de frevo conforme a rolagem: fechado quando o topo dele entra pela
+ * base da janela, aberto por inteiro quando o topo chega a 35% da altura. Volta a fechar se a
+ * pessoa rolar para cima. O ângulo vai para `--abertura-arco`, usado pela máscara em globals.css.
+ */
+export function atualizarArco(arco: HTMLElement) {
+  const inicio = window.innerHeight;
+  const fim = window.innerHeight * 0.35;
+  const progresso = (inicio - arco.getBoundingClientRect().top) / (inicio - fim);
+  const angulo = Math.min(1, Math.max(0, progresso)) * 95;
+  arco.style.setProperty("--abertura-arco", `${angulo.toFixed(1)}deg`);
 }
 
 export function obterAviao(): HTMLElement | null {

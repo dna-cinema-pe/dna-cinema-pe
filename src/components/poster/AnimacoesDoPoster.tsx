@@ -3,8 +3,10 @@
 import { useEffect } from "react";
 import {
   abrirCortinas,
+  atualizarArco,
   derrubarPoster,
   iniciarVoo,
+  obterArco,
   obterAviao,
   obterBotaoReporPoster,
   obterCortinas,
@@ -18,6 +20,7 @@ import {
 /**
  * Liga os gatilhos das animações do poster, que é renderizado no servidor:
  * - o avião voa uma vez quando 30% dele aparece na tela;
+ * - o arco de guarda-chuva de frevo do Ciclo do Recife abre e fecha acompanhando a rolagem;
  * - o holofote do Super-8 varre as cortinas fechadas; quando o palco chega à faixa central da
  *   tela, ele varre por mais alguns segundos, as cortinas abrem uma vez, ele para e o título surge;
  * - o pôster cai ao receber o ponteiro, mouse ou toque (ou Enter/Espaço no foco), fica caído e,
@@ -42,6 +45,27 @@ export function AnimacoesDoPoster() {
       );
       observador.observe(aviao);
       limpezas.push(() => observador.disconnect());
+    }
+
+    const arco = obterArco();
+    if (arco) {
+      // Um cálculo por quadro, no máximo, mesmo com muitos eventos de rolagem.
+      let quadro = 0;
+      const agendar = () => {
+        if (quadro) return;
+        quadro = requestAnimationFrame(() => {
+          quadro = 0;
+          atualizarArco(arco);
+        });
+      };
+      atualizarArco(arco);
+      window.addEventListener("scroll", agendar, { passive: true });
+      window.addEventListener("resize", agendar);
+      limpezas.push(() => {
+        cancelAnimationFrame(quadro);
+        window.removeEventListener("scroll", agendar);
+        window.removeEventListener("resize", agendar);
+      });
     }
 
     const cortinas = obterCortinas();
