@@ -25,6 +25,9 @@ type PessoaJson = {
   idade: number;
   genero: string | null;
   flagEhNordestino: boolean | null;
+  flagEhPernambucano: boolean | null;
+  naturalidade: string | null;
+  corRaca: string | null;
 };
 type PremiacaoJson = {
   nomePremiacao: string;

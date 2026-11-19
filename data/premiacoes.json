@@ -24,6 +24,7 @@
   { "nomePremiacao": "Mostra Internacional de Cinema de São Paulo", "descricaoPremiacao": "Tradicional mostra competitiva e panorama do cinema mundial realizada na capital paulista.", "nivelImportanciaPremiacao": 2, "flagNacional": true },
   { "nomePremiacao": "Festival de San Sebastián", "descricaoPremiacao": "Festival Internacional de Cinema de San Sebastián, mais importante evento cinematográfico da Espanha.", "nivelImportanciaPremiacao": 2, "flagNacional": false },
   { "nomePremiacao": "Festival Internacional de Cinema de Guadalajara", "descricaoPremiacao": "Um dos mais relevantes festivais de cinema latino-americano e ibero-americano, realizado no México.", "nivelImportanciaPremiacao": 2, "flagNacional": false },
+  { "nomePremiacao": "Premios Goya", "descricaoPremiacao": "Principal premiação de cinema da Espanha, concedida pela Academia de Artes e Ciências Cinematográficas espanhola; inclui a categoria de Melhor Filme Ibero-Americano.", "nivelImportanciaPremiacao": 2, "flagNacional": false },
 
   { "nomePremiacao": "Festival de Cinema Latino-Americano de Toulouse", "descricaoPremiacao": "Cinélatino — Rencontres de Toulouse, festival francês dedicado à difusão do cinema latino-americano.", "nivelImportanciaPremiacao": 3, "flagNacional": false },
   { "nomePremiacao": "Festival de Cinema Brasileiro de Miami", "descricaoPremiacao": "Brazilian Film Festival of Miami, principal vitrine do cinema brasileiro nos Estados Unidos.", "nivelImportanciaPremiacao": 3, "flagNacional": false },

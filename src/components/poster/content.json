@@ -1,0 +1,138 @@
+{
+  "abertura": {
+    "titulo": {
+      "prefixo": "DNA DO",
+      "linhas": [
+        "CINEMA",
+        "PERNAMBUCANO"
+      ]
+    },
+    "subtitulo": "Uma investigação sobre a história, os recursos e as pessoas por trás do cinema feito em Pernambuco."
+  },
+  "contexto": {
+    "titulo": "CONTEXTO",
+    "paragrafos": [
+      "Hoje, o cinema pernambucano ganha espaço pelo mundo afora. Mas, antes dos grandes festivais, já havia gente por aqui fazendo cinema acontecer, muito antes da fama de agora.",
+      "Cada filme guarda uma história, cada época, uma transformação. Há quem escreva, filme e edite, quem financia a produção, quem abra caminhos para outros e quem mantenha viva a criação.",
+      "Mas o que existe por trás de um cinema que ganhou projeção? Como se formou essa trajetória, quem construiu essa produção e o que os dados nos revelam sobre as suas condições?",
+      "Para descobrir esse caminho, vamos voltar no tempo. Antes de olhar para os prêmios, vamos conhecer o nascimento de uma produção que atravessou diferentes épocas e movimentos."
+    ]
+  },
+  "cicloDoRecife": {
+    "titulo": "CICLO DO RECIFE",
+    "paragrafos": [
+      "Na década de vinte, o Recife também filmava. Entre histórias e imagens, uma produção se formava, e o cinema feito por aqui novos caminhos ensaiava.",
+      "De 1923 a 1931, o Recife já realizava seus próprios longas. O chamado Ciclo do Recife deixou jovens impressionados com um cinema que nascia e com projetos próprios e variados."
+    ]
+  },
+  "super8": {
+    "titulo": "SUPER-8",
+    "paragrafos": [
+      "Mas fazer cinema exige recursos, equipamento e condição. Mas nem sempre quem tem histórias consegue trazê-las à exibição. Décadas depois, outras gerações buscaram formas de experimentação.",
+      "Com equipamentos mais acessíveis, novos caminhos puderam explorar, fazendo do próprio processo uma maneira de inventar. Com câmeras Super-8, novos filmes puderam criar.",
+      "Entre recursos escassos e um caminho pouco explorado, uma geração experimentava outro modo de contar seu lado, E não deixava que o pouco investimento tornasse o cinema pernambucano limitado."
+    ]
+  },
+  "anos2000": {
+    "titulo": "ANOS 2000",
+    "paragrafos": [
+      "Com a virada do século, novos filmes ganharam espaço. A produção se diversificava, ampliando o próprio traço. Não havia um só caminho, nem um único compasso.",
+      "Entre os filmes dessa trajetória, Amarelo Manga se destacou. Em 2002, o longa de Cláudio Assis novos olhares apresentou. A produção pernambucana outras vozes incorporou."
+    ]
+  },
+  "consolidacao": {
+    "titulo": "CONSOLIDAÇÃO",
+    "paragrafos": [
+      "Chegando aos anos recentes, mais filmes cruzaram fronteiras. Recife ganhou espaço em histórias e maneiras de transformar o próprio lugar em imagens para outras galeras.",
+      "O Som ao Redor, Aquarius, Bacurau e Retratos Fantasmas ajudam a contar essa história, com diferentes pegadas. Marcelo Gomes, Kleber Mendonça Filho trouxeram de Pernambuco novas olhadas."
+    ]
+  },
+  "retomadaManguebeat": {
+    "titulo": [
+      "RETOMADA",
+      "E",
+      "MANGUEBEAT"
+    ]
+  },
+  "reconhecimentoInternacional": {
+    "titulo": [
+      "RECONHECIMENTO",
+      "INTERNACIONAL"
+    ],
+    "paragrafos": [
+      "Um filme ganha um prêmio, outro chega a um festival. A notícia cruza fronteiras, o reconhecimento cresce afinal. Mas o que cada conquista nos revela sobre nosso audiovisual?",
+      "Em 2025, um Urso de Prata veio de Berlim para contar: O Último Azul, de Gabriel Mascaro, foi de Recife até lá para ganhar. Mais um prêmio de reconhecimento internacional para a produção brasileira levar.",
+      "Baile Perfumado marcou uma etapa dessa trajetória. Depois, outros filmes chegaram a circuitos de outra escala. Cada conquista tem seu contexto, cada prêmio tem sua história.",
+      "Sem cansar, Pernambuco chegou aos sonhos do Oscar. Manas disputou de perto a vaga do Brasil, O Último Azul brilhou em Berlim por outra estrada. Mas foi com O Agente Secreto que Recife ficou conhecido no mundo todo.",
+      "O Som ao Redor chegou a circuitos internacionais. Bacurau ganhou destaque em festivais mundiais. São marcos de uma trajetória que atravessou fronteiras culturais",
+      "Presente em Cannes, Toronto, Berlim e muitos mais, Pernambucano foi reconhecido e ganhou tudo que era capaz, Já com 4 indicações ao Oscar, Um futuro de destaque é nossa aposta"
+    ]
+  },
+  "podio": {
+    "dica": "Passe o mouse (ou toque) em um degrau para ver os filmes →",
+    "degraus": [
+      {
+        "posicao": 1,
+        "rotulo": "Vencedores relevantes",
+        "filmes": []
+      },
+      {
+        "posicao": 2,
+        "rotulo": "Indicados relevantes e vencedores",
+        "filmes": []
+      },
+      {
+        "posicao": 3,
+        "rotulo": "Outros indicados",
+        "filmes": []
+      }
+    ]
+  },
+  "conclusao": {
+    "titulo": "CONCLUSÃO",
+    "paragrafos": [
+      "Dos primeiros filmes do Recife aos que ganharam projeção, há décadas de experiências, trabalho e transformação. O cinema pernambucano não se explica por uma só razão.",
+      "Há cultura, há financiamento, há quem produza e quem crie. Há caminhos que se abrem e barreiras que persistem. A história se faz por muitos, mesmo quando poucos aparecem.",
+      "Os prêmios mostram conquistas, os recursos, condições. Os dados sobre profissionais podem revelar desigualdades. Cada fonte tem seus limites, cada número, suas verdades",
+      "O cinema pernambucano tem muitas histórias para contar. Mas, para além das telas, Há muito a investigar. Conhecer o que o sustenta também é parte do olhar."
+    ],
+    "voltarAoInicio": "Voltar ao início",
+    "compartilhar": "Compartilhar",
+    "linkCopiado": "Link copiado!"
+  },
+  "creditos": {
+    "titulo": "Créditos de produção",
+    "grupos": [
+      {
+        "titulo": "Design",
+        "nomes": [
+          "Annalyce Gonçalves",
+          "Dandara Vitória",
+          "Júlia",
+          "Pedro Henrique"
+        ]
+      },
+      {
+        "titulo": "Programação",
+        "nomes": [
+          "Asael",
+          "Bruna Veiga",
+          "Heitor",
+          "Guilherme",
+          "Ohashi",
+          "Jl",
+          "Klarissa",
+          "João Vitor",
+          "João Moraes"
+        ]
+      },
+      {
+        "titulo": "Jornalismo",
+        "nomes": [
+          "Jl",
+          "Vitória Lira"
+        ]
+      }
+    ]
+  }
+}

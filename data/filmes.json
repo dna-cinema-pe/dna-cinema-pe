@@ -363,6 +363,28 @@
     "classificacaoIndicativa": "12"
   },
   {
+    "chave": "o-ultimo-azul-2024",
+    "titulo": "O Último Azul",
+    "ano": 2024,
+    "genero": "Drama / Fábula",
+    "sinopse": "Tereza, de 77 anos, recebe uma ordem do Estado para se mudar para uma colônia remota sob uma política de \"boa morte compulsória\" voltada a idosos. Antes de obedecer, ela parte rio adentro pela Amazônia em busca de uma última aventura.",
+    "cidadeFilmagem": null,
+    "posterUrl": "/posters/o-ultimo-azul-2024.jpg",
+    "posterAlt": "Pôster de O Último Azul com o rosto de Denise Weinberg ao centro, um peixe-betta vermelho e branco, e o selo do Urso de Prata da Berlinale.",
+    "classificacaoIndicativa": "14"
+  },
+  {
+    "chave": "manas-2024",
+    "titulo": "Manas",
+    "ano": 2024,
+    "genero": "Drama",
+    "sinopse": "Na Ilha de Marajó, no Pará, Tielle, de 13 anos, enfrenta as violências sofridas por sucessivas gerações de mulheres de sua família, em um retrato construído a partir de dez anos de pesquisa sobre abuso e exploração sexual infantil na região.",
+    "cidadeFilmagem": "Ilha de Marajó (PA)",
+    "posterUrl": "/posters/manas-2024.jpg",
+    "posterAlt": "Pôster de Manas com a atriz Jamilli Correa sentada à beira d'água na Ilha de Marajó, navios ao fundo.",
+    "classificacaoIndicativa": "16"
+  },
+  {
     "chave": "o-agente-secreto-2025",
     "titulo": "O Agente Secreto",
     "ano": 2025,

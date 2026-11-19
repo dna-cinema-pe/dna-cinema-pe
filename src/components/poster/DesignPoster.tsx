@@ -1,5 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
-import type { RecorteGenero } from "@/server/panorama.ts";
+import type { PremiosInternacionais, RecorteGenero, RecorteOrigem } from "@/server/panorama.ts";
+import { Hotspot } from "@/components/onboarding/Hotspot.tsx";
+import { Abertura } from "./secoes/Abertura.tsx";
+import { Conclusao } from "./secoes/Conclusao.tsx";
+import { Contexto } from "./secoes/Contexto.tsx";
+import { Creditos } from "./secoes/Creditos.tsx";
+import { CicloDoRecife } from "./secoes/CicloDoRecife.tsx";
+import { Super8 } from "./secoes/Super8.tsx";
+import { RetomadaManguebeat } from "./secoes/RetomadaManguebeat.tsx";
+import { Anos2000 } from "./secoes/Anos2000.tsx";
+import { Consolidacao } from "./secoes/Consolidacao.tsx";
+import { Podio } from "./secoes/Podio.tsx";
+import { ReconhecimentoInternacional } from "./secoes/ReconhecimentoInternacional.tsx";
+import { PostalPendurado } from "./PostalPendurado.tsx";
 
 const assetPathPrefix = "/poster";
 const imgImage2 = `${assetPathPrefix}/6cfd1.png`;
@@ -22,35 +35,8 @@ const imgCamada2 = `${assetPathPrefix}/0a233.svg`;
 const imgCamada3 = `${assetPathPrefix}/a1863.svg`;
 const imgCamada4 = `${assetPathPrefix}/82523.svg`;
 const imgBandeira = `${assetPathPrefix}/dfc92.svg`;
-const imgCamada5 = `${assetPathPrefix}/d5aa9.svg`;
-const imgVector = `${assetPathPrefix}/38156.svg`;
-const imgGroup45 = `${assetPathPrefix}/979c9.svg`;
-const imgVector1 = `${assetPathPrefix}/55984.svg`;
-const imgVector2 = `${assetPathPrefix}/1255e.svg`;
-const imgVector3 = `${assetPathPrefix}/2e947.svg`;
-const imgVector4 = `${assetPathPrefix}/862b2.svg`;
-const imgVector5 = `${assetPathPrefix}/e99cb.svg`;
-const imgGroup = `${assetPathPrefix}/5bb7f.svg`;
-const imgGroup1 = `${assetPathPrefix}/610c5.svg`;
-const imgVector6 = `${assetPathPrefix}/4ece6.svg`;
-const imgVector7 = `${assetPathPrefix}/b81a3.svg`;
-const imgVector8 = `${assetPathPrefix}/6b6ce.svg`;
-const imgVector9 = `${assetPathPrefix}/d21b5.svg`;
 const imgVector10 = `${assetPathPrefix}/95194.svg`;
-const imgVector11 = `${assetPathPrefix}/8f319.svg`;
-const imgVector12 = `${assetPathPrefix}/39a9b.svg`;
 const imgVector13 = `${assetPathPrefix}/84431.svg`;
-const imgCamada6 = `${assetPathPrefix}/b1011.svg`;
-const imgCamada7 = `${assetPathPrefix}/eeb70.svg`;
-const imgGroup2 = `${assetPathPrefix}/7e9c9.svg`;
-const imgGroup3 = `${assetPathPrefix}/27f6e.svg`;
-const imgGroup4 = `${assetPathPrefix}/61f8a.svg`;
-const imgGroup5 = `${assetPathPrefix}/68463.svg`;
-const imgGroup7 = `${assetPathPrefix}/e0dcb.svg`;
-const imgGroup13 = `${assetPathPrefix}/e710d.svg`;
-const imgGroup8 = `${assetPathPrefix}/35f9c.svg`;
-const imgCamada8 = `${assetPathPrefix}/13379.svg`;
-const imgCamada9 = `${assetPathPrefix}/c29bf.svg`;
 const imgVector14 = `${assetPathPrefix}/529d0.svg`;
 const imgVector15 = `${assetPathPrefix}/27564.svg`;
 const imgVector16 = `${assetPathPrefix}/e0a91.svg`;
@@ -94,6 +80,9 @@ const imgGroup9 = `${assetPathPrefix}/6e384.svg`;
 const imgGroup32 = `${assetPathPrefix}/88159.svg`;
 const imgVector53 = `${assetPathPrefix}/a19ac.svg`;
 const imgArcoCiclo = `${assetPathPrefix}/90d88.svg`;
+const imgCicloRecife1 = `${assetPathPrefix}/ciclo-recife-1.png`;
+const imgCicloRecife2 = `${assetPathPrefix}/ciclo-recife-2.png`;
+const imgCicloRecife3 = `${assetPathPrefix}/ciclo-recife-3.png`;
 const imgEllipse2 = `${assetPathPrefix}/ea310.svg`;
 const imgGroup14 = `${assetPathPrefix}/5f164.svg`;
 const imgGroup15 = `${assetPathPrefix}/b0c58.svg`;
@@ -151,13 +140,17 @@ const imgCamada27 = `${assetPathPrefix}/7188f.svg`;
 interface DesignPosterProps {
   /** Vem de `obterRecorteGenero()`. Sem dado, o gráfico de gênero vira placeholder. */
   genero?: RecorteGenero | null;
+  /** Vem de `obterRecorteOrigem()`. Sem dado, o gráfico de origem vira placeholder. */
+  origem?: RecorteOrigem | null;
+  /** Vem de `obterPremiosInternacionais()`. Sem dado, os pinos da rota avisam que não carregou. */
+  premios?: PremiosInternacionais | null;
 }
 
 const BARRA_MAX = 382;
 const BARRA_BORDA_DIREITA = 402;
 const CINZA_PLACEHOLDER = "#d9d9d9";
 
-export function DesignPoster({ genero = null }: DesignPosterProps) {
+export function DesignPoster({ genero = null, origem = null, premios = null }: DesignPosterProps) {
   const maior = genero ? Math.max(genero.mulheres, genero.homens, 1) : 0;
   const larguraMulheres = genero ? Math.round((BARRA_MAX * genero.mulheres) / maior) : 253;
   const larguraHomens = genero ? Math.round((BARRA_MAX * genero.homens) / maior) : BARRA_MAX;
@@ -165,12 +158,35 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
   const corHomens = genero ? "#e3a54f" : CINZA_PLACEHOLDER;
   const textoMulheres = genero ? `${genero.mulheres}%` : "--%";
   const textoHomens = genero ? `${genero.homens}%` : "--%";
+
+  const maiorOrigem = origem ? Math.max(origem.pernambucanos, origem.outros, 1) : 0;
+  const larguraPernambucanos = origem
+    ? Math.round((BARRA_MAX * origem.pernambucanos) / maiorOrigem)
+    : 253;
+  const larguraOutros = origem ? Math.round((BARRA_MAX * origem.outros) / maiorOrigem) : BARRA_MAX;
+  const corPernambucanos = origem ? "red" : CINZA_PLACEHOLDER;
+  const corOutros = origem ? "#e3a54f" : CINZA_PLACEHOLDER;
+  const textoPernambucanos = origem ? `${origem.pernambucanos}%` : "--%";
+  const textoOutros = origem ? `${origem.outros}%` : "--%";
   return (
     <div
       className="bg-[#0b0909] relative h-[25712px] w-[1920px] overflow-hidden"
       data-node-id="46:2"
       data-name="Frame 2 teste"
     >
+      {/* Âncoras de capítulo (US-1.4): posição casada com o título de cada seção, sem alterar o layout do Figma. */}
+      <span id="cap-hero" aria-hidden="true" className="absolute left-0 top-0 h-px w-px" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(7% + 60.16px)" }} id="cap-contexto" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(15% + 77.2px)" }} id="cap-ciclo-do-recife" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(24% + 24.12px)" }} id="cap-super-8" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(29% + 70.52px)" }} id="cap-retomada-e-manguebeat" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(38% + 133.44px)" }} id="cap-anos-2000" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(41% + 71.08px)" }} id="cap-consolidacao" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(50% + 199px)" }} id="cap-financiamento" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(60% + 237.8px)" }} id="cap-reconhecimento-internacional" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(71% + 74.48px)" }} id="cap-recorte-genero-raca-origem" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(82% + 151.16px)" }} id="cap-conclusao" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(89% + 240.32px)" }} id="cap-rodape" />
       <div
         className="absolute flex h-[450.879px] items-center justify-center left-[calc(40%+301px)] top-[calc(17%-2.04px)] w-[445.039px]"
         data-node-id="288:172"
@@ -192,21 +208,21 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
         </div>
       </div>
       <div
-        className="absolute inset-[12.99%_76.56%_86.46%_4.27%]"
+        className="cloud-float cloud-float--slow absolute inset-[12.99%_76.56%_86.46%_4.27%]"
         data-node-id="283:117"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada3} />
       </div>
       <div
-        className="absolute inset-[12.99%_76.56%_86.46%_4.27%]"
+        className="cloud-float cloud-float--slow absolute inset-[12.99%_76.56%_86.46%_4.27%]"
         data-node-id="288:144"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada3} />
       </div>
       <div
-        className="absolute inset-[13.76%_4.86%_85.73%_71.46%]"
+        className="cloud-float cloud-float--reverse absolute inset-[13.76%_4.86%_85.73%_71.46%]"
         data-node-id="288:147"
         data-name="Camada_1"
       >
@@ -226,361 +242,8 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
           </div>
         </div>
       </div>
-      <div
-        className="pointer-events-none absolute z-10 left-[-94px] top-[130px] h-[314px] w-[778px]"
-        data-node-id="299:327"
-        data-name="Vector"
-      >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector6} />
-      </div>
-      <div
-        className="pointer-events-none absolute z-10 left-[1443px] top-[828px] h-[99px] w-[312px]"
-        data-node-id="299:508"
-      >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup45} />
-      </div>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute z-20 font-titulo leading-[0] left-[calc(50%+0.5px)] not-italic text-[#e3a54f] text-[0px] text-center top-[calc(1%+40.88px)] whitespace-nowrap"
-        data-node-id="46:3"
-      >
-        <span className="leading-[normal] text-[64px]">DNA DO</span>
-        <span className="leading-[normal] text-[96px]">{` `}</span>
-      </p>
-      <div
-        className="-translate-x-1/2 [word-break:break-word] absolute z-20 font-titulo leading-[0] left-[963.5px] not-italic text-[#e3a54f] text-[128px] text-center top-[calc(1%+167.88px)] whitespace-nowrap"
-        data-node-id="51:71"
-      >
-        <p className="leading-[normal] mb-0 whitespace-pre">{`CINEMA `}</p>
-        <p className="leading-[normal] whitespace-pre">PERNAMBUCANO</p>
-      </div>
-      <div className="absolute contents left-[23px] top-[40px]" data-node-id="129:4">
-        <div
-          className="-translate-x-1/2 absolute z-20 left-1/2 size-[126px] top-[161px]"
-          data-node-id="46:4"
-          data-name="Camada_1"
-        >
-          <img
-            alt=""
-            className="absolute block inset-0 max-w-none size-full"
-            src={imgCamada5}
-          />
-        </div>
-        <div
-          className="absolute inset-[3.21%_48.33%_96.37%_48.39%]"
-          data-node-id="46:7"
-          data-name="Vector"
-        >
-          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
-        </div>
-        <div
-          className="absolute flex h-[285.578px] items-center justify-center left-[calc(40%+128.98px)] top-[70.34px] w-[990.76px]"
-          data-node-id="51:72"
-        >
-          <div className="-scale-y-100 flex-none rotate-[-172.72deg]">
-            <div className="h-[162.894px] relative w-[978px]" data-name="Camada_1" />
-          </div>
-        </div>
-        <div
-          className="absolute z-20 h-[1135.39px] left-[23px] overflow-clip top-[40px] w-[1873.95px]"
-          data-node-id="46:14"
-          data-name="Camada_1"
-        >
-          <div
-            className="absolute inset-[-97.24%_23.74%_-40.57%_-39.01%] overflow-clip"
-            data-node-id="299:268"
-            data-name="nuvem 1"
-          >
-            <div
-              className="absolute inset-[35.01%_148.87%_53.36%_-84.87%]"
-              data-node-id="299:269"
-              data-name="Vector"
-            >
-              <img
-                alt=""
-                className="absolute block inset-0 max-w-none size-full"
-                src={imgVector1}
-              />
-            </div>
-            <div
-              className="absolute inset-[24.44%_177.24%_65.37%_-119.21%]"
-              data-node-id="299:270"
-              data-name="Vector"
-            >
-              <img
-                alt=""
-                className="absolute block inset-0 max-w-none size-full"
-                src={imgVector2}
-              />
-            </div>
-            <div
-              className="absolute inset-[24.85%_144.19%_68.39%_-74.38%]"
-              data-node-id="299:271"
-              data-name="Vector"
-            >
-              <img
-                alt=""
-                className="absolute block inset-0 max-w-none size-full"
-                src={imgVector3}
-              />
-            </div>
-            <div
-              className="absolute inset-[39.88%_195.34%_52.84%_-117.3%]"
-              data-node-id="299:272"
-              data-name="Vector"
-            >
-              <img
-                alt=""
-                className="absolute block inset-0 max-w-none size-full"
-                src={imgVector4}
-              />
-            </div>
-            <div
-              className="absolute inset-[31.28%_151.07%_67.49%_-66.87%]"
-              data-node-id="299:273"
-              data-name="Vector"
-            >
-              <img
-                alt=""
-                className="absolute block inset-0 max-w-none size-full"
-                src={imgVector5}
-              />
-            </div>
-            <div
-              className="absolute contents inset-[-61.58%_13.9%_140.86%_-5.1%]"
-              data-node-id="299:274"
-              data-name="Group"
-            >
-              <div
-                className="absolute contents inset-[-61.58%_13.9%_140.86%_-5.1%]"
-                data-node-id="299:275"
-                data-name="Group"
-              >
-                <div
-                  className="absolute inset-[-61.58%_13.9%_140.86%_-5.1%]"
-                  data-node-id="299:276"
-                  data-name="Group"
-                >
-                  <img
-                    alt=""
-                    className="absolute block inset-0 max-w-none size-full"
-                    src={imgGroup}
-                  />
-                </div>
-              </div>
-            </div>
-            <div
-              className="absolute contents inset-[86.1%_160.84%_-7.18%_-99.68%]"
-              data-node-id="299:316"
-              data-name="Group"
-            >
-              <div
-                className="absolute inset-[86.1%_160.84%_-7.18%_-99.68%]"
-                data-node-id="299:317"
-                data-name="Group"
-              >
-                <img
-                  alt=""
-                  className="absolute block inset-0 max-w-none size-full"
-                  src={imgGroup1}
-                />
-              </div>
-            </div>
-          </div>
-          <div
-            className="absolute inset-[5.95%_98.85%_0.09%_0]"
-            data-node-id="46:15"
-            data-name="Vector"
-          >
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector7} />
-          </div>
-          <div
-            className="absolute inset-[94.48%_98.98%_5.47%_1.02%]"
-            data-node-id="46:16"
-            data-name="Vector"
-          >
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector8} />
-          </div>
-          <div
-            className="absolute inset-[3.44%_45.97%_96.55%_54%]"
-            data-node-id="46:17"
-            data-name="Vector"
-          >
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector9} />
-          </div>
-          <div
-            className="absolute inset-[3.23%_2.05%_0_2.05%]"
-            data-node-id="46:18"
-            data-name="Vector"
-          >
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector10} />
-          </div>
-          <div
-            className="absolute inset-[94.57%_1.02%_5.38%_98.98%]"
-            data-node-id="46:19"
-            data-name="Vector"
-          >
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector11} />
-          </div>
-          <div
-            className="absolute inset-[6.04%_0_0_98.85%]"
-            data-node-id="46:20"
-            data-name="Vector"
-          >
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector12} />
-          </div>
-          <div
-            className="absolute inset-[0_0.2%_93.96%_0.2%]"
-            data-node-id="46:21"
-            data-name="Vector"
-          >
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector13} />
-          </div>
-          <div
-            className="absolute flex inset-[2.2%_2.85%_63.45%_67.08%] items-center justify-center"
-            data-node-id="46:22"
-            style={{ containerType: "size" }}
-          >
-            <div className="flex-none h-[hypot(-13.9049cqw,49.9566cqh)] rotate-[21.91deg] w-[hypot(86.0951cqw,50.0434cqh)]">
-              <div className="relative size-full" data-name="Camada_1">
-                <img
-                  alt=""
-                  className="absolute block inset-0 max-w-none size-full"
-                  src={imgCamada6}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="absolute z-20 inset-[0.65%_62.17%_98.46%_21.82%]"
-          data-node-id="46:10"
-          data-name="Camada_1"
-        >
-          <img
-            alt=""
-            className="absolute block inset-0 max-w-none size-full"
-            src={imgCamada7}
-          />
-        </div>
-        <div className="absolute inset-[4.57%_1.21%_89.23%_95.73%]" data-node-id="46:32">
-          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup2} />
-        </div>
-        <div
-          className="absolute flex inset-[4.56%_95.74%_89.24%_1.2%] items-center justify-center"
-          data-node-id="46:35"
-          style={{ containerType: "size" }}
-        >
-          <div className="-scale-x-100 flex-none h-[100cqh] w-[100cqw]">
-            <div className="relative size-full">
-              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup3} />
-            </div>
-          </div>
-        </div>
-        <div
-          className="absolute flex inset-[10.75%_95.59%_83.05%_1.35%] items-center justify-center"
-          data-node-id="46:38"
-          style={{ containerType: "size" }}
-        >
-          <div className="-scale-x-100 flex-none h-[100cqh] w-[100cqw]">
-            <div className="relative size-full">
-              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup4} />
-            </div>
-          </div>
-        </div>
-        <div className="absolute inset-[16.95%_95.33%_76.85%_1.61%]" data-node-id="46:41">
-          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup5} />
-        </div>
-        <div
-          className="absolute flex inset-[23.15%_95.59%_70.65%_1.35%] items-center justify-center"
-          data-node-id="46:44"
-          style={{ containerType: "size" }}
-        >
-          <div className="-scale-x-100 flex-none h-[100cqh] w-[100cqw]">
-            <div className="relative size-full">
-              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup7} />
-            </div>
-          </div>
-        </div>
-        <div className="absolute inset-[29.35%_95.33%_64.45%_1.61%]" data-node-id="83:39">
-          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup13} />
-        </div>
-        <div
-          className="absolute flex inset-[10.75%_1.47%_83.05%_95.47%] items-center justify-center"
-          data-node-id="46:47"
-          style={{ containerType: "size" }}
-        >
-          <div className="-scale-x-100 flex-none h-[100cqh] w-[100cqw]">
-            <div className="relative size-full">
-              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup4} />
-            </div>
-          </div>
-        </div>
-        <div className="absolute inset-[16.95%_1.21%_76.85%_95.73%]" data-node-id="46:50">
-          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup5} />
-        </div>
-        <div
-          className="absolute flex inset-[23.15%_1.47%_70.65%_95.47%] items-center justify-center"
-          data-node-id="46:53"
-          style={{ containerType: "size" }}
-        >
-          <div className="-scale-x-100 flex-none h-[100cqh] w-[100cqw]">
-            <div className="relative size-full">
-              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup8} />
-            </div>
-          </div>
-        </div>
-        <div className="absolute contents left-[82px] top-[calc(4%+113.52px)]" data-node-id="51:69">
-          <div
-            className="absolute h-[361px] left-[82px] top-[calc(4%+113.52px)] w-[1472px]"
-            data-node-id="46:56"
-            data-name="Camada_1"
-          >
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada8} />
-          </div>
-          <div
-            className="absolute h-[25.28px] left-[calc(20%+335px)] top-[calc(5%+228.4px)] w-[261.86px]"
-            data-node-id="46:238"
-            data-name="Camada_1"
-          >
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada9} />
-          </div>
-        </div>
-      </div>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-corpo font-normal leading-[normal] left-[calc(50%+3px)] not-italic text-[#eaeaea] text-[32px] text-center top-[calc(3%+233.64px)] w-[856px]"
-        data-node-id="46:271"
-      >
-        Uma investigação sobre a história, os recursos e as pessoas por trás do cinema feito em
-        Pernambuco.
-      </p>
-      <p
-        className="-translate-x-full [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+979px)] not-italic text-[128px] text-right text-white top-[calc(7%+60.16px)] whitespace-nowrap"
-        data-node-id="46:272"
-      >
-        CONTEXTO
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(8%+35.04px)] w-[470px]"
-        data-node-id="46:273"
-      >
-        Hoje, o cinema pernambucano ganha espaço pelo mundo afora. Mas, antes dos grandes festivais,
-        já havia gente por aqui fazendo cinema acontecer, muito antes da fama de agora.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(40%+266px)] not-italic text-[24px] text-white top-[calc(8%+35.04px)] w-[498px]"
-        data-node-id="46:275"
-      >{`Cada filme guarda uma história, cada época, uma transformação. Há quem escreva, filme e edite, quem financia a produção, quem abra caminhos para outros e quem mantenha viva a criação. `}</p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(12%+60.56px)] w-[500px]"
-        data-node-id="46:276"
-      >
-        Mas o que existe por trás de um cinema que ganhou projeção? Como se formou essa trajetória,
-        quem construiu essa produção e o que os dados nos revelam sobre as suas condições?
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(40%+252px)] not-italic text-[24px] text-white top-[calc(12%+60.56px)] w-[512px]"
-        data-node-id="132:713"
-      >{`Para descobrir esse caminho, vamos voltar no tempo. Antes de olhar para os prêmios, vamos conhecer o nascimento de uma produção que atravessou diferentes épocas e movimentos. `}</p>
+      <Abertura />
+      <Contexto />
       <div
         className="absolute aspect-[85/81] left-[85.73%] right-[9.84%] top-[calc(2%+130.76px)]"
         data-node-id="46:277"
@@ -1167,17 +830,11 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
           data-node-id="46:302"
         >
           <div className="flex-none rotate-[9.49deg]">
-            <div className="bg-[#d9d9d9] h-[350px] relative w-[571.677px]" />
-          </div>
-        </div>
-        <div
-          className="absolute flex h-[68.361px] items-center justify-center left-[239.76px] top-[195.82px] w-[259.741px]"
-          data-node-id="46:303"
-        >
-          <div className="flex-none rotate-[9.49deg]">
-            <p className="[word-break:break-word] font-corpo font-semibold h-[26px] leading-[normal] not-italic relative text-[24px] text-black w-[259px]">
-              imagem filmes
-            </p>
+            <img
+              alt="Ponte sobre o rio Capibaribe no Recife, em cena dos anos 1920"
+              className="h-[350px] object-cover relative w-[571.677px]"
+              src={imgCicloRecife1}
+            />
           </div>
         </div>
       </div>
@@ -1189,17 +846,11 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
           data-node-id="51:78"
         >
           <div className="flex-none rotate-[14.59deg]">
-            <div className="bg-[#eee] h-[350px] relative w-[569.769px]" />
-          </div>
-        </div>
-        <div
-          className="absolute flex h-[70.619px] items-center justify-center left-[241.8px] top-[199.8px] w-[188.47px]"
-          data-node-id="51:79"
-        >
-          <div className="flex-none rotate-[10.99deg]">
-            <p className="[word-break:break-word] font-corpo font-semibold leading-[normal] not-italic relative text-[24px] text-black whitespace-nowrap">
-              imagem filmes
-            </p>
+            <img
+              alt="Público em frente a um cinema do Recife com cartazes de filmes"
+              className="h-[350px] object-cover relative w-[569.769px]"
+              src={imgCicloRecife2}
+            />
           </div>
         </div>
       </div>
@@ -1211,17 +862,11 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
           data-node-id="51:81"
         >
           <div className="flex-none rotate-[25.46deg]">
-            <div className="bg-[#c4c4c4] h-[350px] relative w-[542.991px]" />
-          </div>
-        </div>
-        <div
-          className="absolute flex h-[96.688px] items-center justify-center left-[252px] top-[240px] w-[191.947px]"
-          data-node-id="51:82"
-        >
-          <div className="flex-none rotate-[21.69deg]">
-            <p className="[word-break:break-word] font-corpo font-semibold h-[26px] leading-[normal] not-italic relative text-[24px] text-black w-[196.233px]">
-              imagem filmes
-            </p>
+            <img
+              alt="Ator em cena de filme do Ciclo do Recife"
+              className="h-[350px] object-cover relative w-[542.991px]"
+              src={imgCicloRecife3}
+            />
           </div>
         </div>
       </div>
@@ -1272,12 +917,6 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
           src={imgImage15}
         />
       </div>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-1/2 not-italic text-[120px] text-center text-white top-[calc(24%+24.12px)] whitespace-nowrap"
-        data-node-id="149:9"
-      >
-        SUPER-8
-      </p>
       <div
         className="absolute h-[334.844px] left-[77px] top-[calc(21%+73.48px)] w-[1767.946px]"
         data-node-id="61:18"
@@ -1292,44 +931,8 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
       >
         Celso Marconi, Jomard Muniz de Brito e Aristides Guimarães, realizadores do Ciclo Super 8
       </p>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+574px)] not-italic text-[90px] text-center text-white top-[calc(29%+70.52px)] whitespace-nowrap"
-        data-node-id="67:25"
-      >
-        RETOMADA
-      </p>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(40%+190px)] not-italic text-[80px] text-center text-white top-[calc(29%+201.52px)] whitespace-nowrap"
-        data-node-id="67:26"
-      >
-        E
-      </p>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+573.5px)] not-italic text-[120px] text-center text-white top-[calc(30%+64.4px)] whitespace-nowrap"
-        data-node-id="67:29"
-      >
-        MANGUEBEAT
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(30%-184px)] not-italic text-[24px] text-white top-[calc(16%+41.08px)] w-[501px]"
-        data-node-id="46:301"
-      >
-        Na década de vinte, o Recife também filmava. Entre histórias e imagens, uma produção se
-        formava, e o cinema feito por aqui novos caminhos ensaiava.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(70%-265px)] not-italic text-[24px] text-white top-[calc(16%+41.08px)] w-[453px]"
-        data-node-id="46:307"
-      >
-        De 1923 a 1931, treze longas foram realizados. O chamado Ciclo do Recife deixou jovens
-        impressionados com um cinema que nascia e com projetos próprios e variados.
-      </p>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-1/2 not-italic text-[120px] text-center text-white top-[calc(15%+77.2px)] w-[1158px]"
-        data-node-id="129:3"
-      >
-        CICLO DO RECIFE
-      </p>
+      <RetomadaManguebeat />
+      <CicloDoRecife />
       <div
         className="absolute h-[373.177px] left-[calc(20%+204px)] top-[calc(13%+184.61px)] w-[743.277px]"
         data-node-id="288:159"
@@ -1344,65 +947,18 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse2} />
       </div>
       <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[160px] not-italic text-[24px] text-white top-[calc(27%+36.76px)] w-[477px]"
-        data-node-id="149:12"
-      >
-        Mas fazer cinema exige recursos, equipamento e condição. Mas nem sempre quem tem histórias
-        consegue trazê-las à exibição. Décadas depois, outras gerações buscaram formas de
-        experimentação.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium h-[211px] leading-[normal] left-[calc(20%+25px)] not-italic text-[24px] text-white top-[calc(39%+219.32px)] w-[477px]"
-        data-node-id="163:123"
-      >
-        Com a virada do século, novos filmes ganharam espaço. A produção se diversificava, ampliando
-        o próprio traço. Não havia um só caminho, nem um único compasso.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium h-[246px] leading-[normal] left-[calc(40%+240px)] not-italic text-[24px] text-white top-[calc(39%+219.32px)] w-[477px]"
-        data-node-id="163:125"
-      >
-        Entre os filmes dessa trajetória, Amarelo Manga se destacou. Em 2002, o longa de Cláudio
-        Assis novos olhares apresentou. A produção pernambucana outras vozes incorporou.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium h-[340px] leading-[normal] left-[calc(20%+25px)] not-italic text-[24px] text-white top-[calc(41%+228.08px)] w-[477px]"
-        data-node-id="163:149"
-      >
-        Chegando aos anos recentes, mais filmes cruzaram fronteiras. Recife ganhou espaço em
-        histórias e maneiras de transformar o próprio lugar em imagens para outras galeras.
-      </p>
-      <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(52%+0.76px)] w-[477px]"
         data-node-id="163:197"
       >
         Um filme nasce de uma ideia, mas precisa de contribuição. Tem roteiro, equipe e equipamento,
         tem trabalho e preparação. Para chegar até as telas, também precisa de condição.
       </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium h-[246px] leading-[normal] left-[calc(40%+240px)] not-italic text-[24px] text-white top-[calc(41%+228.08px)] w-[477px]"
-        data-node-id="163:150"
+      <Super8 />
+      <PostalPendurado
+        id="valente-e-o-galo"
+        comDica
+        className="absolute h-[781.76px] left-[90px] top-[calc(32%+230.37px)] w-[576.791px]"
       >
-        O Som ao Redor, Aquarius, Bacurau e Retratos Fantasmas ajudam a contar essa história, com
-        diferentes pegadas. Marcelo Gomes, Kleber Mendonça Filho trouxeram de Pernambuco novas
-        olhadas.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(50%-239px)] not-italic text-[24px] text-white top-[calc(27%+36.76px)] w-[477px]"
-        data-node-id="149:13"
-      >
-        Com equipamentos mais acessíveis, novos caminhos puderam explorar, fazendo do próprio
-        processo uma maneira de inventar. Com câmeras Super-8, novos filmes puderam criar.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(60%+130px)] not-italic text-[24px] text-white top-[calc(27%+36.76px)] w-[455px]"
-        data-node-id="149:17"
-      >
-        Entre recursos escassos e um caminho pouco explorado, uma geração experimentava outro modo
-        de contar seu lado, E não deixava que o pouco investimento tornasse o cinema pernambucano
-        limitado.
-      </p>
-      <div className="absolute h-[781.76px] left-[90px] top-[calc(32%+230.37px)] w-[576.791px]">
         <div
           className="absolute inset-0 flex items-center justify-center"
           data-node-id="156:60"
@@ -1437,8 +993,11 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
             </p>
           </div>
         </div>
-      </div>
-      <div className="absolute bg-[#d9d9d9] h-[747.369px] left-[calc(20%+313px)] top-[calc(33%+232.04px)] w-[526.736px]">
+      </PostalPendurado>
+      <PostalPendurado
+        id="baile-perfumado"
+        className="absolute bg-[#d9d9d9] h-[747.369px] left-[calc(20%+313px)] top-[calc(33%+232.04px)] w-[526.736px]"
+      >
         <div
           className="absolute h-[393px] left-[38px] top-[44px] w-[449px]"
           data-node-id="156:54"
@@ -1459,8 +1018,11 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
           Na trajetória do cinema, um marco veio se firmar: Baile Perfumado, de 1996, fez o público
           olhar para uma produção pernambucana que voltava a se destacar
         </p>
-      </div>
-      <div className="absolute h-[807.888px] left-[calc(60%+79px)] top-[calc(34%+184.87px)] w-[616.874px]">
+      </PostalPendurado>
+      <PostalPendurado
+        id="o-rap-do-pequeno-principe"
+        className="absolute h-[807.888px] left-[calc(60%+79px)] top-[calc(34%+184.87px)] w-[616.874px]"
+      >
         <div
           className="absolute inset-0 flex items-center justify-center"
           data-node-id="196:9"
@@ -1495,13 +1057,8 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
             </p>
           </div>
         </div>
-      </div>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+576px)] not-italic text-[120px] text-center text-white top-[calc(38%+133.44px)] whitespace-nowrap"
-        data-node-id="163:120"
-      >
-        ANOS 2000
-      </p>
+      </PostalPendurado>
+      <Anos2000 />
       <p
         className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+586.5px)] not-italic text-[115px] text-center text-white top-[calc(50%+199px)] whitespace-nowrap"
         data-node-id="163:188"
@@ -1515,13 +1072,9 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
         <p className="leading-[normal] mb-0">RECORTE DE GÊNERO,</p>
         <p className="leading-[normal]">RAÇA E ORIGEM</p>
       </div>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-1/2 not-italic text-[170px] text-center text-white top-[calc(82%+151.16px)] whitespace-nowrap"
-        data-node-id="163:297"
-      >
-        CONCLUSÃO
-      </p>
-      <div
+      <PostalPendurado
+        id="amarelo-manga"
+        comDica
         className="absolute z-10 flex h-[313.969px] items-center justify-center left-[162px] top-[calc(43%+194.87px)] w-[267.621px]"
         data-node-id="163:142"
       >
@@ -1534,8 +1087,9 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
             />
           </div>
         </div>
-      </div>
-      <div
+      </PostalPendurado>
+      <PostalPendurado
+        id="cinema-aspirinas-e-urubus"
         className="absolute flex h-[520.207px] items-center justify-center left-[calc(20%+371px)] top-[calc(47%-8.64px)] w-[464.88px]"
         data-node-id="163:176"
       >
@@ -1548,8 +1102,9 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
             />
           </div>
         </div>
-      </div>
-      <div
+      </PostalPendurado>
+      <PostalPendurado
+        id="o-agente-secreto"
         className="absolute flex h-[467.094px] items-center justify-center left-[calc(60%+162px)] top-[calc(47%+39.36px)] w-[399.371px]"
         data-node-id="163:182"
       >
@@ -1562,8 +1117,9 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
             />
           </div>
         </div>
-      </div>
-      <div
+      </PostalPendurado>
+      <PostalPendurado
+        id="febre-do-rato"
         className="absolute flex h-[521.214px] items-center justify-center left-[236px] top-[calc(46%+144.48px)] w-[466.172px]"
         data-node-id="163:179"
       >
@@ -1576,7 +1132,7 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
             />
           </div>
         </div>
-      </div>
+      </PostalPendurado>
       <div
         className="absolute flex inset-[35.55%_95.33%_52.05%_1.35%] items-center justify-center"
         data-node-id="162:66"
@@ -1629,7 +1185,8 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
           <img alt="" className="block max-w-none size-full" src={imgVector55} />
         </div>
       </div>
-      <div
+      <PostalPendurado
+        id="o-som-ao-redor"
         className="absolute flex h-[376.553px] items-center justify-center left-[calc(20%+107px)] top-[calc(43%+112.84px)] w-[330.067px]"
         data-node-id="163:161"
       >
@@ -1642,8 +1199,9 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
             />
           </div>
         </div>
-      </div>
-      <div
+      </PostalPendurado>
+      <PostalPendurado
+        id="aquarius"
         className="absolute flex h-[368.416px] items-center justify-center left-[calc(40%+73px)] top-[calc(43%+85.84px)] w-[315px]"
         data-node-id="163:162"
       >
@@ -1656,7 +1214,7 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
             />
           </div>
         </div>
-      </div>
+      </PostalPendurado>
       <div
         className="absolute flex inset-[42.93%_46.95%_56.55%_50.89%] items-center justify-center"
         data-node-id="297:253"
@@ -1668,7 +1226,8 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
           </div>
         </div>
       </div>
-      <div
+      <PostalPendurado
+        id="retratos-fantasmas"
         className="absolute flex h-[368.416px] items-center justify-center left-[calc(60%+333px)] top-[calc(43%+43.84px)] w-[315px]"
         data-node-id="163:169"
       >
@@ -1681,7 +1240,7 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
             />
           </div>
         </div>
-      </div>
+      </PostalPendurado>
       <div
         className="absolute flex inset-[42.85%_13.91%_56.64%_84.15%] items-center justify-center"
         data-node-id="297:258"
@@ -1701,19 +1260,7 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
           <img alt="" className="block max-w-none size-full" src={imgVector56} />
         </div>
       </div>
-      <div
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[0] left-[calc(20%+598px)] not-italic text-[100px] text-center text-white top-[calc(60%+237.8px)] whitespace-nowrap"
-        data-node-id="163:185"
-      >
-        <p className="leading-[normal] mb-0 whitespace-pre">{`RECONHECIMENTO `}</p>
-        <p className="leading-[normal] whitespace-pre">INTERNACIONAL</p>
-      </div>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+547px)] not-italic text-[64px] text-center text-white top-[calc(41%+71.08px)] whitespace-nowrap"
-        data-node-id="180:3"
-      >
-        CONSOLIDAÇÃO
-      </p>
+      <Consolidacao />
       <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(58%+146.04px)] w-[477px]"
         data-node-id="163:199"
@@ -1721,78 +1268,8 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
         Os dados podem mostrar concentrações e diferenças, mas precisam de contexto para sustentar
         conclusões. Investigar quem recebe recursos também exige olhar as condições.
       </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(62%+69.56px)] w-[477px]"
-        data-node-id="163:233"
-      >
-        Um filme ganha um prêmio, outro chega a um festival. A notícia cruza fronteiras, o
-        reconhecimento cresce afinal. Mas o que cada conquista nos revela sobre nosso audiovisual?
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(40%+368px)] not-italic text-[24px] text-white top-[calc(62%+69.56px)] w-[477px]"
-        data-node-id="163:235"
-      >
-        Em 2025, um Urso de Prata veio de Berlim para contar: O Último Azul, de Gabriel Mascaro, foi
-        de Recife até lá para ganhar. Mais um prêmio de reconhecimento internacional para a produção
-        brasileira levar.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(64%+165.32px)] w-[477px]"
-        data-node-id="163:240"
-      >
-        O Som ao Redor chegou a circuitos internacionais. Bacurau ganhou destaque em festivais
-        mundiais. São marcos de uma trajetória que atravessou fronteiras culturais
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+348px)] not-italic text-[24px] text-white top-[calc(83%+221.04px)] w-[477px]"
-        data-node-id="163:298"
-      >
-        Dos primeiros filmes do Recife aos que ganharam projeção, há décadas de experiências,
-        trabalho e transformação. O cinema pernambucano não se explica por uma só razão.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+348px)] not-italic text-[24px] text-white top-[calc(88%+135.44px)] w-[477px]"
-        data-node-id="163:301"
-      >
-        O cinema pernambucano tem muitas histórias para contar. Mas, para além das telas, Há muito a
-        investigar. Conhecer o que o sustenta também é parte do olhar.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+348px)] not-italic text-[24px] text-white top-[calc(87%+5.56px)] w-[477px]"
-        data-node-id="163:300"
-      >
-        Os prêmios mostram conquistas, os recursos, condições. Os dados sobre profissionais podem
-        revelar desigualdades. Cada fonte tem seus limites, cada número, suas verdades
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+348px)] not-italic text-[24px] text-white top-[calc(85%+117.8px)] w-[477px]"
-        data-node-id="163:299"
-      >
-        Há cultura, há financiamento, há quem produza e quem crie. Há caminhos que se abrem e
-        barreiras que persistem. A história se faz por muitos, mesmo quando poucos aparecem.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(40%+368px)] not-italic text-[24px] text-white top-[calc(64%+165.32px)] w-[477px]"
-        data-node-id="163:241"
-      >
-        Presente em Cannes, Toronto, Berlim e muitos mais, Pernambucano foi reconhecido e ganhou
-        tudo que era capaz, Já com 4 indicações ao Oscar, Um futuro de destaque é nossa aposta
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(63%+114.44px)] w-[477px]"
-        data-node-id="163:237"
-      >
-        Baile Perfumado marcou uma etapa dessa trajetória. Depois, outros filmes chegaram a
-        circuitos de outra escala. Cada conquista tem seu contexto, cada prêmio tem sua história.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(40%+368px)] not-italic text-[24px] text-white top-[calc(63%+114.44px)] w-[477px]"
-        data-node-id="163:238"
-      >
-        Sem cansar, Pernambuco representou o Brasil três vezes nos sonhos do Oscar. O Último Azul e
-        Manas, levaram dois pernambucanos a tentar. Mas com O Agente Secreto Recife conhecido no
-        mundo todo ia ficar.
-      </p>
+      <Conclusao />
+      <ReconhecimentoInternacional premios={premios} />
       <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(57%+98.16px)] w-[477px]"
         data-node-id="163:201"
@@ -1804,8 +1281,8 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(56%+87.28px)] w-[477px]"
         data-node-id="163:203"
       >
-        Um valor anunciado não é o mesmo que o pago. Um edital publicado não significa tudo
-        realizado. Para entender o investimento, cada dado deve ser verificado
+        Um edital publicado não garante o mesmo alcance em cada edição. Cada um tem suas regras,
+        seus critérios e seu teto. Para entender o investimento, cada dado deve ser verificado
       </p>
       <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(55%+38.4px)] w-[477px]"
@@ -1819,8 +1296,8 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(54%+25.52px)] w-[477px]"
         data-node-id="163:207"
       >
-        Criado em 2003, ganhou um marco importante: o audiovisual passou a ter edital próprio
-        adiante. Desde 2007, essa modalidade integra essa trajetória.
+        Criado em 2002, ganhou um marco importante: o audiovisual passou a ter edital próprio
+        adiante dentro do Funcultura.
       </p>
       <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(53%+12.64px)] w-[477px]"
@@ -1952,70 +1429,13 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
         </div>
       </div>
       <div
-        className="absolute bg-[#d9d9d9] h-[167px] left-[299px] top-[calc(68%+170.84px)] w-[352px]"
-        data-node-id="163:254"
-      />
-      <div
-        className="absolute bg-[#d9d9d9] h-[317px] left-[calc(40%+39px)] top-[calc(68%+18.84px)] w-[352px]"
-        data-node-id="196:13"
-      />
-      <p
-        className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(40%+172px)] not-italic text-[120px] text-black top-[calc(68%+87.84px)] whitespace-nowrap"
-        data-node-id="196:15"
-      >
-        1º
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(20%+42px)] not-italic text-[120px] text-black top-[calc(68%+155.84px)] whitespace-nowrap"
-        data-node-id="196:16"
-      >
-        2º
-      </p>
-      <div
-        className="absolute bg-[#d9d9d9] h-[110px] left-[calc(60%+199px)] top-[calc(68%+227.84px)] w-[281px]"
-        data-node-id="163:255"
-      />
-      <div
-        className="absolute bg-[#8c8888] h-[243px] left-[calc(40%-8px)] top-[calc(67%-1.04px)] w-[169px]"
-        data-node-id="196:18"
-      />
-      <div
-        className="absolute bg-[#8c8888] h-[220px] left-[293px] top-[calc(67%+147.96px)] w-[153px]"
-        data-node-id="196:24"
-      />
-      <div
-        className="absolute bg-[#8c8888] h-[213px] left-[calc(60%+169px)] top-[calc(67%+232.96px)] w-[138px]"
-        data-node-id="196:27"
-      />
-      <div
-        className="absolute bg-[#8c8888] h-[243px] left-[calc(40%+254px)] top-[calc(67%-1.04px)] w-[169px]"
-        data-node-id="196:20"
-      />
-      <div
-        className="absolute bg-[#8c8888] h-[220px] left-[calc(20%+146px)] top-[calc(67%+147.96px)] w-[153px]"
-        data-node-id="196:25"
-      />
-      <div
-        className="absolute bg-[#8c8888] h-[213px] left-[calc(80%-1px)] top-[calc(67%+232.96px)] w-[138px]"
-        data-node-id="196:28"
-      />
-      <div
-        className="absolute bg-[#d9d9d9] h-[412px] left-[calc(40%+62px)] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[calc(66%+48.08px)] w-[286px]"
-        data-node-id="163:257"
-      />
-      <div
-        className="absolute bg-[#d9d9d9] h-[373px] left-[356px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[calc(66%+219.08px)] w-[259px]"
-        data-node-id="196:26"
-      />
-      <div
-        className="absolute bg-[#d9d9d9] h-[361px] left-[calc(60%+226px)] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[calc(67%+50.96px)] w-[234px]"
-        data-node-id="196:29"
-      />
-      <div
-        className="absolute z-10 flex h-[380.488px] items-center justify-center left-[calc(60%+3px)] top-[calc(43%+44.84px)] w-[329.539px]"
+        className="falling-poster hotspot absolute z-10 flex h-[380.488px] items-center justify-center left-[calc(60%+3px)] top-[calc(43%+44.84px)] w-[329.539px]"
+        role="button"
+        tabIndex={0}
+        aria-label="Derrubar o pôster"
         data-node-id="163:174"
       >
-        <div className="poster-body">
+        <div className="falling-poster__body">
           <div className="flex-none rotate-[-4.27deg]">
             <div className="h-[358.877px] relative w-[303.665px]">
               <img
@@ -2038,33 +1458,16 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
           </div>
         </div>
       </div>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(60%+282px)] not-italic text-[120px] text-black top-[calc(68%+190.84px)] whitespace-nowrap"
-        data-node-id="196:17"
-      >
-        3º
-      </p>
-      <div
-        className="[word-break:break-word] absolute font-corpo font-semibold leading-[0] left-[calc(40%+81px)] not-italic text-[24px] text-white top-[calc(69%+133.72px)] whitespace-nowrap"
-        data-node-id="163:262"
-      >
-        <p className="leading-[normal] mb-0">*1 lugar</p>
-        <p className="leading-[normal]">vencedores relevantse</p>
-      </div>
-      <div
-        className="[word-break:break-word] absolute font-corpo font-semibold leading-[0] left-[337px] not-italic text-[24px] text-white top-[calc(69%+123.72px)] w-[265px]"
-        data-node-id="163:263"
-      >
-        <p className="leading-[normal] mb-0">*2 lugar</p>
-        <p className="leading-[normal]">indicados relevantes + vencedores</p>
-      </div>
-      <div
-        className="[word-break:break-word] absolute font-corpo font-semibold leading-[0] left-[calc(60%+199px)] not-italic text-[24px] text-white top-[calc(69%+113.72px)] whitespace-nowrap"
-        data-node-id="163:268"
-      >
-        <p className="leading-[normal] mb-0">*3 lugar</p>
-        <p className="leading-[normal]">indicados qlqr coisa</p>
-      </div>
+      <Podio />
+      <Hotspot
+        id="hotspot-genero"
+        style={{ top: "calc(73% + 16px)", left: "calc(60% - 10px)", width: 460, height: 240 }}
+        tooltip={
+          genero
+            ? `Dado real do acervo cadastrado: ${genero.mulheres}% mulheres e ${genero.homens}% homens entre as pessoas com gênero informado.`
+            : "Sem pessoas com gênero informado no acervo ainda — por isso o gráfico aparece em cinza."
+        }
+      />
       <div
         className="absolute contents left-[calc(40%+301px)] top-[calc(73%+16.24px)]"
         data-node-id="223:160"
@@ -2108,23 +1511,34 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
           data-node-id="196:42"
         >{textoHomens}</p>
       </div>
+      <Hotspot
+        id="hotspot-origem"
+        style={{ top: "calc(76% + 28px)", left: "calc(60% - 10px)", width: 460, height: 260 }}
+        tooltip={
+          origem
+            ? `${origem.pernambucanos}% das pessoas cadastradas no acervo nasceram em Pernambuco. Não é uma comparação com o cinema nacional — é só dentro do nosso próprio banco.`
+            : "Sem naturalidade confirmada por fonte pública ainda — por isso o gráfico aparece em cinza."
+        }
+      />
       <div
         className="absolute contents left-[calc(40%+301px)] top-[calc(76%+28.88px)]"
         data-node-id="223:159"
       >
         <div
-          className="absolute bg-[#d9d9d9] h-[41px] left-[calc(60%+149px)] top-[calc(76%+37.88px)] w-[253px]"
+          className="absolute h-[41px] top-[calc(76%+37.88px)]"
+          style={{ left: `calc(60% + ${BARRA_BORDA_DIREITA - larguraPernambucanos}px)`, width: larguraPernambucanos, backgroundColor: corPernambucanos }}
           data-node-id="196:43"
         />
         <div
-          className="absolute bg-[#d9d9d9] h-[41px] left-[calc(60%+20px)] top-[calc(76%+98.88px)] w-[382px]"
+          className="absolute h-[41px] top-[calc(76%+98.88px)]"
+          style={{ left: `calc(60% + ${BARRA_BORDA_DIREITA - larguraOutros}px)`, width: larguraOutros, backgroundColor: corOutros }}
           data-node-id="196:44"
         />
         <p
           className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(40%+369px)] not-italic text-[20px] text-white top-[calc(76%+189.88px)] whitespace-nowrap"
           data-node-id="196:45"
         >
-          Pernambucanos no cinema nacional
+          Pernambucanos no cinema pernambucano
         </p>
         <p
           className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(60%+293px)] not-italic text-[20px] text-white top-[calc(76%+233.88px)] whitespace-nowrap"
@@ -2133,27 +1547,24 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
           Outros
         </p>
         <div
-          className="absolute bg-[#d9d9d9] left-[calc(60%+379px)] size-[23px] top-[calc(76%+192.88px)]"
+          className="absolute size-[23px] top-[calc(76%+192.88px)]"
+          style={{ left: "calc(60% + 379px)", backgroundColor: corPernambucanos }}
           data-node-id="196:47"
         />
         <div
-          className="absolute bg-[#d9d9d9] left-[calc(60%+379px)] size-[23px] top-[calc(76%+240.88px)]"
+          className="absolute size-[23px] top-[calc(76%+240.88px)]"
+          style={{ left: "calc(60% + 379px)", backgroundColor: corOutros }}
           data-node-id="196:48"
         />
         <p
           className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(60%+55px)] not-italic text-[40px] text-white top-[calc(76%+28.88px)] whitespace-nowrap"
           data-node-id="196:49"
-        >--%</p>
+        >{textoPernambucanos}</p>
         <p
           className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(40%+301px)] not-italic text-[40px] text-white top-[calc(76%+94.88px)] whitespace-nowrap"
           data-node-id="196:50"
-        >--%</p>
+        >{textoOutros}</p>
       </div>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-semibold font-semibold leading-[normal] left-[calc(60%+78px)] text-[24px] text-white top-[calc(66%+119.08px)] w-[423px]"
-        data-node-id="200:17"
-        style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}
-      >{`*ao passar o mouse os filmes se mostram em fileira → `}</p>
       <div
         className="absolute contents left-[calc(40%+309px)] top-[calc(79%+37.52px)]"
         data-node-id="200:16"
@@ -2384,49 +1795,7 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
           </div>
         </div>
       </div>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-black leading-[normal] left-[calc(50%-207px)] not-italic text-[36px] text-white top-[calc(89%+240.32px)] whitespace-nowrap"
-        data-node-id="262:101"
-      >
-        Créditos de produção:
-      </p>
-      <div
-        className="-translate-x-1/2 [word-break:break-word] absolute font-corpo font-semibold leading-[0] left-1/2 not-italic text-[24px] text-center text-white top-[calc(90%+130.2px)] whitespace-nowrap"
-        data-node-id="262:102"
-      >
-        <p className="font-corpo font-extrabold leading-[normal] mb-0 whitespace-pre">{`Design: `}</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0 whitespace-pre">
-          Annalyce Gonçalves
-        </p>
-        <p className="font-corpo font-medium leading-[normal] mb-0 whitespace-pre">
-          Dandara Vitória
-        </p>
-        <p className="font-corpo font-medium leading-[normal] mb-0 whitespace-pre">Júlia</p>
-        <p className="font-corpo font-medium leading-[normal] whitespace-pre">Pedro Henrique</p>
-      </div>
-      <div
-        className="-translate-x-1/2 [word-break:break-word] absolute font-corpo font-semibold leading-[0] left-1/2 not-italic text-[24px] text-center text-white top-[calc(91%+98.08px)] whitespace-nowrap"
-        data-node-id="262:103"
-      >
-        <p className="font-corpo font-extrabold leading-[normal] mb-0">Programação:</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Asael</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Bruna Veiga</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Heitor</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Guilherme</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Ohashi</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Jl</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Klarissa</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">João Vitor</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">João Moraes</p>
-      </div>
-      <div
-        className="-translate-x-1/2 [word-break:break-word] absolute font-corpo font-extrabold leading-[0] left-1/2 not-italic text-[24px] text-center text-white top-[calc(92%+245.96px)] whitespace-nowrap"
-        data-node-id="262:104"
-      >
-        <p className="leading-[normal] mb-0">Jornalismo:</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Jl</p>
-        <p className="font-corpo font-medium leading-[normal]">Vitória Lira</p>
-      </div>
+      <Creditos />
       <div
         className="absolute flex inset-[93.36%_97.7%_0.44%_1.46%] items-center justify-center"
         data-node-id="262:107"
@@ -2480,7 +1849,9 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada15} />
       </div>
-      <div
+      <PostalPendurado
+        id="recife-frio"
+        comDica
         className="absolute h-[621px] left-[calc(20%+120px)] top-[calc(9%+138.92px)] w-[920px]"
         data-node-id="292:176"
         data-name="ChatGPT Image 25 de set. de 2026, 14_58_30 1"
@@ -2490,7 +1861,7 @@ export function DesignPoster({ genero = null }: DesignPosterProps) {
           className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
           src={imgChatGptImage25DeSetDe20261458301}
         />
-      </div>
+      </PostalPendurado>
       <div
         className="absolute h-[282px] left-[89px] top-[calc(20%+216.6px)] w-[1741px]"
         data-node-id="294:204"

@@ -83,3 +83,15 @@ Ao executar `npm run seed`, o script [`prisma/seed.ts`](../prisma/seed.ts) valid
 1. **Teto Orçamentário de Editais (US02):** A soma de `valorInvestidoFilmeBrl` em `filme_edital.json` para cada edital nunca ultrapassa o `valorTotalBrl` definido em `editais.json`.
 2. **Integridade Referencial:** Todos os vínculos exigem correspondência exata das chaves naturais em `filmes.json`, `pessoas.json`, `premiacoes.json` e `editais.json`.
 3. **Unicidade e Idempotência:** O seed utiliza *upserts* baseados nas constraints únicas do banco, permitindo rodar `npm run seed` múltiplas vezes sem duplicar registros.
+
+---
+
+## 6. Atualização a partir de `analise-design-vs-banco.md`
+
+Rodada de ajustes motivada pelo documento `analise-design-vs-banco.md` (raiz do repositório), que compara o protótipo do design com o banco:
+
+- **Novas colunas em `pessoa`:** `naturalidade` (UF, "EX" para nascidos fora do Brasil) e `flagEhPernambucano` (nordestino não é sinônimo de pernambucano — item 3 da análise). Habilitam o gráfico real de "pernambucanos x outros" no acervo, no lugar do placeholder fixo.
+- **Novos filmes:** *O Último Azul* (2024, dir. Gabriel Mascaro, Urso de Prata — Grande Prêmio do Júri na Berlinale 2025) e *Manas* (2024, dir. Marianna Brennand, filmado no Marajó/PA, indicado a Melhor Filme Ibero-Americano no Goya 2026 como representante do Brasil). Nenhum dos dois foi filmado em Pernambuco nem foi submissão oficial do Brasil ao Oscar — ver nota abaixo.
+- **Funções SOM e MONTAGEM:** adicionados vínculos reais de montagem (*Baile Perfumado*, *Aquarius*, *Bacurau*, *O Agente Secreto*) e som (*O Agente Secreto*), que antes só cobriam direção, elenco, roteiro, produção e fotografia (item 10 da análise).
+- **Não cadastrado (fontes insuficientes):** os ~10 longas adicionais do Ciclo do Recife (1923–1931) que o design cita como "treze longas" não têm fonte cruzada e confiável o bastante para entrar no banco com segurança — ficaram só 3 (os já existentes). Ver item 6 da análise.
+- **Conferido (item 9 da análise):** a afirmação de que "Pernambuco representou o Brasil três vezes nos sonhos do Oscar" via *O Último Azul* e *Manas* não se confirma — nenhum dos dois foi submissão oficial brasileira; *Manas* disputou a vaga internamente e perdeu para *O Agente Secreto*, a única submissão real entre os filmes recentes do acervo. O texto da landing (design) mantém a afirmação original e precisa de revisão por quem edita esse conteúdo.

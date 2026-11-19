@@ -219,5 +219,9 @@
   { "filme": "o-agente-secreto-2025", "premiacao": "BAFTA", "edicaoAno": 2026, "categoriaPremiacao": "Melhor Filme em Língua Não Inglesa", "resultado": "INDICADO" },
   { "filme": "o-agente-secreto-2025", "premiacao": "BAFTA", "edicaoAno": 2026, "categoriaPremiacao": "Melhor Roteiro Original", "resultado": "INDICADO" },
   { "filme": "o-agente-secreto-2025", "premiacao": "Critics Choice Awards", "edicaoAno": 2026, "categoriaPremiacao": "Melhor Filme em Língua Estrangeira", "resultado": "INDICADO" },
-  { "filme": "o-agente-secreto-2025", "premiacao": "Independent Spirit Awards", "edicaoAno": 2026, "categoriaPremiacao": "Melhor Filme Internacional", "resultado": "INDICADO" }
+  { "filme": "o-agente-secreto-2025", "premiacao": "Independent Spirit Awards", "edicaoAno": 2026, "categoriaPremiacao": "Melhor Filme Internacional", "resultado": "INDICADO" },
+
+  { "filme": "o-ultimo-azul-2024", "premiacao": "Festival de Berlim", "edicaoAno": 2025, "categoriaPremiacao": "Urso de Prata – Grande Prêmio do Júri", "resultado": "VENCEDOR" },
+
+  { "filme": "manas-2024", "premiacao": "Premios Goya", "edicaoAno": 2026, "categoriaPremiacao": "Melhor Filme Ibero-Americano (representante do Brasil)", "resultado": "INDICADO" }
 ]

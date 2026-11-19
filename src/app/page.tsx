@@ -1,20 +1,38 @@
 import { Suspense } from "react";
+import { AnimacoesDoPoster } from "@/components/poster/AnimacoesDoPoster.tsx";
+import { ControlesDeMovimento } from "@/components/poster/ControlesDeMovimento.tsx";
 import { DesignPoster } from "@/components/poster/DesignPoster.tsx";
 import { PosterViewport } from "@/components/poster/PosterViewport.tsx";
-import { obterRecorteGenero } from "@/server/panorama.ts";
+import { TrilhaDaLinhaDoTempo } from "@/components/poster/TrilhaDaLinhaDoTempo.tsx";
+import {
+  obterPremiosInternacionais,
+  obterRecorteGenero,
+  obterRecorteOrigem,
+} from "@/server/panorama.ts";
+import { OnboardingProvider } from "@/components/onboarding/OnboardingProvider.tsx";
+import { WelcomeTour, BotaoReabrirTour } from "@/components/onboarding/WelcomeTour.tsx";
+import { ScrollHint } from "@/components/onboarding/ScrollHint.tsx";
+import { Navigator } from "@/components/onboarding/Navigator.tsx";
+import { CompletionSummary } from "@/components/onboarding/CompletionSummary.tsx";
 
 /**
- * Home: o frame do Figma Make, sem animações.
- * Só o gráfico de gênero vem do banco; os de origem e classe social são placeholders
- * fixos porque o schema não tem esses dados (ver docs/analise-design-vs-banco.md).
+ * Home: o frame do Figma Make, com as animações do protótipo (ver globals.css).
+ * Gênero e origem (pernambucanos x outros, dentro do próprio acervo) vêm do banco;
+ * classe social continua placeholder fixo porque o schema não tem esse dado
+ * (ver analise-design-vs-banco.md).
  */
 async function PosterComDados() {
-  // Banco fora do ar não derruba a Home: o gráfico cai para o placeholder.
-  const genero = await obterRecorteGenero().catch(() => null);
+  // Banco fora do ar não derruba a Home: os gráficos caem para o placeholder.
+  const [genero, origem, premios] = await Promise.all([
+    obterRecorteGenero().catch(() => null),
+    obterRecorteOrigem().catch(() => null),
+    obterPremiosInternacionais().catch(() => null),
+  ]);
 
   return (
     <PosterViewport>
-      <DesignPoster genero={genero} />
+      <DesignPoster genero={genero} origem={origem} premios={premios} />
+      <AnimacoesDoPoster />
     </PosterViewport>
   );
 }
@@ -22,15 +40,24 @@ async function PosterComDados() {
 export default function HomePage() {
   return (
     <main className="flex-1 bg-fundo">
-      <Suspense
-        fallback={
-          <PosterViewport>
-            <DesignPoster />
-          </PosterViewport>
-        }
-      >
-        <PosterComDados />
-      </Suspense>
+      <OnboardingProvider>
+        <ControlesDeMovimento />
+        <Suspense
+          fallback={
+            <PosterViewport>
+              <DesignPoster />
+            </PosterViewport>
+          }
+        >
+          <PosterComDados />
+        </Suspense>
+        <ScrollHint />
+        <Navigator />
+        <TrilhaDaLinhaDoTempo />
+        <CompletionSummary />
+        <WelcomeTour />
+        <BotaoReabrirTour />
+      </OnboardingProvider>
     </main>
   );
 }

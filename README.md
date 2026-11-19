@@ -9,10 +9,10 @@
 ## Preparar o ambiente
 
 ```powershell
-git clone https://github.com/SunIord/dna-cinema-pe.git
+git clone https://github.com/dna-cinema-pe/dna-cinema-pe.git
 cd dna-cinema-pe
-npm ci
 Copy-Item .env.example .env
+npm ci
 docker compose up -d
 npx prisma migrate deploy
 npm run seed  # Ou npx prisma db seed
