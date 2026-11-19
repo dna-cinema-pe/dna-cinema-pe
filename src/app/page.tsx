@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { connection } from "next/server";
 import { AnimacoesDoPoster } from "@/components/poster/AnimacoesDoPoster.tsx";
 import { ControlesDeMovimento } from "@/components/poster/ControlesDeMovimento.tsx";
 import { DesignPoster } from "@/components/poster/DesignPoster.tsx";
@@ -6,6 +7,7 @@ import { PosterViewport } from "@/components/poster/PosterViewport.tsx";
 import { TrilhaDaLinhaDoTempo } from "@/components/poster/TrilhaDaLinhaDoTempo.tsx";
 import {
   obterPremiosInternacionais,
+  obterPodioPremios,
   obterRecorteGenero,
   obterRecorteOrigem,
 } from "@/server/panorama.ts";
@@ -22,16 +24,19 @@ import { CompletionSummary } from "@/components/onboarding/CompletionSummary.tsx
  * (ver analise-design-vs-banco.md).
  */
 async function PosterComDados() {
+  await connection();
+
   // Banco fora do ar não derruba a Home: os gráficos caem para o placeholder.
-  const [genero, origem, premios] = await Promise.all([
+  const [genero, origem, premios, podio] = await Promise.all([
     obterRecorteGenero().catch(() => null),
     obterRecorteOrigem().catch(() => null),
     obterPremiosInternacionais().catch(() => null),
+    obterPodioPremios().catch(() => null),
   ]);
 
   return (
     <PosterViewport>
-      <DesignPoster genero={genero} origem={origem} premios={premios} />
+      <DesignPoster genero={genero} origem={origem} premios={premios} podio={podio} />
       <AnimacoesDoPoster />
     </PosterViewport>
   );

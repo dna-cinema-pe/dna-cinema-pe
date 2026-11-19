@@ -48,6 +48,80 @@ export async function obterRecorteOrigem(): Promise<RecorteOrigem | null> {
   return { pernambucanos: percentualPernambucanos, outros: 100 - percentualPernambucanos };
 }
 
+export interface FilmeDoPodio {
+  id: number;
+  titulo: string;
+  poster?: string;
+  alt?: string;
+}
+
+export interface ColocacaoPodio {
+  posicao: 1 | 2 | 3;
+  filmes: FilmeDoPodio[];
+}
+
+export type PodioPremios = ColocacaoPodio[];
+
+export async function obterPodioPremios(): Promise<PodioPremios> {
+  const registros = await prisma.filmePremiacao.findMany({
+    where: { resultado: { in: ["VENCEDOR", "INDICADO"] } },
+    select: {
+      resultado: true,
+      filme: {
+        select: {
+          idFilme: true,
+          titulo: true,
+          posterUrl: true,
+          posterAlt: true,
+        },
+      },
+      premiacao: { select: { nivelImportanciaPremiacao: true } },
+    },
+  });
+
+  const melhorPosicaoPorFilme = new Map<number, { posicao: 1 | 2 | 3; filme: FilmeDoPodio }>();
+
+  for (const registro of registros) {
+    const nivel = registro.premiacao.nivelImportanciaPremiacao;
+    const posicao: 1 | 2 | 3 =
+      registro.resultado === "VENCEDOR" && nivel === 1
+        ? 1
+        : (registro.resultado === "INDICADO" && nivel === 1) ||
+            (registro.resultado === "VENCEDOR" && nivel === 2)
+          ? 2
+          : 3;
+
+    const existente = melhorPosicaoPorFilme.get(registro.filme.idFilme);
+    if (existente && existente.posicao <= posicao) continue;
+
+    melhorPosicaoPorFilme.set(registro.filme.idFilme, {
+      posicao,
+      filme: {
+        id: registro.filme.idFilme,
+        titulo: registro.filme.titulo,
+        poster: registro.filme.posterUrl ?? undefined,
+        alt: registro.filme.posterAlt ?? undefined,
+      },
+    });
+  }
+
+  const colocacoes: PodioPremios = [
+    { posicao: 1, filmes: [] },
+    { posicao: 2, filmes: [] },
+    { posicao: 3, filmes: [] },
+  ];
+
+  for (const { posicao, filme } of melhorPosicaoPorFilme.values()) {
+    colocacoes[posicao - 1].filmes.push(filme);
+  }
+
+  for (const colocacao of colocacoes) {
+    colocacao.filmes.sort((a, b) => a.titulo.localeCompare(b.titulo, "pt-BR"));
+  }
+
+  return colocacoes;
+}
+
 /** Festivais com pino na rota do avião (US-2.7), pelo `nomePremiacao` do banco. */
 export const FESTIVAIS_DA_ROTA = {
   cannes: "Festival de Cannes",

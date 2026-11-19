@@ -1,5 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import type { PremiosInternacionais, RecorteGenero, RecorteOrigem } from "@/server/panorama.ts";
+import type {
+  PodioPremios,
+  PremiosInternacionais,
+  RecorteGenero,
+  RecorteOrigem,
+} from "@/server/panorama.ts";
 import { Hotspot } from "@/components/onboarding/Hotspot.tsx";
 import { Abertura } from "./secoes/Abertura.tsx";
 import { Conclusao } from "./secoes/Conclusao.tsx";
@@ -144,13 +149,20 @@ interface DesignPosterProps {
   origem?: RecorteOrigem | null;
   /** Vem de `obterPremiosInternacionais()`. Sem dado, os pinos da rota avisam que não carregou. */
   premios?: PremiosInternacionais | null;
+  /** Vem de `obterPodioPremios()`. Sem dado, os degraus mostram placeholders. */
+  podio?: PodioPremios | null;
 }
 
 const BARRA_MAX = 382;
 const BARRA_BORDA_DIREITA = 402;
 const CINZA_PLACEHOLDER = "#d9d9d9";
 
-export function DesignPoster({ genero = null, origem = null, premios = null }: DesignPosterProps) {
+export function DesignPoster({
+  genero = null,
+  origem = null,
+  premios = null,
+  podio = null,
+}: DesignPosterProps) {
   const maior = genero ? Math.max(genero.mulheres, genero.homens, 1) : 0;
   const larguraMulheres = genero ? Math.round((BARRA_MAX * genero.mulheres) / maior) : 253;
   const larguraHomens = genero ? Math.round((BARRA_MAX * genero.homens) / maior) : BARRA_MAX;
@@ -1458,7 +1470,7 @@ export function DesignPoster({ genero = null, origem = null, premios = null }: D
           </div>
         </div>
       </div>
-      <Podio />
+      <Podio colocacoes={podio} />
       <Hotspot
         id="hotspot-genero"
         style={{ top: "calc(73% + 16px)", left: "calc(60% - 10px)", width: 460, height: 240 }}
