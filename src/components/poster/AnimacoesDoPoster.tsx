@@ -2,19 +2,24 @@
 
 import { useEffect } from "react";
 import {
+  abrirCortinas,
   derrubarPoster,
   iniciarVoo,
   obterAviao,
   obterBotaoReporPoster,
+  obterCortinas,
   obterPoster,
   pousarPoster,
   reporPoster,
   SELETOR_LOOPS,
+  VARREDURA_ANTES_DE_ABRIR_MS,
 } from "./animacoes.ts";
 
 /**
  * Liga os gatilhos das animações do poster, que é renderizado no servidor:
  * - o avião voa uma vez quando 30% dele aparece na tela;
+ * - o holofote do Super-8 varre as cortinas fechadas; quando o palco chega à faixa central da
+ *   tela, ele varre por mais alguns segundos, as cortinas abrem uma vez, ele para e o título surge;
  * - o pôster cai ao receber o ponteiro, mouse ou toque (ou Enter/Espaço no foco), fica caído e,
  *   ao pousar, mostra "↺ Pendurar de novo", que o repõe;
  * - os loops (nuvens, cruz, pássaro, bandeirinhas) pausam quando saem da tela.
@@ -36,6 +41,24 @@ export function AnimacoesDoPoster() {
         { threshold: 0.3 },
       );
       observador.observe(aviao);
+      limpezas.push(() => observador.disconnect());
+    }
+
+    const cortinas = obterCortinas();
+    if (cortinas) {
+      const observador = new IntersectionObserver(
+        ([entrada]) => {
+          if (entrada.isIntersecting) {
+            const espera = window.setTimeout(abrirCortinas, VARREDURA_ANTES_DE_ABRIR_MS);
+            limpezas.push(() => window.clearTimeout(espera));
+            observador.disconnect();
+          }
+        },
+        // Faixa central da janela, e não uma fração do palco: o palco (959 px na escala cheia)
+        // pode ser mais alto que a tela, e aí nunca ficaria 60% visível.
+        { rootMargin: "-35% 0px -35% 0px" },
+      );
+      observador.observe(cortinas);
       limpezas.push(() => observador.disconnect());
     }
 
@@ -91,7 +114,7 @@ export function AnimacoesDoPoster() {
       marcador.style.pointerEvents = "none";
       marcador.className = loop.className
         .split(/\s+/)
-        .filter((classe) => !/^(cloud-float|red-cloud-loop|gold-cloud-loop|cross-sway|bird-flap|wind-sway)/.test(classe))
+        .filter((classe) => !/^(cloud-float|red-cloud-loop|gold-cloud-loop|cross-sway|bird-flap|wind-sway|super8-holofote)/.test(classe))
         .filter((classe) => classe !== "block")
         .join(" ");
       loop.parentElement?.insertBefore(marcador, loop);

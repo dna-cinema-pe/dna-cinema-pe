@@ -933,7 +933,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         />
       </div>
       <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-1/2 not-italic text-[120px] text-center text-white top-[calc(24%+24.12px)] whitespace-nowrap"
+        className="super8-titulo -translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-1/2 not-italic text-[120px] text-center text-white top-[calc(24%+24.12px)] whitespace-nowrap"
         data-node-id="149:9"
       >
         SUPER-8
@@ -998,10 +998,22 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgArcoCiclo} />
       </div>
       <div
-        className="-translate-x-1/2 absolute h-[916px] left-1/2 top-[calc(22%+138.36px)] w-[940px]"
+        className="-translate-x-1/2 absolute z-30 h-[916px] left-1/2 top-[calc(22%+138.36px)] w-[940px]"
         data-node-id="149:10"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse2} />
+        <img
+          alt=""
+          className="super8-holofote absolute block inset-0 max-w-none size-full"
+          src={imgEllipse2}
+        />
+      </div>
+      {/* Cortinas do Super-8: cobrem o palco (mesma caixa da "image 15") até abrirem. */}
+      <div
+        aria-hidden="true"
+        className="super8-cortinas pointer-events-none absolute z-20 h-[959px] left-[122px] overflow-hidden top-[calc(22%+94.36px)] w-[1678px]"
+      >
+        <div className="super8-cortina super8-cortina--esquerda" />
+        <div className="super8-cortina super8-cortina--direita" />
       </div>
       <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[160px] not-italic text-[24px] text-white top-[calc(27%+36.76px)] w-[477px]"
