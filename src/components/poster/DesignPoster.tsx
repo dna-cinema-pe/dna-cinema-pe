@@ -1708,6 +1708,13 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           </div>
         </div>
       </div>
+      {/* Área de pouso: centrado sobre onde o pôster cai (top + --queda-poster), acima dele. */}
+      <button
+        type="button"
+        className="falling-poster__repor hotspot absolute z-20 -translate-x-1/2 rounded-full border-2 border-ouro bg-fundo/90 px-6 py-3 font-corpo text-[28px] font-semibold text-ouro whitespace-nowrap hover:bg-ouro hover:text-fundo left-[calc(60%+167.77px)] top-[calc(43%+44.84px+var(--queda-poster)-96px)]"
+      >
+        ↺ Pendurar de novo
+      </button>
       <div
         className="absolute flex inset-[42.81%_28.85%_56.67%_67.66%] items-center justify-center"
         data-node-id="297:263"

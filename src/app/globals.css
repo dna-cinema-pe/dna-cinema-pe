@@ -167,7 +167,7 @@ body {
   }
 
   100% {
-    transform: translate3d(0, 720px, 0) rotate(13deg);
+    transform: translate3d(0, var(--queda-poster), 0) rotate(13deg);
   }
 }
 
@@ -257,10 +257,32 @@ body {
   outline-offset: 4px;
 }
 
+/*
+ * Pôster da Consolidação. A queda (720 px) é a mesma variável que posiciona o botão de repor,
+ * na área de pouso reservada no frame: abaixo dela só há postais, nenhum texto. Caído, o
+ * pôster não captura cliques, para os postais sob ele continuarem clicáveis.
+ */
+.falling-poster,
+.falling-poster__repor {
+  --queda-poster: 720px;
+}
+
 .falling-poster--fallen .falling-poster__body {
   animation: poster-fall 1.35s cubic-bezier(0.55, 0.05, 0.8, 0.2) forwards;
+  pointer-events: none;
   transform-origin: 50% 0%;
   will-change: transform;
+}
+
+/* "↺ Pendurar de novo" só aparece depois que a queda termina (classe `--pousado`). */
+.falling-poster__repor {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.falling-poster--pousado + .falling-poster__repor {
+  opacity: 1;
+  visibility: visible;
 }
 
 .plane-flight {
@@ -311,7 +333,12 @@ html[data-animacoes="desligadas"] *::after {
 }
 
 html[data-animacoes="desligadas"] .falling-poster__body {
-  transform: translate3d(0, 720px, 0) rotate(13deg);
+  transform: translate3d(0, var(--queda-poster), 0) rotate(13deg);
+}
+
+/* Sem animações o pôster já fica caído e não há o que repor. */
+html[data-animacoes="desligadas"] .falling-poster__repor {
+  display: none;
 }
 
 html[data-animacoes="desligadas"] .plane-flight {

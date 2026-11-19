@@ -1,12 +1,22 @@
 "use client";
 
 import { useEffect } from "react";
-import { derrubarPoster, iniciarVoo, obterAviao, obterPoster, SELETOR_LOOPS } from "./animacoes.ts";
+import {
+  derrubarPoster,
+  iniciarVoo,
+  obterAviao,
+  obterBotaoReporPoster,
+  obterPoster,
+  pousarPoster,
+  reporPoster,
+  SELETOR_LOOPS,
+} from "./animacoes.ts";
 
 /**
  * Liga os gatilhos das animações do poster, que é renderizado no servidor:
  * - o avião voa uma vez quando 30% dele aparece na tela;
- * - o pôster cai ao receber o ponteiro (ou Enter/Espaço no foco) e fica caído;
+ * - o pôster cai ao receber o ponteiro, mouse ou toque (ou Enter/Espaço no foco), fica caído e,
+ *   ao pousar, mostra "↺ Pendurar de novo", que o repõe;
  * - os loops (nuvens, cruz, pássaro, bandeirinhas) pausam quando saem da tela.
  * Não renderiza nada.
  */
@@ -36,12 +46,28 @@ export function AnimacoesDoPoster() {
         evento.preventDefault();
         derrubarPoster();
       };
+      // `click` cobre navegadores de toque que não disparam `pointerenter` no toque.
       poster.addEventListener("pointerenter", derrubarPoster);
+      poster.addEventListener("click", derrubarPoster);
       poster.addEventListener("keydown", aoTeclar);
+      poster.addEventListener("animationend", pousarPoster);
       limpezas.push(() => {
         poster.removeEventListener("pointerenter", derrubarPoster);
+        poster.removeEventListener("click", derrubarPoster);
         poster.removeEventListener("keydown", aoTeclar);
+        poster.removeEventListener("animationend", pousarPoster);
       });
+
+      const botaoRepor = obterBotaoReporPoster();
+      if (botaoRepor) {
+        // O botão some ao repor; o foco volta para o pôster em vez de cair no <body>.
+        const aoRepor = () => {
+          reporPoster();
+          poster.focus({ preventScroll: true });
+        };
+        botaoRepor.addEventListener("click", aoRepor);
+        limpezas.push(() => botaoRepor.removeEventListener("click", aoRepor));
+      }
     }
 
     // Os loops se movem horizontalmente (a nuvem vermelha anda 2400 px), então observar o próprio
