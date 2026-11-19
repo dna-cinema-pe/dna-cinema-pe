@@ -109,7 +109,7 @@ export const RECONHECIMENTO = {
 
 /** Cada parágrafo do recorte e o gráfico que o acompanha, quando houver. */
 export const RECORTE = {
-  titulo: ["Recorte de Gênero,", "Raça e Origem"],
+  titulo: ["Recorte de Gênero", "e Raça"],
   blocos: [
     {
       texto:
@@ -129,26 +129,16 @@ export const RECORTE = {
     {
       texto:
         "Os dados do audiovisual podem apontar diferenças, mas é preciso compreender o alcance de cada pesquisa. O que vale para o Brasil não descreve todo o estado.",
-      grafico: "origem",
+      grafico: null,
     },
     {
       texto:
         "Também precisamos saber quem consegue participar, quais grupos têm oportunidades e quem pode se destacar. Mas, para falar de raça e cor, é preciso saber como contar.",
-      grafico: null,
+      grafico: "raca",
     },
     {
       texto:
         "Se os dados são incompletos, não se deve imaginar o perfil de cada pessoa nem suas histórias inventar. Uma lacuna na pesquisa também precisa se registrar.",
-      grafico: null,
-    },
-    {
-      texto:
-        "Um filme pode ser filmado em Pernambuco, em qualquer lugar. Mas o local das filmagens não basta para explicar a origem de quem trabalha nem o vínculo com esse lugar",
-      grafico: "classe",
-    },
-    {
-      texto:
-        "Há quem nasça nesta terra, há quem venha aqui trabalhar. Há quem construa sua carreira e decida aqui ficar. São trajetórias diferentes que precisamos separar.",
       grafico: null,
     },
   ],

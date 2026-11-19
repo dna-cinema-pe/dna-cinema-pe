@@ -8,8 +8,7 @@ type IdGrafico = Exclude<(typeof RECORTE.blocos)[number]["grafico"], null>;
 
 const TITULOS_GRAFICO: Record<IdGrafico, string> = {
   genero: "Proporção entre mulheres e homens no cinema pernambucano",
-  origem: "Proporção entre pernambucanos e outros no cinema nacional",
-  classe: "Distribuição por classe social no cinema pernambucano",
+  raca: "Distribuição de cor e raça autodeclarada no cinema pernambucano",
 };
 
 interface Props {
@@ -19,8 +18,8 @@ interface Props {
 
 export function RecorteGeneroRacaOrigem({ graficos }: Props) {
   return (
-    <section aria-labelledby="recorte-genero-raca-origem" className="py-16">
-      <TituloSecao id="recorte-genero-raca-origem" tamanho="medio" className="px-6 py-10">
+    <section aria-labelledby="recorte-genero-raca" className="py-16">
+      <TituloSecao id="recorte-genero-raca" tamanho="medio" className="px-6 py-10">
         {RECORTE.titulo[0]}
         <br />
         {RECORTE.titulo[1]}

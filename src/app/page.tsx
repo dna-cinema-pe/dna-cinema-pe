@@ -1,9 +1,16 @@
 import { Suspense } from "react";
+import { connection } from "next/server";
 import { AnimacoesDoPoster } from "@/components/poster/AnimacoesDoPoster.tsx";
 import { ControlesDeMovimento } from "@/components/poster/ControlesDeMovimento.tsx";
 import { DesignPoster } from "@/components/poster/DesignPoster.tsx";
 import { PosterViewport } from "@/components/poster/PosterViewport.tsx";
-import { obterRecorteGenero, obterRecorteOrigem } from "@/server/panorama.ts";
+import { TrilhaDaLinhaDoTempo } from "@/components/poster/TrilhaDaLinhaDoTempo.tsx";
+import {
+  obterPremiosInternacionais,
+  obterPodioPremios,
+  obterRecorteGenero,
+  obterRecorteRaca,
+} from "@/server/panorama.ts";
 import { OnboardingProvider } from "@/components/onboarding/OnboardingProvider.tsx";
 import { WelcomeTour, BotaoReabrirTour } from "@/components/onboarding/WelcomeTour.tsx";
 import { ScrollHint } from "@/components/onboarding/ScrollHint.tsx";
@@ -12,20 +19,22 @@ import { CompletionSummary } from "@/components/onboarding/CompletionSummary.tsx
 
 /**
  * Home: o frame do Figma Make, com as animações do protótipo (ver globals.css).
- * Gênero e origem (pernambucanos x outros, dentro do próprio acervo) vêm do banco;
- * classe social continua placeholder fixo porque o schema não tem esse dado
- * (ver analise-design-vs-banco.md).
+ * Os recortes de gênero e raça vêm do banco.
  */
 async function PosterComDados() {
+  await connection();
+
   // Banco fora do ar não derruba a Home: os gráficos caem para o placeholder.
-  const [genero, origem] = await Promise.all([
+  const [genero, raca, premios, podio] = await Promise.all([
     obterRecorteGenero().catch(() => null),
-    obterRecorteOrigem().catch(() => null),
+    obterRecorteRaca().catch(() => null),
+    obterPremiosInternacionais().catch(() => null),
+    obterPodioPremios().catch(() => null),
   ]);
 
   return (
     <PosterViewport>
-      <DesignPoster genero={genero} origem={origem} />
+      <DesignPoster genero={genero} raca={raca} premios={premios} podio={podio} />
       <AnimacoesDoPoster />
     </PosterViewport>
   );
@@ -47,6 +56,7 @@ export default function HomePage() {
         </Suspense>
         <ScrollHint />
         <Navigator />
+        <TrilhaDaLinhaDoTempo />
         <CompletionSummary />
         <WelcomeTour />
         <BotaoReabrirTour />
