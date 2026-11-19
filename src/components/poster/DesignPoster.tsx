@@ -838,7 +838,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         </div>
       </div>
       <div
-        className="absolute h-[439.493px] left-[151.87px] top-[calc(17%+93.37px)] w-[621.574px]"
+        className="postal-ciclo absolute h-[439.493px] left-[151.87px] top-[calc(17%+93.37px)] w-[621.574px]"
       >
         <div
           className="absolute inset-0 flex items-center justify-center"
@@ -854,7 +854,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         </div>
       </div>
       <div
-        className="absolute h-[482.247px] left-[calc(20%+265.2px)] top-[calc(17%+236.18px)] w-[639.564px]"
+        className="postal-ciclo absolute h-[482.247px] left-[calc(20%+265.2px)] top-[calc(17%+236.18px)] w-[639.564px]"
       >
         <div
           className="absolute inset-0 flex items-center justify-center"
@@ -870,7 +870,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         </div>
       </div>
       <div
-        className="absolute h-[549.416px] left-[calc(60%+7px)] top-[calc(18%+152.84px)] w-[640.713px]"
+        className="postal-ciclo absolute h-[549.416px] left-[calc(60%+7px)] top-[calc(18%+152.84px)] w-[640.713px]"
       >
         <div
           className="absolute inset-0 flex items-center justify-center"

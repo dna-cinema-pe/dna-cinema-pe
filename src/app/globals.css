@@ -280,9 +280,15 @@ body {
   mask-image: var(--mascara-arco);
 }
 
+/* Fotos do Ciclo do Recife: mesmo balanço dos postais, mas sem modal (não são clicáveis). */
+.postal-ciclo {
+  transform-origin: 50% 0%;
+}
+
 /* Hover no desktop; no toque, PostalPendurado liga `--balancando` no primeiro toque. */
 .hanging-postcard:hover,
-.hanging-postcard--balancando {
+.hanging-postcard--balancando,
+.postal-ciclo:hover {
   animation: postcard-swing 2.2s ease-in-out infinite;
   will-change: transform;
 }
