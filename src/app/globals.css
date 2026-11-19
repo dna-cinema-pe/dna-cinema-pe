@@ -274,6 +274,42 @@ body {
   will-change: offset-distance;
 }
 
+/*
+ * Revelação de texto (500 ms): o texto sobe 24 px e aparece quando RevelarTexto adiciona
+ * `--visivel`. Só esconde com animações ligadas, para o texto nunca sumir sem JavaScript.
+ */
+.revelar-texto {
+  transition:
+    opacity 500ms ease-out,
+    transform 500ms ease-out;
+}
+
+html[data-animacoes="ligadas"] .revelar-texto:not(.revelar-texto--visivel) {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+}
+
+/*
+ * Pódio (US-2.8): cada filme da fileira desliza ao lado; o atraso de 80 ms entre cartões vem do
+ * `animation-delay` de cada um. Com animações desligadas, a regra global tira a animação e os
+ * cartões aparecem direto.
+ */
+@keyframes podio-entrada {
+  from {
+    opacity: 0;
+    transform: translate3d(-40px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.podio-item {
+  animation: podio-entrada 400ms ease-out both;
+}
+
 /* Loops que saem da tela são pausados por AnimacoesDoPoster (IntersectionObserver). */
 .loop-pausado {
   animation-play-state: paused;

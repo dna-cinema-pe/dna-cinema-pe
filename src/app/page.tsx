@@ -3,7 +3,12 @@ import { AnimacoesDoPoster } from "@/components/poster/AnimacoesDoPoster.tsx";
 import { ControlesDeMovimento } from "@/components/poster/ControlesDeMovimento.tsx";
 import { DesignPoster } from "@/components/poster/DesignPoster.tsx";
 import { PosterViewport } from "@/components/poster/PosterViewport.tsx";
-import { obterRecorteGenero, obterRecorteOrigem } from "@/server/panorama.ts";
+import { TrilhaDaLinhaDoTempo } from "@/components/poster/TrilhaDaLinhaDoTempo.tsx";
+import {
+  obterPremiosInternacionais,
+  obterRecorteGenero,
+  obterRecorteOrigem,
+} from "@/server/panorama.ts";
 import { OnboardingProvider } from "@/components/onboarding/OnboardingProvider.tsx";
 import { WelcomeTour, BotaoReabrirTour } from "@/components/onboarding/WelcomeTour.tsx";
 import { ScrollHint } from "@/components/onboarding/ScrollHint.tsx";
@@ -18,14 +23,15 @@ import { CompletionSummary } from "@/components/onboarding/CompletionSummary.tsx
  */
 async function PosterComDados() {
   // Banco fora do ar não derruba a Home: os gráficos caem para o placeholder.
-  const [genero, origem] = await Promise.all([
+  const [genero, origem, premios] = await Promise.all([
     obterRecorteGenero().catch(() => null),
     obterRecorteOrigem().catch(() => null),
+    obterPremiosInternacionais().catch(() => null),
   ]);
 
   return (
     <PosterViewport>
-      <DesignPoster genero={genero} origem={origem} />
+      <DesignPoster genero={genero} origem={origem} premios={premios} />
       <AnimacoesDoPoster />
     </PosterViewport>
   );
@@ -47,6 +53,7 @@ export default function HomePage() {
         </Suspense>
         <ScrollHint />
         <Navigator />
+        <TrilhaDaLinhaDoTempo />
         <CompletionSummary />
         <WelcomeTour />
         <BotaoReabrirTour />

@@ -1,7 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
-import type { RecorteGenero, RecorteOrigem } from "@/server/panorama.ts";
+import type { PremiosInternacionais, RecorteGenero, RecorteOrigem } from "@/server/panorama.ts";
 import { Hotspot } from "@/components/onboarding/Hotspot.tsx";
 import { Abertura } from "./secoes/Abertura.tsx";
+import { Conclusao } from "./secoes/Conclusao.tsx";
+import { Contexto } from "./secoes/Contexto.tsx";
+import { Creditos } from "./secoes/Creditos.tsx";
+import { CicloDoRecife } from "./secoes/CicloDoRecife.tsx";
+import { Super8 } from "./secoes/Super8.tsx";
+import { RetomadaManguebeat } from "./secoes/RetomadaManguebeat.tsx";
+import { Anos2000 } from "./secoes/Anos2000.tsx";
+import { Consolidacao } from "./secoes/Consolidacao.tsx";
+import { Podio } from "./secoes/Podio.tsx";
+import { ReconhecimentoInternacional } from "./secoes/ReconhecimentoInternacional.tsx";
 import { PostalPendurado } from "./PostalPendurado.tsx";
 
 const assetPathPrefix = "/poster";
@@ -132,13 +142,15 @@ interface DesignPosterProps {
   genero?: RecorteGenero | null;
   /** Vem de `obterRecorteOrigem()`. Sem dado, o gráfico de origem vira placeholder. */
   origem?: RecorteOrigem | null;
+  /** Vem de `obterPremiosInternacionais()`. Sem dado, os pinos da rota avisam que não carregou. */
+  premios?: PremiosInternacionais | null;
 }
 
 const BARRA_MAX = 382;
 const BARRA_BORDA_DIREITA = 402;
 const CINZA_PLACEHOLDER = "#d9d9d9";
 
-export function DesignPoster({ genero = null, origem = null }: DesignPosterProps) {
+export function DesignPoster({ genero = null, origem = null, premios = null }: DesignPosterProps) {
   const maior = genero ? Math.max(genero.mulheres, genero.homens, 1) : 0;
   const larguraMulheres = genero ? Math.round((BARRA_MAX * genero.mulheres) / maior) : 253;
   const larguraHomens = genero ? Math.round((BARRA_MAX * genero.homens) / maior) : BARRA_MAX;
@@ -231,34 +243,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         </div>
       </div>
       <Abertura />
-      <p
-        className="-translate-x-full [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+979px)] not-italic text-[128px] text-right text-white top-[calc(7%+60.16px)] whitespace-nowrap"
-        data-node-id="46:272"
-      >
-        CONTEXTO
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(8%+35.04px)] w-[470px]"
-        data-node-id="46:273"
-      >
-        Hoje, o cinema pernambucano ganha espaço pelo mundo afora. Mas, antes dos grandes festivais,
-        já havia gente por aqui fazendo cinema acontecer, muito antes da fama de agora.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(40%+266px)] not-italic text-[24px] text-white top-[calc(8%+35.04px)] w-[498px]"
-        data-node-id="46:275"
-      >{`Cada filme guarda uma história, cada época, uma transformação. Há quem escreva, filme e edite, quem financia a produção, quem abra caminhos para outros e quem mantenha viva a criação. `}</p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(12%+60.56px)] w-[500px]"
-        data-node-id="46:276"
-      >
-        Mas o que existe por trás de um cinema que ganhou projeção? Como se formou essa trajetória,
-        quem construiu essa produção e o que os dados nos revelam sobre as suas condições?
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(40%+252px)] not-italic text-[24px] text-white top-[calc(12%+60.56px)] w-[512px]"
-        data-node-id="132:713"
-      >{`Para descobrir esse caminho, vamos voltar no tempo. Antes de olhar para os prêmios, vamos conhecer o nascimento de uma produção que atravessou diferentes épocas e movimentos. `}</p>
+      <Contexto />
       <div
         className="absolute aspect-[85/81] left-[85.73%] right-[9.84%] top-[calc(2%+130.76px)]"
         data-node-id="46:277"
@@ -932,12 +917,6 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           src={imgImage15}
         />
       </div>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-1/2 not-italic text-[120px] text-center text-white top-[calc(24%+24.12px)] whitespace-nowrap"
-        data-node-id="149:9"
-      >
-        SUPER-8
-      </p>
       <div
         className="absolute h-[334.844px] left-[77px] top-[calc(21%+73.48px)] w-[1767.946px]"
         data-node-id="61:18"
@@ -952,44 +931,8 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
       >
         Celso Marconi, Jomard Muniz de Brito e Aristides Guimarães, realizadores do Ciclo Super 8
       </p>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+574px)] not-italic text-[90px] text-center text-white top-[calc(29%+70.52px)] whitespace-nowrap"
-        data-node-id="67:25"
-      >
-        RETOMADA
-      </p>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(40%+190px)] not-italic text-[80px] text-center text-white top-[calc(29%+201.52px)] whitespace-nowrap"
-        data-node-id="67:26"
-      >
-        E
-      </p>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+573.5px)] not-italic text-[120px] text-center text-white top-[calc(30%+64.4px)] whitespace-nowrap"
-        data-node-id="67:29"
-      >
-        MANGUEBEAT
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(30%-184px)] not-italic text-[24px] text-white top-[calc(16%+41.08px)] w-[501px]"
-        data-node-id="46:301"
-      >
-        Na década de vinte, o Recife também filmava. Entre histórias e imagens, uma produção se
-        formava, e o cinema feito por aqui novos caminhos ensaiava.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(70%-265px)] not-italic text-[24px] text-white top-[calc(16%+41.08px)] w-[453px]"
-        data-node-id="46:307"
-      >
-        De 1923 a 1931, o Recife já realizava seus próprios longas. O chamado Ciclo do Recife deixou jovens
-        impressionados com um cinema que nascia e com projetos próprios e variados.
-      </p>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-1/2 not-italic text-[120px] text-center text-white top-[calc(15%+77.2px)] w-[1158px]"
-        data-node-id="129:3"
-      >
-        CICLO DO RECIFE
-      </p>
+      <RetomadaManguebeat />
+      <CicloDoRecife />
       <div
         className="absolute h-[373.177px] left-[calc(20%+204px)] top-[calc(13%+184.61px)] w-[743.277px]"
         data-node-id="288:159"
@@ -1004,64 +947,13 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse2} />
       </div>
       <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[160px] not-italic text-[24px] text-white top-[calc(27%+36.76px)] w-[477px]"
-        data-node-id="149:12"
-      >
-        Mas fazer cinema exige recursos, equipamento e condição. Mas nem sempre quem tem histórias
-        consegue trazê-las à exibição. Décadas depois, outras gerações buscaram formas de
-        experimentação.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium h-[211px] leading-[normal] left-[calc(20%+25px)] not-italic text-[24px] text-white top-[calc(39%+219.32px)] w-[477px]"
-        data-node-id="163:123"
-      >
-        Com a virada do século, novos filmes ganharam espaço. A produção se diversificava, ampliando
-        o próprio traço. Não havia um só caminho, nem um único compasso.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium h-[246px] leading-[normal] left-[calc(40%+240px)] not-italic text-[24px] text-white top-[calc(39%+219.32px)] w-[477px]"
-        data-node-id="163:125"
-      >
-        Entre os filmes dessa trajetória, Amarelo Manga se destacou. Em 2002, o longa de Cláudio
-        Assis novos olhares apresentou. A produção pernambucana outras vozes incorporou.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium h-[340px] leading-[normal] left-[calc(20%+25px)] not-italic text-[24px] text-white top-[calc(41%+228.08px)] w-[477px]"
-        data-node-id="163:149"
-      >
-        Chegando aos anos recentes, mais filmes cruzaram fronteiras. Recife ganhou espaço em
-        histórias e maneiras de transformar o próprio lugar em imagens para outras galeras.
-      </p>
-      <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(52%+0.76px)] w-[477px]"
         data-node-id="163:197"
       >
         Um filme nasce de uma ideia, mas precisa de contribuição. Tem roteiro, equipe e equipamento,
         tem trabalho e preparação. Para chegar até as telas, também precisa de condição.
       </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium h-[246px] leading-[normal] left-[calc(40%+240px)] not-italic text-[24px] text-white top-[calc(41%+228.08px)] w-[477px]"
-        data-node-id="163:150"
-      >
-        O Som ao Redor, Aquarius, Bacurau e Retratos Fantasmas ajudam a contar essa história, com
-        diferentes pegadas. Marcelo Gomes, Kleber Mendonça Filho trouxeram de Pernambuco novas
-        olhadas.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(50%-239px)] not-italic text-[24px] text-white top-[calc(27%+36.76px)] w-[477px]"
-        data-node-id="149:13"
-      >
-        Com equipamentos mais acessíveis, novos caminhos puderam explorar, fazendo do próprio
-        processo uma maneira de inventar. Com câmeras Super-8, novos filmes puderam criar.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(60%+130px)] not-italic text-[24px] text-white top-[calc(27%+36.76px)] w-[455px]"
-        data-node-id="149:17"
-      >
-        Entre recursos escassos e um caminho pouco explorado, uma geração experimentava outro modo
-        de contar seu lado, E não deixava que o pouco investimento tornasse o cinema pernambucano
-        limitado.
-      </p>
+      <Super8 />
       <PostalPendurado
         id="valente-e-o-galo"
         comDica
@@ -1166,12 +1058,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           </div>
         </div>
       </PostalPendurado>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+576px)] not-italic text-[120px] text-center text-white top-[calc(38%+133.44px)] whitespace-nowrap"
-        data-node-id="163:120"
-      >
-        ANOS 2000
-      </p>
+      <Anos2000 />
       <p
         className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+586.5px)] not-italic text-[115px] text-center text-white top-[calc(50%+199px)] whitespace-nowrap"
         data-node-id="163:188"
@@ -1185,12 +1072,6 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         <p className="leading-[normal] mb-0">RECORTE DE GÊNERO,</p>
         <p className="leading-[normal]">RAÇA E ORIGEM</p>
       </div>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-1/2 not-italic text-[170px] text-center text-white top-[calc(82%+151.16px)] whitespace-nowrap"
-        data-node-id="163:297"
-      >
-        CONCLUSÃO
-      </p>
       <PostalPendurado
         id="amarelo-manga"
         comDica
@@ -1379,19 +1260,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           <img alt="" className="block max-w-none size-full" src={imgVector56} />
         </div>
       </div>
-      <div
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[0] left-[calc(20%+598px)] not-italic text-[100px] text-center text-white top-[calc(60%+237.8px)] whitespace-nowrap"
-        data-node-id="163:185"
-      >
-        <p className="leading-[normal] mb-0 whitespace-pre">{`RECONHECIMENTO `}</p>
-        <p className="leading-[normal] whitespace-pre">INTERNACIONAL</p>
-      </div>
-      <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+547px)] not-italic text-[64px] text-center text-white top-[calc(41%+71.08px)] whitespace-nowrap"
-        data-node-id="180:3"
-      >
-        CONSOLIDAÇÃO
-      </p>
+      <Consolidacao />
       <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(58%+146.04px)] w-[477px]"
         data-node-id="163:199"
@@ -1399,78 +1268,8 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         Os dados podem mostrar concentrações e diferenças, mas precisam de contexto para sustentar
         conclusões. Investigar quem recebe recursos também exige olhar as condições.
       </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(62%+69.56px)] w-[477px]"
-        data-node-id="163:233"
-      >
-        Um filme ganha um prêmio, outro chega a um festival. A notícia cruza fronteiras, o
-        reconhecimento cresce afinal. Mas o que cada conquista nos revela sobre nosso audiovisual?
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(40%+368px)] not-italic text-[24px] text-white top-[calc(62%+69.56px)] w-[477px]"
-        data-node-id="163:235"
-      >
-        Em 2025, um Urso de Prata veio de Berlim para contar: O Último Azul, de Gabriel Mascaro, foi
-        de Recife até lá para ganhar. Mais um prêmio de reconhecimento internacional para a produção
-        brasileira levar.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(64%+165.32px)] w-[477px]"
-        data-node-id="163:240"
-      >
-        O Som ao Redor chegou a circuitos internacionais. Bacurau ganhou destaque em festivais
-        mundiais. São marcos de uma trajetória que atravessou fronteiras culturais
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+348px)] not-italic text-[24px] text-white top-[calc(83%+221.04px)] w-[477px]"
-        data-node-id="163:298"
-      >
-        Dos primeiros filmes do Recife aos que ganharam projeção, há décadas de experiências,
-        trabalho e transformação. O cinema pernambucano não se explica por uma só razão.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+348px)] not-italic text-[24px] text-white top-[calc(88%+135.44px)] w-[477px]"
-        data-node-id="163:301"
-      >
-        O cinema pernambucano tem muitas histórias para contar. Mas, para além das telas, Há muito a
-        investigar. Conhecer o que o sustenta também é parte do olhar.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+348px)] not-italic text-[24px] text-white top-[calc(87%+5.56px)] w-[477px]"
-        data-node-id="163:300"
-      >
-        Os prêmios mostram conquistas, os recursos, condições. Os dados sobre profissionais podem
-        revelar desigualdades. Cada fonte tem seus limites, cada número, suas verdades
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+348px)] not-italic text-[24px] text-white top-[calc(85%+117.8px)] w-[477px]"
-        data-node-id="163:299"
-      >
-        Há cultura, há financiamento, há quem produza e quem crie. Há caminhos que se abrem e
-        barreiras que persistem. A história se faz por muitos, mesmo quando poucos aparecem.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(40%+368px)] not-italic text-[24px] text-white top-[calc(64%+165.32px)] w-[477px]"
-        data-node-id="163:241"
-      >
-        Presente em Cannes, Toronto, Berlim e muitos mais, Pernambucano foi reconhecido e ganhou
-        tudo que era capaz, Já com 4 indicações ao Oscar, Um futuro de destaque é nossa aposta
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(63%+114.44px)] w-[477px]"
-        data-node-id="163:237"
-      >
-        Baile Perfumado marcou uma etapa dessa trajetória. Depois, outros filmes chegaram a
-        circuitos de outra escala. Cada conquista tem seu contexto, cada prêmio tem sua história.
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(40%+368px)] not-italic text-[24px] text-white top-[calc(63%+114.44px)] w-[477px]"
-        data-node-id="163:238"
-      >
-        Sem cansar, Pernambuco chegou aos sonhos do Oscar. Manas disputou de perto a vaga do Brasil,
-        O Último Azul brilhou em Berlim por outra estrada. Mas foi com O Agente Secreto que Recife ficou
-        conhecido no mundo todo.
-      </p>
+      <Conclusao />
+      <ReconhecimentoInternacional premios={premios} />
       <p
         className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(57%+98.16px)] w-[477px]"
         data-node-id="163:201"
@@ -1630,66 +1429,6 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
         </div>
       </div>
       <div
-        className="absolute bg-[#d9d9d9] h-[167px] left-[299px] top-[calc(68%+170.84px)] w-[352px]"
-        data-node-id="163:254"
-      />
-      <div
-        className="absolute bg-[#d9d9d9] h-[317px] left-[calc(40%+39px)] top-[calc(68%+18.84px)] w-[352px]"
-        data-node-id="196:13"
-      />
-      <p
-        className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(40%+172px)] not-italic text-[120px] text-black top-[calc(68%+87.84px)] whitespace-nowrap"
-        data-node-id="196:15"
-      >
-        1º
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(20%+42px)] not-italic text-[120px] text-black top-[calc(68%+155.84px)] whitespace-nowrap"
-        data-node-id="196:16"
-      >
-        2º
-      </p>
-      <div
-        className="absolute bg-[#d9d9d9] h-[110px] left-[calc(60%+199px)] top-[calc(68%+227.84px)] w-[281px]"
-        data-node-id="163:255"
-      />
-      <div
-        className="absolute bg-[#8c8888] h-[243px] left-[calc(40%-8px)] top-[calc(67%-1.04px)] w-[169px]"
-        data-node-id="196:18"
-      />
-      <div
-        className="absolute bg-[#8c8888] h-[220px] left-[293px] top-[calc(67%+147.96px)] w-[153px]"
-        data-node-id="196:24"
-      />
-      <div
-        className="absolute bg-[#8c8888] h-[213px] left-[calc(60%+169px)] top-[calc(67%+232.96px)] w-[138px]"
-        data-node-id="196:27"
-      />
-      <div
-        className="absolute bg-[#8c8888] h-[243px] left-[calc(40%+254px)] top-[calc(67%-1.04px)] w-[169px]"
-        data-node-id="196:20"
-      />
-      <div
-        className="absolute bg-[#8c8888] h-[220px] left-[calc(20%+146px)] top-[calc(67%+147.96px)] w-[153px]"
-        data-node-id="196:25"
-      />
-      <div
-        className="absolute bg-[#8c8888] h-[213px] left-[calc(80%-1px)] top-[calc(67%+232.96px)] w-[138px]"
-        data-node-id="196:28"
-      />
-      <div
-        className="absolute bg-[#d9d9d9] h-[412px] left-[calc(40%+62px)] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[calc(66%+48.08px)] w-[286px]"
-        data-node-id="163:257"
-      />
-      <div
-        className="absolute bg-[#d9d9d9] h-[373px] left-[356px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[calc(66%+219.08px)] w-[259px]"
-        data-node-id="196:26"
-      />
-      <div
-        className="absolute bg-[#d9d9d9] h-[361px] left-[calc(60%+226px)] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[calc(67%+50.96px)] w-[234px]"
-        data-node-id="196:29"
-      />
-      <div
         className="falling-poster hotspot absolute z-10 flex h-[380.488px] items-center justify-center left-[calc(60%+3px)] top-[calc(43%+44.84px)] w-[329.539px]"
         role="button"
         tabIndex={0}
@@ -1719,33 +1458,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           </div>
         </div>
       </div>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(60%+282px)] not-italic text-[120px] text-black top-[calc(68%+190.84px)] whitespace-nowrap"
-        data-node-id="196:17"
-      >
-        3º
-      </p>
-      <div
-        className="[word-break:break-word] absolute font-corpo font-semibold leading-[0] left-[calc(40%+81px)] not-italic text-[24px] text-white top-[calc(69%+133.72px)] whitespace-nowrap"
-        data-node-id="163:262"
-      >
-        <p className="leading-[normal] mb-0">*1 lugar</p>
-        <p className="leading-[normal]">vencedores relevantse</p>
-      </div>
-      <div
-        className="[word-break:break-word] absolute font-corpo font-semibold leading-[0] left-[337px] not-italic text-[24px] text-white top-[calc(69%+123.72px)] w-[265px]"
-        data-node-id="163:263"
-      >
-        <p className="leading-[normal] mb-0">*2 lugar</p>
-        <p className="leading-[normal]">indicados relevantes + vencedores</p>
-      </div>
-      <div
-        className="[word-break:break-word] absolute font-corpo font-semibold leading-[0] left-[calc(60%+199px)] not-italic text-[24px] text-white top-[calc(69%+113.72px)] whitespace-nowrap"
-        data-node-id="163:268"
-      >
-        <p className="leading-[normal] mb-0">*3 lugar</p>
-        <p className="leading-[normal]">indicados qlqr coisa</p>
-      </div>
+      <Podio />
       <Hotspot
         id="hotspot-genero"
         style={{ top: "calc(73% + 16px)", left: "calc(60% - 10px)", width: 460, height: 240 }}
@@ -1852,11 +1565,6 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           data-node-id="196:50"
         >{textoOutros}</p>
       </div>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-semibold font-semibold leading-[normal] left-[calc(60%+78px)] text-[24px] text-white top-[calc(66%+119.08px)] w-[423px]"
-        data-node-id="200:17"
-        style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}
-      >{`*ao passar o mouse os filmes se mostram em fileira → `}</p>
       <div
         className="absolute contents left-[calc(40%+309px)] top-[calc(79%+37.52px)]"
         data-node-id="200:16"
@@ -2087,49 +1795,7 @@ export function DesignPoster({ genero = null, origem = null }: DesignPosterProps
           </div>
         </div>
       </div>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-black leading-[normal] left-[calc(50%-207px)] not-italic text-[36px] text-white top-[calc(89%+240.32px)] whitespace-nowrap"
-        data-node-id="262:101"
-      >
-        Créditos de produção:
-      </p>
-      <div
-        className="-translate-x-1/2 [word-break:break-word] absolute font-corpo font-semibold leading-[0] left-1/2 not-italic text-[24px] text-center text-white top-[calc(90%+130.2px)] whitespace-nowrap"
-        data-node-id="262:102"
-      >
-        <p className="font-corpo font-extrabold leading-[normal] mb-0 whitespace-pre">{`Design: `}</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0 whitespace-pre">
-          Annalyce Gonçalves
-        </p>
-        <p className="font-corpo font-medium leading-[normal] mb-0 whitespace-pre">
-          Dandara Vitória
-        </p>
-        <p className="font-corpo font-medium leading-[normal] mb-0 whitespace-pre">Júlia</p>
-        <p className="font-corpo font-medium leading-[normal] whitespace-pre">Pedro Henrique</p>
-      </div>
-      <div
-        className="-translate-x-1/2 [word-break:break-word] absolute font-corpo font-semibold leading-[0] left-1/2 not-italic text-[24px] text-center text-white top-[calc(91%+98.08px)] whitespace-nowrap"
-        data-node-id="262:103"
-      >
-        <p className="font-corpo font-extrabold leading-[normal] mb-0">Programação:</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Asael</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Bruna Veiga</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Heitor</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Guilherme</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Ohashi</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Jl</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Klarissa</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">João Vitor</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">João Moraes</p>
-      </div>
-      <div
-        className="-translate-x-1/2 [word-break:break-word] absolute font-corpo font-extrabold leading-[0] left-1/2 not-italic text-[24px] text-center text-white top-[calc(92%+245.96px)] whitespace-nowrap"
-        data-node-id="262:104"
-      >
-        <p className="leading-[normal] mb-0">Jornalismo:</p>
-        <p className="font-corpo font-medium leading-[normal] mb-0">Jl</p>
-        <p className="font-corpo font-medium leading-[normal]">Vitória Lira</p>
-      </div>
+      <Creditos />
       <div
         className="absolute flex inset-[93.36%_97.7%_0.44%_1.46%] items-center justify-center"
         data-node-id="262:107"
