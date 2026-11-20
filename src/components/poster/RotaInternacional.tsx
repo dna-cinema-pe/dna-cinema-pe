@@ -7,6 +7,10 @@ import { repetirVoo } from "./animacoes.ts";
 import { useAnimacoesDesligadas } from "./useAnimacoesDesligadas.ts";
 
 /**
+ * Abaixo de 1280 px (US-4.1), os pinos e o botão "Voar de novo" usam `poster-nivel-financiamento`
+ * (globals.css): descem com o pôster até o espaço do Financiamento, mas não o do texto do
+ * Reconhecimento Internacional, que fica abaixo deles.
+ *
  * Pinos ao longo da rota do avião (`M 0 0 C -360 -20 -850 55 -1200 170`, a partir do centro do
  * avião em 1467 × 15472 no frame). Cada pino fica um pouco acima do ponto da curva em t = 0,12,
  * 0,37, 0,62 e 0,87, na ordem do voo, da direita para a esquerda.
@@ -146,7 +150,7 @@ export function RotaInternacional({ premios }: { premios: PremiosInternacionais 
           aria-expanded={aberto === pino.id}
           aria-controls={aberto === pino.id ? painelId : undefined}
           aria-label={`${pino.nome}: ver filmes premiados`}
-          className="hotspot group absolute z-20 flex -translate-x-1/2 -translate-y-full flex-col items-center"
+          className="hotspot group absolute z-20 flex -translate-x-1/2 -translate-y-full flex-col items-center poster-nivel-financiamento"
           style={{ left: pino.left, top: pino.top }}
         >
           <span className="rounded-full border-2 border-ouro bg-fundo px-5 py-2 font-corpo text-[24px] font-semibold text-ouro transition-colors group-hover:bg-ouro group-hover:text-fundo group-aria-expanded:bg-ouro group-aria-expanded:text-fundo">
@@ -162,7 +166,7 @@ export function RotaInternacional({ premios }: { premios: PremiosInternacionais 
         onClick={repetirVoo}
         disabled={animacoesDesligadas}
         aria-label="Voar de novo"
-        className="hotspot absolute left-[1390px] top-[15560px] z-20 rounded-full border-2 border-ouro bg-fundo px-6 py-3 font-corpo text-[24px] font-semibold text-ouro hover:bg-ouro hover:text-fundo disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-fundo disabled:hover:text-ouro"
+        className="hotspot absolute left-[1390px] top-[15560px] z-20 poster-nivel-financiamento rounded-full border-2 border-ouro bg-fundo px-6 py-3 font-corpo text-[24px] font-semibold text-ouro hover:bg-ouro hover:text-fundo disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-fundo disabled:hover:text-ouro"
       >
         <span aria-hidden="true">✈ </span>Voar de novo
       </button>
