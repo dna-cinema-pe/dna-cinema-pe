@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function FilmeNotFound() {
   return (
-    <main style={{ padding: "2rem", fontFamily: "sans-serif" }}>
+    <main id="conteudo" tabIndex={-1} style={{ padding: "2rem", fontFamily: "sans-serif" }}>
       <h1>404 - Filme não encontrado</h1>
       <p>
         O identificador informado não corresponde a nenhum filme existente em nosso catálogo ou é inválido.

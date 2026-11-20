@@ -9,16 +9,23 @@ function Anel({ valor, total, rotulo }: { valor: number; total: number; rotulo: 
   return (
     <div className="flex flex-col items-center gap-1.5">
       <div
+        role="img"
+        aria-label={`${rotulo}: ${valor} de ${total} (${percentual}%)`}
         className="flex size-14 items-center justify-center rounded-full"
         style={{
           background: `conic-gradient(var(--color-ouro) ${percentual}%, rgba(255,255,255,0.12) 0)`,
         }}
       >
-        <div className="flex size-11 items-center justify-center rounded-full bg-fundo text-xs font-bold text-white">
+        <div
+          aria-hidden="true"
+          className="flex size-11 items-center justify-center rounded-full bg-fundo text-xs font-bold text-white"
+        >
           {valor}/{total}
         </div>
       </div>
-      <span className="text-[11px] text-white/55">{rotulo}</span>
+      <span aria-hidden="true" className="text-[11px] text-white/60">
+        {rotulo}
+      </span>
     </div>
   );
 }
@@ -50,7 +57,7 @@ export function CompletionSummary() {
           type="button"
           aria-label="Fechar resumo"
           onClick={() => setDispensado(true)}
-          className="absolute right-2.5 top-2.5 text-base leading-none text-white/50 hover:text-white"
+          className="absolute right-2.5 top-2.5 text-base leading-none text-white/70 hover:text-white"
         >
           ×
         </button>

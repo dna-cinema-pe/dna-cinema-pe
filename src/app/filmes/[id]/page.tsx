@@ -293,7 +293,7 @@ export default async function FilmeDetalhePage({ params }: Props) {
   }
 
   return (
-    <main style={{ padding: "2rem" }}>
+    <main id="conteudo" tabIndex={-1} style={{ padding: "2rem" }}>
       <nav aria-label="Atalhos da página">
         <p>
           <Link href="/filmes">← Voltar para o catálogo de filmes</Link> |{" "}

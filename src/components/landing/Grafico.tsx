@@ -1,4 +1,6 @@
 import { Barra, COR_BARRA } from "@/components/ui/Barra.tsx";
+import { TabelaDoGrafico } from "@/components/ui/TabelaDoGrafico.tsx";
+import { NAO_DISPONIVEL } from "@/lib/utils.ts";
 import type { ItemGrafico } from "./tipos.ts";
 
 interface Props {
@@ -27,6 +29,19 @@ export function Grafico({ titulo, itens, maximo = 100, className = "" }: Props) 
           />
         ))}
       </div>
+
+      <TabelaDoGrafico
+        titulo={titulo}
+        descricao="Valores por categoria, com os mesmos números exibidos nas barras."
+        colunaRotulo="Categoria"
+        colunaValor="Valor"
+        linhas={itens.map((item) => ({
+          rotulo: item.rotulo,
+          valor:
+            item.valorTexto ??
+            (item.valor === null ? NAO_DISPONIVEL : `${Math.round((item.valor / maximo) * 100)}%`),
+        }))}
+      />
 
       <ul className="flex flex-col items-end gap-1.5">
         {itens.map((item) => (

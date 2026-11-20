@@ -42,7 +42,7 @@ async function PosterComDados() {
 
 export default function HomePage() {
   return (
-    <main className="flex-1 bg-fundo">
+    <main id="conteudo" tabIndex={-1} className="flex-1 bg-fundo">
       <OnboardingProvider>
         <ControlesDeMovimento />
         <Suspense

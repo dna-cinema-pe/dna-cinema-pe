@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function GlobalNotFound() {
   return (
-    <main style={{ padding: "2rem", fontFamily: "sans-serif" }}>
+    <main id="conteudo" tabIndex={-1} style={{ padding: "2rem", fontFamily: "sans-serif" }}>
       <h1>404 - Página não encontrada</h1>
       <p>A página que você está procurando não existe.</p>
       <p style={{ marginTop: "1rem" }}>

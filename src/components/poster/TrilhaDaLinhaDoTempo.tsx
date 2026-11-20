@@ -89,7 +89,7 @@ export function TrilhaDaLinhaDoTempo() {
                   }`}
                 >
                   {periodo.titulo}
-                  {periodo.detalhe && <span className="ml-1 text-white/50">{periodo.detalhe}</span>}
+                  {periodo.detalhe && <span className="ml-1 text-white/70">{periodo.detalhe}</span>}
                 </span>
               </button>
             </li>

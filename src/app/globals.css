@@ -20,6 +20,8 @@
   --color-ferrugem: #ac3215;
   --color-ferrugem-claro: #b83e24;
   --color-vermelho: #e2200f;
+  /* Tinta clara do vermelho para texto sobre o fundo escuro (4,5:1+). */
+  --color-vermelho-claro: #ff6b5a;
   --color-laranja: #ff9f3f;
   --color-papel: #ceccc8;
 }
@@ -252,11 +254,6 @@ body {
   will-change: transform;
 }
 
-.hanging-postcard:focus-visible {
-  outline: 4px solid var(--color-ouro);
-  outline-offset: 4px;
-}
-
 .falling-poster--fallen .falling-poster__body {
   animation: poster-fall 1.35s cubic-bezier(0.55, 0.05, 0.8, 0.2) forwards;
   transform-origin: 50% 0%;
@@ -329,7 +326,8 @@ html[data-animacoes="ligadas"] .revelar-texto:not(.revelar-texto--visivel) {
   outline-offset: 2px;
 }
 
-.hotspot:active {
+.hotspot:active,
+.hotspot:has(> button:active) {
   transform: scale(0.97);
 }
 
@@ -352,4 +350,20 @@ html[data-animacoes="desligadas"] .falling-poster__body {
 
 html[data-animacoes="desligadas"] .plane-flight {
   offset-distance: 100%;
+}
+
+/*
+ * Foco visível (WCAG 2.2 AA / 2.4.7 e 2.4.11): um contorno dourado com folga para todos os
+ * elementos interativos, inclusive links, botões de navegação e o link "Pular para o conteúdo".
+ * Hotspots e pôsteres mantêm o contorno específico definido acima. O <main> fica de fora: ele só
+ * recebe foco programático do link de pular, e um contorno em volta da página inteira não ajuda.
+ */
+:where(a, button, input, select, textarea, summary, [tabindex]:not(main)):focus-visible {
+  outline: 3px solid var(--color-ouro);
+  outline-offset: 3px;
+}
+
+main:focus,
+main:focus-visible {
+  outline: none;
 }

@@ -1,8 +1,8 @@
 export default function FilmesLoading() {
   return (
-    <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
+    <main id="conteudo" tabIndex={-1} style={{ padding: "2rem", fontFamily: "sans-serif" }}>
       <p>Carregando catálogo de filmes...</p>
-    </div>
+    </main>
   );
 }
 

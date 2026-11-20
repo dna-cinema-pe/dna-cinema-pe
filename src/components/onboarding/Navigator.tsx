@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CAPITULOS, type CapituloId } from "./capitulos.ts";
 import { useOnboarding } from "./OnboardingProvider.tsx";
 
@@ -21,9 +21,9 @@ function ListaCapitulos({ aoNavegar }: ListaProps) {
             <button
               type="button"
               onClick={() => aoNavegar(capitulo.id)}
-              aria-current={ativo ? "true" : undefined}
+              aria-current={ativo ? "location" : undefined}
               className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm transition-colors ${
-                ativo ? "text-vermelho font-semibold" : visitado ? "text-white" : "text-white/45"
+                ativo ? "text-vermelho-claro font-semibold" : visitado ? "text-white" : "text-white/60"
               } hover:bg-white/10`}
             >
               <span
@@ -92,10 +92,50 @@ export function Navigator() {
   const { capituloAtivo, irParaCapitulo, totalHotspots, hotspotsVistos } = useOnboarding();
   const [abertoMobile, setAbertoMobile] = useState(false);
   const [pertoDoFim, setPertoDoFim] = useState(false);
+  const gavetaRef = useRef<HTMLDivElement>(null);
+  const botaoMobileRef = useRef<HTMLButtonElement>(null);
 
   const indiceAtivo = CAPITULOS.findIndex((c) => c.id === capituloAtivo);
   const proximo = indiceAtivo >= 0 ? CAPITULOS[indiceAtivo + 1] : undefined;
   const capituloAtual = CAPITULOS[indiceAtivo];
+
+  // A gaveta mobile é modal: leva o foco para dentro dela, prende o Tab, fecha no Esc e devolve
+  // o foco ao botão que a abriu (WCAG 2.2 AA / 2.1.2 e 2.4.3).
+  useEffect(() => {
+    if (!abertoMobile) return;
+    const gaveta = gavetaRef.current;
+    const botaoQueAbriu = botaoMobileRef.current;
+    gaveta?.querySelector<HTMLElement>("nav button")?.focus();
+
+    function aoTeclar(evento: KeyboardEvent) {
+      if (evento.key === "Escape") {
+        evento.preventDefault();
+        setAbertoMobile(false);
+        return;
+      }
+      if (evento.key !== "Tab" || !gaveta) return;
+
+      const focaveis = gaveta.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])',
+      );
+      if (focaveis.length === 0) return;
+      const primeiro = focaveis[0];
+      const ultimo = focaveis[focaveis.length - 1];
+      if (evento.shiftKey && document.activeElement === primeiro) {
+        evento.preventDefault();
+        ultimo.focus();
+      } else if (!evento.shiftKey && document.activeElement === ultimo) {
+        evento.preventDefault();
+        primeiro.focus();
+      }
+    }
+
+    document.addEventListener("keydown", aoTeclar);
+    return () => {
+      document.removeEventListener("keydown", aoTeclar);
+      botaoQueAbriu?.focus({ preventScroll: true });
+    };
+  }, [abertoMobile]);
 
   useEffect(() => {
     function verificar() {
@@ -126,7 +166,7 @@ export function Navigator() {
       {totalHotspots > 0 && (
         <div
           aria-hidden="true"
-          className="font-corpo fixed right-4 top-5 z-40 hidden items-center gap-1 rounded-full bg-black/40 px-2.5 py-1 text-[11px] font-medium text-vermelho backdrop-blur-sm lg:flex"
+          className="font-corpo fixed right-4 top-5 z-40 hidden items-center gap-1 rounded-full bg-black/40 px-2.5 py-1 text-[11px] font-medium text-vermelho-claro backdrop-blur-sm lg:flex"
         >
           ✨ {hotspotsVistos.size}/{totalHotspots}
         </div>
@@ -135,13 +175,15 @@ export function Navigator() {
       {/* Botão compacto no mobile: capítulo atual + abre a lista completa (canto oposto ao "?") */}
       <button
         id="onboarding-alvo-capitulos-mobile"
+        ref={botaoMobileRef}
         type="button"
         onClick={() => setAbertoMobile((v) => !v)}
         aria-expanded={abertoMobile}
-        aria-label="Abrir menu de capítulos"
+        aria-controls={abertoMobile ? "onboarding-menu-capitulos" : undefined}
+        aria-label={abertoMobile ? "Fechar menu de capítulos" : "Abrir menu de capítulos"}
         className="font-corpo fixed bottom-5 left-5 z-40 flex items-center gap-2 rounded-full bg-black/50 px-3 py-2 text-[11px] font-medium text-white shadow-lg backdrop-blur-sm lg:hidden"
       >
-        <span className="text-vermelho">
+        <span className="text-vermelho-claro">
           {indiceAtivo + 1}/{CAPITULOS.length}
         </span>
         <span className="max-w-24 truncate">{capituloAtual?.titulo}</span>
@@ -149,7 +191,14 @@ export function Navigator() {
 
       {/* Gaveta no mobile */}
       {abertoMobile && (
-        <div className="fixed inset-0 z-[46] lg:hidden" role="dialog" aria-modal="true">
+        <div
+          ref={gavetaRef}
+          id="onboarding-menu-capitulos"
+          className="fixed inset-0 z-[46] lg:hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu de capítulos"
+        >
           <button
             type="button"
             aria-label="Fechar menu de capítulos"
@@ -174,7 +223,7 @@ export function Navigator() {
             onClick={() => navegar(proximo.id)}
             className="font-corpo pointer-events-auto flex items-center gap-1.5 rounded-full bg-black/50 px-3 py-2 text-[11px] font-medium text-white shadow-lg backdrop-blur-sm"
           >
-            <span aria-hidden="true" className="animate-bounce text-vermelho">
+            <span aria-hidden="true" className="animate-bounce text-vermelho-claro">
               ⌄
             </span>
             {proximo.titulo}
