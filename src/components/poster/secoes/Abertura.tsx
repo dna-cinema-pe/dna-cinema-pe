@@ -287,11 +287,11 @@ export function Abertura() {
             src={imgCamada7}
           />
         </div>
-        <div className="absolute inset-[4.57%_1.21%_89.23%_95.73%]" data-node-id="46:32">
+        <div className="absolute inset-[4.57%_1.21%_89.23%_95.73%] max-xl:bottom-[calc(89.23%-var(--espaco-abertura,0px)-var(--espaco-contexto,0px))]" data-node-id="46:32">
           <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup2} />
         </div>
         <div
-          className="absolute flex inset-[4.56%_95.74%_89.24%_1.2%] items-center justify-center"
+          className="absolute flex inset-[4.56%_95.74%_89.24%_1.2%] max-xl:bottom-[calc(89.24%-var(--espaco-abertura,0px)-var(--espaco-contexto,0px))] items-center justify-center"
           data-node-id="46:35"
           style={{ containerType: "size" }}
         >
@@ -302,7 +302,7 @@ export function Abertura() {
           </div>
         </div>
         <div
-          className="absolute flex inset-[10.75%_95.59%_83.05%_1.35%] items-center justify-center"
+          className="absolute flex inset-[10.75%_95.59%_83.05%_1.35%] max-xl:translate-y-[calc(var(--espaco-abertura,0px)+var(--espaco-contexto,0px))] max-xl:bottom-[calc(83.05%-var(--espaco-ciclo,0px)-var(--espaco-ciclo-texto,0px))] items-center justify-center"
           data-node-id="46:38"
           style={{ containerType: "size" }}
         >
@@ -312,11 +312,11 @@ export function Abertura() {
             </div>
           </div>
         </div>
-        <div className="absolute inset-[16.95%_95.33%_76.85%_1.61%]" data-node-id="46:41">
+        <div className="absolute inset-[16.95%_95.33%_76.85%_1.61%] max-xl:translate-y-[calc(var(--espaco-abertura,0px)+var(--espaco-contexto,0px)+var(--espaco-ciclo,0px)+var(--espaco-ciclo-texto,0px))] max-xl:bottom-[calc(76.85%-var(--espaco-ciclo-final,0px))]" data-node-id="46:41">
           <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup5} />
         </div>
         <div
-          className="absolute flex inset-[23.15%_95.59%_70.65%_1.35%] items-center justify-center"
+          className="absolute flex inset-[23.15%_95.59%_70.65%_1.35%] max-xl:translate-y-[calc(var(--espaco-abertura,0px)+var(--espaco-contexto,0px)+var(--espaco-ciclo,0px)+var(--espaco-ciclo-texto,0px)+var(--espaco-ciclo-final,0px))] max-xl:bottom-[calc(70.65%-var(--espaco-super8-legenda,0px)-var(--espaco-super8,0px))] items-center justify-center"
           data-node-id="46:44"
           style={{ containerType: "size" }}
         >
@@ -326,11 +326,11 @@ export function Abertura() {
             </div>
           </div>
         </div>
-        <div className="absolute inset-[29.35%_95.33%_64.45%_1.61%]" data-node-id="83:39">
+        <div className="absolute inset-[29.35%_95.33%_64.45%_1.61%] max-xl:translate-y-[calc(var(--espaco-abertura,0px)+var(--espaco-contexto,0px)+var(--espaco-ciclo,0px)+var(--espaco-ciclo-texto,0px)+var(--espaco-ciclo-final,0px)+var(--espaco-super8-legenda,0px)+var(--espaco-super8,0px))]" data-node-id="83:39">
           <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup13} />
         </div>
         <div
-          className="absolute flex inset-[10.75%_1.47%_83.05%_95.47%] items-center justify-center"
+          className="absolute flex inset-[10.75%_1.47%_83.05%_95.47%] max-xl:translate-y-[calc(var(--espaco-abertura,0px)+var(--espaco-contexto,0px))] max-xl:bottom-[calc(83.05%-var(--espaco-ciclo,0px)-var(--espaco-ciclo-texto,0px))] items-center justify-center"
           data-node-id="46:47"
           style={{ containerType: "size" }}
         >
@@ -340,11 +340,11 @@ export function Abertura() {
             </div>
           </div>
         </div>
-        <div className="absolute inset-[16.95%_1.21%_76.85%_95.73%]" data-node-id="46:50">
+        <div className="absolute inset-[16.95%_1.21%_76.85%_95.73%] max-xl:translate-y-[calc(var(--espaco-abertura,0px)+var(--espaco-contexto,0px)+var(--espaco-ciclo,0px)+var(--espaco-ciclo-texto,0px))] max-xl:bottom-[calc(76.85%-var(--espaco-ciclo-final,0px))]" data-node-id="46:50">
           <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup5} />
         </div>
         <div
-          className="absolute flex inset-[23.15%_1.47%_70.65%_95.47%] items-center justify-center"
+          className="absolute flex inset-[23.15%_1.47%_70.65%_95.47%] max-xl:translate-y-[calc(var(--espaco-abertura,0px)+var(--espaco-contexto,0px)+var(--espaco-ciclo,0px)+var(--espaco-ciclo-texto,0px)+var(--espaco-ciclo-final,0px))] max-xl:bottom-[calc(70.65%-var(--espaco-super8-legenda,0px)-var(--espaco-super8,0px))] items-center justify-center"
           data-node-id="46:53"
           style={{ containerType: "size" }}
         >
@@ -354,16 +354,27 @@ export function Abertura() {
             </div>
           </div>
         </div>
+        {/*
+          Abaixo de 1280 px, a cena da cidade e as faixas laterais descem `--espaco-abertura` para
+          abrir espaço depois do subtítulo, junto com o resto do pôster (DESLOCADO no DesignPoster).
+          A moldura superior (46:14) fica; os primeiros segmentos das faixas se alongam para cobrir
+          o espaço e os demais descem. As faixas acompanham também `--espaco-contexto` (o varal do
+          Contexto desce para abrir espaço aos parágrafos) e `--espaco-ciclo` (o Ciclo do Recife
+          desce depois dos últimos parágrafos) e `--espaco-ciclo-texto` (o que vem depois dos
+          parágrafos do Ciclo desce) e `--espaco-ciclo-final` (a ponte desce depois do texto abaixo
+          das fotos do Ciclo), além dos espaços do Super-8 (`--espaco-super8-legenda` e
+          `--espaco-super8`): o segmento que atravessa esses pontos se alonga e os de baixo descem.
+        */}
         <div className="absolute contents left-[82px] top-[calc(4%+113.52px)]" data-node-id="51:69">
           <div
-            className="absolute h-[361px] left-[82px] top-[calc(4%+113.52px)] w-[1472px]"
+            className="absolute h-[361px] left-[82px] top-[calc(4%+113.52px)] w-[1472px] max-xl:translate-y-(--espaco-abertura)"
             data-node-id="46:56"
             data-name="Camada_1"
           >
             <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada8} />
           </div>
           <div
-            className="absolute h-[25.28px] left-[calc(20%+335px)] top-[calc(5%+228.4px)] w-[261.86px]"
+            className="absolute h-[25.28px] left-[calc(20%+335px)] top-[calc(5%+228.4px)] w-[261.86px] max-xl:translate-y-(--espaco-abertura)"
             data-node-id="46:238"
             data-name="Camada_1"
           >
@@ -372,7 +383,7 @@ export function Abertura() {
         </div>
       </div>
       <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-corpo font-normal leading-[normal] left-[calc(50%+3px)] not-italic text-[#eaeaea] text-[32px] text-center top-[calc(3%+233.64px)] w-[856px]"
+        className="-translate-x-1/2 [word-break:break-word] absolute font-corpo font-normal leading-[normal] left-[calc(50%+3px)] not-italic text-[#eaeaea] text-[32px] max-xl:text-[length:max(32px,calc(14px*var(--inv,1)))] text-center top-[calc(3%+233.64px)] max-xl:top-[calc(3%+233.64px+20px*var(--inv,1))] w-[856px] max-xl:w-[1300px] max-md:w-[1400px]"
         data-node-id="46:271"
       >
         {subtitulo}

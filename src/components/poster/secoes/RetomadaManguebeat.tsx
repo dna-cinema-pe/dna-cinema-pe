@@ -1,10 +1,14 @@
 import conteudo from "../content.json";
 
-/** Posição de cada parte do título no frame do Figma: "RETOMADA", "E" e "MANGUEBEAT". */
+/**
+ * Posição de cada parte do título no frame do Figma: "RETOMADA", "E" e "MANGUEBEAT".
+ * `poster-nivel-super8` (globals.css): abaixo de 1280 px, o título não desce o espaço aberto
+ * depois dos cartões (`--espaco-retomada`), só os de antes dele.
+ */
 const PARTES = [
-  { nodeId: "67:25", className: "-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+574px)] not-italic text-[90px] text-center text-white top-[calc(29%+70.52px)] whitespace-nowrap" },
-  { nodeId: "67:26", className: "-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(40%+190px)] not-italic text-[80px] text-center text-white top-[calc(29%+201.52px)] whitespace-nowrap" },
-  { nodeId: "67:29", className: "-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+573.5px)] not-italic text-[120px] text-center text-white top-[calc(30%+64.4px)] whitespace-nowrap" },
+  { nodeId: "67:25", className: "-translate-x-1/2 poster-nivel-super8 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+574px)] not-italic text-[90px] text-center text-white top-[calc(29%+70.52px)] whitespace-nowrap" },
+  { nodeId: "67:26", className: "-translate-x-1/2 poster-nivel-super8 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(40%+190px)] not-italic text-[80px] text-center text-white top-[calc(29%+201.52px)] whitespace-nowrap" },
+  { nodeId: "67:29", className: "-translate-x-1/2 poster-nivel-super8 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+573.5px)] not-italic text-[120px] text-center text-white top-[calc(30%+64.4px)] whitespace-nowrap" },
 ] as const;
 
 /**
