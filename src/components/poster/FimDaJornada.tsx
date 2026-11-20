@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { CAPITULOS } from "@/components/onboarding/capitulos.ts";
 import { useOnboarding } from "@/components/onboarding/OnboardingProvider.tsx";
 import conteudo from "./content.json";
@@ -12,6 +12,18 @@ const BOTAO =
   "hotspot flex items-center gap-3 rounded-full border-2 border-ouro px-8 py-4 font-corpo text-[28px] font-bold";
 
 type EstadoCompartilhar = "parado" | "copiado" | "manual";
+
+function assinarSemMudancas() {
+  return () => {};
+}
+
+function obterSnapshotDoCliente() {
+  return true;
+}
+
+function obterSnapshotDoServidor() {
+  return false;
+}
 
 /** Endereço da reportagem, sem âncora de capítulo nem parâmetros. */
 function enderecoDaPagina() {
@@ -26,6 +38,11 @@ function enderecoDaPagina() {
 export function FimDaJornada() {
   const { capitulosVisitados, totalHotspots, hotspotsVistos, irParaCapitulo } = useOnboarding();
   const [estado, setEstado] = useState<EstadoCompartilhar>("parado");
+  const resumoHidratado = useSyncExternalStore(
+    assinarSemMudancas,
+    obterSnapshotDoCliente,
+    obterSnapshotDoServidor,
+  );
 
   async function aoCompartilhar() {
     const url = enderecoDaPagina();
@@ -57,8 +74,8 @@ export function FimDaJornada() {
     <div className="-translate-x-1/2 absolute left-1/2 top-[calc(89%+75px)] z-20 flex w-[1700px] flex-col items-center gap-3 font-corpo text-white">
       <div className="flex items-center gap-8">
         <p className="text-[28px] font-semibold">
-          Você leu {capitulosVisitados.size} de {CAPITULOS.length} capítulos
-          {totalHotspots > 0 && (
+          Você leu {resumoHidratado ? capitulosVisitados.size : "—"} de {CAPITULOS.length} capítulos
+          {resumoHidratado && totalHotspots > 0 && (
             <>
               {" "}
               e fez {hotspotsVistos.size} de {totalHotspots} descobertas

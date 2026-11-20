@@ -6,7 +6,7 @@ export default async function FilmesPage() {
   const filmes = await listarFilmes();
 
   return (
-    <main className="min-h-screen bg-black text-zinc-100 p-6 md:p-10 font-sans">
+    <main id="conteudo" tabIndex={-1} className="min-h-screen bg-black text-zinc-100 p-6 md:p-10 font-sans">
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Cabeçalho */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-zinc-800 pb-5">
@@ -42,7 +42,7 @@ export default async function FilmesPage() {
 
         {/* Tabela de Filmes */}
         {filmes.length === 0 ? (
-          <div className="bg-zinc-950 border border-zinc-800 rounded-lg p-12 text-center text-zinc-500">
+          <div className="bg-zinc-950 border border-zinc-800 rounded-lg p-12 text-center text-zinc-400">
             Nenhum filme cadastrado no acervo.
           </div>
         ) : (
@@ -96,7 +96,7 @@ export default async function FilmesPage() {
                             loading="lazy"
                           />
                         ) : (
-                          <div className="flex flex-col items-center justify-center text-[10px] text-zinc-500 text-center leading-tight">
+                          <div className="flex flex-col items-center justify-center text-[10px] text-zinc-400 text-center leading-tight">
                             <span className="text-base mb-0.5">🎬</span>
                             <span>Sem cartaz</span>
                           </div>
@@ -126,7 +126,7 @@ export default async function FilmesPage() {
                       {filme.genero ? (
                         <span>{filme.genero}</span>
                       ) : (
-                        <span className="text-zinc-600 italic">{NAO_DISPONIVEL}</span>
+                        <span className="text-zinc-400 italic">{NAO_DISPONIVEL}</span>
                       )}
                     </td>
 
@@ -138,7 +138,7 @@ export default async function FilmesPage() {
                           {filme.cidadeFilmagem}
                         </span>
                       ) : (
-                        <span className="text-zinc-600 italic">{NAO_DISPONIVEL}</span>
+                        <span className="text-zinc-400 italic">{NAO_DISPONIVEL}</span>
                       )}
                     </td>
 

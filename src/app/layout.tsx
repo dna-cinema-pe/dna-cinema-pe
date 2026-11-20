@@ -39,6 +39,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} ${alfaSlabOne.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <a
+          href="#conteudo"
+          className="font-corpo sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ouro focus:px-5 focus:py-3 focus:text-sm focus:font-bold focus:text-fundo focus:shadow-2xl"
+        >
+          Pular para o conteúdo
+        </a>
         <script dangerouslySetInnerHTML={{ __html: SCRIPT_ANIMACOES }} />
         {children}
       </body>

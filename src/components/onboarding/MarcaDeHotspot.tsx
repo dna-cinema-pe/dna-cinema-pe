@@ -45,7 +45,7 @@ interface Props {
 export function MarcaDeHotspot({ podeApontar, reduzirMovimento }: Props) {
   return (
     <>
-      <span className="pointer-events-none absolute -right-3 -top-3 flex size-7">
+      <span aria-hidden="true" className="pointer-events-none absolute -right-3 -top-3 flex size-7">
         {reduzirMovimento ? (
           <span className="size-7 rounded-full border-2 border-ouro" />
         ) : (
@@ -55,7 +55,10 @@ export function MarcaDeHotspot({ podeApontar, reduzirMovimento }: Props) {
           </>
         )}
       </span>
-      <span className="pointer-events-none absolute -top-9 left-0 whitespace-nowrap rounded-md bg-black/85 px-2 py-1 font-corpo text-xs font-semibold text-white">
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-9 left-0 whitespace-nowrap rounded-md bg-black/85 px-2 py-1 font-corpo text-xs font-semibold text-white"
+      >
         {podeApontar ? "✨ Passe o mouse" : "✨ Toque"}
       </span>
     </>

@@ -15,7 +15,7 @@ export default function GlobalError({
   }, [error]);
 
   return (
-    <main style={{ padding: "2rem", fontFamily: "sans-serif" }}>
+    <main id="conteudo" tabIndex={-1} style={{ padding: "2rem", fontFamily: "sans-serif" }}>
       <h1>Ocorreu um erro inesperado</h1>
       <p>{error.message || "Não foi possível processar a requisição."}</p>
       <div style={{ marginTop: "1rem" }}>

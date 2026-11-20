@@ -52,7 +52,10 @@ export function Podio({ colocacoes }: { colocacoes?: PodioPremios | null }) {
   }));
 
   return (
-    <section aria-label="Pódio de prêmios" className="contents">
+    <section aria-labelledby="titulo-podio" className="contents">
+      <h2 id="titulo-podio" className="sr-only">
+        Pódio de prêmios
+      </h2>
       {/* Dica fixa no lugar da nota "*ao passar o mouse os filmes se mostram em fileira" do Figma. */}
       <p
         className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(60%+78px)] text-[24px] text-ouro top-[calc(66%+119.08px)] w-[423px]"

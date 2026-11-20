@@ -1,7 +1,7 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import { useEffect, useRef, useState, type HTMLAttributes, type KeyboardEvent, type PointerEvent } from "react";
+import { useEffect, useRef, useState, type HTMLAttributes, type PointerEvent } from "react";
 import { createPortal } from "react-dom";
 import { MarcaDeHotspot, useEstadoHotspot } from "@/components/onboarding/MarcaDeHotspot.tsx";
 import { POSTAIS, type FilmeDoPostal, type IdPostal } from "./postais.ts";
@@ -18,7 +18,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
  */
 export function PostalPendurado({ id, comDica = false, className, children, ...resto }: Props) {
   const filme: FilmeDoPostal = POSTAIS[id];
-  const postalRef = useRef<HTMLDivElement>(null);
+  const postalRef = useRef<HTMLButtonElement>(null);
   const tipoPonteiro = useRef<string>("mouse");
   const devolverFoco = useRef(false);
   const [balancando, setBalancando] = useState(false);
@@ -53,31 +53,14 @@ export function PostalPendurado({ id, comDica = false, className, children, ...r
     abrir();
   }
 
-  function aoTeclar(evento: KeyboardEvent<HTMLDivElement>) {
-    if (evento.key !== "Enter" && evento.key !== " ") return;
-    evento.preventDefault();
-    abrir();
-  }
-
   return (
     <>
       <div
         {...resto}
-        ref={postalRef}
-        role="button"
-        tabIndex={0}
-        aria-haspopup="dialog"
-        aria-label={`${filme.titulo} (${filme.ano}): ver detalhes do filme`}
         className={`hanging-postcard${balancando ? " hanging-postcard--balancando" : ""} ${className ?? ""}`}
-        onPointerDown={(evento: PointerEvent<HTMLDivElement>) => {
-          tipoPonteiro.current = evento.pointerType;
-        }}
         onPointerEnter={(evento) => {
           if (evento.pointerType === "mouse") hotspot.marcarVisto();
         }}
-        onClick={aoClicar}
-        onKeyDown={aoTeclar}
-        onBlur={() => setBalancando(false)}
       >
         {children}
         {comDica && !hotspot.visto && (
@@ -90,6 +73,22 @@ export function PostalPendurado({ id, comDica = false, className, children, ...r
             />
           </span>
         )}
+        {/*
+          O cartão visual continua sendo uma div (as imagens e textos não cabem no modelo de
+          conteúdo de <button>); a área clicável é este botão sobreposto, que também recebe o foco.
+        */}
+        <button
+          ref={postalRef}
+          type="button"
+          aria-haspopup="dialog"
+          aria-label={`Abrir ficha de ${filme.titulo} (${filme.ano})`}
+          className="absolute inset-0 z-20 cursor-pointer rounded-sm border-0 bg-transparent p-0"
+          onPointerDown={(evento: PointerEvent<HTMLButtonElement>) => {
+            tipoPonteiro.current = evento.pointerType;
+          }}
+          onClick={aoClicar}
+          onBlur={() => setBalancando(false)}
+        />
       </div>
       {aberto && <ModalDoFilme filme={filme} aoFechar={fechar} />}
     </>

@@ -6,6 +6,7 @@ import type {
   RecorteRaca,
 } from "@/server/panorama.ts";
 import { Hotspot } from "@/components/onboarding/Hotspot.tsx";
+import { TabelaDoGrafico } from "@/components/ui/TabelaDoGrafico.tsx";
 import { Abertura } from "./secoes/Abertura.tsx";
 import { Conclusao } from "./secoes/Conclusao.tsx";
 import { Contexto } from "./secoes/Contexto.tsx";
@@ -1065,19 +1066,21 @@ export function DesignPoster({
         </div>
       </PostalPendurado>
       <Anos2000 />
-      <p
+      <h2
+        id="titulo-financiamento"
         className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+586.5px)] not-italic text-[115px] text-center text-white top-[calc(50%+199px)] whitespace-nowrap"
         data-node-id="163:188"
       >
         FINANCIAMENTO
-      </p>
-      <div
+      </h2>
+      <h2
+        id="titulo-recorte-genero-raca"
         className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[0] left-[982px] not-italic text-[120px] text-center text-white top-[calc(71%+74.48px)] whitespace-nowrap"
         data-node-id="163:271"
       >
-        <p className="leading-[normal] mb-0">RECORTE DE GÊNERO</p>
-        <p className="leading-[normal]">E RAÇA</p>
-      </div>
+        <span className="block leading-[normal]">RECORTE DE GÊNERO</span>
+        <span className="block leading-[normal]">E RAÇA</span>
+      </h2>
       <PostalPendurado
         id="amarelo-manga"
         comDica
@@ -1422,9 +1425,6 @@ export function DesignPoster({
       </div>
       <div
         className="falling-poster hotspot absolute z-10 flex h-[380.488px] items-center justify-center left-[calc(60%+3px)] top-[calc(43%+44.84px)] w-[329.539px]"
-        role="button"
-        tabIndex={0}
-        aria-label="Derrubar o pôster"
         data-node-id="163:174"
       >
         <div className="falling-poster__body">
@@ -1438,6 +1438,12 @@ export function DesignPoster({
             </div>
           </div>
         </div>
+        {/* Botão sobreposto: mantém o cartão visual fora do modelo de conteúdo de <button>. */}
+        <button
+          type="button"
+          aria-label="Derrubar o pôster"
+          className="absolute inset-0 z-20 cursor-pointer border-0 bg-transparent p-0"
+        />
       </div>
       <div
         className="absolute flex inset-[42.81%_28.85%_56.67%_67.66%] items-center justify-center"
@@ -1454,13 +1460,33 @@ export function DesignPoster({
       <Hotspot
         id="hotspot-genero"
         style={{ top: "calc(73% + 16px)", left: "calc(60% - 10px)", width: 460, height: 240 }}
+        rotulo="Ver proporção de gênero no cinema pernambucano"
         tooltip={
           genero
             ? `Dado real do acervo cadastrado: ${genero.mulheres}% mulheres e ${genero.homens}% homens entre as pessoas com gênero informado.`
             : "Sem pessoas com gênero informado no acervo ainda — por isso o gráfico aparece em cinza."
         }
       />
+      <TabelaDoGrafico
+        titulo="Proporção entre mulheres e homens no cinema pernambucano"
+        descricao={
+          genero
+            ? `Entre as pessoas do acervo com gênero informado, ${genero.mulheres}% são mulheres e ${genero.homens}% são homens. Os percentuais consideram apenas quem tem o dado preenchido.`
+            : "Ainda não há pessoas com gênero informado no acervo; por isso o gráfico é exibido em cinza, sem percentuais."
+        }
+        colunaRotulo="Gênero"
+        colunaValor="Percentual"
+        linhas={
+          genero
+            ? [
+                { rotulo: "Mulheres", valor: `${genero.mulheres}%` },
+                { rotulo: "Homens", valor: `${genero.homens}%` },
+              ]
+            : [{ rotulo: "Gênero", valor: "Informação não disponível" }]
+        }
+      />
       <div
+        aria-hidden="true"
         className="absolute contents left-[calc(40%+301px)] top-[calc(73%+16.24px)]"
         data-node-id="223:160"
       >
@@ -1506,13 +1532,35 @@ export function DesignPoster({
       <Hotspot
         id="hotspot-raca"
         style={{ top: "calc(76% + 28px)", left: "calc(60% - 10px)", width: 460, height: 260 }}
+        rotulo="Ver recorte de cor e raça no cinema pernambucano"
         tooltip={
           raca
             ? `Recorte baseado em ${raca.totalInformado} autodeclarações de cor/raça. ${raca.totalSemInformacao} pessoas sem autodeclaração registrada não entram no percentual.`
             : "Sem autodeclarações de cor/raça registradas no acervo."
         }
       />
-      <div className="absolute left-[calc(60%-10px)] top-[calc(76%+28.88px)] w-[460px] space-y-6">
+      <TabelaDoGrafico
+        titulo="Distribuição de cor e raça autodeclarada no cinema pernambucano"
+        descricao={
+          raca && raca.itens.length > 0
+            ? `Distribuição entre as ${raca.totalInformado} pessoas com autodeclaração de cor/raça. ${raca.totalSemInformacao} pessoas sem autodeclaração registrada ficam fora dos percentuais.`
+            : "Ainda não há autodeclarações de cor/raça registradas no acervo; por isso o gráfico é exibido em cinza, sem percentuais."
+        }
+        colunaRotulo="Cor/raça"
+        colunaValor="Percentual"
+        linhas={
+          raca && raca.itens.length > 0
+            ? raca.itens.map((item) => ({
+                rotulo: item.categoria,
+                valor: `${item.percentual}%`,
+              }))
+            : [{ rotulo: "Cor/raça", valor: "Informação não disponível" }]
+        }
+      />
+      <div
+        aria-hidden="true"
+        className="absolute left-[calc(60%-10px)] top-[calc(76%+28.88px)] w-[460px] space-y-6"
+      >
         {(raca?.itens ?? [{ categoria: "Raça/cor sem dados", percentual: 0 }]).map(
           (item, indice) => {
             const cor = ["red", "#e3a54f", "#8c8888", "#f2e8d5", "#a34a32"][indice % 5];
