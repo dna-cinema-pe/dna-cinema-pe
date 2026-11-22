@@ -11,6 +11,7 @@ import {
   obterRecorteGenero,
   obterRecorteRaca,
 } from "@/server/panorama.ts";
+import { obterInvestimentos } from "@/server/investimentos.ts";
 import { OnboardingProvider } from "@/components/onboarding/OnboardingProvider.tsx";
 import { WelcomeTour, BotaoReabrirTour } from "@/components/onboarding/WelcomeTour.tsx";
 import { ScrollHint } from "@/components/onboarding/ScrollHint.tsx";
@@ -25,16 +26,23 @@ async function PosterComDados() {
   await connection();
 
   // Banco fora do ar não derruba a Home: os gráficos caem para o placeholder.
-  const [genero, raca, premios, podio] = await Promise.all([
+  const [genero, raca, premios, podio, investimentos] = await Promise.all([
     obterRecorteGenero().catch(() => null),
     obterRecorteRaca().catch(() => null),
     obterPremiosInternacionais().catch(() => null),
     obterPodioPremios().catch(() => null),
+    obterInvestimentos().catch(() => null),
   ]);
 
   return (
     <PosterViewport>
-      <DesignPoster genero={genero} raca={raca} premios={premios} podio={podio} />
+      <DesignPoster
+        genero={genero}
+        raca={raca}
+        premios={premios}
+        podio={podio}
+        investimentos={investimentos}
+      />
       <AnimacoesDoPoster />
     </PosterViewport>
   );

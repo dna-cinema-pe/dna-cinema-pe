@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CAPITULOS } from "@/components/onboarding/capitulos.ts";
 import { useOnboarding } from "@/components/onboarding/OnboardingProvider.tsx";
 import conteudo from "./content.json";
@@ -26,6 +26,15 @@ function enderecoDaPagina() {
 export function FimDaJornada() {
   const { capitulosVisitados, totalHotspots, hotspotsVistos, irParaCapitulo } = useOnboarding();
   const [estado, setEstado] = useState<EstadoCompartilhar>("parado");
+  // Os números vêm da rolagem: só existem no cliente. A 1ª renderização mostra 0 para bater com
+  // o HTML do servidor (e com a hidratação tardia de um subtree que já vê o progresso medido).
+  const [hidratado, setHidratado] = useState(false);
+
+  useEffect(() => setHidratado(true), []);
+
+  const capitulosLidos = hidratado ? capitulosVisitados.size : 0;
+  const descobertas = hidratado ? hotspotsVistos.size : 0;
+  const totalDescobertas = hidratado ? totalHotspots : 0;
 
   async function aoCompartilhar() {
     const url = enderecoDaPagina();
@@ -57,11 +66,11 @@ export function FimDaJornada() {
     <div className="-translate-x-1/2 absolute left-1/2 top-[calc(89%+75px)] z-20 flex w-[1700px] flex-col items-center gap-3 font-corpo text-white">
       <div className="flex items-center gap-8">
         <p className="text-[28px] font-semibold">
-          Você leu {capitulosVisitados.size} de {CAPITULOS.length} capítulos
-          {totalHotspots > 0 && (
+          Você leu {capitulosLidos} de {CAPITULOS.length} capítulos
+          {totalDescobertas > 0 && (
             <>
               {" "}
-              e fez {hotspotsVistos.size} de {totalHotspots} descobertas
+              e fez {descobertas} de {totalDescobertas} descobertas
             </>
           )}
           .

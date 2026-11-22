@@ -83,6 +83,8 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
   const [progresso, setProgresso] = useState(0);
   const [percentuaisCapitulos, setPercentuaisCapitulos] =
     useState<Record<CapituloId, number>>(PERCENTUAIS_INICIAIS);
+  // Só depois de medir os capítulos no cliente é que "visitados" passa a refletir a rolagem.
+  const [percentuaisMedidos, setPercentuaisMedidos] = useState(false);
 
   const origemTourRef = useRef<HTMLElement | null>(null);
 
@@ -124,6 +126,7 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     function atualizarPercentuais() {
       setPercentuaisCapitulos(medirPercentuaisCapitulos());
+      setPercentuaisMedidos(true);
     }
     atualizarPercentuais();
     window.addEventListener("resize", atualizarPercentuais);
@@ -131,13 +134,15 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // Capítulo ativo e visitados: derivados ao vivo do próprio `progresso`, sem passos intermediários.
+  // Antes da primeira medição todos os capítulos valem 0%, então nada é considerado visitado.
   const indiceAtivo = useMemo(() => {
+    if (!percentuaisMedidos) return 0;
     let indice = 0;
     for (let i = 0; i < CAPITULOS.length; i++) {
       if (percentuaisCapitulos[CAPITULOS[i].id] <= progresso + 0.5) indice = i;
     }
     return indice;
-  }, [progresso, percentuaisCapitulos]);
+  }, [percentuaisMedidos, progresso, percentuaisCapitulos]);
 
   const capituloAtivo = CAPITULOS[indiceAtivo].id;
   const capitulosVisitados = useMemo(

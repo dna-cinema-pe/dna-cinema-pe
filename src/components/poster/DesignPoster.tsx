@@ -18,6 +18,8 @@ import { Consolidacao } from "./secoes/Consolidacao.tsx";
 import { Podio } from "./secoes/Podio.tsx";
 import { ReconhecimentoInternacional } from "./secoes/ReconhecimentoInternacional.tsx";
 import { PostalPendurado } from "./PostalPendurado.tsx";
+import { Investimentos } from "./Investimentos.tsx";
+import type { Investimentos as DadosInvestimentos } from "@/server/investimentos.ts";
 
 const assetPathPrefix = "/poster";
 const imgImage2 = `${assetPathPrefix}/6cfd1.png`;
@@ -151,6 +153,8 @@ interface DesignPosterProps {
   premios?: PremiosInternacionais | null;
   /** Vem de `obterPodioPremios()`. Sem dado, os degraus mostram placeholders. */
   podio?: PodioPremios | null;
+  /** Vem de `obterInvestimentos()`. Sem dado, a seção de financiamento avisa que não carregou. */
+  investimentos?: DadosInvestimentos | null;
 }
 
 const BARRA_MAX = 382;
@@ -162,6 +166,7 @@ export function DesignPoster({
   raca = null,
   premios = null,
   podio = null,
+  investimentos = null,
 }: DesignPosterProps) {
   const maior = genero ? Math.max(genero.mulheres, genero.homens, 1) : 0;
   const larguraMulheres = genero ? Math.round((BARRA_MAX * genero.mulheres) / maior) : 253;
@@ -1312,60 +1317,12 @@ export function DesignPoster({
         Em Pernambuco, há caminhos para incentivar a criação. O Funcultura é um mecanismo de fomento
         à produção, com editais que destinam recursos para a cultura da nação.
       </p>
-      <p
-        className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(60%+185px)] not-italic text-[24px] text-white top-[calc(51%+220.88px)] whitespace-nowrap"
+      <div
+        className="absolute left-[calc(60%-10px)] top-[calc(51%+186px)] w-[513px]"
         data-node-id="163:212"
       >
-        GRAFICOS
-      </p>
-      <div
-        className="absolute bg-[#d9d9d9] h-[45px] left-[calc(40%+352px)] top-[calc(52%+135.76px)] w-[94px]"
-        data-node-id="163:213"
-      />
-      <div
-        className="absolute bg-[#d9d9d9] h-[132px] left-[calc(60%+174px)] top-[calc(52%+48.76px)] w-[77px]"
-        data-node-id="163:214"
-      />
-      <div
-        className="absolute bg-[#d9d9d9] h-[215px] left-[calc(80%+18px)] top-[calc(51%+220.88px)] w-[79px]"
-        data-node-id="163:215"
-      />
-      <div
-        className="absolute bg-[#d9d9d9] h-[205px] left-[calc(40%+352px)] top-[calc(53%+39.64px)] w-[513px]"
-        data-node-id="163:216"
-      />
-      <div
-        className="absolute bg-[#d9d9d9] h-[30px] left-[calc(40%+353px)] top-[calc(55%+13.4px)] w-[512px]"
-        data-node-id="163:217"
-      />
-      <div
-        className="absolute bg-[#d9d9d9] h-[25px] left-[calc(40%+353px)] top-[calc(54%+209.52px)] w-[326px]"
-        data-node-id="163:218"
-      />
-      <div
-        className="absolute bg-[#d9d9d9] h-[41px] left-[calc(40%+356px)] top-[calc(54%+137.52px)] w-[253px]"
-        data-node-id="163:219"
-      />
-      <div
-        className="absolute bg-[#d9d9d9] h-[45px] left-[calc(40%+369px)] top-[calc(57%+134.16px)] w-[94px]"
-        data-node-id="163:220"
-      />
-      <div
-        className="absolute bg-[#d9d9d9] h-[132px] left-[calc(60%+203px)] top-[calc(57%+47.16px)] w-[77px]"
-        data-node-id="163:221"
-      />
-      <div
-        className="absolute bg-[#d9d9d9] h-[215px] left-[calc(80%+35px)] top-[calc(56%+220.28px)] w-[79px]"
-        data-node-id="163:222"
-      />
-      <div
-        className="absolute bg-[#d9d9d9] h-[205px] left-[calc(40%+369px)] top-[calc(58%+37.04px)] w-[513px]"
-        data-node-id="163:223"
-      />
-      <div
-        className="absolute bg-[#d9d9d9] h-[205px] left-[calc(40%+352px)] top-[calc(55%+165.4px)] w-[513px]"
-        data-node-id="163:228"
-      />
+        <Investimentos dados={investimentos} />
+      </div>
       <div
         className="[word-break:break-word] absolute font-corpo font-medium leading-[0] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(73%+27.24px)] w-[477px] whitespace-pre-wrap"
         data-node-id="163:273"
