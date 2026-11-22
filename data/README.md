@@ -17,7 +17,7 @@ Na revisão e expansão atual da base, todas as lacunas foram preenchidas com da
 | Arquivo | Tabela | Carga Inicial | Carga Atual | Evolução | Principais Mudanças |
 | :--- | :--- | :---: | :---: | :---: | :--- |
 | [`filmes.json`](./filmes.json) | `filme` | 21 | **34** | **+13** (+62%) | Preenchimento de 100% dos campos `genero`, `cidadeFilmagem`, `classificacaoIndicativa`, `posterUrl` e `posterAlt` + adição de 13 obras do cinema pernambucano. |
-| [`pessoas.json`](./pessoas.json) | `pessoa` | 15 | **64** | **+49** (+327%) | Preenchimento de `idade`, `genero` e `flagEhNordestino` (antes 100% nulos/`-1`) + inclusão de diretoras mulheres, elenco, roteiristas, produtores e fotógrafos. |
+| [`pessoas.json`](./pessoas.json) | `pessoa` | 15 | **76** | **+61** (+407%) | Preenchimento de `idade`, `genero` e `flagEhNordestino` (antes 100% nulos/`-1`) + inclusão de diretoras mulheres, elenco, roteiristas, produtores e fotógrafos. |
 | [`premiacoes.json`](./premiacoes.json) | `premiacao` | 48 | **50** | **+2** (+4%) | Preenchimento das 31 descrições que estavam `null` + inclusão do *Festival de San Sebastián* e do *Festival de Guadalajara*. |
 | [`editais.json`](./editais.json) | `edital` | 0 | **12** | **+12** (Novo) | Criação de 12 editais estaduais (Funcultura PE) e federais (FSA/ANCINE, Petrobras Cultural, Lei do Audiovisual e Prêmio Resgate MinC). |
 | [`filme_pessoa.json`](./filme_pessoa.json) | `filme_pessoa` | 26 | **152** | **+126** (+485%) | Expansão de vínculos: antes restrito apenas a `DIRECAO`; agora contempla `DIRECAO`, `ELENCO`, `ROTEIRO`, `PRODUCAO` e `FOTOGRAFIA`. |
@@ -70,7 +70,7 @@ Com a reformulação dos dados, todas as histórias de usuário do sistema conta
 
 - **US01 (Acervo, Linha do Tempo e Acessibilidade):** 34 filmes do cinema pernambucano (de 1923 a 2025) com sinopse, gênero, classificação indicativa, `posterUrl` e texto alternativo descritivo (`posterAlt`).
 - **US02 (Fomento Público e Editais):** 12 editais estaduais (**Funcultura Audiovisual PE**) e federais (**FSA/ANCINE**, **Petrobras Cultural**, **Lei do Audiovisual**, **Prêmio Resgate**) somando 46 aportes em filmes pernambucanos.
-- **US03 (Participação de Atores e Profissionais Nordestinos):** 64 pessoas cadastradas com `flagEhNordestino` verificado e 152 vínculos em `filme_pessoa.json` cobrindo elenco e equipe criativa.
+- **US03 (Participação de Atores e Profissionais Nordestinos):** 76 pessoas cadastradas com `flagEhNordestino` verificado e 152 vínculos em `filme_pessoa.json` cobrindo elenco e equipe criativa.
 - **US04 (Participação Feminina na Direção e no Elenco):** Presença de mulheres cineastas (*Renata Pinheiro*, *Nara Normande*), produtoras (*Emilie Lesclaux*) e amplo elenco feminino (*Hermila Guedes*, *Maeve Jinkings*, *Marcélia Cartaxo*, *Sonia Braga*, *Fernanda Montenegro*, *Dira Paes*, *Kika Sena*, *Nash Laila*, *Bárbara Colen*, *Dandara de Morais*, *Malu Galli*), com `genero` 100% preenchido.
 - **US05 (Premiações e Reconhecimento Nacional/Internacional):** 50 premiações categorizadas por nível de importância (`1` = principal, `2` = relevante, `3` = demais) e 191 registros em `filme_premiacao.json` diferenciando `VENCEDOR` e `INDICADO`.
 - **US06 (Distribuição Geográfica e Locações em Pernambuco):** Locações mapeadas em todas as regiões de Pernambuco: Capital (`Recife`), Região Metropolitana (`Camaragibe`, `Jaboatão dos Guararapes`, `Igarassu`, `Ilha de Itamaracá`), Zona da Mata (`Nazaré da Mata`, `Paudalho`, `São José da Coroa Grande`), Agreste (`Caruaru`, `Toritama`, `Pesqueira`) e Sertão (`Arcoverde`, `Petrolina`, `Floresta`, `Sertânia`).
@@ -95,3 +95,9 @@ Rodada de ajustes motivada pelo documento `analise-design-vs-banco.md` (raiz do 
 - **Funções SOM e MONTAGEM:** adicionados vínculos reais de montagem (*Baile Perfumado*, *Aquarius*, *Bacurau*, *O Agente Secreto*) e som (*O Agente Secreto*), que antes só cobriam direção, elenco, roteiro, produção e fotografia (item 10 da análise).
 - **Não cadastrado (fontes insuficientes):** os ~10 longas adicionais do Ciclo do Recife (1923–1931) que o design cita como "treze longas" não têm fonte cruzada e confiável o bastante para entrar no banco com segurança — ficaram só 3 (os já existentes). Ver item 6 da análise.
 - **Conferido (item 9 da análise):** a afirmação de que "Pernambuco representou o Brasil três vezes nos sonhos do Oscar" via *O Último Azul* e *Manas* não se confirma — nenhum dos dois foi submissão oficial brasileira; *Manas* disputou a vaga internamente e perdeu para *O Agente Secreto*, a única submissão real entre os filmes recentes do acervo. O texto da landing (design) mantém a afirmação original e precisa de revisão por quem edita esse conteúdo.
+
+## 7. Limites dos dados demográficos (US-2.9)
+
+O arquivo [`pessoas.json`](./pessoas.json) contém atualmente 76 registros: 26 com `genero: FEMININO`, 49 com `genero: MASCULINO` e 1 sem gênero informado. Pela naturalidade registrada, 30 pessoas nasceram em Pernambuco, 38 em outra localidade e 8 não têm naturalidade disponível. Esses números descrevem apenas os cadastros do acervo, não todo o setor audiovisual.
+
+Há somente 2 autodeclarações de cor/raça e não existe variável de classe social no modelo ou no arquivo. Por isso, não se calcula uma distribuição de raça ou classe. O arquivo também não registra ano de referência dos dados; a interface informa essa ausência em vez de atribuir um ano.
