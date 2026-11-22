@@ -56,7 +56,8 @@ export function FimDaJornada() {
     // (89% + 240 px): resumo e botões numa linha só, para caber nesse intervalo.
     <div className="-translate-x-1/2 absolute left-1/2 top-[calc(89%+75px)] z-20 flex w-[1700px] flex-col items-center gap-3 font-corpo text-white">
       <div className="flex items-center gap-8">
-        <p className="text-[28px] font-semibold">
+        {/* O navegador restaura o scroll antes da hidratação: a contagem pode divergir do HTML do servidor. */}
+        <p className="text-[28px] font-semibold" suppressHydrationWarning>
           Você leu {capitulosVisitados.size} de {CAPITULOS.length} capítulos
           {totalHotspots > 0 && (
             <>

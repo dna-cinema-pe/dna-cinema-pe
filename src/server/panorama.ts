@@ -1,30 +1,75 @@
 import { prisma } from "@/lib/db";
 
 export interface RecorteGenero {
-  /** Percentuais inteiros que somam 100. */
   mulheres: number;
   homens: number;
+  totalInformado: number;
+  totalPessoas: number;
+  totalForaDoRecorte: number;
 }
 
 /**
- * Landing: proporção de mulheres e homens entre as pessoas cadastradas.
- * Gênero `NULL` ou `OUTRO` não entra na conta (ver convenção de dados ausentes no schema);
- * sem nenhum registro de FEMININO ou MASCULINO, devolve `null` e a página mostra placeholder.
+ * Proporção de mulheres e homens entre as pessoas cadastradas.
+ * Valores `NULL` ou `OUTRO` ficam fora do denominador; a interface informa essa limitação.
  */
-export async function obterRecorteGenero(): Promise<RecorteGenero | null> {
-  const grupos = await prisma.pessoa.groupBy({
-    by: ["genero"],
-    _count: { _all: true },
-  });
+export async function obterRecorteGenero(): Promise<RecorteGenero> {
+  const [grupos, totalPessoas] = await Promise.all([
+    prisma.pessoa.groupBy({
+      by: ["genero"],
+      _count: { _all: true },
+    }),
+    prisma.pessoa.count(),
+  ]);
 
   const contar = (genero: string) => grupos.find((g) => g.genero === genero)?._count._all ?? 0;
   const mulheres = contar("FEMININO");
   const homens = contar("MASCULINO");
-  const total = mulheres + homens;
-  if (total === 0) return null;
+  const totalInformado = mulheres + homens;
 
-  const percentualMulheres = Math.round((mulheres / total) * 100);
-  return { mulheres: percentualMulheres, homens: 100 - percentualMulheres };
+  return {
+    mulheres,
+    homens,
+    totalInformado,
+    totalPessoas,
+    totalForaDoRecorte: totalPessoas - totalInformado,
+  };
+}
+
+export interface RecorteOrigem {
+  pernambucanos: number;
+  outros: number;
+  totalInformado: number;
+  totalPessoas: number;
+  totalSemNaturalidade: number;
+}
+
+/**
+ * Origem pelo estado/código de naturalidade documentado no acervo.
+ * Naturalidades ausentes ou vazias não são classificadas como "outros".
+ */
+export async function obterRecorteOrigem(): Promise<RecorteOrigem> {
+  const [grupos, totalPessoas] = await Promise.all([
+    prisma.pessoa.groupBy({
+      by: ["naturalidade"],
+      where: { naturalidade: { not: null } },
+      _count: { _all: true },
+    }),
+    prisma.pessoa.count(),
+  ]);
+
+  const validos = grupos.filter((grupo) => grupo.naturalidade?.trim());
+  const pernambucanos =
+    validos.find((grupo) => grupo.naturalidade === "PE")?._count._all ?? 0;
+  const totalInformado = validos.reduce((total, grupo) => total + grupo._count._all, 0);
+  const outros = totalInformado - pernambucanos;
+
+  return {
+    pernambucanos,
+    outros,
+    totalInformado,
+    totalPessoas,
+    totalSemNaturalidade: totalPessoas - totalInformado,
+  };
 }
 
 export interface ItemRecorteRaca {

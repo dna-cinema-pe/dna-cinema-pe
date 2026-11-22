@@ -69,7 +69,10 @@ interface OnboardingState {
 const OnboardingContext = createContext<OnboardingState | null>(null);
 
 const PERCENTUAIS_INICIAIS = Object.fromEntries(
-  CAPITULOS.map((c) => [c.id, 0]),
+  CAPITULOS.map((capitulo, indice) => [
+    capitulo.id,
+    (indice / CAPITULOS.length) * 100,
+  ]),
 ) as Record<CapituloId, number>;
 
 export function OnboardingProvider({ children }: { children: ReactNode }) {
@@ -117,7 +120,16 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
     }
     atualizarProgresso();
     window.addEventListener("scroll", atualizarProgresso, { passive: true });
-    return () => window.removeEventListener("scroll", atualizarProgresso);
+    window.addEventListener("pageshow", atualizarProgresso);
+    // A altura do pôster e a restauração de scroll do navegador só se estabilizam depois do mount.
+    const observador = new ResizeObserver(atualizarProgresso);
+    observador.observe(document.documentElement);
+    observador.observe(document.body);
+    return () => {
+      observador.disconnect();
+      window.removeEventListener("scroll", atualizarProgresso);
+      window.removeEventListener("pageshow", atualizarProgresso);
+    };
   }, []);
 
   // Posição (%) de cada capítulo na mesma régua — remedida no mount e ao redimensionar.

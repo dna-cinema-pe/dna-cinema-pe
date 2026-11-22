@@ -9,7 +9,7 @@ export const CAPITULOS = [
   { id: "cap-consolidacao", titulo: "Consolidação" },
   { id: "cap-financiamento", titulo: "Financiamento" },
   { id: "cap-reconhecimento-internacional", titulo: "Reconhecimento Internacional" },
-  { id: "cap-recorte-genero-raca", titulo: "Recorte de Gênero e Raça" },
+  { id: "cap-recorte-genero-raca", titulo: "Recorte de Gênero, Origem e Classe social" },
   { id: "cap-conclusao", titulo: "Conclusão" },
   { id: "cap-rodape", titulo: "Créditos" },
 ] as const;

@@ -3,9 +3,9 @@ import type {
   PodioPremios,
   PremiosInternacionais,
   RecorteGenero,
+  RecorteOrigem,
   RecorteRaca,
 } from "@/server/panorama.ts";
-import { Hotspot } from "@/components/onboarding/Hotspot.tsx";
 import { Abertura } from "./secoes/Abertura.tsx";
 import { Conclusao } from "./secoes/Conclusao.tsx";
 import { Contexto } from "./secoes/Contexto.tsx";
@@ -17,6 +17,7 @@ import { Anos2000 } from "./secoes/Anos2000.tsx";
 import { Consolidacao } from "./secoes/Consolidacao.tsx";
 import { Podio } from "./secoes/Podio.tsx";
 import { ReconhecimentoInternacional } from "./secoes/ReconhecimentoInternacional.tsx";
+import { RecorteDemografico } from "./RecorteDemografico.tsx";
 import { PostalPendurado } from "./PostalPendurado.tsx";
 
 const assetPathPrefix = "/poster";
@@ -143,9 +144,11 @@ const imgCamada26 = `${assetPathPrefix}/9b157.svg`;
 const imgCamada27 = `${assetPathPrefix}/7188f.svg`;
 
 interface DesignPosterProps {
-  /** Vem de `obterRecorteGenero()`. Sem dado, o gráfico de gênero vira placeholder. */
+  /** Vem de `obterRecorteGenero()` e alimenta o gráfico de gênero. */
   genero?: RecorteGenero | null;
-  /** Vem de `obterRecorteRaca()`. Sem dado, o gráfico de raça vira placeholder. */
+  /** Vem de `obterRecorteOrigem()`. A naturalidade ausente não entra no denominador. */
+  origem?: RecorteOrigem | null;
+  /** Vem de `obterRecorteRaca()` e informa a cobertura limitada de cor/raça. */
   raca?: RecorteRaca | null;
   /** Vem de `obterPremiosInternacionais()`. Sem dado, os pinos da rota avisam que não carregou. */
   premios?: PremiosInternacionais | null;
@@ -153,27 +156,13 @@ interface DesignPosterProps {
   podio?: PodioPremios | null;
 }
 
-const BARRA_MAX = 382;
-const BARRA_BORDA_DIREITA = 402;
-const CINZA_PLACEHOLDER = "#d9d9d9";
-
 export function DesignPoster({
   genero = null,
+  origem = null,
   raca = null,
   premios = null,
   podio = null,
 }: DesignPosterProps) {
-  const maior = genero ? Math.max(genero.mulheres, genero.homens, 1) : 0;
-  const larguraMulheres = genero ? Math.round((BARRA_MAX * genero.mulheres) / maior) : 253;
-  const larguraHomens = genero ? Math.round((BARRA_MAX * genero.homens) / maior) : BARRA_MAX;
-  const corMulheres = genero ? "red" : CINZA_PLACEHOLDER;
-  const corHomens = genero ? "#e3a54f" : CINZA_PLACEHOLDER;
-  const textoMulheres = genero ? `${genero.mulheres}%` : "--%";
-  const textoHomens = genero ? `${genero.homens}%` : "--%";
-
-  const maiorPercentualRaca = raca
-    ? Math.max(...raca.itens.map((item) => item.percentual), 1)
-    : 1;
   return (
     <div
       className="bg-[#0b0909] relative h-[25712px] w-[1920px] overflow-hidden"
@@ -1072,11 +1061,13 @@ export function DesignPoster({
         FINANCIAMENTO
       </p>
       <div
+        id="titulo-recorte-demografico"
         className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[0] left-[982px] not-italic text-[120px] text-center text-white top-[calc(71%+74.48px)] whitespace-nowrap"
         data-node-id="163:271"
       >
         <p className="leading-[normal] mb-0">RECORTE DE GÊNERO</p>
-        <p className="leading-[normal]">E RAÇA</p>
+        <p className="leading-[normal]">ORIGEM E</p>
+        <p className="leading-[normal]">CLASSE SOCIAL</p>
       </div>
       <PostalPendurado
         id="amarelo-manga"
@@ -1366,8 +1357,12 @@ export function DesignPoster({
         className="absolute bg-[#d9d9d9] h-[205px] left-[calc(40%+352px)] top-[calc(55%+165.4px)] w-[513px]"
         data-node-id="163:228"
       />
+      {/*
+        Coluna narrativa do recorte demográfico: o primeiro parágrafo usa o mesmo topo do quadro de
+        gráficos (`top-[calc(73%+150px)]` em RecorteDemografico) para as duas colunas começarem juntas.
+      */}
       <div
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[0] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(73%+27.24px)] w-[477px] whitespace-pre-wrap"
+        className="[word-break:break-word] absolute font-corpo font-medium leading-[0] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(73%+150px)] w-[477px] whitespace-pre-wrap"
         data-node-id="163:273"
       >
         <p className="leading-[normal] mb-0">{`Um filme tem muitas mãos, muito mais que direção. `}</p>
@@ -1375,7 +1370,7 @@ export function DesignPoster({
         <p className="leading-[normal]">Conhecer quem faz o cinema é olhar toda a criação.</p>
       </div>
       <div
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[0] left-[calc(20%+24px)] not-italic text-[24px] text-white top-[calc(74%+52.12px)] w-[477px] whitespace-pre-wrap"
+        className="[word-break:break-word] absolute font-corpo font-medium leading-[0] left-[calc(20%+24px)] not-italic text-[24px] text-white top-[calc(74%+174.88px)] w-[477px] whitespace-pre-wrap"
         data-node-id="163:274"
       >
         <p className="leading-[normal] mb-0">{`Mas será que as oportunidades alcançam todos por igual? `}</p>
@@ -1385,28 +1380,28 @@ export function DesignPoster({
         </p>
       </div>
       <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(76%+75.88px)] w-[477px]"
+        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(76%+198.64px)] w-[477px]"
         data-node-id="163:275"
       >
         Os dados do audiovisual podem apontar diferenças, mas é preciso compreender o alcance de
         cada pesquisa. O que vale para o Brasil não descreve todo o estado.
       </p>
       <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(77%+79.76px)] w-[477px]"
+        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(77%+202.52px)] w-[477px]"
         data-node-id="163:277"
       >
         Também precisamos saber quem consegue participar, quais grupos têm oportunidades e quem pode
         se destacar. Mas, para falar de raça e cor, é preciso saber como contar.
       </p>
       <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(78%+87.64px)] w-[477px]"
+        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(78%+210.4px)] w-[477px]"
         data-node-id="163:278"
       >
         Se os dados são incompletos, não se deve imaginar o perfil de cada pessoa nem suas histórias
         inventar. Uma lacuna na pesquisa também precisa se registrar.
       </p>
       <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(75%+82px)] w-[477px]"
+        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(75%+204.76px)] w-[477px]"
         data-node-id="163:276"
       >
         As mulheres fazem cinema, mas precisamos investigar como ocupam cada função e onde podem
@@ -1451,99 +1446,7 @@ export function DesignPoster({
         </div>
       </div>
       <Podio colocacoes={podio} />
-      <Hotspot
-        id="hotspot-genero"
-        style={{ top: "calc(73% + 16px)", left: "calc(60% - 10px)", width: 460, height: 240 }}
-        tooltip={
-          genero
-            ? `Dado real do acervo cadastrado: ${genero.mulheres}% mulheres e ${genero.homens}% homens entre as pessoas com gênero informado.`
-            : "Sem pessoas com gênero informado no acervo ainda — por isso o gráfico aparece em cinza."
-        }
-      />
-      <div
-        className="absolute contents left-[calc(40%+301px)] top-[calc(73%+16.24px)]"
-        data-node-id="223:160"
-      >
-        <div
-          className="absolute h-[41px] top-[calc(73%+25.24px)]"
-          style={{ left: `calc(60% + ${BARRA_BORDA_DIREITA - larguraMulheres}px)`, width: larguraMulheres, backgroundColor: corMulheres }}
-          data-node-id="163:287"
-        />
-        <div
-          className="absolute h-[41px] top-[calc(73%+85.24px)]"
-          style={{ left: `calc(60% + ${BARRA_BORDA_DIREITA - larguraHomens}px)`, width: larguraHomens, backgroundColor: corHomens }}
-          data-node-id="196:34"
-        />
-        <p
-          className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(60%-2px)] not-italic text-[20px] text-white top-[calc(73%+177.24px)] whitespace-nowrap"
-          data-node-id="196:36"
-        >
-          Mulheres no cinema pernambucano
-        </p>
-        <p
-          className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(60%+7px)] not-italic text-[20px] text-white top-[calc(73%+225.24px)] whitespace-nowrap"
-          data-node-id="196:37"
-        >
-          Homens no cinema pernambucano
-        </p>
-        <div
-          className="absolute bg-[red] left-[calc(60%+379px)] size-[23px] top-[calc(73%+181.24px)]"
-          data-node-id="196:38"
-        />
-        <div
-          className="absolute bg-[#e3a54f] left-[calc(60%+379px)] size-[23px] top-[calc(73%+229.24px)]"
-          data-node-id="196:40"
-        />
-        <p
-          className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(60%+55px)] not-italic text-[40px] text-white top-[calc(73%+16.24px)] whitespace-nowrap"
-          data-node-id="196:41"
-        >{textoMulheres}</p>
-        <p
-          className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(40%+301px)] not-italic text-[40px] text-white top-[calc(73%+82.24px)] whitespace-nowrap"
-          data-node-id="196:42"
-        >{textoHomens}</p>
-      </div>
-      <Hotspot
-        id="hotspot-raca"
-        style={{ top: "calc(76% + 28px)", left: "calc(60% - 10px)", width: 460, height: 260 }}
-        tooltip={
-          raca
-            ? `Recorte baseado em ${raca.totalInformado} autodeclarações de cor/raça. ${raca.totalSemInformacao} pessoas sem autodeclaração registrada não entram no percentual.`
-            : "Sem autodeclarações de cor/raça registradas no acervo."
-        }
-      />
-      <div className="absolute left-[calc(60%-10px)] top-[calc(76%+28.88px)] w-[460px] space-y-6">
-        {(raca?.itens ?? [{ categoria: "Raça/cor sem dados", percentual: 0 }]).map(
-          (item, indice) => {
-            const cor = ["red", "#e3a54f", "#8c8888", "#f2e8d5", "#a34a32"][indice % 5];
-            const largura = raca
-              ? Math.round((BARRA_MAX * item.percentual) / maiorPercentualRaca)
-              : BARRA_MAX;
-
-            return (
-              <div key={item.categoria}>
-                <div className="flex items-center gap-5">
-                  <span className="w-[82px] font-corpo text-[40px] font-semibold text-white">
-                    {raca ? `${item.percentual}%` : "--%"}
-                  </span>
-                  <div className="flex h-[41px] flex-1 justify-end">
-                    <div
-                      className="h-full"
-                      style={{
-                        width: largura,
-                        backgroundColor: raca ? cor : CINZA_PLACEHOLDER,
-                      }}
-                    />
-                  </div>
-                </div>
-                <p className="mt-2 text-right font-corpo text-[20px] font-semibold text-white">
-                  {item.categoria}
-                </p>
-              </div>
-            );
-          },
-        )}
-      </div>
+      <RecorteDemografico genero={genero} origem={origem} raca={raca} />
       <div
         className="plane-flight absolute z-10 flex inset-[59.91%_15.97%_39.56%_68.75%] items-center justify-center"
         data-node-id="202:244"
