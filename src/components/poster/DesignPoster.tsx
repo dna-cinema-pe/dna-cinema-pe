@@ -19,6 +19,117 @@ import { Podio } from "./secoes/Podio.tsx";
 import { ReconhecimentoInternacional } from "./secoes/ReconhecimentoInternacional.tsx";
 import { PostalPendurado } from "./PostalPendurado.tsx";
 
+/**
+ * Espaço extra depois do subtítulo da Abertura, abaixo de 1280 px (US-4.1). O subtítulo cresce
+ * para ficar legível e passaria por cima da cena da cidade; tudo o que vem depois dele fica em
+ * grupos `.poster-deslocar` (globals.css), que descem cada elemento `--deslocar`. Os valores vêm
+ * do PosterViewport, que também aumenta a altura da página na mesma medida. As posições em %
+ * continuam calculadas sobre os mesmos 25712 px: nada estica nem muda de proporção. No desktop
+ * os espaços são 0 e nada muda.
+ *
+ * Os grupos não têm caixa (`display: contents`), para não virarem camadas do tamanho do pôster
+ * na memória (isso derrubava o Safari do iPhone).
+ */
+const DESLOCADO = "poster-deslocar [--deslocar:var(--espaco-abertura,0px)]";
+
+/**
+ * Igual a DESLOCADO, mas desce a soma de todos os espaços que o pôster abre abaixo de 1280 px
+ * (ver os níveis `.poster-nivel-*` no globals.css). Vale do varal do Contexto para baixo. O que fica
+ * acima de um desses pontos declara o próprio nível em vez de descer tudo:
+ * - âncora do Contexto: `poster-nivel-abertura`;
+ * - varal, prendedor e postal "recife-frio": `poster-nivel-contexto`;
+ * - nuvens, arco, estrelas, palmeira, título, parágrafos e âncora do Ciclo: `poster-nivel-ciclo`;
+ * - prédio, folha, estrelas, corda e fotos do varal (as três fotos não têm `data-node-id`) e o
+ *   texto abaixo dele: `poster-nivel-ciclo-texto`;
+ * - ponte, corda, estrelas, cortina, círculo, título, âncora e legenda do Super-8:
+ *   `poster-nivel-ciclo-final`;
+ * - parágrafos do Super-8: `poster-nivel-super8-legenda`;
+ * - caranguejos, título, praia, câmera, estrelas, faixas laterais e cartões da Retomada e
+ *   Manguebeat: `poster-nivel-super8`;
+ * - fogos, título, âncora e parágrafos do Anos 2000: `poster-nivel-retomada`;
+ * - estrelas, âncora, título e parágrafos da Consolidação: `poster-nivel-anos2000`;
+ * - varais da Consolidação (prendedores, cordas, pôsteres e fotos) e moedas, título, parágrafos,
+ *   gráficos e faixas laterais do Financiamento: `poster-nivel-consolidacao` (ver
+ *   FINANCIAMENTO_TEXTO);
+ * - rota com o avião, título, estrelas e parágrafos do Reconhecimento Internacional:
+ *   `poster-nivel-financiamento`;
+ * - Recorte de Gênero e Raça (título, parágrafos, gráficos, versão do celular e faixas laterais):
+ *   `poster-nivel-podio` (ver RECORTE_CELULAR);
+ * - título e parágrafos da Conclusão: `poster-nivel-recorte`; fim da jornada:
+ *   `poster-nivel-conclusao`; Créditos: `poster-nivel-jornada`;
+ * - pódio (na seção, ver Podio.tsx) e estrelas ao redor: `poster-nivel-reconhecimento`. As três
+ *   estrelas entre os degraus e a fileira de filmes descem junto com a fileira
+ *   (`--podio-fileira-desloc`), para não ficar sobre os rótulos dos degraus; no desktop também
+ *   se aproximam do centro e diminuem, como o pódio (70%), e ficam 28 px reais mais abaixo,
+ *   porque lá a fileira fica mais perto dos rótulos (PODIO_RESPIRO_DESKTOP no PosterViewport).
+ */
+const DESLOCADO_COM_CONTEXTO =
+  "poster-deslocar [--deslocar:calc(var(--espaco-abertura,0px)+var(--espaco-contexto,0px)+var(--espaco-ciclo,0px)+var(--espaco-ciclo-texto,0px)+var(--espaco-ciclo-final,0px)+var(--espaco-super8-legenda,0px)+var(--espaco-super8,0px)+var(--espaco-retomada,0px)+var(--espaco-anos2000,0px)+var(--espaco-consolidacao,0px)+var(--espaco-financiamento,0px)+var(--espaco-reconhecimento,0px)+var(--espaco-podio,0px)+var(--espaco-recorte,0px)+var(--espaco-conclusao,0px)+var(--espaco-jornada,0px)+var(--espaco-creditos,0px))]";
+
+/**
+ * Cartões da Retomada e Manguebeat (US-4.1). Abaixo de 768 px o varal com os cartões (corda,
+ * câmera, estrelas e cartões) desce 40 px reais para se afastar do desenho da praia; o
+ * PosterViewport soma esse valor ao espaço antes do Anos 2000. As faixas laterais desta parte
+ * não descem com o varal, então continuam contínuas sem ajuste.
+ * Também abaixo de 768 px, o texto fica com 10 px reais e o
+ * retângulo cresce para baixo para caber nele; a foto não muda de tamanho. Nos cartões
+ * inclinados, a foto e o texto passam para dentro do retângulo (CARTAO_FOTO_CELULAR e
+ * CARTAO_TEXTO_CELULAR), e os originais ficam ocultos: assim giram juntos e a foto fica
+ * centralizada. A inclinação também diminui (1,5°), para o retângulo, bem mais alto, não passar
+ * da moldura lateral. O PosterViewport mede os cartões (`data-medir`) para descer o Anos 2000
+ * e o resto (`--espaco-retomada`).
+ */
+const TEXTO_VALENTE =
+  "Mas fazer cinema exige recursos, equipamento e condição. Mas nem sempre quem tem histórias consegue trazê-las à exibição. Décadas depois, outras gerações buscaram formas de experimentação.";
+const TEXTO_RAP =
+  "Entre Science e musicalidade, novas histórias ganharam lugar. Mas não foi uma força apenas que fez o cinema avançar: cultura, Nação e trabalho também ajudaram a transformar.";
+const CARTAO_TEXTO_CELULAR =
+  "hidden max-md:block [word-break:break-word] font-corpo font-medium leading-[normal] not-italic text-black text-[length:calc(10px*var(--inv,1))]";
+/**
+ * Foto dentro do retângulo nos cartões inclinados, no celular: centralizada e do tamanho do Figma.
+ * O retângulo precisa ter no máximo 33 px de margem lateral (527 − 460 = 67): com uma foto mais
+ * larga que o espaço, `mx-auto` não centraliza.
+ */
+const CARTAO_FOTO_CELULAR = "hidden max-md:block relative mx-auto mb-[40px] h-[399px] w-[460px]";
+
+/**
+ * Parágrafos do Financiamento abaixo de 768 px (US-4.1): continuam na coluna da esquerda, mais
+ * largos (até x = 1080, antes dos gráficos) e com 11 px reais. Começam a pelo menos 44 px reais
+ * da borda da tela, para não ficar embaixo da trilha da linha do tempo (fixa à esquerda, ~12 a
+ * 36 px; ver TrilhaDaLinhaDoTempo). Cada um desce
+ * `--fin-desloc-N` (calculado no PosterViewport) para não encostar no anterior, e o gráfico ao
+ * lado de cada parágrafo desce o mesmo valor (`data-fin` marca os parágrafos). O primeiro já desce
+ * 40 px reais, para afastar a seção do varal acima; moedas, título e âncora descem junto com ele.
+ */
+const FINANCIAMENTO_TEXTO =
+  "max-md:left-[max(110px,calc(44px*var(--inv,1)))] max-md:w-[calc(1080px-max(110px,calc(44px*var(--inv,1))))] max-md:font-normal max-md:text-[length:calc(11px*var(--inv,1))]";
+
+/**
+ * Recorte de Gênero e Raça abaixo de 768 px (US-4.1): a versão do Figma (parágrafos em coluna à
+ * esquerda e gráficos à direita) fica oculta e entra RECORTE_CELULAR, em coluna única e em fluxo:
+ * parágrafos 1 a 3, gráfico de gênero, parágrafos 4 a 6 e gráfico de raça. Os gráficos usam os
+ * mesmos Hotspots (mesmo id, então a descoberta conta uma vez só). O PosterViewport mede a coluna
+ * (`data-medir="recorte-celular"`) para posicionar a Conclusão (`--espaco-recorte`).
+ */
+const RECORTE_TEXTOS = [
+  "Um filme tem muitas mãos, muito mais que direção. Tem roteiro, som e fotografia, montagem e produção. Conhecer quem faz o cinema é olhar toda a criação.",
+  "Mas será que as oportunidades alcançam todos por igual? Quem ocupa cada função? Quem encontra espaço profissional? Os dados podem revelar diferenças no audiovisual.",
+  "As mulheres fazem cinema, mas precisamos investigar como ocupam cada função e onde podem trabalhar. O total de profissionais não explica tudo no olhar.",
+  "Os dados do audiovisual podem apontar diferenças, mas é preciso compreender o alcance de cada pesquisa. O que vale para o Brasil não descreve todo o estado.",
+  "Também precisamos saber quem consegue participar, quais grupos têm oportunidades e quem pode se destacar. Mas, para falar de raça e cor, é preciso saber como contar.",
+  "Se os dados são incompletos, não se deve imaginar o perfil de cada pessoa nem suas histórias inventar. Uma lacuna na pesquisa também precisa se registrar.",
+];
+const RECORTE_CELULAR =
+  "hidden max-md:flex absolute left-[260px] w-[1400px] top-[calc(73%+27.24px)] flex-col items-center gap-[calc(24px*var(--inv,1))] font-corpo text-white poster-nivel-podio";
+const RECORTE_PARAGRAFO = "w-full text-center font-normal leading-[normal] text-[length:calc(14px*var(--inv,1))]";
+const GRAFICO_CELULAR =
+  "relative flex w-[1100px] flex-col gap-[calc(8px*var(--inv,1))] py-[calc(8px*var(--inv,1))] font-semibold";
+const GRAFICO_LINHA = "flex items-center gap-[calc(8px*var(--inv,1))]";
+const GRAFICO_NUMERO = "w-[calc(48px*var(--inv,1))] shrink-0 text-right text-[length:calc(14px*var(--inv,1))]";
+const GRAFICO_BARRA = "h-[calc(12px*var(--inv,1))] flex-1";
+const GRAFICO_LEGENDA = "flex items-center justify-end gap-[calc(6px*var(--inv,1))] text-[length:calc(11px*var(--inv,1))]";
+const GRAFICO_COR = "size-[calc(10px*var(--inv,1))] shrink-0";
+
 const assetPathPrefix = "/poster";
 const imgImage2 = `${assetPathPrefix}/6cfd1.png`;
 const imgImage1 = `${assetPathPrefix}/4f3e8.png`;
@@ -28,11 +139,14 @@ const imgRectangle16 = `${assetPathPrefix}/1764f.png`;
 const imgRectangle17 = `${assetPathPrefix}/51870.png`;
 const imgRectangle19 = `${assetPathPrefix}/a6ff2.png`;
 const imgRectangle25 = `${assetPathPrefix}/cfa07.png`;
-const imgRectangle27 = `${assetPathPrefix}/04a8f.png`;
+// 04a8f e 50445: versões reduzidas (US-4.1). Os originais (2475 × 1443 e 1920 × 2560 px) aparecem
+// com no máximo ~400 px do frame e, decodificados, pesavam ~34 MB no iPhone; as cópias têm o dobro
+// do tamanho exibido no desktop.
+const imgRectangle27 = `${assetPathPrefix}/04a8f-reduzida.png`;
 const imgRectangle26 = `${assetPathPrefix}/14c87.png`;
 const imgRectangle21 = `${assetPathPrefix}/7dabb.png`;
 const imgRectangle22 = `${assetPathPrefix}/1124d.png`;
-const imgRectangle23 = `${assetPathPrefix}/50445.png`;
+const imgRectangle23 = `${assetPathPrefix}/50445-reduzida.png`;
 const imgRectangle24 = `${assetPathPrefix}/f00b8.png`;
 const imgChatGptImage25DeSetDe20261458301 = `${assetPathPrefix}/0e24a.png`;
 const imgCamada1 = `${assetPathPrefix}/052eb.svg`;
@@ -174,27 +288,36 @@ export function DesignPoster({
   const maiorPercentualRaca = raca
     ? Math.max(...raca.itens.map((item) => item.percentual), 1)
     : 1;
+  const dicaGenero = genero
+    ? `Dado real do acervo cadastrado: ${genero.mulheres}% mulheres e ${genero.homens}% homens entre as pessoas com gênero informado.`
+    : "Sem pessoas com gênero informado no acervo ainda — por isso o gráfico aparece em cinza.";
+  const dicaRaca = raca
+    ? `Recorte baseado em ${raca.totalInformado} autodeclarações de cor/raça. ${raca.totalSemInformacao} pessoas sem autodeclaração registrada não entram no percentual.`
+    : "Sem autodeclarações de cor/raça registradas no acervo.";
+  const itensRaca = raca?.itens ?? [{ categoria: "Raça/cor sem dados", percentual: 0 }];
   return (
     <div
-      className="bg-[#0b0909] relative h-[25712px] w-[1920px] overflow-hidden"
+      className="bg-[#0b0909] relative h-[25712px] w-[1920px] overflow-x-clip overflow-y-visible"
       data-node-id="46:2"
       data-name="Frame 2 teste"
     >
       {/* Âncoras de capítulo (US-1.4): posição casada com o título de cada seção, sem alterar o layout do Figma. */}
       <span id="cap-hero" aria-hidden="true" className="absolute left-0 top-0 h-px w-px" />
-      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(7% + 60.16px)" }} id="cap-contexto" />
-      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(15% + 77.2px)" }} id="cap-ciclo-do-recife" />
-      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(24% + 24.12px)" }} id="cap-super-8" />
-      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(29% + 70.52px)" }} id="cap-retomada-e-manguebeat" />
-      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(38% + 133.44px)" }} id="cap-anos-2000" />
-      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(41% + 71.08px)" }} id="cap-consolidacao" />
-      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(50% + 199px)" }} id="cap-financiamento" />
-      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(60% + 237.8px)" }} id="cap-reconhecimento-internacional" />
-      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(71% + 74.48px)" }} id="cap-recorte-genero-raca" />
-      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(82% + 151.16px)" }} id="cap-conclusao" />
-      <span aria-hidden="true" className="absolute left-0 h-px w-px" style={{ top: "calc(89% + 240.32px)" }} id="cap-rodape" />
+      {/* Daqui para baixo, o que fica abaixo do subtítulo da Abertura desce abaixo de 1280 px (ver DESLOCADO e DESLOCADO_COM_CONTEXTO). */}
+      <div className={DESLOCADO_COM_CONTEXTO}>
+      <span aria-hidden="true" className="absolute left-0 h-px w-px poster-nivel-abertura" style={{ top: "calc(7% + 60.16px)" }} id="cap-contexto" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px poster-nivel-ciclo" style={{ top: "calc(15% + 77.2px)" }} id="cap-ciclo-do-recife" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px poster-nivel-ciclo-final" style={{ top: "calc(24% + 24.12px)" }} id="cap-super-8" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px poster-nivel-super8" style={{ top: "calc(29% + 70.52px)" }} id="cap-retomada-e-manguebeat" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px poster-nivel-retomada" style={{ top: "calc(38% + 133.44px)" }} id="cap-anos-2000" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px poster-nivel-anos2000" style={{ top: "calc(41% + 71.08px)" }} id="cap-consolidacao" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-1)]" style={{ top: "calc(50% + 199px)" }} id="cap-financiamento" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px poster-nivel-financiamento" style={{ top: "calc(60% + 237.8px)" }} id="cap-reconhecimento-internacional" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px poster-nivel-podio" style={{ top: "calc(71% + 74.48px)" }} id="cap-recorte-genero-raca" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px poster-nivel-recorte" style={{ top: "calc(82% + 151.16px)" }} id="cap-conclusao" />
+      <span aria-hidden="true" className="absolute left-0 h-px w-px poster-nivel-jornada" style={{ top: "calc(89% + 240.32px)" }} id="cap-rodape" />
       <div
-        className="absolute flex h-[450.879px] items-center justify-center left-[calc(40%+301px)] top-[calc(17%-2.04px)] w-[445.039px]"
+        className="absolute flex h-[450.879px] items-center justify-center left-[calc(40%+301px)] top-[calc(17%-2.04px)] w-[445.039px] poster-nivel-ciclo-texto"
         data-node-id="288:172"
       >
         <div className="flex-none rotate-[17.69deg]">
@@ -204,7 +327,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute flex h-[262.057px] items-center justify-center left-[57px] top-[calc(16%+6.08px)] w-[189.439px]"
+        className="absolute flex h-[262.057px] items-center justify-center left-[57px] top-[calc(16%+6.08px)] w-[189.439px] poster-nivel-ciclo"
         data-node-id="283:114"
       >
         <div className="flex-none rotate-[8.43deg]">
@@ -214,21 +337,21 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="cloud-float cloud-float--slow absolute inset-[12.99%_76.56%_86.46%_4.27%]"
+        className="cloud-float cloud-float--slow absolute inset-[12.99%_76.56%_86.46%_4.27%] poster-nivel-ciclo"
         data-node-id="283:117"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada3} />
       </div>
       <div
-        className="cloud-float cloud-float--slow absolute inset-[12.99%_76.56%_86.46%_4.27%]"
+        className="cloud-float cloud-float--slow absolute inset-[12.99%_76.56%_86.46%_4.27%] poster-nivel-ciclo"
         data-node-id="288:144"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada3} />
       </div>
       <div
-        className="cloud-float cloud-float--reverse absolute inset-[13.76%_4.86%_85.73%_71.46%]"
+        className="cloud-float cloud-float--reverse absolute inset-[13.76%_4.86%_85.73%_71.46%] poster-nivel-ciclo"
         data-node-id="288:147"
         data-name="Camada_1"
       >
@@ -248,8 +371,11 @@ export function DesignPoster({
           </div>
         </div>
       </div>
+      </div>
       <Abertura />
-      <Contexto />
+      <div className={DESLOCADO}>
+        <Contexto />
+      </div>
       <div
         className="absolute aspect-[85/81] left-[85.73%] right-[9.84%] top-[calc(2%+130.76px)]"
         data-node-id="46:277"
@@ -272,6 +398,8 @@ export function DesignPoster({
           src={imgImage2}
         />
       </div>
+      {/* Barco e vetores da cena da cidade: descem só o espaço da Abertura. */}
+      <div className={DESLOCADO}>
       <div
         className="absolute inset-[6.24%_88.44%_93.72%_7.34%]"
         data-node-id="46:291"
@@ -828,8 +956,11 @@ export function DesignPoster({
           </div>
         </div>
       </div>
+      </div>
+      {/* Do varal do Contexto para baixo: desce também o espaço do Contexto. */}
+      <div className={DESLOCADO_COM_CONTEXTO}>
       <div
-        className="postal-ciclo absolute h-[439.493px] left-[151.87px] top-[calc(17%+93.37px)] w-[621.574px]"
+        className="postal-ciclo absolute h-[439.493px] left-[151.87px] top-[calc(17%+93.37px)] w-[621.574px] poster-nivel-ciclo-texto"
       >
         <div
           className="absolute inset-0 flex items-center justify-center"
@@ -845,7 +976,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="postal-ciclo absolute h-[482.247px] left-[calc(20%+265.2px)] top-[calc(17%+236.18px)] w-[639.564px]"
+        className="postal-ciclo absolute h-[482.247px] left-[calc(20%+265.2px)] top-[calc(17%+236.18px)] w-[639.564px] poster-nivel-ciclo-texto"
       >
         <div
           className="absolute inset-0 flex items-center justify-center"
@@ -861,7 +992,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="postal-ciclo absolute h-[549.416px] left-[calc(60%+7px)] top-[calc(18%+152.84px)] w-[640.713px]"
+        className="postal-ciclo absolute h-[549.416px] left-[calc(60%+7px)] top-[calc(18%+152.84px)] w-[640.713px] poster-nivel-ciclo-texto"
       >
         <div
           className="absolute inset-0 flex items-center justify-center"
@@ -877,7 +1008,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="pointer-events-none absolute h-[603px] left-[82px] top-[calc(17%+36.96px)] w-[1810px]"
+        className="pointer-events-none absolute h-[603px] left-[82px] top-[calc(17%+36.96px)] w-[1810px] poster-nivel-ciclo-texto"
         data-node-id="129:2"
       >
         <div className="absolute inset-[-0.47%_0_-0.63%_-0.15%]">
@@ -885,21 +1016,37 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="[word-break:break-word] absolute font-corpo font-medium h-[246px] leading-[0] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(19%+170.72px)] w-[495px] whitespace-pre-wrap"
+        className="[word-break:break-word] absolute font-corpo font-medium h-[246px] leading-[0] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(19%+170.72px)] w-[495px] whitespace-pre-wrap poster-nivel-ciclo-texto max-xl:text-[length:max(24px,calc(14px*var(--inv,1)))] max-xl:font-normal max-xl:h-auto max-xl:top-[calc(17%+718.43px+24px*var(--inv,1))] max-xl:left-[310px] max-xl:w-[1300px] max-md:left-[260px] max-md:w-[1400px]"
         data-node-id="46:308"
+        data-medir="ciclo-final"
       >
-        <p className="leading-[normal] mb-0">{`Mas o que existe por trás `}</p>
-        <p className="leading-[normal] mb-0">
+        {/*
+          Abaixo de 1280 px (US-4.1): mesmo tamanho e largura dos outros parágrafos (ver
+          TEXTO_RESPONSIVO e COLUNA_RESPONSIVA em Paragrafos.tsx), mas alinhado à esquerda. As
+          linhas do Figma viram um parágrafo só (`inline`) e a altura deixa de ser fixa; o
+          PosterViewport mede o texto (`data-medir`) para descer a ponte e o resto
+          (`--espaco-ciclo-final`). O espaço depois de "trajetória," só existe nesse modo.
+          Começa 24 px reais abaixo da foto do meio do varal (17% + 236,18 px de topo + 482,25 px
+          de altura). A terceira foto (x a partir de 1159, até 18% + 702,26 px) ainda desce ao lado
+          das primeiras linhas: o `float` abaixo reserva esse canto, até x = 1140 e até 8 px reais
+          depois da foto, e as linhas seguintes ocupam a largura toda.
+        */}
+        <span
+          aria-hidden="true"
+          className="hidden max-xl:block max-xl:float-right max-xl:w-[470px] max-md:w-[520px] max-xl:h-[max(0px,calc(240.95px-16px*var(--inv,1)))]"
+        />
+        <p className="leading-[normal] mb-0 max-xl:inline">{`Mas o que existe por trás `}</p>
+        <p className="leading-[normal] mb-0 max-xl:inline max-xl:after:content-['_']">
           de um cinema que ganhou projeção? Como se formou essa trajetória,
         </p>
-        <p className="leading-[normal] mb-0">{`quem construiu essa produção e o que os dados nos revelam `}</p>
-        <p className="leading-[normal]">sobre as suas condições?</p>
+        <p className="leading-[normal] mb-0 max-xl:inline">{`quem construiu essa produção e o que os dados nos revelam `}</p>
+        <p className="leading-[normal] max-xl:inline">sobre as suas condições?</p>
       </div>
-      <div className="absolute inset-[29.33%_1.21%_64.46%_95.73%]" data-node-id="46:340">
+      <div className="absolute inset-[29.33%_1.21%_64.46%_95.73%] poster-nivel-super8" data-node-id="46:340">
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup9} />
       </div>
       <div
-        className="pointer-events-none absolute flex inset-[18.57%_13.67%_80.72%_78.91%] items-center justify-center"
+        className="pointer-events-none absolute flex inset-[18.57%_13.67%_80.72%_78.91%] items-center justify-center poster-nivel-ciclo-texto"
         data-node-id="222:155"
         style={{ containerType: "size" }}
       >
@@ -909,11 +1056,11 @@ export function DesignPoster({
           </div>
         </div>
       </div>
-      <div className="absolute inset-[29.33%_1.21%_64.46%_95.73%]" data-node-id="163:94">
+      <div className="absolute inset-[29.33%_1.21%_64.46%_95.73%] poster-nivel-super8" data-node-id="163:94">
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup9} />
       </div>
       <div
-        className="absolute h-[959px] left-[122px] top-[calc(22%+94.36px)] w-[1678px]"
+        className="absolute h-[959px] left-[122px] top-[calc(22%+94.36px)] w-[1678px] poster-nivel-ciclo-final"
         data-node-id="61:3"
         data-name="image 15"
       >
@@ -924,30 +1071,37 @@ export function DesignPoster({
         />
       </div>
       <div
-        className="absolute h-[334.844px] left-[77px] top-[calc(21%+73.48px)] w-[1767.946px]"
+        className="absolute h-[334.844px] left-[77px] top-[calc(21%+73.48px)] w-[1767.946px] poster-nivel-ciclo-final"
         data-node-id="61:18"
       >
         <div className="absolute inset-[-0.9%_-0.17%]">
           <img alt="" className="block max-w-none size-full" src={imgVector53} />
         </div>
       </div>
+      {/*
+        Legenda do Super-8. Abaixo de 1280 px (US-4.1): centralizada, com 11 px reais (um pouco
+        menor que os outros textos, de 14 px) e podendo quebrar linha: fica em 2 linhas no celular
+        e em 1 no tablet. O PosterViewport mede a legenda (`data-medir`) para descer os parágrafos
+        e o resto (`--espaco-super8-legenda`).
+      */}
       <p
-        className="-translate-x-full [word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(50%+549px)] not-italic text-[24px] text-right text-white top-[calc(26%+140.88px)] whitespace-nowrap"
+        className="-translate-x-full [word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(50%+549px)] not-italic text-[24px] text-right text-white top-[calc(26%+140.88px)] whitespace-nowrap poster-nivel-ciclo-final max-xl:text-[length:calc(11px*var(--inv,1))] max-xl:whitespace-normal max-xl:text-center max-xl:translate-x-0 max-xl:left-[110px] max-xl:w-[1700px]"
         data-node-id="132:732"
+        data-medir="super8-legenda"
       >
         Celso Marconi, Jomard Muniz de Brito e Aristides Guimarães, realizadores do Ciclo Super 8
       </p>
       <RetomadaManguebeat />
       <CicloDoRecife />
       <div
-        className="arco-frevo absolute h-[373.177px] left-[calc(20%+204px)] top-[calc(13%+184.61px)] w-[743.277px]"
+        className="arco-frevo absolute h-[373.177px] left-[calc(20%+204px)] top-[calc(13%+184.61px)] w-[743.277px] poster-nivel-ciclo"
         data-node-id="288:159"
         data-name="ARCO CICLO"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgArcoCiclo} />
       </div>
       <div
-        className="-translate-x-1/2 absolute z-30 h-[916px] left-1/2 top-[calc(22%+138.36px)] w-[940px]"
+        className="-translate-x-1/2 absolute z-30 h-[916px] left-1/2 top-[calc(22%+138.36px)] w-[940px] poster-nivel-ciclo-final"
         data-node-id="149:10"
       >
         <img
@@ -965,8 +1119,9 @@ export function DesignPoster({
         <div className="super8-cortina super8-cortina--direita" />
       </div>
       <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(52%+0.76px)] w-[477px]"
+        className={`[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(52%+0.76px)] w-[477px] poster-nivel-consolidacao ${FINANCIAMENTO_TEXTO} max-md:[--extra:var(--fin-desloc-1)]`}
         data-node-id="163:197"
+        data-fin="1"
       >
         Um filme nasce de uma ideia, mas precisa de contribuição. Tem roteiro, equipe e equipamento,
         tem trabalho e preparação. Para chegar até as telas, também precisa de condição.
@@ -975,18 +1130,24 @@ export function DesignPoster({
       <PostalPendurado
         id="valente-e-o-galo"
         comDica
-        className="absolute h-[781.76px] left-[90px] top-[calc(32%+230.37px)] w-[576.791px]"
+        className="absolute h-[781.76px] left-[90px] top-[calc(32%+230.37px)] w-[576.791px] poster-nivel-super8 max-md:h-auto max-md:[--extra:calc(40px*var(--inv,1))]"
+        data-medir="retomada-cartao-1"
       >
         <div
-          className="absolute inset-0 flex items-center justify-center"
+          className="absolute inset-0 flex items-center justify-center max-md:relative max-md:inset-auto max-md:py-[17px]"
           data-node-id="156:60"
         >
-          <div className="flex-none rotate-[3.94deg]">
-            <div className="bg-[#d9d9d9] h-[747.369px] relative w-[526.736px]" />
+          <div className="flex-none rotate-[3.94deg] max-md:rotate-[1.5deg]">
+            <div className="bg-[#d9d9d9] h-[747.369px] relative w-[526.736px] max-md:h-auto max-md:min-h-[747.369px] max-md:px-[25px] max-md:pt-[33px] max-md:pb-[40px]">
+              <div className={CARTAO_FOTO_CELULAR}>
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgRectangle16} />
+              </div>
+              <p className={CARTAO_TEXTO_CELULAR}>{TEXTO_VALENTE}</p>
+            </div>
           </div>
         </div>
         <div
-          className="absolute flex h-[429.632px] items-center justify-center left-[52.82px] top-[31.42px] w-[486.301px]"
+          className="max-md:hidden absolute flex h-[429.632px] items-center justify-center left-[52.82px] top-[31.42px] w-[486.301px]"
           data-node-id="156:61"
         >
           <div className="flex-none rotate-[3.94deg]">
@@ -1000,21 +1161,20 @@ export function DesignPoster({
           </div>
         </div>
         <div
-          className="absolute flex h-[248.23px] items-center justify-center left-[28.47px] top-[467.92px] w-[490.701px]"
+          className="absolute flex h-[248.23px] items-center justify-center left-[28.47px] top-[467.92px] w-[490.701px] max-md:hidden"
           data-node-id="156:63"
         >
           <div className="flex-none rotate-[3.94deg]">
             <p className="[word-break:break-word] font-corpo font-medium leading-[normal] not-italic relative text-[24px] text-black w-[477px]">
-              Mas fazer cinema exige recursos, equipamento e condição. Mas nem sempre quem tem
-              histórias consegue trazê-las à exibição. Décadas depois, outras gerações buscaram
-              formas de experimentação.
+              {TEXTO_VALENTE}
             </p>
           </div>
         </div>
       </PostalPendurado>
       <PostalPendurado
         id="baile-perfumado"
-        className="absolute bg-[#d9d9d9] h-[747.369px] left-[calc(20%+313px)] top-[calc(33%+232.04px)] w-[526.736px]"
+        className="absolute bg-[#d9d9d9] h-[747.369px] left-[calc(20%+313px)] top-[calc(33%+232.04px)] w-[526.736px] poster-nivel-super8 max-md:h-auto max-md:px-[47px] max-md:pt-[504px] max-md:pb-[40px] max-md:[--extra:calc(40px*var(--inv,1))]"
+        data-medir="retomada-cartao-2"
       >
         <div
           className="absolute h-[393px] left-[38px] top-[44px] w-[449px]"
@@ -1030,7 +1190,7 @@ export function DesignPoster({
           </div>
         </div>
         <p
-          className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[47px] not-italic text-[24px] text-black top-[504px] w-[431px]"
+          className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[47px] not-italic text-[24px] text-black top-[504px] w-[431px] max-md:static max-md:w-auto max-md:text-[length:calc(10px*var(--inv,1))]"
           data-node-id="156:56"
         >
           Na trajetória do cinema, um marco veio se firmar: Baile Perfumado, de 1996, fez o público
@@ -1039,18 +1199,25 @@ export function DesignPoster({
       </PostalPendurado>
       <PostalPendurado
         id="o-rap-do-pequeno-principe"
-        className="absolute h-[807.888px] left-[calc(60%+79px)] top-[calc(34%+184.87px)] w-[616.874px]"
+        className="absolute h-[807.888px] left-[calc(60%+79px)] top-[calc(34%+184.87px)] w-[616.874px] poster-nivel-super8 max-md:h-auto max-md:[--extra:calc(40px*var(--inv,1))]"
+        data-medir="retomada-cartao-3"
       >
         <div
-          className="absolute inset-0 flex items-center justify-center"
+          className="absolute inset-0 flex items-center justify-center max-md:relative max-md:inset-auto max-md:py-[30px]"
           data-node-id="196:9"
         >
-          <div className="flex-none rotate-[-7.25deg]">
-            <div className="bg-white h-[747.369px] relative w-[526.736px]" />
+          <div className="flex-none rotate-[-7.25deg] max-md:rotate-[-1.5deg]">
+            <div className="bg-white h-[747.369px] relative w-[526.736px] max-md:h-auto max-md:min-h-[747.369px] max-md:px-[25px] max-md:pt-[33px] max-md:pb-[40px]">
+              <div className={CARTAO_FOTO_CELULAR}>
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgRectangle17} />
+              </div>
+              {/* 23 px a mais de cada lado: o texto deste cartão é mais estreito (431 px no Figma). */}
+              <p className={`${CARTAO_TEXTO_CELULAR} px-[23px]`}>{TEXTO_RAP}</p>
+            </div>
           </div>
         </div>
         <div
-          className="absolute flex h-[458.07px] items-center justify-center left-[36px] top-[50.05px] w-[508.938px]"
+          className="max-md:hidden absolute flex h-[458.07px] items-center justify-center left-[36px] top-[50.05px] w-[508.938px]"
           data-node-id="83:43"
         >
           <div className="flex-none rotate-[-7.25deg]">
@@ -1064,27 +1231,25 @@ export function DesignPoster({
           </div>
         </div>
         <div
-          className="absolute flex h-[268.684px] items-center justify-center left-[103.9px] top-[499.84px] w-[454.821px]"
+          className="absolute flex h-[268.684px] items-center justify-center left-[103.9px] top-[499.84px] w-[454.821px] max-md:hidden"
           data-node-id="156:46"
         >
           <div className="flex-none rotate-[-7.25deg]">
             <p className="[word-break:break-word] font-corpo font-medium leading-[normal] not-italic relative text-[24px] text-black w-[431px]">
-              Entre Science e musicalidade, novas histórias ganharam lugar. Mas não foi uma força
-              apenas que fez o cinema avançar: cultura, Nação e trabalho também ajudaram a
-              transformar.
+              {TEXTO_RAP}
             </p>
           </div>
         </div>
       </PostalPendurado>
       <Anos2000 />
       <p
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+586.5px)] not-italic text-[115px] text-center text-white top-[calc(50%+199px)] whitespace-nowrap"
+        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-[calc(20%+586.5px)] not-italic text-[115px] text-center text-white top-[calc(50%+199px)] whitespace-nowrap poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-1)]"
         data-node-id="163:188"
       >
         FINANCIAMENTO
       </p>
       <div
-        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[0] left-[982px] not-italic text-[120px] text-center text-white top-[calc(71%+74.48px)] whitespace-nowrap"
+        className="-translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[0] left-[982px] not-italic text-[120px] text-center text-white top-[calc(71%+74.48px)] whitespace-nowrap poster-nivel-podio"
         data-node-id="163:271"
       >
         <p className="leading-[normal] mb-0">RECORTE DE GÊNERO</p>
@@ -1093,7 +1258,7 @@ export function DesignPoster({
       <PostalPendurado
         id="amarelo-manga"
         comDica
-        className="absolute z-10 flex h-[313.969px] items-center justify-center left-[162px] top-[calc(43%+194.87px)] w-[267.621px]"
+        className="absolute z-10 flex h-[313.969px] items-center justify-center left-[162px] top-[calc(43%+194.87px)] w-[267.621px] poster-nivel-consolidacao"
         data-node-id="163:142"
       >
         <div className="flex-none rotate-[1.28deg]">
@@ -1108,7 +1273,7 @@ export function DesignPoster({
       </PostalPendurado>
       <PostalPendurado
         id="cinema-aspirinas-e-urubus"
-        className="absolute flex h-[520.207px] items-center justify-center left-[calc(20%+371px)] top-[calc(47%-8.64px)] w-[464.88px]"
+        className="absolute flex h-[520.207px] items-center justify-center left-[calc(20%+371px)] top-[calc(47%-8.64px)] w-[464.88px] poster-nivel-consolidacao"
         data-node-id="163:176"
       >
         <div className="flex-none rotate-[11.02deg]">
@@ -1123,7 +1288,7 @@ export function DesignPoster({
       </PostalPendurado>
       <PostalPendurado
         id="o-agente-secreto"
-        className="absolute flex h-[467.094px] items-center justify-center left-[calc(60%+162px)] top-[calc(47%+39.36px)] w-[399.371px]"
+        className="absolute flex h-[467.094px] items-center justify-center left-[calc(60%+162px)] top-[calc(47%+39.36px)] w-[399.371px] poster-nivel-consolidacao"
         data-node-id="163:182"
       >
         <div className="flex-none rotate-[-1.83deg]">
@@ -1138,7 +1303,7 @@ export function DesignPoster({
       </PostalPendurado>
       <PostalPendurado
         id="febre-do-rato"
-        className="absolute flex h-[521.214px] items-center justify-center left-[236px] top-[calc(46%+144.48px)] w-[466.172px]"
+        className="absolute flex h-[521.214px] items-center justify-center left-[236px] top-[calc(46%+144.48px)] w-[466.172px] poster-nivel-consolidacao"
         data-node-id="163:179"
       >
         <div className="flex-none rotate-[11.22deg]">
@@ -1152,7 +1317,7 @@ export function DesignPoster({
         </div>
       </PostalPendurado>
       <div
-        className="absolute flex inset-[35.55%_95.33%_52.05%_1.35%] items-center justify-center"
+        className="absolute flex inset-[35.55%_95.33%_52.05%_1.35%] items-center justify-center poster-nivel-super8 max-xl:bottom-[calc(52.05%-var(--espaco-retomada,0px)-var(--espaco-anos2000,0px)-var(--espaco-consolidacao,0px))]"
         data-node-id="162:66"
         style={{ containerType: "size" }}
       >
@@ -1162,11 +1327,11 @@ export function DesignPoster({
           </div>
         </div>
       </div>
-      <div className="absolute inset-[47.95%_95.38%_21.06%_1.25%]" data-node-id="162:74">
+      <div className="absolute inset-[47.95%_95.38%_21.06%_1.25%] poster-nivel-consolidacao bottom-[calc(21.06%-var(--espaco-financiamento,0px)-var(--espaco-reconhecimento,0px)-var(--espaco-podio,0px))]" data-node-id="162:74">
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup15} />
       </div>
       <div
-        className="absolute flex inset-[35.53%_1.21%_52.07%_95.47%] items-center justify-center"
+        className="absolute flex inset-[35.53%_1.21%_52.07%_95.47%] items-center justify-center poster-nivel-super8 max-xl:bottom-[calc(52.07%-var(--espaco-retomada,0px)-var(--espaco-anos2000,0px)-var(--espaco-consolidacao,0px))]"
         data-node-id="163:98"
         style={{ containerType: "size" }}
       >
@@ -1177,7 +1342,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute flex inset-[47.93%_1.16%_21.07%_95.47%] items-center justify-center"
+        className="absolute flex inset-[47.93%_1.16%_21.07%_95.47%] items-center justify-center poster-nivel-consolidacao bottom-[calc(21.07%-var(--espaco-financiamento,0px)-var(--espaco-reconhecimento,0px)-var(--espaco-podio,0px))]"
         data-node-id="163:104"
         style={{ containerType: "size" }}
       >
@@ -1188,7 +1353,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="pointer-events-none absolute h-[687.459px] left-[73px] top-[calc(32%+82.66px)] w-[1779px]"
+        className="pointer-events-none absolute h-[687.459px] left-[73px] top-[calc(32%+82.66px)] w-[1779px] poster-nivel-super8 max-md:[--extra:calc(40px*var(--inv,1))]"
         data-node-id="163:152"
       >
         <div className="absolute inset-[-0.44%_-0.17%]">
@@ -1196,7 +1361,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="pointer-events-none absolute h-[217.018px] left-[85.29px] top-[calc(43%-7.76px)] w-[1764.837px]"
+        className="pointer-events-none absolute h-[217.018px] left-[85.29px] top-[calc(43%-7.76px)] w-[1764.837px] poster-nivel-consolidacao"
         data-node-id="163:156"
       >
         <div className="absolute inset-[-1.84%_-0.23%]">
@@ -1205,7 +1370,7 @@ export function DesignPoster({
       </div>
       <PostalPendurado
         id="o-som-ao-redor"
-        className="absolute flex h-[376.553px] items-center justify-center left-[calc(20%+107px)] top-[calc(43%+112.84px)] w-[330.067px]"
+        className="absolute flex h-[376.553px] items-center justify-center left-[calc(20%+107px)] top-[calc(43%+112.84px)] w-[330.067px] poster-nivel-consolidacao"
         data-node-id="163:161"
       >
         <div className="flex-none rotate-[-6.71deg]">
@@ -1220,7 +1385,7 @@ export function DesignPoster({
       </PostalPendurado>
       <PostalPendurado
         id="aquarius"
-        className="absolute flex h-[368.416px] items-center justify-center left-[calc(40%+73px)] top-[calc(43%+85.84px)] w-[315px]"
+        className="absolute flex h-[368.416px] items-center justify-center left-[calc(40%+73px)] top-[calc(43%+85.84px)] w-[315px] poster-nivel-consolidacao"
         data-node-id="163:162"
       >
         <div className="flex-none rotate-[-1.83deg]">
@@ -1234,7 +1399,7 @@ export function DesignPoster({
         </div>
       </PostalPendurado>
       <div
-        className="absolute flex inset-[42.93%_46.95%_56.55%_50.89%] items-center justify-center"
+        className="absolute flex inset-[42.93%_46.95%_56.55%_50.89%] items-center justify-center poster-nivel-consolidacao"
         data-node-id="297:253"
         style={{ containerType: "size" }}
       >
@@ -1246,7 +1411,7 @@ export function DesignPoster({
       </div>
       <PostalPendurado
         id="retratos-fantasmas"
-        className="absolute flex h-[368.416px] items-center justify-center left-[calc(60%+333px)] top-[calc(43%+43.84px)] w-[315px]"
+        className="absolute flex h-[368.416px] items-center justify-center left-[calc(60%+333px)] top-[calc(43%+43.84px)] w-[315px] poster-nivel-consolidacao"
         data-node-id="163:169"
       >
         <div className="flex-none rotate-[-1.83deg]">
@@ -1260,7 +1425,7 @@ export function DesignPoster({
         </div>
       </PostalPendurado>
       <div
-        className="absolute flex inset-[42.85%_13.91%_56.64%_84.15%] items-center justify-center"
+        className="absolute flex inset-[42.85%_13.91%_56.64%_84.15%] items-center justify-center poster-nivel-consolidacao"
         data-node-id="297:258"
         style={{ containerType: "size" }}
       >
@@ -1271,7 +1436,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="pointer-events-none absolute h-[265.599px] left-[85.29px] top-[calc(46%+28.59px)] w-[1775.598px]"
+        className="pointer-events-none absolute h-[265.599px] left-[85.29px] top-[calc(46%+28.59px)] w-[1775.598px] poster-nivel-consolidacao"
         data-node-id="163:160"
       >
         <div className="absolute inset-[-1.51%_-0.23%]">
@@ -1280,8 +1445,9 @@ export function DesignPoster({
       </div>
       <Consolidacao />
       <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(58%+146.04px)] w-[477px]"
+        className={`[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(58%+146.04px)] w-[477px] poster-nivel-consolidacao ${FINANCIAMENTO_TEXTO} max-md:[--extra:var(--fin-desloc-7)]`}
         data-node-id="163:199"
+        data-fin="7"
       >
         Os dados podem mostrar concentrações e diferenças, mas precisam de contexto para sustentar
         conclusões. Investigar quem recebe recursos também exige olhar as condições.
@@ -1289,143 +1455,154 @@ export function DesignPoster({
       <Conclusao />
       <ReconhecimentoInternacional premios={premios} />
       <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(57%+98.16px)] w-[477px]"
+        className={`[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(57%+98.16px)] w-[477px] poster-nivel-consolidacao ${FINANCIAMENTO_TEXTO} max-md:[--extra:var(--fin-desloc-6)]`}
         data-node-id="163:201"
+        data-fin="6"
       >
         O dinheiro não conta tudo quando aparece em um total. Também importa saber como se distribui
         o capital, quais projetos são contemplados e quem consegue chegar ao edital.
       </p>
       <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(56%+87.28px)] w-[477px]"
+        className={`[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(56%+87.28px)] w-[477px] poster-nivel-consolidacao ${FINANCIAMENTO_TEXTO} max-md:[--extra:var(--fin-desloc-5)]`}
         data-node-id="163:203"
+        data-fin="5"
       >
         Um edital publicado não garante o mesmo alcance em cada edição. Cada um tem suas regras,
         seus critérios e seu teto. Para entender o investimento, cada dado deve ser verificado
       </p>
       <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(55%+38.4px)] w-[477px]"
+        className={`[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(55%+38.4px)] w-[477px] poster-nivel-consolidacao ${FINANCIAMENTO_TEXTO} max-md:[--extra:var(--fin-desloc-4)]`}
         data-node-id="163:205"
+        data-fin="4"
       >
         Mas, quanto se investe em filmes? Como os recursos vão mudar? Quem consegue financiamento?
         Quem pode se inscrever e acessar? São perguntas necessárias para entender quem consegue
         filmar.
       </p>
       <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(54%+25.52px)] w-[477px]"
+        className={`[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(54%+25.52px)] w-[477px] poster-nivel-consolidacao ${FINANCIAMENTO_TEXTO} max-md:[--extra:var(--fin-desloc-3)]`}
         data-node-id="163:207"
+        data-fin="3"
       >
         Criado em 2002, ganhou um marco importante: o audiovisual passou a ter edital próprio
         adiante dentro do Funcultura.
       </p>
       <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(53%+12.64px)] w-[477px]"
+        className={`[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+4px)] not-italic text-[24px] text-white top-[calc(53%+12.64px)] w-[477px] poster-nivel-consolidacao ${FINANCIAMENTO_TEXTO} max-md:[--extra:var(--fin-desloc-2)]`}
         data-node-id="163:209"
+        data-fin="2"
       >
         Em Pernambuco, há caminhos para incentivar a criação. O Funcultura é um mecanismo de fomento
         à produção, com editais que destinam recursos para a cultura da nação.
       </p>
       <p
-        className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(60%+185px)] not-italic text-[24px] text-white top-[calc(51%+220.88px)] whitespace-nowrap"
+        className="[word-break:break-word] absolute font-corpo font-semibold leading-[normal] left-[calc(60%+185px)] not-italic text-[24px] text-white top-[calc(51%+220.88px)] whitespace-nowrap poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-1)]"
         data-node-id="163:212"
       >
         GRAFICOS
       </p>
       <div
-        className="absolute bg-[#d9d9d9] h-[45px] left-[calc(40%+352px)] top-[calc(52%+135.76px)] w-[94px]"
+        className="absolute bg-[#d9d9d9] h-[45px] left-[calc(40%+352px)] top-[calc(52%+135.76px)] w-[94px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-1)]"
         data-node-id="163:213"
       />
       <div
-        className="absolute bg-[#d9d9d9] h-[132px] left-[calc(60%+174px)] top-[calc(52%+48.76px)] w-[77px]"
+        className="absolute bg-[#d9d9d9] h-[132px] left-[calc(60%+174px)] top-[calc(52%+48.76px)] w-[77px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-1)]"
         data-node-id="163:214"
       />
       <div
-        className="absolute bg-[#d9d9d9] h-[215px] left-[calc(80%+18px)] top-[calc(51%+220.88px)] w-[79px]"
+        className="absolute bg-[#d9d9d9] h-[215px] left-[calc(80%+18px)] top-[calc(51%+220.88px)] w-[79px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-1)]"
         data-node-id="163:215"
       />
       <div
-        className="absolute bg-[#d9d9d9] h-[205px] left-[calc(40%+352px)] top-[calc(53%+39.64px)] w-[513px]"
+        className="absolute bg-[#d9d9d9] h-[205px] left-[calc(40%+352px)] top-[calc(53%+39.64px)] w-[513px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-2)]"
         data-node-id="163:216"
       />
       <div
-        className="absolute bg-[#d9d9d9] h-[30px] left-[calc(40%+353px)] top-[calc(55%+13.4px)] w-[512px]"
+        className="absolute bg-[#d9d9d9] h-[30px] left-[calc(40%+353px)] top-[calc(55%+13.4px)] w-[512px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-3)]"
         data-node-id="163:217"
       />
       <div
-        className="absolute bg-[#d9d9d9] h-[25px] left-[calc(40%+353px)] top-[calc(54%+209.52px)] w-[326px]"
+        className="absolute bg-[#d9d9d9] h-[25px] left-[calc(40%+353px)] top-[calc(54%+209.52px)] w-[326px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-3)]"
         data-node-id="163:218"
       />
       <div
-        className="absolute bg-[#d9d9d9] h-[41px] left-[calc(40%+356px)] top-[calc(54%+137.52px)] w-[253px]"
+        className="absolute bg-[#d9d9d9] h-[41px] left-[calc(40%+356px)] top-[calc(54%+137.52px)] w-[253px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-3)]"
         data-node-id="163:219"
       />
       <div
-        className="absolute bg-[#d9d9d9] h-[45px] left-[calc(40%+369px)] top-[calc(57%+134.16px)] w-[94px]"
+        className="absolute bg-[#d9d9d9] h-[45px] left-[calc(40%+369px)] top-[calc(57%+134.16px)] w-[94px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-5)]"
         data-node-id="163:220"
       />
       <div
-        className="absolute bg-[#d9d9d9] h-[132px] left-[calc(60%+203px)] top-[calc(57%+47.16px)] w-[77px]"
+        className="absolute bg-[#d9d9d9] h-[132px] left-[calc(60%+203px)] top-[calc(57%+47.16px)] w-[77px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-5)]"
         data-node-id="163:221"
       />
       <div
-        className="absolute bg-[#d9d9d9] h-[215px] left-[calc(80%+35px)] top-[calc(56%+220.28px)] w-[79px]"
+        className="absolute bg-[#d9d9d9] h-[215px] left-[calc(80%+35px)] top-[calc(56%+220.28px)] w-[79px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-5)]"
         data-node-id="163:222"
       />
       <div
-        className="absolute bg-[#d9d9d9] h-[205px] left-[calc(40%+369px)] top-[calc(58%+37.04px)] w-[513px]"
+        className="absolute bg-[#d9d9d9] h-[205px] left-[calc(40%+369px)] top-[calc(58%+37.04px)] w-[513px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-6)]"
         data-node-id="163:223"
       />
       <div
-        className="absolute bg-[#d9d9d9] h-[205px] left-[calc(40%+352px)] top-[calc(55%+165.4px)] w-[513px]"
+        className="absolute bg-[#d9d9d9] h-[205px] left-[calc(40%+352px)] top-[calc(55%+165.4px)] w-[513px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-4)]"
         data-node-id="163:228"
       />
       <div
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[0] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(73%+27.24px)] w-[477px] whitespace-pre-wrap"
+        className={`[word-break:break-word] absolute font-corpo font-medium leading-[0] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(73%+27.24px)] w-[477px] whitespace-pre-wrap poster-recorte-1 max-md:hidden`}
         data-node-id="163:273"
+        data-rec="1"
       >
-        <p className="leading-[normal] mb-0">{`Um filme tem muitas mãos, muito mais que direção. `}</p>
-        <p className="leading-[normal] mb-0">{`Tem roteiro, som e fotografia, montagem e produção. `}</p>
-        <p className="leading-[normal]">Conhecer quem faz o cinema é olhar toda a criação.</p>
+        <p className="leading-[normal] mb-0 max-md:inline">{`Um filme tem muitas mãos, muito mais que direção. `}</p>
+        <p className="leading-[normal] mb-0 max-md:inline">{`Tem roteiro, som e fotografia, montagem e produção. `}</p>
+        <p className="leading-[normal] max-md:inline">Conhecer quem faz o cinema é olhar toda a criação.</p>
       </div>
       <div
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[0] left-[calc(20%+24px)] not-italic text-[24px] text-white top-[calc(74%+52.12px)] w-[477px] whitespace-pre-wrap"
+        className={`[word-break:break-word] absolute font-corpo font-medium leading-[0] left-[calc(20%+24px)] not-italic text-[24px] text-white top-[calc(74%+52.12px)] w-[477px] whitespace-pre-wrap poster-recorte-2 max-md:hidden`}
         data-node-id="163:274"
+        data-rec="2"
       >
-        <p className="leading-[normal] mb-0">{`Mas será que as oportunidades alcançam todos por igual? `}</p>
-        <p className="leading-[normal] mb-0">{`Quem ocupa cada função? `}</p>
-        <p className="leading-[normal]">
+        <p className="leading-[normal] mb-0 max-md:inline">{`Mas será que as oportunidades alcançam todos por igual? `}</p>
+        <p className="leading-[normal] mb-0 max-md:inline">{`Quem ocupa cada função? `}</p>
+        <p className="leading-[normal] max-md:inline">
           Quem encontra espaço profissional? Os dados podem revelar diferenças no audiovisual.
         </p>
       </div>
       <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(76%+75.88px)] w-[477px]"
+        className={`[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(76%+75.88px)] w-[477px] poster-recorte-4 max-md:hidden`}
         data-node-id="163:275"
+        data-rec="4"
       >
         Os dados do audiovisual podem apontar diferenças, mas é preciso compreender o alcance de
         cada pesquisa. O que vale para o Brasil não descreve todo o estado.
       </p>
       <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(77%+79.76px)] w-[477px]"
+        className={`[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(77%+79.76px)] w-[477px] poster-recorte-5 max-md:hidden`}
         data-node-id="163:277"
+        data-rec="5"
       >
         Também precisamos saber quem consegue participar, quais grupos têm oportunidades e quem pode
         se destacar. Mas, para falar de raça e cor, é preciso saber como contar.
       </p>
       <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(78%+87.64px)] w-[477px]"
+        className={`[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(78%+87.64px)] w-[477px] poster-recorte-6 max-md:hidden`}
         data-node-id="163:278"
+        data-rec="6"
       >
         Se os dados são incompletos, não se deve imaginar o perfil de cada pessoa nem suas histórias
         inventar. Uma lacuna na pesquisa também precisa se registrar.
       </p>
       <p
-        className="[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(75%+82px)] w-[477px]"
+        className={`[word-break:break-word] absolute font-corpo font-medium leading-[normal] left-[calc(20%+26px)] not-italic text-[24px] text-white top-[calc(75%+82px)] w-[477px] poster-recorte-3 max-md:hidden`}
         data-node-id="163:276"
+        data-rec="3"
       >
         As mulheres fazem cinema, mas precisamos investigar como ocupam cada função e onde podem
         trabalhar. O total de profissionais não explica tudo no olhar.
       </p>
       <div
-        className="absolute h-[106px] left-[calc(20%+26px)] top-[calc(60%+5.8px)] w-[892px]"
+        className="absolute h-[106px] left-[calc(20%+26px)] top-[calc(60%+5.8px)] w-[892px] poster-nivel-financiamento"
         data-node-id="196:11"
       >
         <div className="absolute inset-[-4.25%_0_-18.34%_-0.5%]">
@@ -1433,7 +1610,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="falling-poster hotspot absolute z-10 flex h-[380.488px] items-center justify-center left-[calc(60%+3px)] top-[calc(43%+44.84px)] w-[329.539px]"
+        className="falling-poster hotspot absolute z-10 flex h-[380.488px] items-center justify-center left-[calc(60%+3px)] top-[calc(43%+44.84px)] w-[329.539px] poster-nivel-consolidacao"
         role="button"
         tabIndex={0}
         aria-label="Derrubar o pôster"
@@ -1459,7 +1636,7 @@ export function DesignPoster({
         ↺ Pendurar de novo
       </button>
       <div
-        className="absolute flex inset-[42.81%_28.85%_56.67%_67.66%] items-center justify-center"
+        className="absolute flex inset-[42.81%_28.85%_56.67%_67.66%] items-center justify-center poster-nivel-consolidacao"
         data-node-id="297:263"
         style={{ containerType: "size" }}
       >
@@ -1470,17 +1647,16 @@ export function DesignPoster({
         </div>
       </div>
       <Podio colocacoes={podio} />
+      {/* Gráfico de gênero do Figma; no celular fica oculto e entra o de RECORTE_CELULAR. */}
+      <div className="contents poster-recorte-1 max-md:hidden">
       <Hotspot
         id="hotspot-genero"
         style={{ top: "calc(73% + 16px)", left: "calc(60% - 10px)", width: 460, height: 240 }}
-        tooltip={
-          genero
-            ? `Dado real do acervo cadastrado: ${genero.mulheres}% mulheres e ${genero.homens}% homens entre as pessoas com gênero informado.`
-            : "Sem pessoas com gênero informado no acervo ainda — por isso o gráfico aparece em cinza."
-        }
+        tooltip={dicaGenero} dicaGrande
       />
+      </div>
       <div
-        className="absolute contents left-[calc(40%+301px)] top-[calc(73%+16.24px)]"
+        className="absolute contents left-[calc(40%+301px)] top-[calc(73%+16.24px)] poster-recorte-1 max-md:hidden"
         data-node-id="223:160"
       >
         <div
@@ -1522,17 +1698,19 @@ export function DesignPoster({
           data-node-id="196:42"
         >{textoHomens}</p>
       </div>
+      {/* Gráfico de raça do Figma; no celular fica oculto e entra o de RECORTE_CELULAR. */}
+      <div className="contents poster-recorte-4 max-md:hidden">
       <Hotspot
         id="hotspot-raca"
         style={{ top: "calc(76% + 28px)", left: "calc(60% - 10px)", width: 460, height: 260 }}
-        tooltip={
-          raca
-            ? `Recorte baseado em ${raca.totalInformado} autodeclarações de cor/raça. ${raca.totalSemInformacao} pessoas sem autodeclaração registrada não entram no percentual.`
-            : "Sem autodeclarações de cor/raça registradas no acervo."
-        }
+        tooltip={dicaRaca} dicaGrande
       />
-      <div className="absolute left-[calc(60%-10px)] top-[calc(76%+28.88px)] w-[460px] space-y-6">
-        {(raca?.itens ?? [{ categoria: "Raça/cor sem dados", percentual: 0 }]).map(
+      </div>
+      <div
+        className="absolute left-[calc(60%-10px)] top-[calc(76%+28.88px)] w-[460px] space-y-6 poster-recorte-4 max-md:hidden"
+        data-medir="recorte-raca"
+      >
+        {itensRaca.map(
           (item, indice) => {
             const cor = ["red", "#e3a54f", "#8c8888", "#f2e8d5", "#a34a32"][indice % 5];
             const largura = raca
@@ -1563,8 +1741,67 @@ export function DesignPoster({
           },
         )}
       </div>
+      <div className={RECORTE_CELULAR} data-medir="recorte-celular">
+        {RECORTE_TEXTOS.slice(0, 3).map((texto) => (
+          <p key={texto} className={RECORTE_PARAGRAFO}>
+            {texto}
+          </p>
+        ))}
+        <div className={GRAFICO_CELULAR}>
+          {[
+            { texto: textoMulheres, largura: larguraMulheres, cor: corMulheres },
+            { texto: textoHomens, largura: larguraHomens, cor: corHomens },
+          ].map((barra, i) => (
+            <div key={i} className={GRAFICO_LINHA}>
+              <span className={GRAFICO_NUMERO}>{barra.texto}</span>
+              <div className={GRAFICO_BARRA}>
+                <div
+                  className="h-full"
+                  style={{ width: `${(barra.largura / BARRA_MAX) * 100}%`, backgroundColor: barra.cor }}
+                />
+              </div>
+            </div>
+          ))}
+          <p className={GRAFICO_LEGENDA}>
+            Mulheres no cinema pernambucano
+            <span className={GRAFICO_COR} style={{ backgroundColor: corMulheres }} />
+          </p>
+          <p className={GRAFICO_LEGENDA}>
+            Homens no cinema pernambucano
+            <span className={GRAFICO_COR} style={{ backgroundColor: corHomens }} />
+          </p>
+          <Hotspot id="hotspot-genero" style={{ left: 0, top: 0, width: "100%", height: "100%" }} tooltip={dicaGenero} dicaGrande />
+        </div>
+        {RECORTE_TEXTOS.slice(3).map((texto) => (
+          <p key={texto} className={RECORTE_PARAGRAFO}>
+            {texto}
+          </p>
+        ))}
+        <div className={GRAFICO_CELULAR}>
+          {itensRaca.map((item, indice) => (
+            <div key={item.categoria} className="flex flex-col gap-[calc(4px*var(--inv,1))]">
+              <div className={GRAFICO_LINHA}>
+                <span className={GRAFICO_NUMERO}>{raca ? `${item.percentual}%` : "--%"}</span>
+                <div className={GRAFICO_BARRA}>
+                  <div
+                    className="ml-auto h-full"
+                    style={{
+                      width: raca ? `${(item.percentual / maiorPercentualRaca) * 100}%` : "100%",
+                      backgroundColor: raca
+                        ? ["red", "#e3a54f", "#8c8888", "#f2e8d5", "#a34a32"][indice % 5]
+                        : CINZA_PLACEHOLDER,
+                    }}
+                  />
+                </div>
+              </div>
+              <p className="text-right text-[length:calc(11px*var(--inv,1))]">{item.categoria}</p>
+            </div>
+          ))}
+          <Hotspot id="hotspot-raca" style={{ left: 0, top: 0, width: "100%", height: "100%" }} tooltip={dicaRaca} dicaGrande />
+        </div>
+      </div>
       <div
-        className="plane-flight absolute z-10 flex inset-[59.91%_15.97%_39.56%_68.75%] items-center justify-center"
+        className="plane-flight absolute z-10 flex inset-[59.91%_15.97%_39.56%_68.75%] items-center justify-center poster-nivel-financiamento"
         data-node-id="202:244"
         style={{ containerType: "size" }}
       >
@@ -1580,7 +1817,7 @@ export function DesignPoster({
         data-name="Group"
       >
         <div
-          className="absolute z-20 inset-[60.47%_78.39%_38.79%_7.14%]"
+          className="absolute z-20 inset-[60.47%_78.39%_38.79%_7.14%] poster-nivel-financiamento"
           data-node-id="202:148"
           data-name="Group"
         >
@@ -1588,42 +1825,42 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute inset-[37.6%_71.82%_61.25%_11.04%]"
+        className="absolute inset-[37.6%_71.82%_61.25%_11.04%] poster-nivel-retomada"
         data-node-id="221:109"
         data-name="Vector"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector58} />
       </div>
       <div
-        className="absolute inset-[38.19%_25.1%_61.58%_71.56%]"
+        className="absolute inset-[38.19%_25.1%_61.58%_71.56%] poster-nivel-retomada"
         data-node-id="221:113"
         data-name="Vector"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector59} />
       </div>
       <div
-        className="absolute inset-[37.54%_51.3%_61.76%_38.28%]"
+        className="absolute inset-[37.54%_51.3%_61.76%_38.28%] poster-nivel-retomada"
         data-node-id="221:110"
         data-name="Vector"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector60} />
       </div>
       <div
-        className="absolute inset-[38.9%_19.84%_60.55%_71.98%]"
+        className="absolute inset-[38.9%_19.84%_60.55%_71.98%] poster-nivel-retomada"
         data-node-id="221:111"
         data-name="Vector"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector61} />
       </div>
       <div
-        className="absolute inset-[39.15%_53.85%_60.33%_38.28%]"
+        className="absolute inset-[39.15%_53.85%_60.33%_38.28%] poster-nivel-retomada"
         data-node-id="221:112"
         data-name="Vector"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector62} />
       </div>
       <div
-        className="absolute flex inset-[40.78%_47.54%_58.68%_45.68%] items-center justify-center"
+        className="absolute flex inset-[40.78%_47.54%_58.68%_45.68%] items-center justify-center poster-nivel-anos2000"
         data-node-id="221:124"
         style={{ containerType: "size" }}
       >
@@ -1638,7 +1875,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute flex inset-[34.16%_13.92%_64.78%_79.81%] items-center justify-center"
+        className="absolute flex inset-[34.16%_13.92%_64.78%_79.81%] items-center justify-center poster-nivel-super8 max-md:[--extra:calc(40px*var(--inv,1))]"
         data-node-id="220:12"
         style={{ containerType: "size" }}
       >
@@ -1649,7 +1886,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="pointer-events-none absolute flex inset-[33.33%_46.65%_65.61%_46.69%] items-center justify-center"
+        className="pointer-events-none absolute flex inset-[33.33%_46.65%_65.61%_46.69%] items-center justify-center poster-nivel-super8 max-md:[--extra:calc(40px*var(--inv,1))]"
         data-node-id="221:125"
         style={{ containerType: "size" }}
       >
@@ -1660,7 +1897,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute flex inset-[32.31%_77.02%_66.63%_17.28%] items-center justify-center"
+        className="absolute flex inset-[32.31%_77.02%_66.63%_17.28%] items-center justify-center poster-nivel-super8 max-md:[--extra:calc(40px*var(--inv,1))]"
         data-node-id="221:129"
         style={{ containerType: "size" }}
       >
@@ -1670,14 +1907,14 @@ export function DesignPoster({
           </div>
         </div>
       </div>
-      <div className="absolute inset-[21.83%_83.79%_77.23%_10.42%]" data-node-id="222:138">
+      <div className="absolute inset-[21.83%_83.79%_77.23%_10.42%] poster-nivel-ciclo-final" data-node-id="222:138">
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup28} />
       </div>
-      <div className="pointer-events-none absolute inset-[17.06%_82.66%_82.29%_13.39%]" data-node-id="222:149">
+      <div className="pointer-events-none absolute inset-[17.06%_82.66%_82.29%_13.39%] poster-nivel-ciclo-texto" data-node-id="222:149">
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup30} />
       </div>
       <div
-        className="pointer-events-none absolute flex inset-[17.81%_41.35%_81.52%_49.95%] items-center justify-center"
+        className="pointer-events-none absolute flex inset-[17.81%_41.35%_81.52%_49.95%] items-center justify-center poster-nivel-ciclo-texto"
         data-node-id="222:152"
         style={{ containerType: "size" }}
       >
@@ -1688,7 +1925,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute flex inset-[21.76%_6.19%_77.23%_81.52%] items-center justify-center"
+        className="absolute flex inset-[21.76%_6.19%_77.23%_81.52%] items-center justify-center poster-nivel-ciclo-final"
         data-node-id="222:139"
         style={{ containerType: "size" }}
       >
@@ -1720,11 +1957,19 @@ export function DesignPoster({
           </div>
         </div>
       </div>
-      <div className="absolute inset-[78.93%_1.16%_0.44%_1.42%]" data-node-id="251:17">
+      {/*
+        Grupo da moldura de baixo (251:17): os traços laterais dele vão até 79,89% da altura e lá
+        encontram os de 253:32 (95,41%). Abaixo do pódio a página ganha espaços (Recorte, Conclusão,
+        fim da jornada, Créditos) e 253:32 desce a soma deles; este grupo estica para o encontro cair
+        no mesmo ponto: o fim da caixa desce a soma ÷ 0,7989 (o resto passa do fim da página e é
+        cortado). Os SVGs da moldura usam preserveAspectRatio="none" para esticar com a caixa.
+        Só no celular: a partir de 768 px os espaços são pequenos e a moldura já fecha esticando 1×.
+      */}
+      <div className="absolute inset-[78.93%_1.16%_0.44%_1.42%] poster-nivel-podio bottom-[calc(0.44%-1*(var(--espaco-recorte,0px)+var(--espaco-conclusao,0px)+var(--espaco-jornada,0px)+var(--espaco-creditos,0px)))] max-md:bottom-[calc(0.44%-1.2517*(var(--espaco-recorte,0px)+var(--espaco-conclusao,0px)+var(--espaco-jornada,0px)+var(--espaco-creditos,0px)))]" data-node-id="251:17">
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup33} />
       </div>
       <div
-        className="absolute flex inset-[78.95%_95.43%_3.7%_1.25%] items-center justify-center"
+        className="absolute flex inset-[78.95%_95.43%_3.7%_1.25%] items-center justify-center poster-nivel-podio bottom-[calc(3.7%-var(--espaco-recorte,0px)-var(--espaco-conclusao,0px)-var(--espaco-jornada,0px)-var(--espaco-creditos,0px))]"
         data-node-id="250:2"
         style={{ containerType: "size" }}
       >
@@ -1747,42 +1992,42 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute h-[701px] left-[calc(80%-4px)] top-[calc(15%+55.2px)] w-[295px]"
+        className="absolute h-[701px] left-[calc(80%-4px)] top-[calc(15%+55.2px)] w-[295px] poster-nivel-ciclo-texto"
         data-node-id="288:131"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada10} />
       </div>
       <div
-        className="-translate-x-1/2 absolute h-[125.26px] left-[calc(50%+0.25px)] top-[calc(13%+43.44px)] w-[106.51px]"
+        className="-translate-x-1/2 absolute h-[125.26px] left-[calc(50%+0.25px)] top-[calc(13%+43.44px)] w-[106.51px] poster-nivel-ciclo"
         data-node-id="288:155"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada11} />
       </div>
       <div
-        className="absolute h-[54.14px] left-[324px] top-[calc(14%+157.32px)] w-[45.88px]"
+        className="absolute h-[54.14px] left-[324px] top-[calc(14%+157.32px)] w-[45.88px] poster-nivel-ciclo"
         data-node-id="288:160"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada12} />
       </div>
       <div
-        className="absolute inset-[14.9%_26.68%_84.92%_71.46%]"
+        className="absolute inset-[14.9%_26.68%_84.92%_71.46%] poster-nivel-ciclo"
         data-node-id="288:163"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada13} />
       </div>
       <div
-        className="pointer-events-none absolute h-[82.15px] left-[calc(40%+158px)] top-[calc(17%+26.96px)] w-[68.66px]"
+        className="pointer-events-none absolute h-[82.15px] left-[calc(40%+158px)] top-[calc(17%+26.96px)] w-[68.66px] poster-nivel-ciclo-texto"
         data-node-id="288:166"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada14} />
       </div>
       <div
-        className="absolute h-[55.61px] left-[calc(80%+41px)] top-[calc(18%+47.84px)] w-[45.22px]"
+        className="absolute h-[55.61px] left-[calc(80%+41px)] top-[calc(18%+47.84px)] w-[45.22px] poster-nivel-ciclo-texto"
         data-node-id="288:169"
         data-name="Camada_1"
       >
@@ -1791,7 +2036,7 @@ export function DesignPoster({
       <PostalPendurado
         id="recife-frio"
         comDica
-        className="absolute h-[621px] left-[calc(20%+120px)] top-[calc(9%+138.92px)] w-[920px]"
+        className="absolute h-[621px] left-[calc(20%+120px)] top-[calc(9%+138.92px)] w-[920px] poster-nivel-contexto"
         data-node-id="292:176"
         data-name="ChatGPT Image 25 de set. de 2026, 14_58_30 1"
       >
@@ -1802,14 +2047,14 @@ export function DesignPoster({
         />
       </PostalPendurado>
       <div
-        className="absolute h-[282px] left-[89px] top-[calc(20%+216.6px)] w-[1741px]"
+        className="absolute h-[282px] left-[89px] top-[calc(20%+216.6px)] w-[1741px] poster-nivel-ciclo-final"
         data-node-id="294:204"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada16} />
       </div>
       <div
-        className="absolute flex inset-[46.37%_70.88%_53.11%_25.63%] items-center justify-center"
+        className="absolute flex inset-[46.37%_70.88%_53.11%_25.63%] items-center justify-center poster-nivel-consolidacao"
         data-node-id="297:228"
         style={{ containerType: "size" }}
       >
@@ -1820,7 +2065,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute flex inset-[46.76%_43.85%_52.71%_52.66%] items-center justify-center"
+        className="absolute flex inset-[46.76%_43.85%_52.71%_52.66%] items-center justify-center poster-nivel-consolidacao"
         data-node-id="297:233"
         style={{ containerType: "size" }}
       >
@@ -1831,7 +2076,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute flex inset-[46.86%_20.73%_52.62%_76.67%] items-center justify-center"
+        className="absolute flex inset-[46.86%_20.73%_52.62%_76.67%] items-center justify-center poster-nivel-consolidacao"
         data-node-id="297:238"
         style={{ containerType: "size" }}
       >
@@ -1842,18 +2087,18 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute h-[121.118px] left-[79px] top-[calc(9%+52.92px)] w-[1760px]"
+        className="absolute h-[121.118px] left-[79px] top-[calc(9%+52.92px)] w-[1760px] poster-nivel-contexto"
         data-node-id="292:181"
       >
         <div className="absolute inset-[-2.94%_0_-3.3%_-0.23%]">
           <img alt="" className="block max-w-none size-full" src={imgVector64} />
         </div>
       </div>
-      <div className="absolute inset-[9.14%_48.44%_90.21%_47.6%]" data-node-id="292:177">
+      <div className="absolute inset-[9.14%_48.44%_90.21%_47.6%] poster-nivel-contexto" data-node-id="292:177">
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup37} />
       </div>
       <div
-        className="pointer-events-none absolute flex inset-[42.87%_64.11%_55.74%_14.48%] items-center justify-center"
+        className="pointer-events-none absolute flex inset-[42.87%_64.11%_55.74%_14.48%] items-center justify-center poster-nivel-consolidacao"
         data-node-id="297:243"
         style={{ containerType: "size" }}
       >
@@ -1864,14 +2109,14 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute h-[249.29px] left-[261px] top-[calc(13%+121.44px)] w-[347.02px]"
+        className="absolute h-[249.29px] left-[261px] top-[calc(13%+121.44px)] w-[347.02px] poster-nivel-ciclo"
         data-node-id="299:509"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada17} />
       </div>
       <div
-        className="absolute flex h-[226.369px] items-center justify-center left-[calc(60%+276.26px)] top-[calc(28%+142.29px)] w-[241.157px]"
+        className="absolute flex h-[226.369px] items-center justify-center left-[calc(60%+276.26px)] top-[calc(28%+142.29px)] w-[241.157px] poster-nivel-super8"
         data-node-id="301:515"
       >
         <div className="flex-none rotate-[-18.36deg]">
@@ -1881,7 +2126,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute flex h-[356.346px] items-center justify-center left-[227px] top-[calc(28%+102.64px)] w-[366.636px]"
+        className="absolute flex h-[356.346px] items-center justify-center left-[227px] top-[calc(28%+102.64px)] w-[366.636px] poster-nivel-super8"
         data-node-id="301:541"
       >
         <div className="flex-none rotate-[32.28deg]">
@@ -1891,14 +2136,14 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute inset-[30.43%_4.73%_67.67%_4.74%]"
+        className="absolute inset-[30.43%_4.73%_67.67%_4.74%] poster-nivel-super8"
         data-node-id="200:44"
         data-name="Group"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup11} />
       </div>
       <div
-        className="absolute flex h-[226.369px] items-center justify-center left-[calc(20%+84px)] top-[calc(31%+68.28px)] w-[241.157px]"
+        className="absolute flex h-[226.369px] items-center justify-center left-[calc(20%+84px)] top-[calc(31%+68.28px)] w-[241.157px] poster-nivel-super8"
         data-node-id="301:554"
       >
         <div className="flex-none rotate-[-18.36deg]">
@@ -1908,7 +2153,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute flex h-[118.963px] items-center justify-center left-[calc(60%+225.07px)] top-[calc(31%+159.25px)] w-[134.875px]"
+        className="absolute flex h-[118.963px] items-center justify-center left-[calc(60%+225.07px)] top-[calc(31%+159.25px)] w-[134.875px] poster-nivel-super8"
         data-node-id="301:567"
       >
         <div className="flex-none rotate-[0.17deg]">
@@ -1918,7 +2163,7 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute flex h-[167.534px] items-center justify-center left-[162px] top-[calc(50%+75px)] w-[229.888px]"
+        className="absolute flex h-[167.534px] items-center justify-center left-[162px] top-[calc(50%+75px)] w-[229.888px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-1)]"
         data-node-id="301:580"
       >
         <div className="flex-none rotate-[-12.02deg]">
@@ -1928,28 +2173,28 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute h-[178px] left-[calc(80%+44px)] top-[calc(50%+51px)] w-[176px]"
+        className="absolute h-[178px] left-[calc(80%+44px)] top-[calc(50%+51px)] w-[176px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-1)]"
         data-node-id="301:607"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada22} />
       </div>
       <div
-        className="absolute h-[151px] left-[calc(60%+195px)] top-[calc(49%+185.12px)] w-[167px]"
+        className="absolute h-[151px] left-[calc(60%+195px)] top-[calc(49%+185.12px)] w-[167px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-1)]"
         data-node-id="301:629"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada23} />
       </div>
       <div
-        className="absolute h-[144px] left-[calc(20%-3px)] top-[calc(49%+161.12px)] w-[175px]"
+        className="absolute h-[144px] left-[calc(20%-3px)] top-[calc(49%+161.12px)] w-[175px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-1)]"
         data-node-id="301:642"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada24} />
       </div>
       <div
-        className="absolute flex h-[251.104px] items-center justify-center left-[calc(40%+12.5px)] top-[calc(49%+143.07px)] w-[358.998px]"
+        className="absolute flex h-[251.104px] items-center justify-center left-[calc(40%+12.5px)] top-[calc(49%+143.07px)] w-[358.998px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-1)]"
         data-node-id="301:656"
       >
         <div className="flex-none rotate-[8.74deg]">
@@ -1959,77 +2204,77 @@ export function DesignPoster({
         </div>
       </div>
       <div
-        className="absolute inset-[40.42%_14.91%_59.4%_83.23%]"
+        className="absolute inset-[40.42%_14.91%_59.4%_83.23%] poster-nivel-anos2000"
         data-node-id="304:668"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada13} />
       </div>
       <div
-        className="absolute h-[82.15px] left-[222px] top-[calc(41%+172.08px)] w-[68.66px]"
+        className="absolute h-[82.15px] left-[222px] top-[calc(41%+172.08px)] w-[68.66px] poster-nivel-anos2000"
         data-node-id="304:670"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada14} />
       </div>
       <div
-        className="pointer-events-none absolute h-[55.61px] left-[calc(80%+98px)] top-[calc(43%+218.84px)] w-[45.22px]"
+        className="pointer-events-none absolute h-[55.61px] left-[calc(80%+98px)] top-[calc(43%+218.84px)] w-[45.22px] poster-nivel-consolidacao"
         data-node-id="304:672"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada15} />
       </div>
       <div
-        className="absolute inset-[61.1%_14.86%_38.72%_83.28%]"
+        className="absolute inset-[61.1%_14.86%_38.72%_83.28%] poster-nivel-financiamento"
         data-node-id="304:675"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada13} />
       </div>
       <div
-        className="absolute h-[82.15px] left-[calc(40%+214px)] top-[calc(60%+112.8px)] w-[68.66px]"
+        className="absolute h-[82.15px] left-[calc(40%+214px)] top-[calc(60%+112.8px)] w-[68.66px] poster-nivel-financiamento"
         data-node-id="304:677"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada14} />
       </div>
       <div
-        className="absolute h-[55.61px] left-[calc(20%-7px)] top-[calc(61%+178.68px)] w-[45.22px]"
+        className="absolute h-[55.61px] left-[calc(20%-7px)] top-[calc(61%+178.68px)] w-[45.22px] poster-nivel-financiamento"
         data-node-id="304:679"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada15} />
       </div>
       <div
-        className="absolute inset-[66.37%_62.56%_33.45%_35.57%]"
+        className="absolute inset-[66.37%_62.56%_33.45%_35.57%] poster-nivel-reconhecimento xl:top-[17050.94px] xl:left-[766.06px] xl:right-auto xl:bottom-auto xl:w-[25.13px] xl:h-[32.4px]"
         data-node-id="304:682"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada13} />
       </div>
       <div
-        className="absolute h-[82.15px] left-[calc(20%+223px)] top-[calc(69%+185.72px)] w-[68.66px]"
+        className="absolute h-[82.15px] left-[calc(20%+223px)] top-[calc(69%+185.72px)] w-[68.66px] poster-nivel-reconhecimento [--extra:var(--podio-fileira-desloc)] xl:[--extra:calc(var(--podio-fileira-desloc)+28px*var(--inv,1))] xl:left-[712.9px] xl:w-[48.06px] xl:h-[57.51px]"
         data-node-id="304:684"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada14} />
       </div>
       <div
-        className="absolute h-[136px] left-[calc(40%+339px)] top-[calc(69%+226.72px)] w-[114px]"
+        className="absolute h-[136px] left-[calc(40%+339px)] top-[calc(69%+226.72px)] w-[114px] poster-nivel-reconhecimento [--extra:var(--podio-fileira-desloc)] xl:[--extra:calc(var(--podio-fileira-desloc)+28px*var(--inv,1))] xl:left-[1062.9px] xl:w-[79.8px] xl:h-[95.2px]"
         data-node-id="304:689"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada26} />
       </div>
       <div
-        className="absolute h-[55.61px] left-[calc(60%+226px)] top-[calc(70%+49.6px)] w-[45.22px]"
+        className="absolute h-[55.61px] left-[calc(60%+226px)] top-[calc(70%+49.6px)] w-[45.22px] poster-nivel-reconhecimento [--extra:var(--podio-fileira-desloc)] xl:[--extra:calc(var(--podio-fileira-desloc)+28px*var(--inv,1))] xl:left-[1252.6px] xl:w-[31.65px] xl:h-[38.93px]"
         data-node-id="304:686"
         data-name="Camada_1"
       >
         <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada15} />
       </div>
       <div
-        className="absolute flex h-[507.901px] items-center justify-center left-[calc(60%+45.7px)] top-[calc(32%+104.22px)] w-[433.575px]"
+        className="absolute flex h-[507.901px] items-center justify-center left-[calc(60%+45.7px)] top-[calc(32%+104.22px)] w-[433.575px] poster-nivel-super8 max-md:[--extra:calc(40px*var(--inv,1))]"
         data-node-id="304:692"
       >
         <div className="flex-none rotate-[-19.27deg]">
@@ -2037,6 +2282,7 @@ export function DesignPoster({
             <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada27} />
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
