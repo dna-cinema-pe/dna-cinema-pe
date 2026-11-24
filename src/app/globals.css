@@ -167,7 +167,26 @@ body {
   }
 
   100% {
-    transform: translate3d(0, 720px, 0) rotate(13deg);
+    transform: translate3d(0, var(--queda-poster), 0) rotate(13deg);
+  }
+}
+
+@keyframes holofote-varredura {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  25% {
+    transform: translate3d(-340px, 40px, 0);
+  }
+
+  50% {
+    transform: translate3d(60px, -50px, 0);
+  }
+
+  75% {
+    transform: translate3d(360px, 30px, 0);
   }
 }
 
@@ -245,9 +264,31 @@ body {
   transform-origin: 50% 0%;
 }
 
+/*
+ * Arco de guarda-chuva de frevo (Ciclo do Recife): máscara em leque centrada na base, de onde
+ * saem os gomos. `--abertura-arco` (0° a 95°, vindo da rolagem) é a metade do leque visível,
+ * para cada lado a partir do topo: 0° esconde tudo, 95° mostra o arco inteiro.
+ */
+.arco-frevo {
+  --abertura-arco: 0deg;
+  --mascara-arco: conic-gradient(
+    from calc(-1 * var(--abertura-arco)) at 50% 100%,
+    #000 calc(2 * var(--abertura-arco)),
+    transparent 0
+  );
+  -webkit-mask-image: var(--mascara-arco);
+  mask-image: var(--mascara-arco);
+}
+
+/* Fotos do Ciclo do Recife: mesmo balanço dos postais, mas sem modal (não são clicáveis). */
+.postal-ciclo {
+  transform-origin: 50% 0%;
+}
+
 /* Hover no desktop; no toque, PostalPendurado liga `--balancando` no primeiro toque. */
 .hanging-postcard:hover,
-.hanging-postcard--balancando {
+.hanging-postcard--balancando,
+.postal-ciclo:hover {
   animation: postcard-swing 2.2s ease-in-out infinite;
   will-change: transform;
 }
@@ -257,10 +298,117 @@ body {
   outline-offset: 4px;
 }
 
+/*
+ * Pôster da Consolidação. A queda (720 px) é a mesma variável que posiciona o botão de repor,
+ * na área de pouso reservada no frame: abaixo dela só há postais, nenhum texto. Caído, o
+ * pôster não captura cliques, para os postais sob ele continuarem clicáveis.
+ */
+.falling-poster,
+.falling-poster__repor {
+  --queda-poster: 720px;
+}
+
 .falling-poster--fallen .falling-poster__body {
   animation: poster-fall 1.35s cubic-bezier(0.55, 0.05, 0.8, 0.2) forwards;
+  pointer-events: none;
   transform-origin: 50% 0%;
   will-change: transform;
+}
+
+/* "↺ Pendurar de novo" só aparece depois que a queda termina (classe `--pousado`). */
+.falling-poster__repor {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.falling-poster--pousado + .falling-poster__repor {
+  opacity: 1;
+  visibility: visible;
+}
+
+/*
+ * Super-8, em sequência: (1) cortinas de veludo fechadas, com o holofote varrendo o pano;
+ * (2) o palco chega ao centro da tela e, após a varredura (AnimacoesDoPoster), as cortinas se
+ * recolhem nas laterais, como num teatro, e o holofote para no centro; (3) o título surge.
+ */
+.super8-cortinas {
+  --abertura-cortinas: 2.4s;
+}
+
+/* Bambinela: faixa fixa no topo, que não abre. */
+.super8-cortinas::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 1;
+  height: 70px;
+  background:
+    linear-gradient(to bottom, rgb(0 0 0 / 0.35), transparent),
+    repeating-linear-gradient(90deg, #4a0707 0, #8f1116 14px, #c81d25 24px, #8f1116 34px, #4a0707 48px);
+  box-shadow: 0 12px 24px rgb(0 0 0 / 0.55);
+}
+
+.super8-cortina {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50.5%;
+  background:
+    linear-gradient(to bottom, rgb(0 0 0 / 0.45), transparent 18%, transparent 78%, rgb(0 0 0 / 0.55)),
+    repeating-linear-gradient(90deg, #4a0707 0, #8f1116 22px, #c81d25 38px, #8f1116 54px, #4a0707 76px);
+  box-shadow: 0 0 40px rgb(0 0 0 / 0.6);
+  transition: transform var(--abertura-cortinas) cubic-bezier(0.45, 0, 0.25, 1);
+  will-change: transform;
+}
+
+/* Cada metade se recolhe para a sua borda: as dobras se apertam e ficam como panos laterais. */
+.super8-cortina--esquerda {
+  left: 0;
+  transform-origin: 0% 50%;
+}
+
+.super8-cortina--direita {
+  right: 0;
+  transform-origin: 100% 50%;
+}
+
+.super8-cortinas--abertas .super8-cortina {
+  transform: scaleX(0.13);
+}
+
+/*
+ * Título escondido até as cortinas terminarem de abrir. Empilhamento: cortinas (z-20) < holofote
+ * (z-30, a luz cai sobre o pano) < título (z-40, que só aparece com as cortinas já abertas).
+ */
+.super8-titulo {
+  z-index: 40;
+  opacity: 0;
+  transform: scale(0.8);
+  transition:
+    opacity 0.9s ease-out 2.4s,
+    transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1.25) 2.4s;
+}
+
+.super8-titulo--revelado {
+  opacity: 1;
+  text-shadow: 0 6px 24px rgb(0 0 0 / 0.6);
+  transform: scale(1);
+}
+
+/*
+ * Disco cinza do Figma com borda difusa e brilho somado, como luz de holofote. Varre as cortinas
+ * fechadas; ao abrir, `--parado` corta o loop e a transição o leva de volta ao centro.
+ */
+.super8-holofote {
+  animation: holofote-varredura 6s ease-in-out infinite;
+  filter: blur(18px);
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+.super8-holofote--parado {
+  animation: none;
+  transition: transform 0.9s ease-out;
 }
 
 .plane-flight {
@@ -347,7 +495,28 @@ html[data-animacoes="desligadas"] *::after {
 }
 
 html[data-animacoes="desligadas"] .falling-poster__body {
-  transform: translate3d(0, 720px, 0) rotate(13deg);
+  transform: translate3d(0, var(--queda-poster), 0) rotate(13deg);
+}
+
+/* Sem animações o pôster já fica caído e não há o que repor. */
+html[data-animacoes="desligadas"] .falling-poster__repor {
+  display: none;
+}
+
+/* Sem animações o arco de frevo aparece inteiro, sem depender da rolagem. */
+html[data-animacoes="desligadas"] .arco-frevo {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* Sem animações as cortinas já ficam abertas, o título visível e o holofote, parado no centro. */
+html[data-animacoes="desligadas"] .super8-cortina {
+  transform: scaleX(0.13);
+}
+
+html[data-animacoes="desligadas"] .super8-titulo {
+  opacity: 1;
+  transform: none;
 }
 
 html[data-animacoes="desligadas"] .plane-flight {

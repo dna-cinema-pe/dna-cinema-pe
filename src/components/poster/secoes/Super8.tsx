@@ -27,7 +27,7 @@ export function Super8() {
     <section aria-labelledby="titulo-super-8" className="contents">
       <h2
         id="titulo-super-8"
-        className="-translate-x-1/2 poster-nivel-ciclo-final [word-break:break-word] absolute font-titulo leading-[normal] left-1/2 not-italic text-[120px] text-center text-white top-[calc(24%+24.12px)] whitespace-nowrap"
+        className="super8-titulo -translate-x-1/2 [word-break:break-word] absolute font-titulo leading-[normal] left-1/2 not-italic text-[120px] text-center text-white top-[calc(24%+24.12px)] whitespace-nowrap poster-nivel-ciclo-final"
         data-node-id="149:9"
       >
         {titulo}
