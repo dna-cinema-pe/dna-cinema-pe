@@ -522,3 +522,197 @@ html[data-animacoes="desligadas"] .super8-titulo {
 html[data-animacoes="desligadas"] .plane-flight {
   offset-distance: 100%;
 }
+
+/*
+ * Espaço extra no pôster (US-4.1), quase todo abaixo de 1280 px; no desktop, só o do pódio
+ * (`--espaco-podio`), e os outros espaços valem 0. O grupo `.poster-deslocar` não tem caixa
+ * (`display: contents`): uma caixa do tamanho do pôster viraria uma camada gigante na memória e
+ * derruba o Safari do iPhone. Em vez disso, cada elemento do grupo desce `--deslocar` com
+ * margem: `margin-top: D` e `margin-bottom: -D` movem uma caixa absoluta D px para baixo sem
+ * mudar a altura (inclusive com `inset-[…%]`) e sem criar camadas.
+ *
+ * A regra vale para o primeiro elemento com caixa a partir do grupo, atravessando os que têm a
+ * classe `contents` (seções e grupos do Figma). As posições em % continuam calculadas sobre o
+ * frame de 25712 px, então nada estica nem muda de proporção.
+ */
+.poster-deslocar {
+  display: contents;
+}
+
+.poster-deslocar > :not(.contents),
+.poster-deslocar > .contents > :not(.contents),
+.poster-deslocar > .contents > .contents > :not(.contents),
+.poster-deslocar > .contents > .contents > .contents > :not(.contents) {
+  margin-top: calc(var(--deslocar, 0px) + var(--extra, 0px));
+  margin-bottom: calc(-1 * (var(--deslocar, 0px) + var(--extra, 0px)));
+}
+
+/*
+ * `--extra`: quanto um elemento desce além do nível dele (o parágrafo do Financiamento que abre
+ * espaço para o anterior, o varal dos cartões da Retomada, a fileira do pódio…). Também por margem,
+ * e não por `translate`: no Safari do iPhone, cada elemento com `translate` pode virar uma camada
+ * separada desenhada em resolução cheia, e a soma derrubava a página.
+ */
+
+/*
+ * Colunas que só têm caixa no celular (`md:contents`, como as da Conclusão e dos Créditos): a
+ * partir de 768 px elas viram `contents`, mas não têm a classe `contents`, então a regra acima
+ * desceria a coluna (sem efeito), e não os filhos. Aqui os filhos descem no lugar dela.
+ */
+@media (width >= 48rem) {
+  .poster-coluna-md > :not(.contents) {
+    margin-top: calc(var(--deslocar, 0px) + var(--extra, 0px));
+    margin-bottom: calc(-1 * (var(--deslocar, 0px) + var(--extra, 0px)));
+  }
+}
+
+/*
+ * Níveis de `.poster-deslocar` (US-4.1). O grupo desce a soma de todos os espaços, e um elemento que
+ * fica acima de um dos pontos em que o pôster abre espaço declara até qual espaço ele desce. Cada
+ * espaço vem do PosterViewport:
+ * - `--espaco-abertura`: depois do subtítulo da Abertura;
+ * - `--espaco-contexto`: depois da primeira linha de parágrafos do Contexto (o varal desce);
+ * - `--espaco-ciclo`: depois da segunda linha do Contexto (o Ciclo do Recife desce);
+ * - `--espaco-ciclo-texto`: depois dos parágrafos do Ciclo (o varal com as fotos desce);
+ * - `--espaco-ciclo-final`: depois do texto abaixo das fotos do Ciclo (a ponte e o resto descem);
+ * - `--espaco-super8-legenda`: depois da legenda do Super-8 (os parágrafos descem);
+ * - `--espaco-super8`: depois dos parágrafos do Super-8 (os caranguejos e o resto descem);
+ * - `--espaco-retomada`: depois dos cartões da Retomada e Manguebeat (o Anos 2000 e o que vem
+ *   depois descem);
+ * - `--espaco-anos2000`: depois dos parágrafos do Anos 2000 (a Consolidação e o resto descem);
+ * - `--espaco-consolidacao`: depois dos parágrafos da Consolidação (os varais e o resto descem);
+ * - `--espaco-financiamento`: depois dos parágrafos e gráficos do Financiamento (a rota do
+ *   Reconhecimento Internacional e o resto descem);
+ * - `--espaco-reconhecimento`: depois dos parágrafos do Reconhecimento Internacional (o pódio e o
+ *   resto descem);
+ * - `--espaco-podio`: depois da fileira de filmes do pódio (o Recorte de Gênero e Raça e o resto
+ *   descem);
+ * - `--espaco-recorte`: depois do texto e dos gráficos do Recorte (a Conclusão e o resto descem ou
+ *   sobem);
+ * - `--espaco-conclusao`: depois dos parágrafos da Conclusão (o fim da jornada, os Créditos e o
+ *   resto descem);
+ * - `--espaco-creditos`: depois dos Créditos (a bandeira e o rodapé descem).
+ *
+ * Do pódio em diante, o PosterViewport expõe as somas acumuladas (`--ate-podio`, `--ate-recorte`,
+ * `--ate-conclusao`), e os níveis usam essas somas.
+ */
+.poster-nivel-abertura {
+  --deslocar: var(--espaco-abertura, 0px);
+}
+
+.poster-nivel-contexto {
+  --deslocar: calc(var(--espaco-abertura, 0px) + var(--espaco-contexto, 0px));
+}
+
+.poster-nivel-ciclo {
+  --deslocar: calc(var(--espaco-abertura, 0px) + var(--espaco-contexto, 0px) + var(--espaco-ciclo, 0px));
+}
+
+.poster-nivel-ciclo-texto {
+  --deslocar: calc(
+    var(--espaco-abertura, 0px) + var(--espaco-contexto, 0px) + var(--espaco-ciclo, 0px) +
+      var(--espaco-ciclo-texto, 0px)
+  );
+}
+
+.poster-nivel-ciclo-final {
+  --deslocar: calc(
+    var(--espaco-abertura, 0px) + var(--espaco-contexto, 0px) + var(--espaco-ciclo, 0px) +
+      var(--espaco-ciclo-texto, 0px) + var(--espaco-ciclo-final, 0px)
+  );
+}
+
+.poster-nivel-super8-legenda {
+  --deslocar: calc(
+    var(--espaco-abertura, 0px) + var(--espaco-contexto, 0px) + var(--espaco-ciclo, 0px) +
+      var(--espaco-ciclo-texto, 0px) + var(--espaco-ciclo-final, 0px) + var(--espaco-super8-legenda, 0px)
+  );
+}
+
+.poster-nivel-super8 {
+  --deslocar: calc(
+    var(--espaco-abertura, 0px) + var(--espaco-contexto, 0px) + var(--espaco-ciclo, 0px) +
+      var(--espaco-ciclo-texto, 0px) + var(--espaco-ciclo-final, 0px) + var(--espaco-super8-legenda, 0px) +
+      var(--espaco-super8, 0px)
+  );
+}
+
+.poster-nivel-retomada {
+  --deslocar: calc(
+    var(--espaco-abertura, 0px) + var(--espaco-contexto, 0px) + var(--espaco-ciclo, 0px) +
+      var(--espaco-ciclo-texto, 0px) + var(--espaco-ciclo-final, 0px) + var(--espaco-super8-legenda, 0px) +
+      var(--espaco-super8, 0px) + var(--espaco-retomada, 0px)
+  );
+}
+
+.poster-nivel-anos2000 {
+  --deslocar: calc(
+    var(--espaco-abertura, 0px) + var(--espaco-contexto, 0px) + var(--espaco-ciclo, 0px) +
+      var(--espaco-ciclo-texto, 0px) + var(--espaco-ciclo-final, 0px) + var(--espaco-super8-legenda, 0px) +
+      var(--espaco-super8, 0px) + var(--espaco-retomada, 0px) + var(--espaco-anos2000, 0px)
+  );
+}
+
+.poster-nivel-consolidacao {
+  --deslocar: calc(
+    var(--espaco-abertura, 0px) + var(--espaco-contexto, 0px) + var(--espaco-ciclo, 0px) +
+      var(--espaco-ciclo-texto, 0px) + var(--espaco-ciclo-final, 0px) + var(--espaco-super8-legenda, 0px) +
+      var(--espaco-super8, 0px) + var(--espaco-retomada, 0px) + var(--espaco-anos2000, 0px) +
+      var(--espaco-consolidacao, 0px)
+  );
+}
+
+.poster-nivel-financiamento {
+  --deslocar: calc(
+    var(--espaco-abertura, 0px) + var(--espaco-contexto, 0px) + var(--espaco-ciclo, 0px) +
+      var(--espaco-ciclo-texto, 0px) + var(--espaco-ciclo-final, 0px) + var(--espaco-super8-legenda, 0px) +
+      var(--espaco-super8, 0px) + var(--espaco-retomada, 0px) + var(--espaco-anos2000, 0px) +
+      var(--espaco-consolidacao, 0px) + var(--espaco-financiamento, 0px)
+  );
+}
+
+.poster-nivel-reconhecimento {
+  --deslocar: calc(
+    var(--espaco-abertura, 0px) + var(--espaco-contexto, 0px) + var(--espaco-ciclo, 0px) +
+      var(--espaco-ciclo-texto, 0px) + var(--espaco-ciclo-final, 0px) + var(--espaco-super8-legenda, 0px) +
+      var(--espaco-super8, 0px) + var(--espaco-retomada, 0px) + var(--espaco-anos2000, 0px) +
+      var(--espaco-consolidacao, 0px) + var(--espaco-financiamento, 0px) + var(--espaco-reconhecimento, 0px)
+  );
+}
+
+.poster-nivel-podio {
+  --deslocar: var(--ate-podio, 0px);
+}
+
+/* Parágrafos do Recorte e os gráficos ao lado deles: cada um desce também `--rec-desloc-N`. */
+.poster-recorte-1 {
+  --deslocar: calc(var(--ate-podio, 0px) + var(--rec-desloc-1, 0px));
+}
+.poster-recorte-2 {
+  --deslocar: calc(var(--ate-podio, 0px) + var(--rec-desloc-2, 0px));
+}
+.poster-recorte-3 {
+  --deslocar: calc(var(--ate-podio, 0px) + var(--rec-desloc-3, 0px));
+}
+.poster-recorte-4 {
+  --deslocar: calc(var(--ate-podio, 0px) + var(--rec-desloc-4, 0px));
+}
+.poster-recorte-5 {
+  --deslocar: calc(var(--ate-podio, 0px) + var(--rec-desloc-5, 0px));
+}
+.poster-recorte-6 {
+  --deslocar: calc(var(--ate-podio, 0px) + var(--rec-desloc-6, 0px));
+}
+
+.poster-nivel-recorte {
+  --deslocar: var(--ate-recorte, 0px);
+}
+
+.poster-nivel-conclusao {
+  --deslocar: var(--ate-conclusao, 0px);
+}
+
+/* Créditos: descem também o espaço aberto depois do fim da jornada (`--espaco-jornada`, celular). */
+.poster-nivel-jornada {
+  --deslocar: var(--ate-jornada, 0px);
+}
