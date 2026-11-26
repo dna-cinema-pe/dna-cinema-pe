@@ -237,7 +237,13 @@ export function Abertura() {
             data-node-id="46:18"
             data-name="Vector"
           >
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector10} />
+            {/* Maior elemento da primeira tela (o LCP): baixa antes dos outros desenhos (US-4.3). */}
+            <img
+              alt=""
+              fetchPriority="high"
+              className="absolute block inset-0 max-w-none size-full"
+              src={imgVector10}
+            />
           </div>
           <div
             className="absolute inset-[94.57%_1.02%_5.38%_98.98%]"

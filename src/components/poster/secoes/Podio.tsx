@@ -36,6 +36,8 @@ function PosterDoPodio({
     <div className={`absolute overflow-hidden bg-[#8c8888] ${className}`}>
       {filme?.poster && (
         <img
+          loading="lazy"
+          decoding="async"
           src={filme.poster}
           alt={filme.alt ?? `Pôster de ${filme.titulo}`}
           className="size-full object-cover"

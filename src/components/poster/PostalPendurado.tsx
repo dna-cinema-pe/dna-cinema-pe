@@ -142,6 +142,8 @@ function ModalDoFilme({ filme, aoFechar }: { filme: FilmeDoPostal; aoFechar: () 
           ×
         </button>
         <img
+          loading="lazy"
+          decoding="async"
           src={filme.poster}
           alt={filme.posterAlt}
           className="mx-auto w-48 shrink-0 self-start rounded-md object-cover shadow-lg sm:w-56"

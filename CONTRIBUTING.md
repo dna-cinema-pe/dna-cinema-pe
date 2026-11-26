@@ -47,6 +47,8 @@ Como o merge em `develop` é por squash, **o título do PR vira a mensagem do co
 ## Antes do pull request
 
 - Rode `npm run lint`, `npx prisma validate` e `npm run build`. São as mesmas verificações do `CI`.
+- Rode também `npm run verificar:assets` (PNG/JPG em `public/` e URLs de assets do Figma), que ainda não está no `CI`.
+- Imagens novas em `public/`: rode `npm run otimizar:assets` (converte PNG/JPG para WebP e otimiza SVGs) e troque a extensão nas referências. Não use URLs de assets do Figma; baixe o arquivo para `public/` (ver [0006](docs/decisions/0006-desempenho-e-assets.md)).
 - Use o modelo de pull request em `.github/pull_request_template.md`.
 - Não envie `.env`, `node_modules` ou `.next` para o repositório.
 

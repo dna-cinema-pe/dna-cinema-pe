@@ -55,8 +55,8 @@ function BarraDeProgresso({ aoNavegar }: ListaProps) {
     >
       <div className="relative h-[3px] w-full bg-white/10">
         <div
-          className="h-full bg-vermelho transition-[width] duration-150"
-          style={{ width: `${progresso}%` }}
+          className="h-full w-full origin-left bg-vermelho transition-transform duration-150"
+          style={{ transform: `scaleX(${progresso / 100})` }}
         />
         {CAPITULOS.slice(1).map((capitulo) => {
           const posicao = percentuaisCapitulos[capitulo.id] ?? 0;

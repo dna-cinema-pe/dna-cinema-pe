@@ -9,16 +9,16 @@ interface DefinicaoIlustracao {
  * ao receber um asset, basta preencher `src` aqui (ex.: "/ilustracoes/sol.svg").
  */
 export const ILUSTRACOES = {
-  sol: { rotulo: "sol", src: "/ilustracoes/sol.png" },
-  passaroOuro: { rotulo: "pássaro dourado", src: "/ilustracoes/passaroOuro.png" },
-  passaroFerrugem: { rotulo: "pássaro ferrugem", src: "/ilustracoes/passaroFerrugem.png" },
-  bandeirinhas: { rotulo: "bandeirinhas", src: "/ilustracoes/bandeirinhas.png" },
-  manchaEsquerda: { rotulo: "mancha ferrugem esquerda", src: "/ilustracoes/manchaEsquerda.png" },
-  manchaDireita: { rotulo: "mancha ferrugem direita", src: "/ilustracoes/manchaDireita.png" },
-  estrela: { rotulo: "estrela", src: "/ilustracoes/estrela.png" },
-  cruz: { rotulo: "cruz", src: "/ilustracoes/cruz.png" },
-  ponteRecife: { rotulo: "ponte do Recife", src: "/ilustracoes/ponteRecife.png" },
-  veleiro: { rotulo: "veleiro", src: "/ilustracoes/veleiro.png" },
+  sol: { rotulo: "sol", src: "/ilustracoes/sol.webp" },
+  passaroOuro: { rotulo: "pássaro dourado", src: "/ilustracoes/passaroOuro.webp" },
+  passaroFerrugem: { rotulo: "pássaro ferrugem", src: "/ilustracoes/passaroFerrugem.webp" },
+  bandeirinhas: { rotulo: "bandeirinhas", src: "/ilustracoes/bandeirinhas.webp" },
+  manchaEsquerda: { rotulo: "mancha ferrugem esquerda", src: "/ilustracoes/manchaEsquerda.webp" },
+  manchaDireita: { rotulo: "mancha ferrugem direita", src: "/ilustracoes/manchaDireita.webp" },
+  estrela: { rotulo: "estrela", src: "/ilustracoes/estrela.webp" },
+  cruz: { rotulo: "cruz", src: "/ilustracoes/cruz.webp" },
+  ponteRecife: { rotulo: "ponte do Recife", src: "/ilustracoes/ponteRecife.webp" },
+  veleiro: { rotulo: "veleiro", src: "/ilustracoes/veleiro.webp" },
   guardaChuvaFrevo: { rotulo: "guarda-chuva de frevo" },
   caranguejo: { rotulo: "caranguejo" },
   ilhaPalmeiras: { rotulo: "ilha com palmeiras" },
@@ -29,7 +29,7 @@ export const ILUSTRACOES = {
   aviao: { rotulo: "avião" },
   setaCurva: { rotulo: "seta curva" },
   postal: { rotulo: "postal" },
-  fiosPostal: { rotulo: "fios do postal", src: "/ilustracoes/fiosPostal.png" },
+  fiosPostal: { rotulo: "fios do postal", src: "/ilustracoes/fiosPostal.webp" },
 } as const satisfies Record<string, DefinicaoIlustracao>;
 
 export type IdIlustracao = keyof typeof ILUSTRACOES;

@@ -30,7 +30,7 @@ import { PostalPendurado } from "./PostalPendurado.tsx";
  * Os grupos não têm caixa (`display: contents`), para não virarem camadas do tamanho do pôster
  * na memória (isso derrubava o Safari do iPhone).
  */
-const DESLOCADO = "poster-deslocar [--deslocar:var(--espaco-abertura,0px)]";
+const DESLOCADO = "poster-deslocar poster-deslocar--abertura [--deslocar:var(--espaco-abertura,0px)]";
 
 /**
  * Igual a DESLOCADO, mas desce a soma de todos os espaços que o pôster abre abaixo de 1280 px
@@ -131,24 +131,24 @@ const GRAFICO_LEGENDA = "flex items-center justify-end gap-[calc(6px*var(--inv,1
 const GRAFICO_COR = "size-[calc(10px*var(--inv,1))] shrink-0";
 
 const assetPathPrefix = "/poster";
-const imgImage2 = `${assetPathPrefix}/6cfd1.png`;
-const imgImage1 = `${assetPathPrefix}/4f3e8.png`;
-const imgImage15 = `${assetPathPrefix}/a239c.png`;
-const imgRectangle15 = `${assetPathPrefix}/bb5e0.png`;
-const imgRectangle16 = `${assetPathPrefix}/1764f.png`;
-const imgRectangle17 = `${assetPathPrefix}/51870.png`;
-const imgRectangle19 = `${assetPathPrefix}/a6ff2.png`;
-const imgRectangle25 = `${assetPathPrefix}/cfa07.png`;
+const imgImage2 = `${assetPathPrefix}/6cfd1.webp`;
+const imgImage1 = `${assetPathPrefix}/4f3e8.webp`;
+const imgImage15 = `${assetPathPrefix}/a239c.webp`;
+const imgRectangle15 = `${assetPathPrefix}/bb5e0.webp`;
+const imgRectangle16 = `${assetPathPrefix}/1764f.webp`;
+const imgRectangle17 = `${assetPathPrefix}/51870.webp`;
+const imgRectangle19 = `${assetPathPrefix}/a6ff2.webp`;
+const imgRectangle25 = `${assetPathPrefix}/cfa07.webp`;
 // 04a8f e 50445: versões reduzidas (US-4.1). Os originais (2475 × 1443 e 1920 × 2560 px) aparecem
 // com no máximo ~400 px do frame e, decodificados, pesavam ~34 MB no iPhone; as cópias têm o dobro
 // do tamanho exibido no desktop.
-const imgRectangle27 = `${assetPathPrefix}/04a8f-reduzida.png`;
-const imgRectangle26 = `${assetPathPrefix}/14c87.png`;
-const imgRectangle21 = `${assetPathPrefix}/7dabb.png`;
-const imgRectangle22 = `${assetPathPrefix}/1124d.png`;
-const imgRectangle23 = `${assetPathPrefix}/50445-reduzida.png`;
-const imgRectangle24 = `${assetPathPrefix}/f00b8.png`;
-const imgChatGptImage25DeSetDe20261458301 = `${assetPathPrefix}/0e24a.png`;
+const imgRectangle27 = `${assetPathPrefix}/04a8f-reduzida.webp`;
+const imgRectangle26 = `${assetPathPrefix}/14c87.webp`;
+const imgRectangle21 = `${assetPathPrefix}/7dabb.webp`;
+const imgRectangle22 = `${assetPathPrefix}/1124d.webp`;
+const imgRectangle23 = `${assetPathPrefix}/50445-reduzida.webp`;
+const imgRectangle24 = `${assetPathPrefix}/f00b8.webp`;
+const imgChatGptImage25DeSetDe20261458301 = `${assetPathPrefix}/0e24a.webp`;
 const imgCamada1 = `${assetPathPrefix}/052eb.svg`;
 const imgCamada2 = `${assetPathPrefix}/0a233.svg`;
 const imgCamada3 = `${assetPathPrefix}/a1863.svg`;
@@ -199,9 +199,9 @@ const imgGroup9 = `${assetPathPrefix}/6e384.svg`;
 const imgGroup32 = `${assetPathPrefix}/88159.svg`;
 const imgVector53 = `${assetPathPrefix}/a19ac.svg`;
 const imgArcoCiclo = `${assetPathPrefix}/90d88.svg`;
-const imgCicloRecife1 = `${assetPathPrefix}/ciclo-recife-1.png`;
-const imgCicloRecife2 = `${assetPathPrefix}/ciclo-recife-2.png`;
-const imgCicloRecife3 = `${assetPathPrefix}/ciclo-recife-3.png`;
+const imgCicloRecife1 = `${assetPathPrefix}/ciclo-recife-1.webp`;
+const imgCicloRecife2 = `${assetPathPrefix}/ciclo-recife-2.webp`;
+const imgCicloRecife3 = `${assetPathPrefix}/ciclo-recife-3.webp`;
 const imgEllipse2 = `${assetPathPrefix}/ea310.svg`;
 const imgGroup14 = `${assetPathPrefix}/5f164.svg`;
 const imgGroup15 = `${assetPathPrefix}/b0c58.svg`;
@@ -322,7 +322,7 @@ export function DesignPoster({
       >
         <div className="flex-none rotate-[17.69deg]">
           <div className="h-[361px] relative w-[352px]" data-name="Camada_1">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada1} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada1} />
           </div>
         </div>
       </div>
@@ -332,7 +332,7 @@ export function DesignPoster({
       >
         <div className="flex-none rotate-[8.43deg]">
           <div className="h-[241.845px] relative w-[155.656px]" data-name="Camada_1">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada2} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada2} />
           </div>
         </div>
       </div>
@@ -341,21 +341,21 @@ export function DesignPoster({
         data-node-id="283:117"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada3} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada3} />
       </div>
       <div
         className="cloud-float cloud-float--slow absolute inset-[12.99%_76.56%_86.46%_4.27%] poster-nivel-ciclo"
         data-node-id="288:144"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada3} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada3} />
       </div>
       <div
         className="cloud-float cloud-float--reverse absolute inset-[13.76%_4.86%_85.73%_71.46%] poster-nivel-ciclo"
         data-node-id="288:147"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada4} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada4} />
       </div>
       <div
         className="absolute h-[1576px] left-[70px] overflow-clip top-[calc(93%+153.84px)] w-[1780px]"
@@ -367,7 +367,7 @@ export function DesignPoster({
           data-name="bandeira"
         >
           <div className="absolute inset-[0_-1.49%]">
-            <img alt="" className="block max-w-none size-full" src={imgBandeira} />
+            <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={imgBandeira} />
           </div>
         </div>
       </div>
@@ -382,6 +382,8 @@ export function DesignPoster({
         data-name="image 2"
       >
         <img
+          loading="lazy"
+          decoding="async"
           alt=""
           className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
           src={imgImage2}
@@ -393,6 +395,8 @@ export function DesignPoster({
         data-name="image 3"
       >
         <img
+          loading="lazy"
+          decoding="async"
           alt=""
           className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
           src={imgImage2}
@@ -405,14 +409,14 @@ export function DesignPoster({
         data-node-id="46:291"
         data-name="Vector"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector14} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector14} />
       </div>
       <div
         className="absolute inset-[5.98%_88.85%_93.99%_7.71%]"
         data-node-id="46:297"
         data-name="Vector"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector15} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector15} />
       </div>
       <div
         className="absolute contents left-[calc(60%+77px)] top-[calc(5%+139.28px)]"
@@ -423,14 +427,14 @@ export function DesignPoster({
           data-node-id="46:207"
           data-name="Vector"
         >
-          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector16} />
+          <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector16} />
         </div>
         <div
           className="absolute inset-[6.47%_7.55%_93.48%_88.75%]"
           data-node-id="46:293"
           data-name="Vector"
         >
-          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector17} />
+          <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector17} />
         </div>
         <div
           className="absolute contents left-[calc(60%+77px)] top-[calc(5%+139.28px)]"
@@ -447,6 +451,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector18}
@@ -458,6 +464,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector19}
@@ -469,6 +477,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector20}
@@ -480,6 +490,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector21}
@@ -491,6 +503,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector22}
@@ -502,6 +516,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector23}
@@ -513,6 +529,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector24}
@@ -524,6 +542,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector25}
@@ -535,6 +555,8 @@ export function DesignPoster({
               data-name="image 1"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
                 src={imgImage1}
@@ -552,6 +574,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector18}
@@ -563,6 +587,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector19}
@@ -574,6 +600,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector20}
@@ -585,6 +613,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector21}
@@ -596,6 +626,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector22}
@@ -607,6 +639,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector23}
@@ -618,6 +652,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector24}
@@ -629,6 +665,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector25}
@@ -640,6 +678,8 @@ export function DesignPoster({
               data-name="image 1"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
                 src={imgImage1}
@@ -661,6 +701,8 @@ export function DesignPoster({
                 data-name="Vector"
               >
                 <img
+                  loading="lazy"
+                  decoding="async"
                   alt=""
                   className="absolute block inset-0 max-w-none size-full"
                   src={imgVector26}
@@ -672,6 +714,8 @@ export function DesignPoster({
                 data-name="Vector"
               >
                 <img
+                  loading="lazy"
+                  decoding="async"
                   alt=""
                   className="absolute block inset-0 max-w-none size-full"
                   src={imgVector27}
@@ -683,6 +727,8 @@ export function DesignPoster({
                 data-name="Vector"
               >
                 <img
+                  loading="lazy"
+                  decoding="async"
                   alt=""
                   className="absolute block inset-0 max-w-none size-full"
                   src={imgVector28}
@@ -694,6 +740,8 @@ export function DesignPoster({
                 data-name="Vector"
               >
                 <img
+                  loading="lazy"
+                  decoding="async"
                   alt=""
                   className="absolute block inset-0 max-w-none size-full"
                   src={imgVector29}
@@ -705,6 +753,8 @@ export function DesignPoster({
                 data-name="Vector"
               >
                 <img
+                  loading="lazy"
+                  decoding="async"
                   alt=""
                   className="absolute block inset-0 max-w-none size-full"
                   src={imgVector30}
@@ -716,6 +766,8 @@ export function DesignPoster({
                 data-name="Vector"
               >
                 <img
+                  loading="lazy"
+                  decoding="async"
                   alt=""
                   className="absolute block inset-0 max-w-none size-full"
                   src={imgVector31}
@@ -727,6 +779,8 @@ export function DesignPoster({
                 data-name="Vector"
               >
                 <img
+                  loading="lazy"
+                  decoding="async"
                   alt=""
                   className="absolute block inset-0 max-w-none size-full"
                   src={imgVector32}
@@ -738,6 +792,8 @@ export function DesignPoster({
                 data-name="Vector"
               >
                 <img
+                  loading="lazy"
+                  decoding="async"
                   alt=""
                   className="absolute block inset-0 max-w-none size-full"
                   src={imgVector33}
@@ -749,6 +805,8 @@ export function DesignPoster({
                 data-name="image 1"
               >
                 <img
+                  loading="lazy"
+                  decoding="async"
                   alt=""
                   className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
                   src={imgImage1}
@@ -761,6 +819,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector34}
@@ -772,6 +832,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector35}
@@ -783,6 +845,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector36}
@@ -794,6 +858,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector37}
@@ -805,6 +871,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector38}
@@ -816,6 +884,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector39}
@@ -827,6 +897,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector40}
@@ -838,6 +910,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector41}
@@ -849,6 +923,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector42}
@@ -860,6 +936,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector43}
@@ -871,6 +949,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector44}
@@ -882,6 +962,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector45}
@@ -893,6 +975,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector46}
@@ -904,6 +988,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector47}
@@ -915,6 +1001,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector48}
@@ -926,6 +1014,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector49}
@@ -937,6 +1027,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector50}
@@ -948,6 +1040,8 @@ export function DesignPoster({
               data-name="Vector"
             >
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute block inset-0 max-w-none size-full"
                 src={imgVector51}
@@ -968,6 +1062,8 @@ export function DesignPoster({
         >
           <div className="flex-none rotate-[9.49deg]">
             <img
+              loading="lazy"
+              decoding="async"
               alt="Ponte sobre o rio Capibaribe no Recife, em cena dos anos 1920"
               className="h-[350px] object-cover relative w-[571.677px]"
               src={imgCicloRecife1}
@@ -984,6 +1080,8 @@ export function DesignPoster({
         >
           <div className="flex-none rotate-[14.59deg]">
             <img
+              loading="lazy"
+              decoding="async"
               alt="Público em frente a um cinema do Recife com cartazes de filmes"
               className="h-[350px] object-cover relative w-[569.769px]"
               src={imgCicloRecife2}
@@ -1000,6 +1098,8 @@ export function DesignPoster({
         >
           <div className="flex-none rotate-[25.46deg]">
             <img
+              loading="lazy"
+              decoding="async"
               alt="Ator em cena de filme do Ciclo do Recife"
               className="h-[350px] object-cover relative w-[542.991px]"
               src={imgCicloRecife3}
@@ -1012,7 +1112,7 @@ export function DesignPoster({
         data-node-id="129:2"
       >
         <div className="absolute inset-[-0.47%_0_-0.63%_-0.15%]">
-          <img alt="" className="block max-w-none size-full" src={imgVector52} />
+          <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={imgVector52} />
         </div>
       </div>
       <div
@@ -1043,7 +1143,7 @@ export function DesignPoster({
         <p className="leading-[normal] max-xl:inline">sobre as suas condições?</p>
       </div>
       <div className="absolute inset-[29.33%_1.21%_64.46%_95.73%] poster-nivel-super8" data-node-id="46:340">
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup9} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup9} />
       </div>
       <div
         className="pointer-events-none absolute flex inset-[18.57%_13.67%_80.72%_78.91%] items-center justify-center poster-nivel-ciclo-texto"
@@ -1052,12 +1152,12 @@ export function DesignPoster({
       >
         <div className="flex-none h-[hypot(-52.0135cqw,81.064cqh)] rotate-[26.71deg] w-[hypot(47.9865cqw,18.936cqh)]">
           <div className="relative size-full">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup32} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup32} />
           </div>
         </div>
       </div>
       <div className="absolute inset-[29.33%_1.21%_64.46%_95.73%] poster-nivel-super8" data-node-id="163:94">
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup9} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup9} />
       </div>
       <div
         className="absolute h-[959px] left-[122px] top-[calc(22%+94.36px)] w-[1678px] poster-nivel-ciclo-final"
@@ -1065,6 +1165,8 @@ export function DesignPoster({
         data-name="image 15"
       >
         <img
+          loading="lazy"
+          decoding="async"
           alt=""
           className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
           src={imgImage15}
@@ -1075,7 +1177,7 @@ export function DesignPoster({
         data-node-id="61:18"
       >
         <div className="absolute inset-[-0.9%_-0.17%]">
-          <img alt="" className="block max-w-none size-full" src={imgVector53} />
+          <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={imgVector53} />
         </div>
       </div>
       {/*
@@ -1098,22 +1200,27 @@ export function DesignPoster({
         data-node-id="288:159"
         data-name="ARCO CICLO"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgArcoCiclo} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgArcoCiclo} />
       </div>
       <div
         className="-translate-x-1/2 absolute z-30 h-[916px] left-1/2 top-[calc(22%+138.36px)] w-[940px] poster-nivel-ciclo-final"
         data-node-id="149:10"
       >
         <img
+          loading="lazy"
+          decoding="async"
           alt=""
           className="super8-holofote absolute block inset-0 max-w-none size-full"
           src={imgEllipse2}
         />
       </div>
-      {/* Cortinas do Super-8: cobrem o palco (mesma caixa da "image 15") até abrirem. */}
+      {/*
+        Cortinas do Super-8: cobrem o palco (mesma caixa da "image 15") até abrirem. Têm o mesmo
+        nível do palco (`poster-nivel-ciclo-final`) para descerem junto com ele abaixo de 1280 px.
+      */}
       <div
         aria-hidden="true"
-        className="super8-cortinas pointer-events-none absolute z-20 h-[959px] left-[122px] overflow-hidden top-[calc(22%+94.36px)] w-[1678px]"
+        className="super8-cortinas pointer-events-none absolute z-20 h-[959px] left-[122px] overflow-hidden top-[calc(22%+94.36px)] w-[1678px] poster-nivel-ciclo-final"
       >
         <div className="super8-cortina super8-cortina--esquerda" />
         <div className="super8-cortina super8-cortina--direita" />
@@ -1140,7 +1247,7 @@ export function DesignPoster({
           <div className="flex-none rotate-[3.94deg] max-md:rotate-[1.5deg]">
             <div className="bg-[#d9d9d9] h-[747.369px] relative w-[526.736px] max-md:h-auto max-md:min-h-[747.369px] max-md:px-[25px] max-md:pt-[33px] max-md:pb-[40px]">
               <div className={CARTAO_FOTO_CELULAR}>
-                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgRectangle16} />
+                <img loading="lazy" decoding="async" alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgRectangle16} />
               </div>
               <p className={CARTAO_TEXTO_CELULAR}>{TEXTO_VALENTE}</p>
             </div>
@@ -1153,6 +1260,8 @@ export function DesignPoster({
           <div className="flex-none rotate-[3.94deg]">
             <div className="h-[399px] relative w-[460px]">
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
                 src={imgRectangle16}
@@ -1183,6 +1292,8 @@ export function DesignPoster({
           <div aria-hidden className="absolute inset-0 pointer-events-none">
             <div className="absolute bg-[#a8a8a8] inset-0" />
             <img
+              loading="lazy"
+              decoding="async"
               alt=""
               className="absolute max-w-none object-cover size-full"
               src={imgRectangle15}
@@ -1209,7 +1320,7 @@ export function DesignPoster({
           <div className="flex-none rotate-[-7.25deg] max-md:rotate-[-1.5deg]">
             <div className="bg-white h-[747.369px] relative w-[526.736px] max-md:h-auto max-md:min-h-[747.369px] max-md:px-[25px] max-md:pt-[33px] max-md:pb-[40px]">
               <div className={CARTAO_FOTO_CELULAR}>
-                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgRectangle17} />
+                <img loading="lazy" decoding="async" alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgRectangle17} />
               </div>
               {/* 23 px a mais de cada lado: o texto deste cartão é mais estreito (431 px no Figma). */}
               <p className={`${CARTAO_TEXTO_CELULAR} px-[23px]`}>{TEXTO_RAP}</p>
@@ -1223,6 +1334,8 @@ export function DesignPoster({
           <div className="flex-none rotate-[-7.25deg]">
             <div className="h-[403px] relative w-[461.756px]">
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
                 src={imgRectangle17}
@@ -1264,6 +1377,8 @@ export function DesignPoster({
         <div className="flex-none rotate-[1.28deg]">
           <div className="h-[308.221px] relative w-[260.803px]">
             <img
+              loading="lazy"
+              decoding="async"
               alt=""
               className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
               src={imgRectangle19}
@@ -1279,6 +1394,8 @@ export function DesignPoster({
         <div className="flex-none rotate-[11.02deg]">
           <div className="h-[455px] relative w-[385px]">
             <img
+              loading="lazy"
+              decoding="async"
               alt=""
               className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
               src={imgRectangle25}
@@ -1294,6 +1411,8 @@ export function DesignPoster({
         <div className="flex-none rotate-[-1.83deg]">
           <div className="h-[455px] relative w-[385px]">
             <img
+              loading="lazy"
+              decoding="async"
               alt=""
               className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
               src={imgRectangle27}
@@ -1309,6 +1428,8 @@ export function DesignPoster({
         <div className="flex-none rotate-[11.22deg]">
           <div className="h-[455px] relative w-[385px]">
             <img
+              loading="lazy"
+              decoding="async"
               alt=""
               className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
               src={imgRectangle26}
@@ -1323,12 +1444,12 @@ export function DesignPoster({
       >
         <div className="-scale-x-100 flex-none h-[100cqh] w-[100cqw]">
           <div className="relative size-full">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup14} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup14} />
           </div>
         </div>
       </div>
       <div className="absolute inset-[47.95%_95.38%_21.06%_1.25%] poster-nivel-consolidacao bottom-[calc(21.06%-var(--espaco-financiamento,0px)-var(--espaco-reconhecimento,0px)-var(--espaco-podio,0px))]" data-node-id="162:74">
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup15} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup15} />
       </div>
       <div
         className="absolute flex inset-[35.53%_1.21%_52.07%_95.47%] items-center justify-center poster-nivel-super8 max-xl:bottom-[calc(52.07%-var(--espaco-retomada,0px)-var(--espaco-anos2000,0px)-var(--espaco-consolidacao,0px))]"
@@ -1337,7 +1458,7 @@ export function DesignPoster({
       >
         <div className="-scale-x-100 flex-none h-[100cqh] w-[100cqw]">
           <div className="relative size-full">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup20} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup20} />
           </div>
         </div>
       </div>
@@ -1348,7 +1469,7 @@ export function DesignPoster({
       >
         <div className="-scale-x-100 flex-none h-[100cqh] w-[100cqw]">
           <div className="relative size-full">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup21} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup21} />
           </div>
         </div>
       </div>
@@ -1357,7 +1478,7 @@ export function DesignPoster({
         data-node-id="163:152"
       >
         <div className="absolute inset-[-0.44%_-0.17%]">
-          <img alt="" className="block max-w-none size-full" src={imgVector54} />
+          <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={imgVector54} />
         </div>
       </div>
       <div
@@ -1365,7 +1486,7 @@ export function DesignPoster({
         data-node-id="163:156"
       >
         <div className="absolute inset-[-1.84%_-0.23%]">
-          <img alt="" className="block max-w-none size-full" src={imgVector55} />
+          <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={imgVector55} />
         </div>
       </div>
       <PostalPendurado
@@ -1376,6 +1497,8 @@ export function DesignPoster({
         <div className="flex-none rotate-[-6.71deg]">
           <div className="h-[344.818px] relative w-[291.769px]">
             <img
+              loading="lazy"
+              decoding="async"
               alt=""
               className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
               src={imgRectangle21}
@@ -1391,6 +1514,8 @@ export function DesignPoster({
         <div className="flex-none rotate-[-1.83deg]">
           <div className="h-[358.877px] relative w-[303.665px]">
             <img
+              loading="lazy"
+              decoding="async"
               alt=""
               className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
               src={imgRectangle22}
@@ -1405,7 +1530,7 @@ export function DesignPoster({
       >
         <div className="flex-none h-[hypot(22.5385cqw,98.251cqh)] rotate-[-4.12deg] w-[hypot(77.4615cqw,-1.74897cqh)]">
           <div className="relative size-full">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup42} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup42} />
           </div>
         </div>
       </div>
@@ -1417,6 +1542,8 @@ export function DesignPoster({
         <div className="flex-none rotate-[-1.83deg]">
           <div className="h-[358.877px] relative w-[303.665px]">
             <img
+              loading="lazy"
+              decoding="async"
               alt=""
               className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
               src={imgRectangle23}
@@ -1431,7 +1558,7 @@ export function DesignPoster({
       >
         <div className="flex-none h-[hypot(12.9846cqw,99.0954cqh)] rotate-[-2.11deg] w-[hypot(87.0154cqw,-0.90464cqh)]">
           <div className="relative size-full">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup43} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup43} />
           </div>
         </div>
       </div>
@@ -1440,7 +1567,7 @@ export function DesignPoster({
         data-node-id="163:160"
       >
         <div className="absolute inset-[-1.51%_-0.23%]">
-          <img alt="" className="block max-w-none size-full" src={imgVector56} />
+          <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={imgVector56} />
         </div>
       </div>
       <Consolidacao />
@@ -1606,7 +1733,7 @@ export function DesignPoster({
         data-node-id="196:11"
       >
         <div className="absolute inset-[-4.25%_0_-18.34%_-0.5%]">
-          <img alt="" className="block max-w-none size-full" src={imgVector57} />
+          <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={imgVector57} />
         </div>
       </div>
       <div
@@ -1620,6 +1747,8 @@ export function DesignPoster({
           <div className="flex-none rotate-[-4.27deg]">
             <div className="h-[358.877px] relative w-[303.665px]">
               <img
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
                 src={imgRectangle24}
@@ -1628,10 +1757,13 @@ export function DesignPoster({
           </div>
         </div>
       </div>
-      {/* Área de pouso: centrado sobre onde o pôster cai (top + --queda-poster), acima dele. */}
+      {/*
+        Área de pouso: centrado sobre onde o pôster cai (top + --queda-poster), acima dele. Mesmo
+        nível do pôster (`poster-nivel-consolidacao`), para descer junto abaixo de 1280 px.
+      */}
       <button
         type="button"
-        className="falling-poster__repor hotspot absolute z-20 -translate-x-1/2 rounded-full border-2 border-ouro bg-fundo/90 px-6 py-3 font-corpo text-[28px] font-semibold text-ouro whitespace-nowrap hover:bg-ouro hover:text-fundo left-[calc(60%+167.77px)] top-[calc(43%+44.84px+var(--queda-poster)-96px)]"
+        className="falling-poster__repor hotspot absolute z-20 -translate-x-1/2 rounded-full border-2 border-ouro bg-fundo/90 px-6 py-3 font-corpo text-[28px] font-semibold text-ouro whitespace-nowrap hover:bg-ouro hover:text-fundo left-[calc(60%+167.77px)] top-[calc(43%+44.84px+var(--queda-poster)-96px)] poster-nivel-consolidacao"
       >
         ↺ Pendurar de novo
       </button>
@@ -1642,7 +1774,7 @@ export function DesignPoster({
       >
         <div className="flex-none h-[hypot(-53.6546cqw,93.3857cqh)] rotate-[15.98deg] w-[hypot(46.3454cqw,6.61433cqh)]">
           <div className="relative size-full">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup44} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup44} />
           </div>
         </div>
       </div>
@@ -1807,7 +1939,7 @@ export function DesignPoster({
       >
         <div className="-scale-x-100 flex-none h-[100cqh] w-[100cqw]">
           <div className="relative size-full" data-name="Group">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup6} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup6} />
           </div>
         </div>
       </div>
@@ -1821,7 +1953,7 @@ export function DesignPoster({
           data-node-id="202:148"
           data-name="Group"
         >
-          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup10} />
+          <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup10} />
         </div>
       </div>
       <div
@@ -1829,35 +1961,35 @@ export function DesignPoster({
         data-node-id="221:109"
         data-name="Vector"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector58} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector58} />
       </div>
       <div
         className="absolute inset-[38.19%_25.1%_61.58%_71.56%] poster-nivel-retomada"
         data-node-id="221:113"
         data-name="Vector"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector59} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector59} />
       </div>
       <div
         className="absolute inset-[37.54%_51.3%_61.76%_38.28%] poster-nivel-retomada"
         data-node-id="221:110"
         data-name="Vector"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector60} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector60} />
       </div>
       <div
         className="absolute inset-[38.9%_19.84%_60.55%_71.98%] poster-nivel-retomada"
         data-node-id="221:111"
         data-name="Vector"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector61} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector61} />
       </div>
       <div
         className="absolute inset-[39.15%_53.85%_60.33%_38.28%] poster-nivel-retomada"
         data-node-id="221:112"
         data-name="Vector"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector62} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector62} />
       </div>
       <div
         className="absolute flex inset-[40.78%_47.54%_58.68%_45.68%] items-center justify-center poster-nivel-anos2000"
@@ -1867,6 +1999,8 @@ export function DesignPoster({
         <div className="flex-none h-[hypot(-41.4897cqw,67.9907cqh)] rotate-[30.22deg] skew-x-[0.4deg] w-[hypot(58.5103cqw,32.0093cqh)]">
           <div className="relative size-full" data-name="image 20 (Traced)">
             <img
+              loading="lazy"
+              decoding="async"
               alt=""
               className="absolute block inset-0 max-w-none size-full"
               src={imgImage20Traced}
@@ -1881,7 +2015,7 @@ export function DesignPoster({
       >
         <div className="flex-none h-[hypot(-46.8715cqw,94.877cqh)] rotate-[12.31deg] w-[hypot(53.1285cqw,5.12304cqh)]">
           <div className="relative size-full">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup25} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup25} />
           </div>
         </div>
       </div>
@@ -1892,7 +2026,7 @@ export function DesignPoster({
       >
         <div className="flex-none h-[hypot(50.3294cqw,94.1628cqh)] rotate-[-14.07deg] w-[hypot(49.6706cqw,-5.83724cqh)]">
           <div className="relative size-full">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup26} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup26} />
           </div>
         </div>
       </div>
@@ -1903,15 +2037,15 @@ export function DesignPoster({
       >
         <div className="flex-none h-[hypot(-41.0157cqw,95.9271cqh)] rotate-[9.75deg] w-[hypot(58.9843cqw,4.07292cqh)]">
           <div className="relative size-full">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup27} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup27} />
           </div>
         </div>
       </div>
       <div className="absolute inset-[21.83%_83.79%_77.23%_10.42%] poster-nivel-ciclo-final" data-node-id="222:138">
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup28} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup28} />
       </div>
       <div className="pointer-events-none absolute inset-[17.06%_82.66%_82.29%_13.39%] poster-nivel-ciclo-texto" data-node-id="222:149">
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup30} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup30} />
       </div>
       <div
         className="pointer-events-none absolute flex inset-[17.81%_41.35%_81.52%_49.95%] items-center justify-center poster-nivel-ciclo-texto"
@@ -1920,7 +2054,7 @@ export function DesignPoster({
       >
         <div className="flex-none h-[hypot(-66.1992cqw,70.71cqh)] rotate-[42.01deg] w-[hypot(33.8008cqw,29.29cqh)]">
           <div className="relative size-full">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup31} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup31} />
           </div>
         </div>
       </div>
@@ -1931,7 +2065,7 @@ export function DesignPoster({
       >
         <div className="flex-none h-[hypot(-62.2207cqw,73.6519cqh)] rotate-[37.51deg] w-[hypot(37.7793cqw,26.3481cqh)]">
           <div className="relative size-full">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup29} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup29} />
           </div>
         </div>
       </div>
@@ -1942,7 +2076,7 @@ export function DesignPoster({
       >
         <div className="-rotate-180 -scale-x-100 flex-none h-[100cqh] w-[100cqw]">
           <div className="relative size-full" data-name="Vector">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector10} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector10} />
           </div>
         </div>
       </div>
@@ -1953,7 +2087,7 @@ export function DesignPoster({
       >
         <div className="-rotate-180 -scale-x-100 flex-none h-[100cqh] w-[100cqw]">
           <div className="relative size-full" data-name="Vector">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector13} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector13} />
           </div>
         </div>
       </div>
@@ -1966,7 +2100,7 @@ export function DesignPoster({
         Só no celular: a partir de 768 px os espaços são pequenos e a moldura já fecha esticando 1×.
       */}
       <div className="absolute inset-[78.93%_1.16%_0.44%_1.42%] poster-nivel-podio bottom-[calc(0.44%-1*(var(--espaco-recorte,0px)+var(--espaco-conclusao,0px)+var(--espaco-jornada,0px)+var(--espaco-creditos,0px)))] max-md:bottom-[calc(0.44%-1.2517*(var(--espaco-recorte,0px)+var(--espaco-conclusao,0px)+var(--espaco-jornada,0px)+var(--espaco-creditos,0px)))]" data-node-id="251:17">
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup33} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup33} />
       </div>
       <div
         className="absolute flex inset-[78.95%_95.43%_3.7%_1.25%] items-center justify-center poster-nivel-podio bottom-[calc(3.7%-var(--espaco-recorte,0px)-var(--espaco-conclusao,0px)-var(--espaco-jornada,0px)-var(--espaco-creditos,0px))]"
@@ -1975,7 +2109,7 @@ export function DesignPoster({
       >
         <div className="-scale-x-100 flex-none h-[100cqh] w-[100cqw]">
           <div className="relative size-full">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup16} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup16} />
           </div>
         </div>
       </div>
@@ -1987,7 +2121,7 @@ export function DesignPoster({
       >
         <div className="-scale-x-100 flex-none h-[100cqh] w-[100cqw]">
           <div className="relative size-full" data-name="Vector">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector63} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector63} />
           </div>
         </div>
       </div>
@@ -1996,42 +2130,42 @@ export function DesignPoster({
         data-node-id="288:131"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada10} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada10} />
       </div>
       <div
         className="-translate-x-1/2 absolute h-[125.26px] left-[calc(50%+0.25px)] top-[calc(13%+43.44px)] w-[106.51px] poster-nivel-ciclo"
         data-node-id="288:155"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada11} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada11} />
       </div>
       <div
         className="absolute h-[54.14px] left-[324px] top-[calc(14%+157.32px)] w-[45.88px] poster-nivel-ciclo"
         data-node-id="288:160"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada12} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada12} />
       </div>
       <div
         className="absolute inset-[14.9%_26.68%_84.92%_71.46%] poster-nivel-ciclo"
         data-node-id="288:163"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada13} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada13} />
       </div>
       <div
         className="pointer-events-none absolute h-[82.15px] left-[calc(40%+158px)] top-[calc(17%+26.96px)] w-[68.66px] poster-nivel-ciclo-texto"
         data-node-id="288:166"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada14} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada14} />
       </div>
       <div
         className="absolute h-[55.61px] left-[calc(80%+41px)] top-[calc(18%+47.84px)] w-[45.22px] poster-nivel-ciclo-texto"
         data-node-id="288:169"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada15} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada15} />
       </div>
       <PostalPendurado
         id="recife-frio"
@@ -2041,6 +2175,8 @@ export function DesignPoster({
         data-name="ChatGPT Image 25 de set. de 2026, 14_58_30 1"
       >
         <img
+          loading="lazy"
+          decoding="async"
           alt=""
           className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
           src={imgChatGptImage25DeSetDe20261458301}
@@ -2051,7 +2187,7 @@ export function DesignPoster({
         data-node-id="294:204"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada16} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada16} />
       </div>
       <div
         className="absolute flex inset-[46.37%_70.88%_53.11%_25.63%] items-center justify-center poster-nivel-consolidacao"
@@ -2060,7 +2196,7 @@ export function DesignPoster({
       >
         <div className="flex-none h-[hypot(-53.6546cqw,93.3857cqh)] rotate-[15.98deg] w-[hypot(46.3454cqw,6.61433cqh)]">
           <div className="relative size-full">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup44} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup44} />
           </div>
         </div>
       </div>
@@ -2071,7 +2207,7 @@ export function DesignPoster({
       >
         <div className="flex-none h-[hypot(-53.6546cqw,93.3857cqh)] rotate-[15.98deg] w-[hypot(46.3454cqw,6.61433cqh)]">
           <div className="relative size-full">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup44} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup44} />
           </div>
         </div>
       </div>
@@ -2082,7 +2218,7 @@ export function DesignPoster({
       >
         <div className="flex-none h-[hypot(35.9309cqw,96.683cqh)] rotate-[-7.9deg] w-[hypot(64.0691cqw,-3.31705cqh)]">
           <div className="relative size-full">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup40} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup40} />
           </div>
         </div>
       </div>
@@ -2091,11 +2227,11 @@ export function DesignPoster({
         data-node-id="292:181"
       >
         <div className="absolute inset-[-2.94%_0_-3.3%_-0.23%]">
-          <img alt="" className="block max-w-none size-full" src={imgVector64} />
+          <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={imgVector64} />
         </div>
       </div>
       <div className="absolute inset-[9.14%_48.44%_90.21%_47.6%] poster-nivel-contexto" data-node-id="292:177">
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup37} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup37} />
       </div>
       <div
         className="pointer-events-none absolute flex inset-[42.87%_64.11%_55.74%_14.48%] items-center justify-center poster-nivel-consolidacao"
@@ -2104,7 +2240,7 @@ export function DesignPoster({
       >
         <div className="flex-none h-[hypot(-18.0637cqw,72.8895cqh)] rotate-[15.98deg] w-[hypot(81.9363cqw,27.1105cqh)]">
           <div className="relative size-full">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup41} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup41} />
           </div>
         </div>
       </div>
@@ -2113,7 +2249,7 @@ export function DesignPoster({
         data-node-id="299:509"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada17} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada17} />
       </div>
       <div
         className="absolute flex h-[226.369px] items-center justify-center left-[calc(60%+276.26px)] top-[calc(28%+142.29px)] w-[241.157px] poster-nivel-super8"
@@ -2121,7 +2257,7 @@ export function DesignPoster({
       >
         <div className="flex-none rotate-[-18.36deg]">
           <div className="h-[173.261px] relative w-[196.585px]" data-name="Camada_1">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada18} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada18} />
           </div>
         </div>
       </div>
@@ -2131,7 +2267,7 @@ export function DesignPoster({
       >
         <div className="flex-none rotate-[32.28deg]">
           <div className="h-[245.516px] relative w-[278.566px]" data-name="Camada_1">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada19} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada19} />
           </div>
         </div>
       </div>
@@ -2140,7 +2276,7 @@ export function DesignPoster({
         data-node-id="200:44"
         data-name="Group"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup11} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup11} />
       </div>
       <div
         className="absolute flex h-[226.369px] items-center justify-center left-[calc(20%+84px)] top-[calc(31%+68.28px)] w-[241.157px] poster-nivel-super8"
@@ -2148,7 +2284,7 @@ export function DesignPoster({
       >
         <div className="flex-none rotate-[-18.36deg]">
           <div className="h-[173.261px] relative w-[196.585px]" data-name="Camada_1">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada18} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada18} />
           </div>
         </div>
       </div>
@@ -2158,7 +2294,7 @@ export function DesignPoster({
       >
         <div className="flex-none rotate-[0.17deg]">
           <div className="h-[118.561px] relative w-[134.521px]" data-name="Camada_1">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada20} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada20} />
           </div>
         </div>
       </div>
@@ -2168,7 +2304,7 @@ export function DesignPoster({
       >
         <div className="flex-none rotate-[-12.02deg]">
           <div className="h-[127px] relative w-[208px]" data-name="Camada_1">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada21} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada21} />
           </div>
         </div>
       </div>
@@ -2177,21 +2313,21 @@ export function DesignPoster({
         data-node-id="301:607"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada22} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada22} />
       </div>
       <div
         className="absolute h-[151px] left-[calc(60%+195px)] top-[calc(49%+185.12px)] w-[167px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-1)]"
         data-node-id="301:629"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada23} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada23} />
       </div>
       <div
         className="absolute h-[144px] left-[calc(20%-3px)] top-[calc(49%+161.12px)] w-[175px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-1)]"
         data-node-id="301:642"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada24} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada24} />
       </div>
       <div
         className="absolute flex h-[251.104px] items-center justify-center left-[calc(40%+12.5px)] top-[calc(49%+143.07px)] w-[358.998px] poster-nivel-consolidacao max-md:[--extra:var(--fin-desloc-1)]"
@@ -2199,7 +2335,7 @@ export function DesignPoster({
       >
         <div className="flex-none rotate-[8.74deg]">
           <div className="h-[203px] relative w-[332px]" data-name="Camada_1">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada25} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada25} />
           </div>
         </div>
       </div>
@@ -2208,70 +2344,70 @@ export function DesignPoster({
         data-node-id="304:668"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada13} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada13} />
       </div>
       <div
         className="absolute h-[82.15px] left-[222px] top-[calc(41%+172.08px)] w-[68.66px] poster-nivel-anos2000"
         data-node-id="304:670"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada14} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada14} />
       </div>
       <div
         className="pointer-events-none absolute h-[55.61px] left-[calc(80%+98px)] top-[calc(43%+218.84px)] w-[45.22px] poster-nivel-consolidacao"
         data-node-id="304:672"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada15} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada15} />
       </div>
       <div
         className="absolute inset-[61.1%_14.86%_38.72%_83.28%] poster-nivel-financiamento"
         data-node-id="304:675"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada13} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada13} />
       </div>
       <div
         className="absolute h-[82.15px] left-[calc(40%+214px)] top-[calc(60%+112.8px)] w-[68.66px] poster-nivel-financiamento"
         data-node-id="304:677"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada14} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada14} />
       </div>
       <div
         className="absolute h-[55.61px] left-[calc(20%-7px)] top-[calc(61%+178.68px)] w-[45.22px] poster-nivel-financiamento"
         data-node-id="304:679"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada15} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada15} />
       </div>
       <div
         className="absolute inset-[66.37%_62.56%_33.45%_35.57%] poster-nivel-reconhecimento xl:top-[17050.94px] xl:left-[766.06px] xl:right-auto xl:bottom-auto xl:w-[25.13px] xl:h-[32.4px]"
         data-node-id="304:682"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada13} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada13} />
       </div>
       <div
         className="absolute h-[82.15px] left-[calc(20%+223px)] top-[calc(69%+185.72px)] w-[68.66px] poster-nivel-reconhecimento [--extra:var(--podio-fileira-desloc)] xl:[--extra:calc(var(--podio-fileira-desloc)+28px*var(--inv,1))] xl:left-[712.9px] xl:w-[48.06px] xl:h-[57.51px]"
         data-node-id="304:684"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada14} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada14} />
       </div>
       <div
         className="absolute h-[136px] left-[calc(40%+339px)] top-[calc(69%+226.72px)] w-[114px] poster-nivel-reconhecimento [--extra:var(--podio-fileira-desloc)] xl:[--extra:calc(var(--podio-fileira-desloc)+28px*var(--inv,1))] xl:left-[1062.9px] xl:w-[79.8px] xl:h-[95.2px]"
         data-node-id="304:689"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada26} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada26} />
       </div>
       <div
         className="absolute h-[55.61px] left-[calc(60%+226px)] top-[calc(70%+49.6px)] w-[45.22px] poster-nivel-reconhecimento [--extra:var(--podio-fileira-desloc)] xl:[--extra:calc(var(--podio-fileira-desloc)+28px*var(--inv,1))] xl:left-[1252.6px] xl:w-[31.65px] xl:h-[38.93px]"
         data-node-id="304:686"
         data-name="Camada_1"
       >
-        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada15} />
+        <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada15} />
       </div>
       <div
         className="absolute flex h-[507.901px] items-center justify-center left-[calc(60%+45.7px)] top-[calc(32%+104.22px)] w-[433.575px] poster-nivel-super8 max-md:[--extra:calc(40px*var(--inv,1))]"
@@ -2279,7 +2415,7 @@ export function DesignPoster({
       >
         <div className="flex-none rotate-[-19.27deg]">
           <div className="h-[430.03px] relative w-[308.98px]" data-name="Camada_1">
-            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada27} />
+            <img loading="lazy" decoding="async" alt="" className="absolute block inset-0 max-w-none size-full" src={imgCamada27} />
           </div>
         </div>
       </div>

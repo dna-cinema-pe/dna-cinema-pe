@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "seed": "node --env-file=.env prisma/seed.ts",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "otimizar:assets": "node scripts/otimizar-assets.mjs",
+    "verificar:assets": "node scripts/otimizar-assets.mjs --verificar && node scripts/verificar-figma.mjs"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.0",
@@ -28,6 +30,8 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
     "prisma": "^7.10.0",
+    "sharp": "^0.35.5",
+    "svgo": "^4.1.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

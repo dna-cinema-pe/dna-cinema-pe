@@ -18,7 +18,7 @@ export const POSTAIS = {
     titulo: "Valente é o Galo",
     ano: 1974,
     diretor: "Fernando Spencer",
-    poster: "/posters/valente-e-o-galo-1974.jpg",
+    poster: "/posters/valente-e-o-galo-1974.webp",
     posterAlt:
       "Cartaz do documentário em Super-8 Valente é o Galo (1974), de Fernando Spencer, retratando uma rinha tradicional.",
     importancia:
@@ -28,7 +28,7 @@ export const POSTAIS = {
     titulo: "Baile Perfumado",
     ano: 1996,
     diretor: "Lírio Ferreira e Paulo Caldas",
-    poster: "/posters/baile-perfumado-1996.jpg",
+    poster: "/posters/baile-perfumado-1996.webp",
     posterAlt:
       "Pôster de Baile Perfumado com o mascate Benjamin Abrahão segurando uma câmera cinematográfica ao lado de Lampião e Maria Bonita.",
     importancia:
@@ -38,7 +38,7 @@ export const POSTAIS = {
     titulo: "O Rap do Pequeno Príncipe Contra as Almas Sebosas",
     ano: 2000,
     diretor: "Paulo Caldas e Marcelo Luna",
-    poster: "/posters/o-rap-do-pequeno-principe-2000.jpg",
+    poster: "/posters/o-rap-do-pequeno-principe-2000.webp",
     posterAlt:
       "Pôster de O Rap do Pequeno Príncipe Contra as Almas Sebosas dividindo os rostos de Helinho e do músico Garnizé em Camaragibe.",
     importancia:
@@ -48,7 +48,7 @@ export const POSTAIS = {
     titulo: "Amarelo Manga",
     ano: 2002,
     diretor: "Cláudio Assis",
-    poster: "/posters/amarelo-manga-2002.jpg",
+    poster: "/posters/amarelo-manga-2002.webp",
     posterAlt:
       "Pôster vibrante em tons de amarelo de Amarelo Manga retratando os personagens do centro do Recife e do Hotel Texas.",
     importancia:
@@ -58,7 +58,7 @@ export const POSTAIS = {
     titulo: "O Som ao Redor",
     ano: 2012,
     diretor: "Kleber Mendonça Filho",
-    poster: "/posters/o-som-ao-redor-2012.jpg",
+    poster: "/posters/o-som-ao-redor-2012.webp",
     posterAlt:
       "Pôster de O Som ao Redor com vista dos edifícios residenciais do bairro de Setúbal, no Recife, cercados por grades.",
     importancia:
@@ -68,7 +68,7 @@ export const POSTAIS = {
     titulo: "Aquarius",
     ano: 2016,
     diretor: "Kleber Mendonça Filho",
-    poster: "/posters/aquarius-2016.jpg",
+    poster: "/posters/aquarius-2016.webp",
     posterAlt:
       "Pôster de Aquarius com Sonia Braga como Clara em seu apartamento repleto de discos de vinil na Praia de Boa Viagem.",
     importancia:
@@ -78,7 +78,7 @@ export const POSTAIS = {
     titulo: "Retratos Fantasmas",
     ano: 2023,
     diretor: "Kleber Mendonça Filho",
-    poster: "/posters/retratos-fantasmas-2023.jpg",
+    poster: "/posters/retratos-fantasmas-2023.webp",
     posterAlt:
       "Pôster de Retratos Fantasmas destacando a fachada iluminada do histórico Cinema São Luiz às margens do Rio Capibaribe no Recife.",
     importancia:
@@ -88,7 +88,7 @@ export const POSTAIS = {
     titulo: "Febre do Rato",
     ano: 2011,
     diretor: "Cláudio Assis",
-    poster: "/posters/febre-do-rato-2011.jpg",
+    poster: "/posters/febre-do-rato-2011.webp",
     posterAlt:
       "Pôster em preto e branco com detalhes em amarelo de Febre do Rato mostrando Irandhir Santos como o poeta Zizo no Recife.",
     importancia:
@@ -98,7 +98,7 @@ export const POSTAIS = {
     titulo: "Cinema, Aspirinas e Urubus",
     ano: 2005,
     diretor: "Marcelo Gomes",
-    poster: "/posters/cinema-aspirinas-e-urubus-2005.jpg",
+    poster: "/posters/cinema-aspirinas-e-urubus-2005.webp",
     posterAlt:
       "Pôster de Cinema, Aspirinas e Urubus mostrando Johann e Ranulpho ao lado do caminhão de aspirinas na caatinga em 1942.",
     importancia:
@@ -108,7 +108,7 @@ export const POSTAIS = {
     titulo: "O Agente Secreto",
     ano: 2025,
     diretor: "Kleber Mendonça Filho",
-    poster: "/posters/o-agente-secreto-2025.jpg",
+    poster: "/posters/o-agente-secreto-2025.webp",
     posterAlt:
       "Pôster de O Agente Secreto com Wagner Moura caracterizado como o professor Marcelo no Recife de 1977.",
     importancia:
@@ -118,7 +118,7 @@ export const POSTAIS = {
     titulo: "Recife Frio",
     ano: 2009,
     diretor: "Kleber Mendonça Filho",
-    poster: "/posters/recife-frio-2009.jpg",
+    poster: "/posters/recife-frio-2009.webp",
     posterAlt:
       "Pôster de Recife Frio com a orla de Boa Viagem sob céu cinzento e moradores agasalhados com roupas de inverno.",
     importancia:

@@ -46,8 +46,8 @@ export function TrilhaDaLinhaDoTempo() {
       {/* Trilho e preenchimento, centrados nos marcadores (que têm 12 px). */}
       <div aria-hidden="true" className="absolute left-[11px] top-0 h-full w-0.5 rounded-full bg-white/15">
         <div
-          className="w-full rounded-full bg-ouro transition-[height] duration-150"
-          style={{ height: `${relativo(progresso)}%` }}
+          className="h-full w-full origin-top rounded-full bg-ouro transition-transform duration-150"
+          style={{ transform: `scaleY(${relativo(progresso) / 100})` }}
         />
       </div>
 

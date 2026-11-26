@@ -58,6 +58,7 @@ async function FichaFilmeSection({ id }: { id: number }) {
                   {filme.posterUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
+                      fetchPriority="high"
                       src={filme.posterUrl}
                       alt={filme.posterAlt ?? `Pôster do filme ${filme.titulo}`}
                       style={{ width: "200px", maxWidth: "100%", height: "auto" }}

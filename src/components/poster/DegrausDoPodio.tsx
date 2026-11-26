@@ -146,6 +146,8 @@ export function DegrausDoPodio({ degraus }: { degraus: DegrauDoPodio[] }) {
               >
                 {filme?.poster ? (
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={filme.poster}
                     alt={filme.alt ?? `Pôster de ${filme.titulo}`}
                     className="h-[240px] w-[180px] object-cover shadow-lg"
