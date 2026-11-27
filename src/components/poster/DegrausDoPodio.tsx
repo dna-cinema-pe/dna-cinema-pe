@@ -2,6 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useId, useState } from "react";
+import { registrarUmaVez } from "@/lib/metricas.ts";
 
 export interface FilmeDoPodio {
   id: number;
@@ -106,6 +107,8 @@ export function DegrausDoPodio({ degraus }: { degraus: DegrauDoPodio[] }) {
   const ativarDegrau = (indice: number) => {
     if (ativo !== indice) setPagina(0);
     setAtivo(indice);
+    // Métrica (US-4.4): uma vez por degrau nesta visita, já que o hover se repete muito.
+    registrarUmaVez("grafico-consultado", { grafico: "podio", item: String(degraus[indice].posicao) });
   };
 
   return (

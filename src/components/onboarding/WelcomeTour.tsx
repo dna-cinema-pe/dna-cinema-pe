@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { registrarEvento } from "@/lib/metricas.ts";
 import { useOnboarding } from "./OnboardingProvider.tsx";
 
 const PASSOS = [
@@ -68,8 +69,16 @@ export function WelcomeTour() {
   const ultimo = passoTour === PASSOS.length - 1;
 
   function avancar() {
-    if (ultimo) fecharTour();
-    else irParaPasso(passoTour + 1);
+    if (ultimo) {
+      registrarEvento("tour-concluido");
+      fecharTour();
+    } else irParaPasso(passoTour + 1);
+  }
+
+  /** "Pular tour" ou Esc: guarda em que passo (1 a 3) o leitor desistiu (US-4.4). */
+  function pular() {
+    registrarEvento("tour-pulado", { passo: passoTour + 1 });
+    fecharTour();
   }
 
   function voltar() {
@@ -79,7 +88,7 @@ export function WelcomeTour() {
   function aoTeclar(e: React.KeyboardEvent) {
     if (e.key === "Escape") {
       e.preventDefault();
-      fecharTour();
+      pular();
       return;
     }
     if (e.key === "Enter") {
@@ -126,7 +135,7 @@ export function WelcomeTour() {
         <div className="flex items-center justify-between gap-3">
           <button
             type="button"
-            onClick={() => fecharTour()}
+            onClick={pular}
             className="font-corpo text-sm text-white/70 underline-offset-2 hover:underline"
           >
             Pular tour

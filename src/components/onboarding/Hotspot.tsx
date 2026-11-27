@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
+import { registrarUmaVez, type Eventos } from "@/lib/metricas.ts";
 import { MarcaDeHotspot, useEstadoHotspot } from "./MarcaDeHotspot.tsx";
 
 interface Props {
@@ -16,6 +17,8 @@ interface Props {
    * encolher junto com o pôster. Usado nos gráficos de gênero e raça.
    */
   dicaGrande?: boolean;
+  /** Gráfico que esta dica explica: abrir a dica registra `grafico-consultado` (US-4.4). */
+  grafico?: Eventos["grafico-consultado"]["grafico"];
 }
 
 const DICA_PADRAO =
@@ -31,8 +34,13 @@ const DICA_GRANDE =
  * Mouse: a dica abre ao passar por cima e fecha ao sair. Toque: abre ao tocar, fecha ao tocar de
  * novo (ou ao tocar fora). Teclado: abre com o foco.
  */
-export function Hotspot({ id, style, tooltip, dicaGrande = false }: Props) {
-  const { visto, reduzirMovimento, podeApontar, marcarVisto } = useEstadoHotspot(id);
+export function Hotspot({ id, style, tooltip, dicaGrande = false, grafico }: Props) {
+  const { visto, reduzirMovimento, podeApontar, marcarVisto: marcarHotspotVisto } =
+    useEstadoHotspot(id);
+  const marcarVisto = () => {
+    marcarHotspotVisto();
+    if (grafico) registrarUmaVez("grafico-consultado", { grafico });
+  };
   const [emFoco, setEmFoco] = useState(false);
   const raiz = useRef<HTMLDivElement>(null);
   /** O último ponteiro que apertou aqui foi toque/caneta (não mouse). */

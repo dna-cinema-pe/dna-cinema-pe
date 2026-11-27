@@ -1788,7 +1788,7 @@ export function DesignPoster({
       <Hotspot
         id="hotspot-genero"
         style={{ top: "calc(73% + 16px)", left: "calc(60% - 10px)", width: 460, height: 240 }}
-        tooltip={dicaGenero} dicaGrande
+        tooltip={dicaGenero} dicaGrande grafico="genero"
       />
       </div>
       <div
@@ -1839,7 +1839,7 @@ export function DesignPoster({
       <Hotspot
         id="hotspot-raca"
         style={{ top: "calc(76% + 28px)", left: "calc(60% - 10px)", width: 460, height: 260 }}
-        tooltip={dicaRaca} dicaGrande
+        tooltip={dicaRaca} dicaGrande grafico="raca"
       />
       </div>
       <div
@@ -1906,7 +1906,7 @@ export function DesignPoster({
             Homens no cinema pernambucano
             <span className={GRAFICO_COR} style={{ backgroundColor: corHomens }} />
           </p>
-          <Hotspot id="hotspot-genero" style={{ left: 0, top: 0, width: "100%", height: "100%" }} tooltip={dicaGenero} dicaGrande />
+          <Hotspot id="hotspot-genero" style={{ left: 0, top: 0, width: "100%", height: "100%" }} tooltip={dicaGenero} dicaGrande grafico="genero" />
         </div>
         {RECORTE_TEXTOS.slice(3).map((texto) => (
           <p key={texto} className={RECORTE_PARAGRAFO}>
@@ -1933,7 +1933,7 @@ export function DesignPoster({
               <p className="text-right text-[length:calc(11px*var(--inv,1))]">{item.categoria}</p>
             </div>
           ))}
-          <Hotspot id="hotspot-raca" style={{ left: 0, top: 0, width: "100%", height: "100%" }} tooltip={dicaRaca} dicaGrande />
+          <Hotspot id="hotspot-raca" style={{ left: 0, top: 0, width: "100%", height: "100%" }} tooltip={dicaRaca} dicaGrande grafico="raca" />
         </div>
       </div>
       <div

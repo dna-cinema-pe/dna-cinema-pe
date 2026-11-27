@@ -10,6 +10,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { registrarEvento, registrarUmaVez } from "@/lib/metricas.ts";
 import { CAPITULOS, type CapituloId } from "./capitulos.ts";
 
 const CHAVE_TOUR_VISTO = "tour_visto";
@@ -96,7 +97,11 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
         visto = false;
       }
       setHotspotsVistos(lerHotspotsVistos());
-      if (!visto) setTourAberto(true);
+      if (!visto) {
+        setTourAberto(true);
+        // Uma vez por carregamento: o StrictMode do React roda este efeito duas vezes em dev.
+        registrarUmaVez("tour-iniciado", { origem: "automatico" });
+      }
 
       const media = window.matchMedia("(prefers-reduced-motion: reduce)");
       setReduzirMovimento(media.matches);
@@ -159,10 +164,18 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
     [indiceAtivo],
   );
 
+  // Métrica de capítulo alcançado (US-4.4): uma vez por capítulo nesta visita, e só depois de
+  // medir as posições, para a abertura não contar capítulos que o leitor não viu.
+  useEffect(() => {
+    if (percentuaisCapitulos === PERCENTUAIS_INICIAIS) return;
+    registrarUmaVez("capitulo-alcancado", { capitulo: capituloAtivo });
+  }, [capituloAtivo, percentuaisCapitulos]);
+
   const abrirTour = useCallback((origem?: HTMLElement | null) => {
     origemTourRef.current = origem ?? null;
     setPassoTour(0);
     setTourAberto(true);
+    registrarEvento("tour-iniciado", { origem: "botao" });
   }, []);
 
   const fecharTour = useCallback(() => {

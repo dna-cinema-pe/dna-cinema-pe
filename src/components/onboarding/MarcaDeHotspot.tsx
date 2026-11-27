@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { registrarUmaVez } from "@/lib/metricas.ts";
 import { useOnboarding } from "./OnboardingProvider.tsx";
 
 /**
@@ -28,7 +29,11 @@ export function useEstadoHotspot(id: string) {
     visto: hidratado && hotspotsVistos.has(id),
     reduzirMovimento: hidratado && reduzirMovimento,
     podeApontar,
-    marcarVisto: () => marcarHotspotVisto(id),
+    marcarVisto: () => {
+      marcarHotspotVisto(id);
+      // Métrica (US-4.4): uma vez por hotspot nesta visita, já que o hover se repete muito.
+      registrarUmaVez("hotspot-usado", { hotspot: id });
+    },
   };
 }
 

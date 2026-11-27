@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { registrarUmaVez } from "@/lib/metricas.ts";
 import type { FestivalDaRota, PremiosInternacionais } from "@/server/panorama.ts";
 import { repetirVoo } from "./animacoes.ts";
 import { useAnimacoesDesligadas } from "./useAnimacoesDesligadas.ts";
@@ -146,7 +147,13 @@ export function RotaInternacional({ premios }: { premios: PremiosInternacionais 
             pinosRef.current[pino.id] = elemento;
           }}
           type="button"
-          onClick={() => setAberto((atual) => (atual === pino.id ? null : pino.id))}
+          onClick={() => {
+            // Métrica (US-4.4) ao abrir um festival, uma vez por festival nesta visita.
+            if (aberto !== pino.id) {
+              registrarUmaVez("grafico-consultado", { grafico: "rota-internacional", item: pino.id });
+            }
+            setAberto((atual) => (atual === pino.id ? null : pino.id));
+          }}
           aria-expanded={aberto === pino.id}
           aria-controls={aberto === pino.id ? painelId : undefined}
           aria-label={`${pino.nome}: ver filmes premiados`}

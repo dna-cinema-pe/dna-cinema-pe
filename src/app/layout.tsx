@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import { SCRIPT_ANIMACOES } from "@/components/landing/movimento.ts";
 import { SCRIPT_ESCALA_POSTER } from "@/components/poster/escalaInicial.ts";
+import { ScriptDeMetricas } from "@/components/ScriptDeMetricas.tsx";
 import "./globals.css";
 
 /*
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <script dangerouslySetInnerHTML={{ __html: SCRIPT_ANIMACOES + SCRIPT_ESCALA_POSTER }} />
         {children}
+        <ScriptDeMetricas />
       </body>
     </html>
   );
