@@ -21,8 +21,9 @@ import {
  * Liga os gatilhos das animações do poster, que é renderizado no servidor:
  * - o avião voa uma vez quando 30% dele aparece na tela;
  * - o arco de guarda-chuva de frevo do Ciclo do Recife abre e fecha acompanhando a rolagem;
- * - o holofote do Super-8 varre as cortinas fechadas; quando o palco chega à faixa central da
- *   tela, ele varre por mais alguns segundos, as cortinas abrem uma vez, ele para e o título surge;
+ * - o holofote do Super-8 varre as cortinas fechadas, com o título ao centro; quando o palco chega
+ *   à faixa central da tela, ele varre por mais alguns segundos, título e holofote somem juntos e as
+ *   cortinas abrem uma vez, revelando a foto;
  * - o pôster cai ao receber o ponteiro, mouse ou toque (ou Enter/Espaço no foco), fica caído e,
  *   ao pousar, mostra "↺ Pendurar de novo", que o repõe;
  * - os loops (nuvens, cruz, pássaro, bandeirinhas) pausam quando saem da tela.

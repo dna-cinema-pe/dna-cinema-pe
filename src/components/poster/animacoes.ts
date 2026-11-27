@@ -6,9 +6,9 @@ const CLASSE_BOTAO_REPOR = "falling-poster__repor";
 const CLASSE_CORTINAS = "super8-cortinas";
 const CLASSE_CORTINAS_ABERTAS = "super8-cortinas--abertas";
 const CLASSE_TITULO_SUPER8 = "super8-titulo";
-const CLASSE_TITULO_SUPER8_REVELADO = "super8-titulo--revelado";
+const CLASSE_TITULO_SUPER8_OCULTO = "super8-titulo--oculto";
 const CLASSE_HOLOFOTE = "super8-holofote";
-const CLASSE_HOLOFOTE_PARADO = "super8-holofote--parado";
+const CLASSE_HOLOFOTE_APAGADO = "super8-holofote--apagado";
 
 /** Quanto tempo o holofote varre as cortinas fechadas antes de elas abrirem. */
 export const VARREDURA_ANTES_DE_ABRIR_MS = 3000;
@@ -69,19 +69,13 @@ export function obterCortinas(): HTMLElement | null {
 }
 
 /**
- * Abre as cortinas do Super-8 e para o holofote: o loop é cortado na posição em que está e uma
- * transição o leva de volta ao centro. O título surge depois, pelo delay em globals.css.
+ * Fim da cena do Super-8: título e holofote somem juntos e as cortinas abrem, revelando a foto.
+ * As três classes entram ao mesmo tempo; a espera das cortinas (`--sumir-titulo`) está em globals.css.
  */
 export function abrirCortinas() {
+  document.querySelector(`.${CLASSE_TITULO_SUPER8}`)?.classList.add(CLASSE_TITULO_SUPER8_OCULTO);
+  document.querySelector(`.${CLASSE_HOLOFOTE}`)?.classList.add(CLASSE_HOLOFOTE_APAGADO);
   obterCortinas()?.classList.add(CLASSE_CORTINAS_ABERTAS);
-  document.querySelector(`.${CLASSE_TITULO_SUPER8}`)?.classList.add(CLASSE_TITULO_SUPER8_REVELADO);
-
-  const holofote = document.querySelector<HTMLElement>(`.${CLASSE_HOLOFOTE}`);
-  if (!holofote) return;
-  holofote.style.transform = getComputedStyle(holofote).transform;
-  holofote.classList.add(CLASSE_HOLOFOTE_PARADO);
-  void holofote.offsetWidth;
-  holofote.style.transform = "";
 }
 
 export function iniciarVoo() {

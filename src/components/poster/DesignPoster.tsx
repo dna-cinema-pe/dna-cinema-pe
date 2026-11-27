@@ -134,6 +134,7 @@ const assetPathPrefix = "/poster";
 const imgImage2 = `${assetPathPrefix}/6cfd1.webp`;
 const imgImage1 = `${assetPathPrefix}/4f3e8.webp`;
 const imgImage15 = `${assetPathPrefix}/a239c.webp`;
+const imgSuper8Realizadores = `${assetPathPrefix}/super8-realizadores.webp`;
 const imgRectangle15 = `${assetPathPrefix}/bb5e0.webp`;
 const imgRectangle16 = `${assetPathPrefix}/1764f.webp`;
 const imgRectangle17 = `${assetPathPrefix}/51870.webp`;
@@ -1214,6 +1215,18 @@ export function DesignPoster({
           src={imgEllipse2}
         />
       </div>
+      {/*
+        Foto do Super-8 (frame 132:717 do Figma), atrás das cortinas: aparece quando elas abrem.
+        Centralizada no palco, abaixo da bambinela e entre os panos recolhidos, na proporção da foto.
+      */}
+      <img
+        loading="lazy"
+        decoding="async"
+        alt="Foto em preto e branco de Celso Marconi, Jomard Muniz de Brito e Aristides Guimarães, realizadores do Ciclo Super 8"
+        className="super8-foto absolute z-10 h-[629px] left-[311px] top-[calc(22%+294.36px)] w-[1300px] object-cover shadow-[0_24px_60px_rgb(0_0_0/0.6)] poster-nivel-ciclo-final"
+        data-node-id="132:717"
+        src={imgSuper8Realizadores}
+      />
       {/*
         Cortinas do Super-8: cobrem o palco (mesma caixa da "image 15") até abrirem. Têm o mesmo
         nível do palco (`poster-nivel-ciclo-final`) para descerem junto com ele abaixo de 1280 px.

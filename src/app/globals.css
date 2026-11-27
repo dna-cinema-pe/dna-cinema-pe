@@ -351,12 +351,14 @@ body {
 }
 
 /*
- * Super-8, em sequência: (1) cortinas de veludo fechadas, com o holofote varrendo o pano;
- * (2) o palco chega ao centro da tela e, após a varredura (AnimacoesDoPoster), as cortinas se
- * recolhem nas laterais, como num teatro, e o holofote para no centro; (3) o título surge.
+ * Super-8, em sequência: (1) cortinas de veludo fechadas, com o título "SUPER-8" ao centro e o
+ * holofote varrendo o pano; (2) o palco chega ao centro da tela e, após a varredura
+ * (AnimacoesDoPoster), título e holofote somem juntos; (3) só então as cortinas se recolhem nas
+ * laterais, como num teatro, e revelam a foto do Super-8 que estava atrás delas.
  */
 .super8-cortinas {
   --abertura-cortinas: 2.4s;
+  --sumir-titulo: 0.6s;
 }
 
 /* Bambinela: faixa fixa no topo, que não abre. */
@@ -396,43 +398,37 @@ body {
   transform-origin: 100% 50%;
 }
 
+/* As cortinas só começam a abrir depois que título e holofote terminam de sumir. */
 .super8-cortinas--abertas .super8-cortina {
   transform: scaleX(0.13);
+  transition-delay: var(--sumir-titulo);
 }
 
 /*
- * Título escondido até as cortinas terminarem de abrir. Empilhamento: cortinas (z-20) < holofote
- * (z-30, a luz cai sobre o pano) < título (z-40, que só aparece com as cortinas já abertas).
+ * Empilhamento: foto (z-10, atrás) < cortinas (z-20) < holofote (z-30, a luz cai sobre o pano) <
+ * título (z-40, sobre a cortina fechada). Título e holofote somem juntos, na mesma duração.
  */
 .super8-titulo {
   z-index: 40;
-  opacity: 0;
-  transform: scale(0.8);
-  transition:
-    opacity 0.9s ease-out 2.4s,
-    transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1.25) 2.4s;
-}
-
-.super8-titulo--revelado {
-  opacity: 1;
   text-shadow: 0 6px 24px rgb(0 0 0 / 0.6);
-  transform: scale(1);
+  transition: opacity 0.6s ease-out;
 }
 
-/*
- * Disco cinza do Figma com borda difusa e brilho somado, como luz de holofote. Varre as cortinas
- * fechadas; ao abrir, `--parado` corta o loop e a transição o leva de volta ao centro.
- */
+.super8-titulo--oculto {
+  opacity: 0;
+}
+
+/* Disco cinza do Figma com borda difusa e brilho somado, como luz de holofote: varre o pano. */
 .super8-holofote {
   animation: holofote-varredura 6s ease-in-out infinite;
   filter: blur(18px);
   mix-blend-mode: screen;
-  will-change: transform;
+  transition: opacity 0.6s ease-out;
+  will-change: transform, opacity;
 }
 
-.super8-holofote--parado {
-  animation: none;
-  transition: transform 0.9s ease-out;
+.super8-holofote--apagado {
+  opacity: 0;
 }
 
 .plane-flight {
@@ -533,14 +529,14 @@ html[data-animacoes="desligadas"] .arco-frevo {
   mask-image: none;
 }
 
-/* Sem animações as cortinas já ficam abertas, o título visível e o holofote, parado no centro. */
+/* Sem animações já aparece o fim da sequência: cortinas abertas, foto à mostra, sem título e luz. */
 html[data-animacoes="desligadas"] .super8-cortina {
   transform: scaleX(0.13);
 }
 
-html[data-animacoes="desligadas"] .super8-titulo {
-  opacity: 1;
-  transform: none;
+html[data-animacoes="desligadas"] .super8-titulo,
+html[data-animacoes="desligadas"] .super8-holofote {
+  opacity: 0;
 }
 
 html[data-animacoes="desligadas"] .plane-flight {
