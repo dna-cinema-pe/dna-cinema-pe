@@ -42,52 +42,9 @@ function ListaCapitulos({ aoNavegar }: ListaProps) {
 }
 
 /**
- * Barra de progresso com marcas de capítulo embutidas: tudo deriva ao vivo do
- * mesmo `progresso` de rolagem, sem estado "em saltos" separado (US-1.4).
+ * Contador de descobertas, gaveta de capítulos e dica de próxima seção (US-1.4). A navegação pela
+ * linha do tempo fica na trilha lateral (TrilhaDaLinhaDoTempo); não há barra de progresso no topo.
  */
-function BarraDeProgresso({ aoNavegar }: ListaProps) {
-  const { progresso, percentuaisCapitulos } = useOnboarding();
-
-  return (
-    <div
-      id="onboarding-alvo-capitulos-desktop"
-      className="font-corpo fixed inset-x-0 top-0 z-40 flex h-4 items-center"
-    >
-      <div className="relative h-[3px] w-full bg-white/10">
-        <div
-          className="h-full w-full origin-left bg-vermelho transition-transform duration-150"
-          style={{ transform: `scaleX(${progresso / 100})` }}
-        />
-        {CAPITULOS.slice(1).map((capitulo) => {
-          const posicao = percentuaisCapitulos[capitulo.id] ?? 0;
-          const passou = posicao <= progresso + 0.5;
-          return (
-            <button
-              key={capitulo.id}
-              type="button"
-              aria-hidden="false"
-              aria-label={capitulo.titulo}
-              onClick={() => aoNavegar(capitulo.id)}
-              className="group absolute top-1/2 -translate-x-1/2 -translate-y-1/2 p-2"
-              style={{ left: `${posicao}%` }}
-            >
-              <span
-                className={`block h-2 w-0.5 rounded-full transition-colors ${
-                  passou ? "bg-vermelho" : "bg-white/40 group-hover:bg-white/70"
-                }`}
-              />
-              <span className="pointer-events-none absolute left-1/2 top-3 hidden -translate-x-1/2 whitespace-nowrap rounded-md bg-black/80 px-2 py-1 text-[11px] font-medium text-white opacity-0 backdrop-blur-sm transition-opacity duration-150 group-hover:opacity-100 lg:block">
-                {capitulo.titulo}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-/** Trilha de pontos, gaveta de capítulos e dica de próxima seção (US-1.4). */
 export function Navigator() {
   const { capituloAtivo, irParaCapitulo, totalHotspots, hotspotsVistos } = useOnboarding();
   const [abertoMobile, setAbertoMobile] = useState(false);
@@ -120,8 +77,6 @@ export function Navigator() {
 
   return (
     <>
-      <BarraDeProgresso aoNavegar={navegar} />
-
       {/* Indicador discreto de descobertas, só se houver algum hotspot na página */}
       {totalHotspots > 0 && (
         <div
@@ -166,7 +121,7 @@ export function Navigator() {
         </div>
       )}
 
-      {/* Dica de próxima seção no mobile (no desktop as marcas já estão na barra) */}
+      {/* Dica de próxima seção no mobile */}
       {proximo && pertoDoFim && (
         <div className="pointer-events-none fixed inset-x-0 bottom-5 z-40 flex justify-center lg:hidden">
           <button

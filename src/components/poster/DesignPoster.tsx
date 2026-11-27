@@ -134,6 +134,7 @@ const assetPathPrefix = "/poster";
 const imgImage2 = `${assetPathPrefix}/6cfd1.webp`;
 const imgImage1 = `${assetPathPrefix}/4f3e8.webp`;
 const imgImage15 = `${assetPathPrefix}/a239c.webp`;
+const imgSuper8Realizadores = `${assetPathPrefix}/super8-realizadores.webp`;
 const imgRectangle15 = `${assetPathPrefix}/bb5e0.webp`;
 const imgRectangle16 = `${assetPathPrefix}/1764f.webp`;
 const imgRectangle17 = `${assetPathPrefix}/51870.webp`;
@@ -212,7 +213,6 @@ const imgVector55 = `${assetPathPrefix}/f972f.svg`;
 const imgGroup42 = `${assetPathPrefix}/19879.svg`;
 const imgGroup43 = `${assetPathPrefix}/29b3f.svg`;
 const imgVector56 = `${assetPathPrefix}/912fd.svg`;
-const imgVector57 = `${assetPathPrefix}/28f91.svg`;
 const imgGroup44 = `${assetPathPrefix}/710c4.svg`;
 const imgGroup6 = `${assetPathPrefix}/f0eaf.svg`;
 const imgGroup10 = `${assetPathPrefix}/b6ff1.svg`;
@@ -1215,6 +1215,18 @@ export function DesignPoster({
         />
       </div>
       {/*
+        Foto do Super-8 (frame 132:717 do Figma), atrás das cortinas: aparece quando elas abrem.
+        Centralizada no palco, abaixo da bambinela e entre os panos recolhidos, na proporção da foto.
+      */}
+      <img
+        loading="lazy"
+        decoding="async"
+        alt="Foto em preto e branco de Celso Marconi, Jomard Muniz de Brito e Aristides Guimarães, realizadores do Ciclo Super 8"
+        className="super8-foto absolute z-10 h-[629px] left-[311px] top-[calc(22%+294.36px)] w-[1300px] object-cover shadow-[0_24px_60px_rgb(0_0_0/0.6)] poster-nivel-ciclo-final"
+        data-node-id="132:717"
+        src={imgSuper8Realizadores}
+      />
+      {/*
         Cortinas do Super-8: cobrem o palco (mesma caixa da "image 15") até abrirem. Têm o mesmo
         nível do palco (`poster-nivel-ciclo-final`) para descerem junto com ele abaixo de 1280 px.
       */}
@@ -1728,14 +1740,6 @@ export function DesignPoster({
         As mulheres fazem cinema, mas precisamos investigar como ocupam cada função e onde podem
         trabalhar. O total de profissionais não explica tudo no olhar.
       </p>
-      <div
-        className="absolute h-[106px] left-[calc(20%+26px)] top-[calc(60%+5.8px)] w-[892px] poster-nivel-financiamento"
-        data-node-id="196:11"
-      >
-        <div className="absolute inset-[-4.25%_0_-18.34%_-0.5%]">
-          <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={imgVector57} />
-        </div>
-      </div>
       <div
         className="falling-poster hotspot absolute z-10 flex h-[380.488px] items-center justify-center left-[calc(60%+3px)] top-[calc(43%+44.84px)] w-[329.539px] poster-nivel-consolidacao"
         role="button"
