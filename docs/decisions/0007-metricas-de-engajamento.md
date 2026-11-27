@@ -27,7 +27,9 @@ Os limites e preços foram consultados em novembro de 2026 e podem mudar.
 
 O Umami Cloud é gratuito no volume do projeto e tem eventos personalizados. Como não usa cookies nem identifica quem visita, atende ao critério de não coletar dados pessoais sem precisar de banner de consentimento. O script tem cerca de 2 KB, é carregado depois que a página fica ociosa (`lazyOnload`) e não concorre com o hero.
 
-A conta pertence ao projeto, não à Vercel. Qualquer integrante pode criá-la, cadastrar o domínio de produção e convidar o resto do time, para que o painel não dependa de uma só pessoa.
+A conta é independente da Vercel. Qualquer integrante pode criá-la e cadastrar o domínio de produção. O plano gratuito não permite convidar outras pessoas para a conta. Para o time consultar os dados, o site tem o link de compartilhamento do Umami ativado: um painel público, só de leitura, sem dados pessoais, com visão geral, eventos, tempo real, funis e detalhamento por propriedade. Por ser público, ele não mostra as sessões uma a uma.
+
+**Painel (somente leitura):** https://cloud.umami.is/share/dnxNV6QJSVDYRRa3 A conta fica com uma pessoa do time; se ela sair do projeto, outra pessoa precisa assumir o acesso, ou criar uma conta nova e trocar o Website ID.
 
 ### 2. Configuração
 
