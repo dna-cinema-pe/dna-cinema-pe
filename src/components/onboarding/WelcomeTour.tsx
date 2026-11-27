@@ -7,8 +7,8 @@ const PASSOS = [
   { texto: "Role para viajar no tempo", alvoIds: ["onboarding-alvo-rolar"] },
   { texto: "Elementos com ✨ reagem ao mouse ou toque", alvoIds: [] },
   {
-    texto: "Use o menu de capítulos para pular etapas",
-    alvoIds: ["onboarding-alvo-capitulos-desktop", "onboarding-alvo-capitulos-mobile"],
+    texto: "Use a linha do tempo à esquerda para pular entre os períodos",
+    alvoIds: ["onboarding-alvo-linha-do-tempo", "onboarding-alvo-capitulos-mobile"],
   },
 ] as const;
 

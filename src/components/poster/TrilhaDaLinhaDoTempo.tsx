@@ -36,6 +36,7 @@ export function TrilhaDaLinhaDoTempo() {
 
   return (
     <nav
+      id="onboarding-alvo-linha-do-tempo"
       aria-label="Linha do tempo"
       aria-hidden={!visivel}
       inert={!visivel}
