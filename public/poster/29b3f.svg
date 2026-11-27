@@ -1,7 +1,1 @@
-<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="32.3343" height="130.726" viewBox="0 0 32.3343 130.726" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="Group 43">
-<path id="Vector" d="M0.246719 0.0594536L25.259 0.0118907L31.2653 130.666L0 130.726L0.246719 0.0594536Z" fill="#E3A54F"/>
-<path id="Vector_2" d="M27.6026 51.0341L29.8203 51.0299L32.2468 97.3812L29.7327 97.3859L2.72501 97.4373L2.85444 91.6718L29.4917 91.6211" fill="#CECCC8"/>
-<path id="Vector_3" d="M0.0737485 91.677L2.85454 91.6717L2.84365 97.437L0.0628627 97.4423" fill="#BC782E"/>
-</g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="32.334" height="130.726" fill="none" overflow="visible" preserveAspectRatio="none" style="display:block" viewBox="0 0 32.334 130.726"><path fill="#e3a54f" d="M.247.06 25.259.011l6.006 130.654-31.265.06z"/><path fill="#ceccc8" d="m27.603 51.034 2.217-.004 2.427 46.351-2.514.005-27.008.051.13-5.765 26.637-.05"/><path fill="#bc782e" d="m.074 91.677 2.78-.005-.01 5.765-2.781.005"/></svg>

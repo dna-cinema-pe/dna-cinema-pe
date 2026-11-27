@@ -37,7 +37,9 @@ const LAYOUT_PRIMEIRA_LINHA: readonly LayoutParagrafo[] = [
  * O PosterViewport mede a altura desta coluna (`data-medir="contexto-segunda-linha"`) para descer
  * o Ciclo do Recife e o que vem depois (`--espaco-ciclo`) sem sobreposição.
  */
-const SEGUNDA_LINHA = `${COLUNA_RESPONSIVA} max-xl:top-[calc(12%+60.56px)] max-xl:[--extra:var(--espaco-contexto)]`;
+// `poster-depende-da-medicao`: a posição depende de `--espaco-contexto`, então fica escondida até o
+// PosterViewport medir (globals.css, US-4.3); o resto do Contexto já aparece no primeiro quadro.
+const SEGUNDA_LINHA = `${COLUNA_RESPONSIVA} poster-depende-da-medicao max-xl:top-[calc(12%+60.56px)] max-xl:[--extra:var(--espaco-contexto)]`;
 
 const LAYOUT_SEGUNDA_LINHA: readonly LayoutParagrafo[] = [
   {

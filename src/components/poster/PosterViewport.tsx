@@ -1,43 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { ATRIBUTO_MEDINDO, LARGURA_POSTER, espacoDaAbertura } from "./escalaInicial.ts";
 
 /** Dimensões do frame no Figma (desktop). O mobile não tem design: o frame só é reduzido. */
-const LARGURA = 1920;
+const LARGURA = LARGURA_POSTER;
 const ALTURA = 25712;
-
-/**
- * Espaço, em px do frame, que o pôster abre depois do subtítulo da Abertura abaixo de 1280 px
- * (US-4.1), para o subtítulo (16 px reais) não passar por cima da cena da cidade.
- *
- * No Figma, o subtítulo começa em y = 1005 e a cidade em y = 1142. A conta estima a altura do
- * subtítulo pelo tamanho e pela largura dele (~100 letras, ~0,55 em por letra, linha de 1,5 em)
- * e soma um respiro mínimo de 16 px reais antes da cidade; o espaço é o quanto isso passa de 1142
- * (nunca negativo).
- *
- * ATENÇÃO: os valores abaixo precisam ser iguais às classes do subtítulo em Abertura.tsx
- * (`max-xl:text-…`, `max-xl:top-…`, `max-xl:w-…` e `max-md:w-…`).
- */
-const SUBTITULO = {
-  /** `max-xl:text-[length:max(32px,calc(14px*var(--inv,1)))]` */
-  fonteMinima: 32,
-  fonteReal: 14,
-  /** `max-xl:top-[calc(3%+233.64px+15px*var(--inv,1))]` */
-  descidaReal: 15,
-  /** `max-xl:w-[1300px]` e `max-md:w-[1600px]` */
-  larguraTablet: 1300,
-  larguraCelular: 1400,
-};
-
-function espacoDaAbertura(inv: number): number {
-  if (!window.matchMedia("(width < 80rem)").matches) return 0;
-  const celular = window.matchMedia("(width < 48rem)").matches;
-  const fonte = Math.max(SUBTITULO.fonteMinima, SUBTITULO.fonteReal * inv);
-  const largura = celular ? SUBTITULO.larguraCelular : SUBTITULO.larguraTablet;
-  const linhas = (100 * 0.55 * fonte) / largura + 1;
-  const fimDoSubtitulo = 1005 + SUBTITULO.descidaReal * inv + linhas * 1.5 * fonte;
-  return Math.max(0, fimDoSubtitulo + 16 * inv - 1142);
-}
 
 /** Colunas de parágrafos do Contexto (Contexto.tsx), acima e abaixo do varal. */
 const SELETOR_CONTEXTO_1 = '[data-medir="contexto-primeira-linha"]';
@@ -273,7 +241,14 @@ function espacoDepois(
 
 /**
  * Reduz o frame de 1920 px para caber na largura da janela, mantendo as proporções.
- * Fica invisível até medir a largura, para não piscar em tamanho cheio.
+ *
+ * Até medir (US-4.3), usa a escala calculada antes da pintura por SCRIPT_ESCALA_POSTER
+ * (`--escala-poster` e `--inv-poster`, ver escalaInicial.ts): o hero aparece direto do HTML do
+ * servidor, sem esperar o JavaScript (LCP). Só os grupos `.poster-deslocar`, que dependem das
+ * medições, ficam escondidos (`data-poster-medindo` no <html>) até a primeira medição feita com as
+ * fontes já carregadas, para não aparecerem no lugar errado e depois pularem (CLS). As medições
+ * rodam em `useLayoutEffect`, antes da pintura, para que uma nova instância (o Suspense troca o
+ * fallback pelo pôster com dados) já pinte com os espaços certos.
  *
  * Expõe `--inv` (1 / escala): `calc(16px * var(--inv))` dentro do frame aparece com 16 px
  * reais na tela, em qualquer largura. Usado nos ajustes de texto abaixo de 1280 px (US-4.1).
@@ -308,8 +283,9 @@ export function PosterViewport({ children }: { children: ReactNode }) {
   const [espacoJornada, setEspacoJornada] = useState(0);
   const [espacoConclusao, setEspacoConclusao] = useState(0);
   const [espacoCreditos, setEspacoCreditos] = useState(0);
+  const [medido, setMedido] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
@@ -406,9 +382,38 @@ export function PosterViewport({ children }: { children: ReactNode }) {
       const coluna = container.querySelector(seletor);
       if (coluna) observer.observe(coluna);
     }
-    return () => observer.disconnect();
+
+    // Revela os grupos `.poster-deslocar` só depois de medir com as fontes carregadas: com a
+    // fonte de fallback os textos têm outra altura, e os espaços mudariam com tudo já visível.
+    // O limite garante que nada fique escondido se as fontes demorarem.
+    let ativo = true;
+    const revelar = () => {
+      if (!ativo) return;
+      atualizar();
+      setMedido(true);
+    };
+    const limite = window.setTimeout(revelar, 3000);
+    document.fonts?.ready.then(() => {
+      window.clearTimeout(limite);
+      revelar();
+    });
+
+    return () => {
+      ativo = false;
+      window.clearTimeout(limite);
+      observer.disconnect();
+    };
   }, []);
 
+  // Remove o atributo no mesmo commit em que os espaços medidos entram no estilo, antes da pintura.
+  useLayoutEffect(() => {
+    if (medido) document.documentElement.removeAttribute(ATRIBUTO_MEDINDO);
+  }, [medido]);
+
+  // Antes de medir, a escala vem do script de antes da pintura (escalaInicial.ts).
+  const escalaCss = escala === null ? "var(--escala-poster, 1)" : String(escala);
+  const invCss = escala === null ? "var(--inv-poster, 1)" : String(1 / escala);
+  const espacoAberturaCss = escala === null ? "var(--espaco-abertura-poster, 0px)" : `${espaco}px`;
   const escalaAtual = escala ?? 1;
   // Somas acumuladas, usadas pelos níveis do pódio em diante (globals.css).
   const atePodio =
@@ -434,7 +439,12 @@ export function PosterViewport({ children }: { children: ReactNode }) {
     <div
       ref={containerRef}
       className="relative mx-auto w-full max-w-[1920px] overflow-hidden bg-fundo"
-      style={{ height: (ALTURA + total) * escalaAtual }}
+      style={{
+        height:
+          escala === null
+            ? `calc((${ALTURA}px + ${espacoAberturaCss}) * ${escalaCss})`
+            : (ALTURA + total) * escalaAtual,
+      }}
     >
       <div
         className="absolute left-0 top-0 origin-top-left"
@@ -442,10 +452,9 @@ export function PosterViewport({ children }: { children: ReactNode }) {
           {
             width: LARGURA,
             height: ALTURA,
-            transform: `scale(${escalaAtual})`,
-            visibility: escala === null ? "hidden" : "visible",
-            "--inv": 1 / escalaAtual,
-            "--espaco-abertura": `${espaco}px`,
+            transform: `scale(${escalaCss})`,
+            "--inv": invCss,
+            "--espaco-abertura": espacoAberturaCss,
             "--espaco-contexto": `${espacoContexto}px`,
             "--espaco-ciclo": `${espacoCiclo}px`,
             "--espaco-ciclo-texto": `${espacoCicloTexto}px`,

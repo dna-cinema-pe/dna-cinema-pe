@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState, type HTMLAttributes, type KeyboardEvent, type PointerEvent } from "react";
 import { createPortal } from "react-dom";
 import { MarcaDeHotspot, useEstadoHotspot } from "@/components/onboarding/MarcaDeHotspot.tsx";
+import { registrarEvento } from "@/lib/metricas.ts";
 import { POSTAIS, type FilmeDoPostal, type IdPostal } from "./postais.ts";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -27,6 +28,7 @@ export function PostalPendurado({ id, comDica = false, className, children, ...r
 
   function abrir() {
     hotspot.marcarVisto();
+    registrarEvento("modal-filme-aberto", { filme: id });
     setBalancando(false);
     setAberto(true);
   }
@@ -142,6 +144,8 @@ function ModalDoFilme({ filme, aoFechar }: { filme: FilmeDoPostal; aoFechar: () 
           ×
         </button>
         <img
+          loading="lazy"
+          decoding="async"
           src={filme.poster}
           alt={filme.posterAlt}
           className="mx-auto w-48 shrink-0 self-start rounded-md object-cover shadow-lg sm:w-56"

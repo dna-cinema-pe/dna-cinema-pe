@@ -1,10 +1,11 @@
 import { prisma } from "@/lib/db";
+import { urlDoPoster } from "@/lib/utils";
 
 /**
  * US06: Listagem geral de filmes
  */
 export async function listarFilmes() {
-  return await prisma.filme.findMany({
+  const filmes = await prisma.filme.findMany({
     select: {
       idFilme: true,
       titulo: true,
@@ -18,15 +19,17 @@ export async function listarFilmes() {
       titulo: "asc",
     },
   });
+  return filmes.map((filme) => ({ ...filme, posterUrl: urlDoPoster(filme.posterUrl) }));
 }
 
 /**
  * US01: Ficha essencial do filme
  */
 export async function obterFilme(id: number) {
-  return await prisma.filme.findUnique({
+  const filme = await prisma.filme.findUnique({
     where: { idFilme: id },
   });
+  return filme && { ...filme, posterUrl: urlDoPoster(filme.posterUrl) };
 }
 
 /**

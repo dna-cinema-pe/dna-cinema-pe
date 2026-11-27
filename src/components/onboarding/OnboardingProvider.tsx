@@ -10,6 +10,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { registrarEvento, registrarUmaVez } from "@/lib/metricas.ts";
 import { CAPITULOS, type CapituloId } from "./capitulos.ts";
 
 const CHAVE_TOUR_VISTO = "tour_visto";
@@ -96,7 +97,11 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
         visto = false;
       }
       setHotspotsVistos(lerHotspotsVistos());
-      if (!visto) setTourAberto(true);
+      if (!visto) {
+        setTourAberto(true);
+        // Uma vez por carregamento: o StrictMode do React roda este efeito duas vezes em dev.
+        registrarUmaVez("tour-iniciado", { origem: "automatico" });
+      }
 
       const media = window.matchMedia("(prefers-reduced-motion: reduce)");
       setReduzirMovimento(media.matches);
@@ -109,15 +114,25 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // Progresso de leitura (barra do topo) via scroll da página — fonte única de verdade.
+  // No máximo uma leitura e um render por quadro (requestAnimationFrame), em vez de um por
+  // evento de scroll (US-4.3, 60 fps).
   useEffect(() => {
+    let quadro = 0;
     function atualizarProgresso() {
+      quadro = 0;
       const alturaTotal = document.documentElement.scrollHeight - window.innerHeight;
       const percentual = alturaTotal > 0 ? (window.scrollY / alturaTotal) * 100 : 0;
       setProgresso(Math.min(100, Math.max(0, percentual)));
     }
+    function aoRolar() {
+      if (!quadro) quadro = requestAnimationFrame(atualizarProgresso);
+    }
     atualizarProgresso();
-    window.addEventListener("scroll", atualizarProgresso, { passive: true });
-    return () => window.removeEventListener("scroll", atualizarProgresso);
+    window.addEventListener("scroll", aoRolar, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", aoRolar);
+      cancelAnimationFrame(quadro);
+    };
   }, []);
 
   // Posição (%) de cada capítulo na mesma régua — remedida no mount e ao redimensionar.
@@ -131,7 +146,11 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // Capítulo ativo e visitados: derivados ao vivo do próprio `progresso`, sem passos intermediários.
+  // Antes de medir (no servidor e na hidratação), todas as posições valem 0 e o último capítulo
+  // pareceria ativo: o HTML saía com "Você chegou ao fim" e 12 de 12 capítulos, que piscava na
+  // abertura e não batia com o cliente (erro de hidratação #418). Até medir, vale o primeiro.
   const indiceAtivo = useMemo(() => {
+    if (percentuaisCapitulos === PERCENTUAIS_INICIAIS) return 0;
     let indice = 0;
     for (let i = 0; i < CAPITULOS.length; i++) {
       if (percentuaisCapitulos[CAPITULOS[i].id] <= progresso + 0.5) indice = i;
@@ -145,10 +164,18 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
     [indiceAtivo],
   );
 
+  // Métrica de capítulo alcançado (US-4.4): uma vez por capítulo nesta visita, e só depois de
+  // medir as posições, para a abertura não contar capítulos que o leitor não viu.
+  useEffect(() => {
+    if (percentuaisCapitulos === PERCENTUAIS_INICIAIS) return;
+    registrarUmaVez("capitulo-alcancado", { capitulo: capituloAtivo });
+  }, [capituloAtivo, percentuaisCapitulos]);
+
   const abrirTour = useCallback((origem?: HTMLElement | null) => {
     origemTourRef.current = origem ?? null;
     setPassoTour(0);
     setTourAberto(true);
+    registrarEvento("tour-iniciado", { origem: "botao" });
   }, []);
 
   const fecharTour = useCallback(() => {

@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/db";
+import { urlDoPoster } from "@/lib/utils";
 
 export interface RecorteGenero {
   /** Percentuais inteiros que somam 100. */
@@ -122,7 +123,7 @@ export async function obterPodioPremios(): Promise<PodioPremios> {
       filme: {
         id: registro.filme.idFilme,
         titulo: registro.filme.titulo,
-        poster: registro.filme.posterUrl ?? undefined,
+        poster: urlDoPoster(registro.filme.posterUrl) ?? undefined,
         alt: registro.filme.posterAlt ?? undefined,
       },
     });
