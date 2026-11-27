@@ -214,13 +214,25 @@ body {
   }
 }
 
+/*
+ * O avião voa até o pino do Oscar e some ao pousar ali. O trajeto começa com o centro do avião em
+ * x = 1320 no frame (o navegador ancora o início do offset-path na borda esquerda dele), então o
+ * centro chega ao x do pino (410; ver RotaInternacional) em 75,3% do comprimento da rota.
+ */
 @keyframes plane-flight {
-  from {
+  0% {
     offset-distance: 0%;
+    opacity: 1;
   }
 
-  to {
-    offset-distance: 100%;
+  90% {
+    offset-distance: 75.3%;
+    opacity: 1;
+  }
+
+  100% {
+    offset-distance: 75.3%;
+    opacity: 0;
   }
 }
 
@@ -539,8 +551,10 @@ html[data-animacoes="desligadas"] .super8-holofote {
   opacity: 0;
 }
 
+/* Sem animações o voo já terminou: o avião pousou no Oscar e sumiu. */
 html[data-animacoes="desligadas"] .plane-flight {
-  offset-distance: 100%;
+  offset-distance: 75.3%;
+  opacity: 0;
 }
 
 /*

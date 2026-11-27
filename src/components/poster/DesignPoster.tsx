@@ -213,7 +213,6 @@ const imgVector55 = `${assetPathPrefix}/f972f.svg`;
 const imgGroup42 = `${assetPathPrefix}/19879.svg`;
 const imgGroup43 = `${assetPathPrefix}/29b3f.svg`;
 const imgVector56 = `${assetPathPrefix}/912fd.svg`;
-const imgVector57 = `${assetPathPrefix}/28f91.svg`;
 const imgGroup44 = `${assetPathPrefix}/710c4.svg`;
 const imgGroup6 = `${assetPathPrefix}/f0eaf.svg`;
 const imgGroup10 = `${assetPathPrefix}/b6ff1.svg`;
@@ -1741,14 +1740,6 @@ export function DesignPoster({
         As mulheres fazem cinema, mas precisamos investigar como ocupam cada função e onde podem
         trabalhar. O total de profissionais não explica tudo no olhar.
       </p>
-      <div
-        className="absolute h-[106px] left-[calc(20%+26px)] top-[calc(60%+5.8px)] w-[892px] poster-nivel-financiamento"
-        data-node-id="196:11"
-      >
-        <div className="absolute inset-[-4.25%_0_-18.34%_-0.5%]">
-          <img loading="lazy" decoding="async" alt="" className="block max-w-none size-full" src={imgVector57} />
-        </div>
-      </div>
       <div
         className="falling-poster hotspot absolute z-10 flex h-[380.488px] items-center justify-center left-[calc(60%+3px)] top-[calc(43%+44.84px)] w-[329.539px] poster-nivel-consolidacao"
         role="button"
